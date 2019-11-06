@@ -28,15 +28,22 @@ key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf oncefrom
 # Create your views here.
 def engine(request):
     return JsonResponse({
-     's':  decrypt('gAAAAABdwvhLbiRWb971EFxlEosly7sqV5y14ifHsjEL3u0TvTz1nmGt2d5RoRTG04AGIXfMH8iSQqd201tIgfx67hXcGyUZYw==')
+     's':  encrypt('sara cannella')
+    })
+
+def login_user_from_token(request, token):
+    return JsonResponse({
+        's':  decrypt(token)
     })
 
 
 
 
-def decrypt(plain): return Fernet(key).decrypt(plain.encode()).decode('utf-8')
+def decrypt(plain): 
+    return Fernet(key).decrypt(plain.encode()).decode('utf-8')
 
-def encrypt(plain): return Fernet(key).encrypt(plain.encode()).decode('utf-8')
+def encrypt(plain): 
+    return Fernet(key).encrypt(plain.encode()).decode('utf-8')
 
 
 
