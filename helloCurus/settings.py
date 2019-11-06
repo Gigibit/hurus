@@ -49,9 +49,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+AUTH_USER_MODEL = 'core.UserProfile'
 
 ROOT_URLCONF = 'helloCurus.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,6 +67,8 @@ TEMPLATES = [
         },
     },
 ]
+AUTHENTICATION_BACKENDS = ['helloCurus.backend.CurusBackend']
+
 
 WSGI_APPLICATION = 'helloCurus.wsgi.application'
 
