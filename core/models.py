@@ -7,6 +7,27 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new cl
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+GERMAN = 'DE'
+ENGLISH = 'EN'
+ITALIAN =  'IT'
+LANGUAGES = (
+    (GERMAN, 'German'),
+    (ITALIAN, 'Italian'),
+    (ENGLISH, 'English'),
+)
+
+
+class Agency(models.Model):
+    name = models.CharField(max_length=50)
+    p_iva = models.CharField(max_length=50)
+
+class EncouragingSentence(models.Model):
+    text = models.TextField()
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGES,
+        default=GERMAN,
+    )
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -21,6 +42,12 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+#        
+#        if user.title == MANAGER :
+#            Manager(profile=user).save()
+#        elif user.title == EMPLOYEE:
+#            Employee(profile=user).save()
+#
         return user
 
     def create_user(self, email, password=None, **extra_fields):
@@ -51,7 +78,14 @@ class UserProfile(AbstractUser):
     )
     username = None
     email = models.EmailField(_('email address'), unique=True)
-
+    preferred_language = models.CharField(
+            max_length=2,
+            choices=LANGUAGES,
+            default=GERMAN,
+    )
+    read_encouraging_sentences = models.ManyToManyField(EncouragingSentence)
+    agency = models.ForeignKey(Agency, null=True, on_delete=models.DO_NOTHING)
+    
     title = models.CharField(
         max_length=2,
         choices=TITLES,
@@ -64,9 +98,6 @@ class UserProfile(AbstractUser):
 
 
 
-
-
-
 # Create your models here.
 class Manager(models.Model):
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
@@ -76,17 +107,13 @@ class Team(models.Model):
     manager = models.ManyToManyField(Manager, null=True)
 
 
-class Agency(models.Model):
-    name = models.CharField(max_length=50)
-    p_iva = models.CharField(max_length=50)
-    manager = models.ForeignKey(Manager, null=True, on_delete=models.SET_NULL)
-
 
 
 
 class Employee(models.Model):
-    # profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    team = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
+    
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    team    = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
 
 
 
