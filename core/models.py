@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new class is imported. ##
 from django.db import models
@@ -18,6 +20,7 @@ LANGUAGES = (
 
 
 class Agency(models.Model):
+    enabled = models.BooleanField(default=True)
     name = models.CharField(max_length=50)
     p_iva = models.CharField(max_length=50)
 
@@ -42,15 +45,17 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
-#        
-#        if user.title == MANAGER :
-#            Manager(profile=user).save()
+
+        print('ciao')
+        if user.title == MANAGER :
+            Manager.objects.create(profile = profile)
 #        elif user.title == EMPLOYEE:
 #            Employee(profile=user).save()
 #
         return user
 
     def create_user(self, email, password=None, **extra_fields):
+        print('create_user')
         """Create and save a regular User with the given email and password."""
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
@@ -101,6 +106,8 @@ class UserProfile(AbstractUser):
 # Create your models here.
 class Manager(models.Model):
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.profile.email
 
 class Team(models.Model):
     name = models.CharField(max_length=50)
@@ -111,7 +118,6 @@ class Team(models.Model):
 
 
 class Employee(models.Model):
-    
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     team    = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
 
@@ -144,3 +150,15 @@ class Tought(models.Model):
     text = models.CharField(max_length=100)
     when = models.DateField()
 
+
+
+
+
+@receiver(post_save, sender=UserProfile, dispatch_uid="create_manager_profile")
+def user_enricher(sender, instance, **kwargs):
+    print('user_enricer')
+    if instance.title == UserProfile.MANAGER:
+        print('was manager')
+        Manager.objects.create(
+            profile=instance
+        )

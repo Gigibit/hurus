@@ -1,0 +1,56 @@
+{% load static %}
+<html>
+    <head>
+        <title>{% block title %}Home {% endblock title %} | CRM Easy</title>
+        {% block head_meta %}
+            {% block head_meta_charset %}
+                <meta http-equiv="Content-Type"
+                    content="text/html; charset=utf-8" />
+            {% endblock head_meta_charset %}
+            {% block head_meta_contentlanguage %}
+                <meta http-equiv="Content-Language" value="en-US" />
+            {% endblock head_meta_contentlanguage %}
+            {% block head_meta_viewport %}
+                <meta name="viewport"
+                    content="width=device-width, initial-scale=1.0">
+            {% endblock head_meta_viewport %}
+        {% endblock head_meta %}
+    {% block head_favicon %}
+    <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/favicon.ico">
+    {% endblock head_favicon %}
+    {% comment %}      
+    {% block head_css %}
+    {% block head_css_site %}
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css"
+              rel="stylesheet" media="screen">
+        <link href="{{ STATIC_URL }}css/app.css"
+              rel="stylesheet" media="screen">
+    {% endblock head_css_site %}
+    {% block head_css_section %}{% endblock head_css_section %}
+    {% block head_css_page %}{% endblock head_css_page %}
+    {% endblock head_css %}
+    {% endcomment %}
+    {% block footer_javascript %}
+    {% block footer_javascript_site %}
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    {% endblock footer_javascript_site %}
+        {% block footer_javascript_section %}{% endblock footer_javascript_section %}
+        {% block footer_javascript_page %}{% endblock footer_javascript_page %}
+    {% endblock footer_javascript %}
+    </head>
+
+    <div class="page-header">
+        <!-- h1><a href="/">happyCurus</a></h1 -->
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</html>

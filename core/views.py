@@ -5,8 +5,10 @@ import os
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet, InvalidToken
+from django.contrib.auth import login
 
+from core.models import *
 
 
 MY_SECRET_FOR_EVER = 'Sara Cannella' # This is input in the form of a string
@@ -25,16 +27,112 @@ key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf oncefrom
 
 
 
-# Create your views here.
+
+
+def home(request):
+    return home_manager(request) if request.user.title == UserProfile.MANAGER else home_employee(request) 
+
+def statistic(request):
+    return statistic_manager(request) if request.user.title == UserProfile.MANAGER else statistic_employee(request) 
+
+def happy_corus(request):
+    return happy_corus_manager(request) if request.user.title == UserProfile.MANAGER else happy_corus_employee(request) 
+
+def e_learning(request):
+    return e_learning_manager(request) if request.user.title == UserProfile.MANAGER else e_learning_employee(request) 
+
+
+
+def home_manager(request):
+    return render(request, 'core/manager/index.html', {
+        'foo': 'bar',
+        })
+
+def statistic_manager(request):
+    return render(request, 'core/manager/satistics.html', {
+    'foo': 'bar',
+    })
+
+
+def happy_curus_manager(request):
+    return render(request, 'core/manager/happy_curus.html', {
+    'foo': 'bar',
+    })
+
+
+def e_learning_manager(request):
+    return render(request, 'core/manager/e_learning.html', {
+    'foo': 'bar',
+    })
+
+
+
+
+def home_employee(request):
+    return render(request, 'core/employee/index.html', {
+    'foo': 'bar',
+    })
+
+
+def statistic_employee(request):
+    return render(request, 'core/employee/statistics.html', {
+    'foo': 'bar',
+    })
+
+
+def happy_curus_employee(request):
+    return render(request, 'core/employee/happy_curus.html', {
+    'foo': 'bar',
+    })
+
+
+def e_learning_employee(request):
+    return render(request, 'core/employee/e_learning.html', {
+    'foo': 'bar',
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Login engine
 def engine(request):
     return JsonResponse({
      's':  encrypt('sara cannella')
     })
 
+
 def login_user_from_token(request, token):
-    return JsonResponse({
-        's':  decrypt(token)
-    })
+    try:
+        decrypted_email = decrypt(token)
+        user = UserProfile.objects.get(email = decrypted_email)
+        login(request, user)
+        return redirect('/')
+    except (InvalidToken, UserProfile.DoesNotExist):
+        return JsonResponse({
+            'info_cripted':  encrypt('as@gmail.com'),
+            's': str(can_access)
+        })
 
 
 
