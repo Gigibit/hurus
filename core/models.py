@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new class is imported. ##
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -23,9 +23,13 @@ class Agency(models.Model):
     enabled = models.BooleanField(default=True)
     name = models.CharField(max_length=50)
     p_iva = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class EncouragingSentence(models.Model):
     text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     language = models.CharField(
         max_length=2,
         choices=LANGUAGES,
@@ -46,9 +50,6 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
 
-        print('ciao')
-        if user.title == MANAGER :
-            Manager.objects.create(profile = profile)
 #        elif user.title == EMPLOYEE:
 #            Employee(profile=user).save()
 #
@@ -75,12 +76,7 @@ class UserManager(BaseUserManager):
 
 
 class UserProfile(AbstractUser):
-    MANAGER = 'MG'
-    EMPLOYEE = 'EM'
-    TITLES = (
-        (MANAGER, 'Manager'),
-        (EMPLOYEE, 'Employee'),
-    )
+
     username = None
     email = models.EmailField(_('email address'), unique=True)
     preferred_language = models.CharField(
@@ -91,23 +87,24 @@ class UserProfile(AbstractUser):
     read_encouraging_sentences = models.ManyToManyField(EncouragingSentence)
     agency = models.ForeignKey(Agency, null=True, on_delete=models.DO_NOTHING)
     
-    title = models.CharField(
-        max_length=2,
-        choices=TITLES,
-        default=MANAGER,
-    )
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager() ## This is the new line in the User model. ##
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 # Create your models here.
-class Manager(models.Model):
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+class Manager(UserProfile):
+    
+    class Meta:
+        verbose_name = 'Manager'
+        verbose_name_plural = 'Managers'
+
     def __str__(self):
-        return self.profile.email
+        return self.email
 
 class Team(models.Model):
     name = models.CharField(max_length=50)
@@ -117,10 +114,19 @@ class Team(models.Model):
 
 
 
-class Employee(models.Model):
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    team    = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
+class Employee(UserProfile):
+    
+    team                = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
+    last_seen_survey    = models.DateField(null=True)
 
+
+    class Meta:
+        verbose_name = 'Employee'
+        verbose_name_plural = 'Employees'
+
+    def has_seen_daily_survey(self):
+        today = datetime.today()
+        return self.last_seen_survey and (today - self.last_seen_survey).days >= 1
 
 
 class Tought(models.Model):
@@ -149,16 +155,7 @@ class Tought(models.Model):
     employee = models.ForeignKey(Employee, null=True, on_delete=models.DO_NOTHING, related_name='toughts')
     text = models.CharField(max_length=100)
     when = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
 
-
-
-
-
-@receiver(post_save, sender=UserProfile, dispatch_uid="create_manager_profile")
-def user_enricher(sender, instance, **kwargs):
-    print('user_enricer')
-    if instance.title == UserProfile.MANAGER:
-        print('was manager')
-        Manager.objects.create(
-            profile=instance
-        )

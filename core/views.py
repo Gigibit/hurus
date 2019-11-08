@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import base64
 import os
@@ -27,19 +27,33 @@ key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf oncefrom
 
 
 
+    
+def check_survey(fn, request):
+    employee = Employee.objects.get(email = request.user.email)
+    if not employee.has_seen_daily_survey():
+        return render(request, 'core/employee/evaluate_mood.html', {
+        'foo': 'bar',
+        })
+    return fn(request)
 
+def is_manager(user):
+    try:
+        return Manager.objects.get(email = user.email)
+    except Manager.DoesNotExist:
+        return False
 
 def home(request):
-    return home_manager(request) if request.user.title == UserProfile.MANAGER else home_employee(request) 
+    print(str(request.user is Employee))
+    return home_manager(request) if is_manager(request.user) else check_survey(home, request) 
 
 def statistic(request):
-    return statistic_manager(request) if request.user.title == UserProfile.MANAGER else statistic_employee(request) 
+    return statistic_manager(request) if is_manager(request.user) else check_survey(statistic_employee, request) 
 
 def happy_corus(request):
-    return happy_corus_manager(request) if request.user.title == UserProfile.MANAGER else happy_corus_employee(request) 
+    return happy_corus_manager(request) if is_manager(request.user) else check_survey(happy_corus_employee,request) 
 
 def e_learning(request):
-    return e_learning_manager(request) if request.user.title == UserProfile.MANAGER else e_learning_employee(request) 
+    return e_learning_manager(request) if is_manager(request.user) else check_survey(e_learning_employee,request) 
 
 
 
@@ -130,8 +144,7 @@ def login_user_from_token(request, token):
         return redirect('/')
     except (InvalidToken, UserProfile.DoesNotExist):
         return JsonResponse({
-            'info_cripted':  encrypt('as@gmail.com'),
-            's': str(can_access)
+            'info_cripted':  encrypt(token)
         })
 
 
