@@ -1,0 +1,154 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-08 20:16+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: core/models.py:81
+msgid "email address"
+msgstr ""
+
+msgid "HOW_DO_YOU_FEEL"
+msgstr "Welcome! How are you feeling today?"
+
+msgid "HAPPY"
+msgstr "Happy"
+
+msgid "GOOD_MOOD"
+msgstr "In A Good Mood"
+
+msgid "INSPIRED"
+msgstr "Inspired"
+
+msgid "SAD"
+msgstr "Sad"
+
+msgid "ANGRY"
+msgstr "Angry"
+
+msgid "AWFUL"
+msgstr "Awful"
+
+msgid "HOW_DO_YOU_BEEN_UP_FREE_TIME"
+msgstr "What have you been up to in your free time?"
+
+msgid "HOW_ARE_YOU"
+msgstr "How are you feeling right now?"
+
+msgid "ACTIVE"
+msgstr "active"
+
+msgid "FOCUSED"
+msgstr "focused"
+
+msgid "JOYFUL"
+msgstr "joyful"
+
+msgid "INTERESTED"
+msgstr "interested"
+
+msgid "SERENE"
+msgstr "serene"
+
+msgid "HOPEFUL"
+msgstr "hopeful"
+
+msgid "GLAD"
+msgstr "glad"
+
+msgid "SURPRISED"
+msgstr "surprised"
+
+msgid "CHEERFUL"
+msgstr "cheerful"
+
+msgid "CONFIDENT"
+msgstr "confident"
+
+msgid "RELIEVED"
+msgstr "relieved"
+
+msgid "IN_LOVE"
+msgstr "in love"
+
+msgid "ENTHUSIASTIC"
+msgstr "enthusiastic"
+
+msgid "RELAXED"
+msgstr "relaxed"
+
+msgid "SATISFACTED"
+msgstr "satisfacted"
+
+msgid "PROUD"
+msgstr "proud"
+
+msgid "ASHAMED"
+msgstr "ashmed"
+
+msgid "ANXIOUS"
+msgstr "anxious"
+
+msgid "AFRAID"
+msgstr "afraid"
+
+msgid "DEPRESSED"
+msgstr "depressed"
+
+msgid "LONELY"
+msgstr "lonely"
+
+msgid "DELUDED"
+msgstr "deluded"
+
+msgid "ANNOYED"
+msgstr "annoyed"
+
+msgid "COLD"
+msgstr "cold"
+
+msgid "CONFUSED"
+msgstr "confused"
+
+msgid "PASSIVE"
+msgstr "passive"
+
+msgid "PREOCCUPIED"
+msgstr "preoccupied"
+
+msgid "INSECURE"
+msgstr "insecure"
+
+msgid "REPRESSED"
+msgstr "repressed"
+
+msgid "FRURSTRATED"
+msgstr "frustrated"
+
+msgid "DISGUSTED"
+msgstr "disgusted"
+
+msgid "GUILTY"
+msgstr "guilty"
+
+msgid "DISCOURAGED"
+msgstr "discoraged"
+
+msgid "YOUR_TOUGHTS"
+msgstr "Your thoughts (visible only to you)"
+
+msgid "WRITE_TO_REMEMBER"
+msgstr "Write down something you want to remember…"

@@ -1,45 +1,87 @@
 .container {
-    height: 100%;
+  height: 100%;
 }
-    .title {
-      margin: 0;
-      text-align: center;
-      font-size: 15px;
-      padding: 18px 20px;
-    }
-  
-    .date-text{
-      display: table-cell;
-      margin-left: 20px;
-      font-weight: bold;
-      border: 2px solid #222;
-      padding:5px;
-    }
-    .date{
-      margin: 0 auto;
-      display: table;
-    }
-    .mood{
-      font-size: 65px;
-      text-align: center;
-      padding: 15px;
-    }
-    .mood-text{
-      font-size: 18px;
-    }
-    .moods-wrapper{
-      margin-top: 33px;
-    }
-    .submit-button{
-      margin: 0 auto;
-      display: block;
-      width: 100%;
-      margin-bottom: 15px;
-    }
-    .mood-selected{
-      border: 2px solid yellow;
-      background-color: #fbb034;
-      border-radius: 48px;
-      background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
-    }
-  
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  padding: 18px 20px;
+}
+
+.date-text{
+  display: table-cell;
+  margin-left: 20px;
+  font-weight: bold;
+  border: 2px solid #222;
+  padding:5px;
+}
+.date{
+  margin: 0 auto;
+  display: table;
+}
+.mood{
+  font-size: 65px;
+  text-align: center;
+  padding: 15px;
+}
+.mood-text{
+  font-size: 18px;
+}
+.moods-wrapper{
+  margin-top: 33px;
+}
+.submit-button{
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.mood-selected{
+  border: 2px solid yellow;
+  background-color: #fbb034;
+  border-radius: 48px;
+  background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
+}
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  padding: 18px 20px;
+}
+#current-tought{
+  resize: none;
+}
+.current-tought-form{
+  margin-top:30px;
+}
+label[for="current-tought"]{
+  text-align: center;
+  width: 100%;
+}
+.tought{
+  border: 2px solid lightgrey;
+  margin: 5px;
+  border-radius: 20px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.tought.happy-tought{
+  border: 2px solid greenyellow;
+}
+section{
+  height: 90%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: scroll;
+  margin: 0 auto;
+}
+.submit-button-container{
+  bottom: 5px;
+  right: 5px;
+  left: 5px;
+  height: 10%;
+}
+.page-wrapper{
+  height: 100%;
+}

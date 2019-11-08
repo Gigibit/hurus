@@ -10,7 +10,128 @@ from django.contrib.auth import login
 
 from core.models import *
 
+def get_toughts():
+    return [
+    {
+      'i18n_key': "ACTIVE",
+      'is_happy': True
+    },
 
+    {
+      'i18n_key': "FOCUSED",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "JOYFUL",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "INTERESTED",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "SERENE",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "HOPEFUL",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "GLAD",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "SURPRISED",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "CHEERFUL",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "CONFIDENT",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "RELIEVED",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "IN_LOVE",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "ENTHUSIASTIC",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "RELAXED",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "SATISFACTED",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "PROUD",
+      'is_happy': True
+    },
+    {
+      'i18n_key': "SAD",
+    },
+    {
+      'i18n_key': "ASHAMED",
+    },
+    {
+      'i18n_key': "ANXIOUS",
+    },
+    {
+      'i18n_key': "AFRAID",
+    },
+    {
+      'i18n_key': "DEPRESSED",
+    },
+    {
+      'i18n_key': "LONELY",
+    },
+    {
+      'i18n_key': "DELUDED",
+    },
+    {
+      'i18n_key': "ANNOYED",
+    },
+    {
+      'i18n_key': "COLD",
+    },
+    {
+      'i18n_key': "CONFUSED",
+    },
+    {
+      'i18n_key': "PASSIVE",
+    },
+    {
+      'i18n_key': "PREOCCUPIED",
+    },
+    {
+      'i18n_key': "INSECURE",
+    },
+    {
+      'i18n_key': "REPRESSED"
+    },
+    {
+      'i18n_key':"FRURSTRATED"
+    },
+    {
+      'i18n_key': "DISGUSTED",
+    },
+    {
+      'i18n_key': "GUILTY",
+    },
+    {
+      'i18n_key': "DISCOURAGED"
+    }
+  ]
 MY_SECRET_FOR_EVER = 'Sara Cannella' # This is input in the form of a string
 password = MY_SECRET_FOR_EVER.encode() # Convert to type bytes
 salt = b'salt_' # CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes
@@ -29,10 +150,11 @@ key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf oncefrom
 
     
 def check_survey(fn, request):
+    toughts = get_toughts()
     employee = Employee.objects.get(email = request.user.email)
     if not employee.has_seen_daily_survey():
         return render(request, 'core/employee/evaluate_mood.html', {
-        'foo': 'bar',
+        'toughts':toughts,
         })
     return fn(request)
 
