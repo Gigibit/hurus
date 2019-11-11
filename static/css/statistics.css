@@ -1,23 +1,26 @@
-.plot {
-  fill: rgba(250, 250, 255, 0.6);
-}
-.grid .tick {
-  stroke: lightgrey;
-  opacity: 0.7;
-}
-.grid path {
-  stroke-width: 0;
-}
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-.x.axis path {
-  display: none;
-}
+
 .line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+    fill: none;
+    stroke: #ffab00;
+    stroke-width: 3;
 }
+
+/* Style the dots by assigning a fill and stroke */
+.dot {
+    fill: #ffab00;
+    stroke: #fff;
+}
+.axis{
+    stroke: orange;
+}
+
+.grid line {
+    stroke: lightgrey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+  }
+  
+  .grid path {
+    stroke-width: 0;
+  }
+  

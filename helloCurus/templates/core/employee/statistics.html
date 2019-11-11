@@ -13,7 +13,7 @@
 
     var moods = {
         {% for mood in moods %}
-        "{{mood.value}}" : {
+        {{mood.value}} : {
             'icon'  : "{% static mood.icon.name %}"
         },
         {% endfor %}
@@ -30,14 +30,230 @@
     ]
     var img = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
 
+
+
+    data.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date)
+        d.mood = d.mood 
+    })
+
+
+
+
+    function moodChart(){
+        var margin = {top: 50, right: 50, bottom: 50, left: 50}
+        , width = window.innerWidth/2 // Use the window's width 
+        , height = window.innerHeight - 100; // Use the window's height
+
+
+        // 1. Add the SVG to the page and employ #2
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+        // gridlines in x axis function
+        function make_x_gridlines() {		
+            return d3.axisBottom(xScale)
+                .ticks(5)
+        }
+
+        // gridlines in y axis function
+        function make_y_gridlines() {		
+            return d3.axisLeft(yScale)
+                .ticks(5)
+        }
+
+        
+        var minMood = d3.min(Object.keys(moods), d => d );
+        var maxMood = d3.max(Object.keys(moods), d => d );
+
+        var minDate = d3.max(data, function(d){ return d.date })
+        var maxDate = new Date();
+
+        // 5. X scale will use the index of our data
+        var xScale =d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; }))
+        // TODO: invert when data will be available
+            .range([0, width]); // output
+
+        // Create an axis component with d3.axisBottom
+        var xAxis = svg.append('g')
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(xScale)
+                            .ticks(5)
+                            .tickFormat(d3.timeFormat("%d %b")));
+
+            // 6. Y scale will use the randomly generate number 
+        var yScale = d3.scaleLinear()
+            .domain([minMood, maxMood]) // input 
+            .range([height, 1]); // output 
+
+
+        svg.on("dblclick",function(){
+            d3.selectAll('.path-image').attr('display', 'auto')
+            xScale .domain(d3.extent(data, function(d) { return d.date; }))
+            xAxis.transition().call(d3.axisBottom(xScale).ticks(5)
+                            .tickFormat(d3.timeFormat("%d %b")))
+            line.select('.line')
+                .transition()
+                .attr("d", d3.line()
+                    .x(function(d) { 
+                        return xScale(d.date) })
+                    .y(function(d) { return yScale(d.mood) })
+                    .curve(d3.curveMonotoneX)
+                )
+            
+        });
+        // add the X gridlines
+        svg.append("g")			
+            .attr("class", "grid")
+            .attr("transform", "translate(0," + height + ")")
+            .call(make_x_gridlines()
+                .tickSize(-height)
+                .tickFormat("")
+            )
+
+        // add the Y gridlines
+        svg.append("g")			
+            .attr("class", "grid")
+            .call(make_y_gridlines()
+                .tickSize(-width)
+                .tickFormat("")
+            )
+
+        // 4. Call the y axis in a group tag
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(d3.axisLeft(yScale).ticks(count(moods)))
+            .selectAll(".tick").each(function(d,i){  
+                console.log(i)      
+                d3.select(this)
+                    .append('image')
+                    .attr('class', 'axis-image')
+                    .attr('xlink:href', moods[d].icon)
+                    .attr("transform", "translate(-27 ,-12)")
+                    .attr('y',0)
+                    .attr('width',20)
+                    .attr('height',20);
+            }); // Create an axis component with d3.axisLeft
+
+
+        d3.selectAll('.x.axis .tick text').attr('style', 'transform:rotateZ(270deg) translate(-27px, -12px)')
+
+        // 9. Append the path, bind the data, and call the line generator 
+        svg.append("path")
+            .datum(data) // 10. Binds data to the line 
+            .attr("class", "line") // Assign a class for styling 
+            .attr("d", line); // 11. Calls the line generator 
+
+  
+        var clip = svg.append("defs").append("svg:clipPath")
+            .attr("id", "clip")
+            .append("svg:rect")
+            .attr("width", width )
+            .attr("height", height )
+            .attr("x", 0)
+            .attr("y", 0);
+
+        // Add brushing
+        var brush = d3.brushX()                   // Add the brush feature using the d3.brush function
+            .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+            .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
+
+    
+            // A function that set idleTimeOut to null
+        var idleTimeout
+        function idled() { idleTimeout = null; }
+        // 7. d3's line generator
+        var line = svg.append('g')
+                    .attr("clip-path", "url(#clip)")
+        // A function that update the chart for given boundaries
+        function updateChart() {
+
+                // What are the selected boundaries?
+                extent = d3.event.selection
+
+                // If no selection, back to initial coordinate. Otherwise, update X axis domain
+                if(!extent){
+                    if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
+                    xScale.domain([4,8])
+                }else{
+                    xScale.domain([ xScale.invert(extent[0]), xScale.invert(extent[1]) ])
+                    line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
+                }
+                d3.selectAll('.path-image').attr('display', 'none')
+
+                // Update axis and line position
+                xAxis.transition().duration(1000).call(
+                    d3.axisBottom(xScale)
+                    .ticks(5)
+                    .tickFormat(d3.timeFormat('%H')))
+                line
+                    .select('.line')
+                    .transition()
+                    .duration(1000)
+                    .attr("d", d3.line()
+                        .x(function(d) { return xScale(d.date) })
+                        .y(function(d) { return yScale(d.mood) })
+                        .curve(d3.curveMonotoneX)
+                    )
+            }
+
+
+        line.append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+        line.append("path")
+            .datum(data)
+            .attr("class", "line")  // I add the class line to be able to modify this line later on.
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d",  d3.line()
+            .x(function(d, i) { return xScale(d.date); }) // set the x values for the line generator
+            .y(function(d) { return yScale(d.mood); }) // set the y values for the line generator 
+            .curve(d3.curveMonotoneX))
+                  // 12. Appends a circle for each datapoint 
+        svg.selectAll(".dot")
+            .data(data)
+            .enter().append("g") // Uses the enter().append() method
+            .attr("class", "dot") // Assign a class for styling
+            .attr("cx", function(d, i) { return xScale(d.date) })
+            .attr("cy", function(d) { return yScale(d.mood) })
+            .attr("r", 5)
+            .each(function(d,i){
+                if(i%7 != 0 && i%7 != 6) return
+                d3.select(this)
+                        .append('image')
+                        .attr('class', 'path-image')
+                        .attr('transform', 'translate(' + 
+                                            ( Math.ceil(this.getAttributeNode("cx").value) - 12 ) + ',' +
+                                            ( Math.ceil(this.getAttributeNode("cy").value) - 4 ) + ')' )
+                        .attr('xlink:href', moods[d.mood].icon)
+                        .attr('width',20)
+                        .attr('height',20);
+            });
+
+        }
+
+
+
+
+
     function chart(){
+
         // set the dimensions and margins of the graph
-        var margin = {top: 30, right: 30, bottom: 30, left: 60},
+        var margin = {top: 10, right: 30, bottom: 30, left: 60},
             width = 460 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
 
         // append the svg object to the body of the page
-        var svg = d3.select("#area")
+        var svg = d3.select("#my_dataviz")
         .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -45,10 +261,16 @@
             .attr("transform",
                 "translate(" + margin.left + "," + margin.top + ")");
 
-            data.forEach(function(d){
-                d.date = d3.timeParse("%d-%m-%Y")(d.date)
-                d.value = d.mood
-            })
+        //Read the data
+        d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered_comma.csv",
+
+        // When reading the csv, I must format variables:
+        function(d){
+            return { date : d3.timeParse("%Y-%m-%d")(d.date), value : d.value }
+        },
+
+        // Now I can use this dataset:
+        function(data) {
 
             // Add X axis --> it is a date format
             var x = d3.scaleTime()
@@ -56,25 +278,15 @@
             .range([ 0, width ]);
             xAxis = svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x).ticks(d3.timeDay, 1).tickFormat(d3.timeFormat('%d %b')));
+            .call(d3.axisBottom(x));
 
             // Add Y axis
             var y = d3.scaleLinear()
             .domain([0, d3.max(data, function(d) { return +d.value; })])
             .range([ height, 0 ]);
             yAxis = svg.append("g")
-            .call(d3.axisLeft(y).ticks(count(moods)))
-            .selectAll(".tick").each(function(d,i){  
-                console.log(d)      
-                console.log(i)      
-                d3.select(this)
-                    .append('image')
-                    .attr('xlink:href', moods[d+1].icon)
-                    .attr("transform", "translate(-" + 35 + ", -15)")
-                    .attr('y',0)
-                    .attr('width',20)
-                    .attr('height',20);
-            });;
+            .call(d3.axisLeft(y));
+
             // Add a clipPath: everything out of this area won't be drawn.
             var clip = svg.append("defs").append("svg:clipPath")
                 .attr("id", "clip")
@@ -118,47 +330,49 @@
             // A function that update the chart for given boundaries
             function updateChart() {
 
-            // What are the selected boundaries?
-            extent = d3.event.selection
+                // What are the selected boundaries?
+                extent = d3.event.selection
 
-            // If no selection, back to initial coordinate. Otherwise, update X axis domain
-            if(!extent){
-                if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-                x.domain([4,8])
-            }else{
-                x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
-                line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
-            }
+                // If no selection, back to initial coordinate. Otherwise, update X axis domain
+                if(!extent){
+                    if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
+                    x.domain([ 4,8])
+                }else{
+                    x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
+                    line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
+                }
 
-            // Update axis and line position
-            xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(d3.timeDay, 1).tickFormat(d3.timeFormat('%d %b')))
-            line
-                .select('.line')
-                .transition()
-                .duration(1000)
-                .attr("d", d3.line()
-                    .x(function(d) { return x(d.date) })
-                    .y(function(d) { return y(d.value) })
-                )
-            }
+                // Update axis and line position
+                xAxis.transition().duration(1000).call(d3.axisBottom(x))
+                line
+                    .select('.line')
+                    .transition()
+                    .duration(1000)
+                    .attr("d", d3.line()
+                        .x(function(d) { return x(d.date) })
+                        .y(function(d) { return y(d.value) })
+                    )
+                }
 
             // If user double click, reinitialize the chart
             svg.on("dblclick",function(){
-            x.domain(d3.extent(data, function(d) {return d.date; }))
-            xAxis.transition().call(d3.axisBottom(x).ticks(d3.timeDay, 1).tickFormat(d3.timeFormat('%d %b')))
-            line
-                .select('.line')
-                .transition()
-                .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
-                .y(function(d) { return y(d.value) })
-            )
+                x.domain(d3.extent(data, function(d) { return d.date; }))
+                xAxis.transition().call(d3.axisBottom(x))
+                line
+                    .select('.line')
+                    .transition()
+                    .attr("d", d3.line()
+                    .x(function(d) { return x(d.date) })
+                    .y(function(d) { return y(d.value) })
+                )
             });
+
+        })
 
 
     }
     
-chart('mood','#area')
+moodChart()
 
 
 
