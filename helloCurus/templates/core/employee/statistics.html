@@ -9,205 +9,160 @@
 {% block content %}
 <div id="area"></div>
 <script>
-        var data = [
-        {% for tought in toughts%}
-        {
+    function count(obj) { return Object.keys(obj).length; }
 
-            "date": "{{ tought.created_at|date:"d-m-Y" }}",
-            "mood": "{{tought.mood.value}}"
+    var moods = {
+        {% for mood in moods %}
+        "{{mood.value}}" : {
+            'icon'  : "{% static mood.icon.name %}"
         },
-
-//{"item":3,"diameter":"25.00","img":img},{"item":4,"diameter":"7.00","img":img},
-
+        {% endfor %}
+    }
+    
+    var data = [
+        {% for tought in toughts%}
+            {
+                "date": "{{ tought.created_at|date:"d-m-Y" }}",
+                "mood": "{{tought.mood.value}}",
+                "name": "{{tought.mood.i18n_key}}"
+            },
         {% endfor %}
     ]
-    var img = "https://www.gravatar.com/avatar/904fd39461599f72d580fadf3a73115b?s=128&d=identicon&r=PG&f=1";
+    var img = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
+
+    function chart(){
+        // set the dimensions and margins of the graph
+        var margin = {top: 30, right: 30, bottom: 30, left: 60},
+            width = 460 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        var svg = d3.select("#area")
+        .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+            data.forEach(function(d){
+                d.date = d3.timeParse("%d-%m-%Y")(d.date)
+                d.value = d.mood
+            })
+
+            // Add X axis --> it is a date format
+            var x = d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; }))
+            .range([ 0, width ]);
+            xAxis = svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).ticks(d3.timeDay, 1).tickFormat(d3.timeFormat('%d %b')));
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function(d) { return +d.value; })])
+            .range([ height, 0 ]);
+            yAxis = svg.append("g")
+            .call(d3.axisLeft(y).ticks(count(moods)))
+            .selectAll(".tick").each(function(d,i){  
+                console.log(d)      
+                console.log(i)      
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', moods[d+1].icon)
+                    .attr("transform", "translate(-" + 35 + ", -15)")
+                    .attr('y',0)
+                    .attr('width',20)
+                    .attr('height',20);
+            });;
+            // Add a clipPath: everything out of this area won't be drawn.
+            var clip = svg.append("defs").append("svg:clipPath")
+                .attr("id", "clip")
+                .append("svg:rect")
+                .attr("width", width )
+                .attr("height", height )
+                .attr("x", 0)
+                .attr("y", 0);
+
+            // Add brushing
+            var brush = d3.brushX()                   // Add the brush feature using the d3.brush function
+                .extent( [ [0,0], [width,height] ] )  // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+                .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
+
+            // Create the line variable: where both the line and the brush take place
+            var line = svg.append('g')
+            .attr("clip-path", "url(#clip)")
+
+            // Add the line
+            line.append("path")
+            .datum(data)
+            .attr("class", "line")  // I add the class line to be able to modify this line later on.
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+                )
+
+            // Add the brushing
+            line
+            .append("g")
+                .attr("class", "brush")
+                .call(brush);
+
+            // A function that set idleTimeOut to null
+            var idleTimeout
+            function idled() { idleTimeout = null; }
+
+            // A function that update the chart for given boundaries
+            function updateChart() {
+
+            // What are the selected boundaries?
+            extent = d3.event.selection
+
+            // If no selection, back to initial coordinate. Otherwise, update X axis domain
+            if(!extent){
+                if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
+                x.domain([4,8])
+            }else{
+                x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
+                line.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
+            }
+
+            // Update axis and line position
+            xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(d3.timeDay, 1).tickFormat(d3.timeFormat('%d %b')))
+            line
+                .select('.line')
+                .transition()
+                .duration(1000)
+                .attr("d", d3.line()
+                    .x(function(d) { return x(d.date) })
+                    .y(function(d) { return y(d.value) })
+                )
+            }
+
+            // If user double click, reinitialize the chart
+            svg.on("dblclick",function(){
+            x.domain(d3.extent(data, function(d) {return d.date; }))
+            xAxis.transition().call(d3.axisBottom(x).ticks(d3.timeDay, 1).tickFormat(d3.timeFormat('%d %b')))
+            line
+                .select('.line')
+                .transition()
+                .attr("d", d3.line()
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+            )
+            });
 
 
-function line_chart(field,el){ 
-  margin = {
-    top: 20,
-    right: 20,
-    bottom: 20,
-    left: 45
-  },
-  tickno = 10,
-  
-  width = 960 - margin.left - margin.right,
-  height = 450 - margin.top - margin.bottom,
-  x = d3.scale.linear().domain(d3.extent(data, function (d) {
-    return d.item;
-}))
-    .range([0, width]),
-  ymax = d3.max(data,function(d){
-    return (parseInt(d[field])+1);
-}),
-  ymin = d3.min(data,function(d){
-    return d[field];
-}),
-
-  xmax = d3.max(data,function(d){
-    return d.name;
-}),
-  y = d3.scale.linear()
-    .domain([ymin,ymax])
-    .range([height, 0]);
-
-var line = d3.svg.line()
-    .x(function (d) {
-    return x(d.item);
-})
-    .y(function (d) {
-    return y(d[field]);
-});
-
-var zoom = d3.behavior.zoom()
-    .x(x)
-    .scaleExtent([1, 1])
-    .y(y)
-    .on("zoom", zoomed);
-
-svg = d3.select(el)
-    .append("svg:svg")
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
-    .append("svg:g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .call(zoom);
-
-
-
-svg.append("svg:rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("class", "plot");
-
-var make_x_axis = function () {
-    return d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
-        .ticks(tickno);
-};
-
-var make_y_axis = function () {
-    return d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(tickno);
-};
-
-var xAxis = d3.svg.axis()
-    .scale(x)
-    .orient("bottom")
-    .ticks(tickno);
-
-
-svg.append("svg:g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0, " + height + ")")
-    .call(xAxis)
-    .selectAll(".tick").each(function(d,i){        
-        d3.select(this)
-          .append('image')
-          .attr('xlink:href', data[i].img)
-          .attr('y',0)
-          .attr('width',128)
-          .attr('height',128);
-    });
-
-
-
-/*
-    .selectAll(".tick").each(function(data){       
-      var tick = d3.select(this);
-      var transform = d3.transform(tick.attr("transform")).translate;
-      
-      var g = document.createElement('g');
-          g.setAttribute("transform",'translate('+transform[0]+','+transform[1]+')')
-      var r = document.createElement('image')
-          r.setAttribute('x',0)
-          r.setAttribute('y',0)
-          r.setAttribute('xlink:href','https://www.gravatar.com/avatar/904fd39461599f72d580fadf3a73115b?s=32&d=identicon&r=PG&f=1')
-          r.setAttribute('width',50)
-          r.setAttribute('height',50)
-          g.appendChild(r);
-          this.parentNode.insertBefore(g,this.nextSibling);
-    })
-*/
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .ticks(tickno);
-
-svg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
-
-svg.append("g")
-    .attr("class", "x grid")
-    .attr("transform", "translate(0," + height + ")")
-    .call(make_x_axis()
-    .tickSize(-height, 0, 0)
-    .tickFormat(""));
-
-svg.append("g")
-    .attr("class", "y grid")
-    .call(make_y_axis()
-    .tickSize(-width, 0, 0)
-    .tickFormat(""));
-
-
-var clip = svg.append("svg:clipPath")
-    .attr("id", "clip")
-    .append("svg:rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", width)
-    .attr("height", height);
-
-
-var chartBody = svg.append("g")
-    .attr("clip-path", "url(#clip)");
-
-chartBody.append("svg:path")
-    .datum(data)
-    .attr("class", "line")
-    .attr("d", line);
-
-svg.append('g').attr('class','dots').selectAll(".dot").data(data).enter().append("circle").attr("r",3.5)
-.attr("cx",function(d){return x(d.item);})
-.attr("cy",function(d){return y(d[field]);})
-
-function zoomed() {
-    console.log(d3.event.translate);
-    console.log(d3.event.scale);
-
-    svg.select(".dots")
-        .attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
     
-    svg.selectAll(".dots circle").attr("r", function(){
-       return (3.5  * d3.event.scale);
-    });
+chart('mood','#area')
 
-    svg.select(".x.axis").call(xAxis);
-    svg.select(".y.axis").call(yAxis);
-    svg.select(".x.grid")
-        .call(make_x_axis()
-        .tickSize(-height, 0, 0)
-        .tickFormat(""));
-    svg.select(".y.grid")
-        .call(make_y_axis()
-        .tickSize(-width, 0, 0)
-        .tickFormat(""));
-    svg.select(".line")
-        .attr("class", "line")
-        .attr("d", line);
-    svg.selectAll(".dots circle").attr("r", function(){
-     return (3.5  * d3.event.scale);
-});
-}
-}
-line_chart('diameter','#area')
+
+
+
 
 
 

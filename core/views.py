@@ -67,13 +67,10 @@ def home_employee(request, employee):
 
 def statistics_employee(request, employee):
     toughts = Tought.objects.all()
-    distinct_moods = set() #I'm to lazy to think about optimized solution now
-    for tought in toughts:
-        distinct_moods.add(tought.mood)
+    moods = Mood.objects.all()
 
-    print(distinct_moods)
     return render(request, 'core/employee/statistics.html', {
-        'distinct_moods' : distinct_moods,
+        'moods' : moods,
         'toughts' : toughts,
     })
 
