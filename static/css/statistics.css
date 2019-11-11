@@ -1,16 +1,23 @@
-#mood-chart{
-    width: 200px;
-    height: 200px;
+.plot {
+  fill: rgba(250, 250, 255, 0.6);
 }
-.mood-icon-wrapper { 
-    height: auto;
-    position: relative;
-    border: 3px solid #eee; 
-  }
-  
-.mood-icon {
-margin: 0;
-position: absolute;
--ms-transform: translateY(-50%);
-transform: translateY(-50%);
+.grid .tick {
+  stroke: lightgrey;
+  opacity: 0.7;
+}
+.grid path {
+  stroke-width: 0;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
