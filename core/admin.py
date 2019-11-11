@@ -5,13 +5,14 @@ from django.contrib.auth.models import Group
 
 
 
-
+admin.site.site_header = 'HelloCurus Admin Console'
 
 @admin.register(Employee)
 class EmployeeProfileAdmin(admin.ModelAdmin):
     exclude = ('username',)
     fieldsets = (
         ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password')}),
+          ('Employee info' , {'fields': ('team',)}),
         )
     add_fieldsets = (
             (None, {

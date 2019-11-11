@@ -18,6 +18,10 @@ from django.urls import path
 from core import views as core
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('submit_survey/', core.submit_survey),
+    path('add_activity/', core.add_activity),
+    path('tought_for_day/', core.tought_for_day),
+    path('statistics/', core.statistics),
     path('login_with_token/<str:token>', core.login_user_from_token),
     path('', core.home),
 ]

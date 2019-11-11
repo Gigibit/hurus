@@ -21,6 +21,11 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 9999999 * 60 #
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 

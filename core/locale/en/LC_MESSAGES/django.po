@@ -4,6 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
+
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -18,137 +19,277 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 #: core/models.py:81
-msgid "email address"
+
+msgid "email_address"
 msgstr ""
+
+msgid "NEW_ACTIVITY_NAME_PLACEHOLDER"
+msgstr "Enter name..."
+
 
 msgid "HOW_DO_YOU_FEEL"
 msgstr "Welcome! How are you feeling today?"
 
+
 msgid "HAPPY"
 msgstr "Happy"
+
 
 msgid "GOOD_MOOD"
 msgstr "In A Good Mood"
 
+
 msgid "INSPIRED"
 msgstr "Inspired"
+
 
 msgid "SAD"
 msgstr "Sad"
 
+
 msgid "ANGRY"
 msgstr "Angry"
+
 
 msgid "AWFUL"
 msgstr "Awful"
 
+
 msgid "HOW_DO_YOU_BEEN_UP_FREE_TIME"
 msgstr "What have you been up to in your free time?"
+
 
 msgid "HOW_ARE_YOU"
 msgstr "How are you feeling right now?"
 
+
 msgid "ACTIVE"
 msgstr "active"
+
 
 msgid "FOCUSED"
 msgstr "focused"
 
+
 msgid "JOYFUL"
 msgstr "joyful"
+
 
 msgid "INTERESTED"
 msgstr "interested"
 
+
 msgid "SERENE"
 msgstr "serene"
+
 
 msgid "HOPEFUL"
 msgstr "hopeful"
 
+
 msgid "GLAD"
 msgstr "glad"
+
 
 msgid "SURPRISED"
 msgstr "surprised"
 
+
 msgid "CHEERFUL"
 msgstr "cheerful"
+
 
 msgid "CONFIDENT"
 msgstr "confident"
 
+
 msgid "RELIEVED"
 msgstr "relieved"
+
 
 msgid "IN_LOVE"
 msgstr "in love"
 
+
 msgid "ENTHUSIASTIC"
 msgstr "enthusiastic"
+
 
 msgid "RELAXED"
 msgstr "relaxed"
 
+
 msgid "SATISFACTED"
 msgstr "satisfacted"
+
 
 msgid "PROUD"
 msgstr "proud"
 
+
 msgid "ASHAMED"
 msgstr "ashmed"
+
 
 msgid "ANXIOUS"
 msgstr "anxious"
 
+
 msgid "AFRAID"
 msgstr "afraid"
+
 
 msgid "DEPRESSED"
 msgstr "depressed"
 
+
 msgid "LONELY"
 msgstr "lonely"
+
 
 msgid "DELUDED"
 msgstr "deluded"
 
+
 msgid "ANNOYED"
 msgstr "annoyed"
+
 
 msgid "COLD"
 msgstr "cold"
 
+
 msgid "CONFUSED"
 msgstr "confused"
+
 
 msgid "PASSIVE"
 msgstr "passive"
 
+
 msgid "PREOCCUPIED"
 msgstr "preoccupied"
+
 
 msgid "INSECURE"
 msgstr "insecure"
 
+
 msgid "REPRESSED"
 msgstr "repressed"
+
 
 msgid "FRURSTRATED"
 msgstr "frustrated"
 
+
 msgid "DISGUSTED"
 msgstr "disgusted"
+
 
 msgid "GUILTY"
 msgstr "guilty"
 
+
 msgid "DISCOURAGED"
 msgstr "discoraged"
+
 
 msgid "YOUR_TOUGHTS"
 msgstr "Your thoughts (visible only to you)"
 
+
 msgid "WRITE_TO_REMEMBER"
 msgstr "Write down something you want to remember…"
+
+
+msgid "Extra_Work"
+msgstr "Extra Work"
+
+msgid "Reading"
+msgstr "Reading"
+
+msgid "Music"
+msgstr "Music"
+
+msgid "TV"
+msgstr "TV"
+
+msgid "Party"
+msgstr "Party"
+
+msgid "Sport"
+msgstr "Sport"
+
+msgid "Romantic_Date"
+msgstr "Romantic Date"
+
+msgid "Friends"
+msgstr "Friends"
+
+msgid "Family"
+msgstr "Family"
+
+msgid "Relax"
+msgstr "Relax"
+
+msgid "Helping"
+msgstr "Helping"
+
+msgid "Cocktail_bar"
+msgstr "Cocktail bar"
+
+msgid "Restaurant"
+msgstr "Restaurant"
+
+msgid "Shopping"
+msgstr "Shopping"
+
+msgid "Art"
+msgstr "Art"
+
+msgid "Writing"
+msgstr "Writing"
+
+msgid "Praying"
+msgstr "Praying"
+
+msgid "Studying"
+msgstr "Studying"
+
+msgid "Time_in_the_nature"
+msgstr "Time in the nature"
+
+
+msgid "Hobby"
+msgstr "Hobby"
+
+msgid "Cleaning_Home"
+msgstr "Cleaning Home"
+
+msgid "Travelling"
+msgstr "Travelling"
+
+msgid "Doctor_appointment"
+msgstr "Doctor appointment"
+
+msgid "Cooking"
+msgstr "Cooking"
+
+msgid "Videogames"
+msgstr "Videogames"
+
+msgid "Phone-call"
+msgstr "Phone-call"
+
+msgid "Having_a_walk"
+msgstr "Having a walk"
+
+msgid "Nothing_at_all_Time_with_my_partner"
+msgstr "Nothing at all Time with my partner"
+
+msgid "Cinema"
+msgstr "Cinema"
+
+msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
+msgstr "What you have been up today?"

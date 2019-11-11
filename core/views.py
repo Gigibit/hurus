@@ -1,181 +1,203 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-import base64
-import os
+import os, base64, json
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.fernet import Fernet, InvalidToken
 from django.contrib.auth import login
-
+from django.views.decorators.csrf import csrf_exempt
 from core.models import *
+from helloCurus.settings import BASE_DIR
+from django.forms.models import model_to_dict
+
+
+def get_icons():
+    path = os.path.join(BASE_DIR, 'static/img/freetime_available_icons')
+    img_list =os.listdir(path)   
+    return ['img/freetime_available_icons/' + src for src in img_list]
+
+
 
 def get_toughts():
-    return [
-    {
-      'i18n_key': "ACTIVE",
-      'is_happy': True
-    },
+    return ToughtOption.objects.all()
 
-    {
-      'i18n_key': "FOCUSED",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "JOYFUL",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "INTERESTED",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "SERENE",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "HOPEFUL",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "GLAD",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "SURPRISED",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "CHEERFUL",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "CONFIDENT",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "RELIEVED",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "IN_LOVE",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "ENTHUSIASTIC",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "RELAXED",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "SATISFACTED",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "PROUD",
-      'is_happy': True
-    },
-    {
-      'i18n_key': "SAD",
-    },
-    {
-      'i18n_key': "ASHAMED",
-    },
-    {
-      'i18n_key': "ANXIOUS",
-    },
-    {
-      'i18n_key': "AFRAID",
-    },
-    {
-      'i18n_key': "DEPRESSED",
-    },
-    {
-      'i18n_key': "LONELY",
-    },
-    {
-      'i18n_key': "DELUDED",
-    },
-    {
-      'i18n_key': "ANNOYED",
-    },
-    {
-      'i18n_key': "COLD",
-    },
-    {
-      'i18n_key': "CONFUSED",
-    },
-    {
-      'i18n_key': "PASSIVE",
-    },
-    {
-      'i18n_key': "PREOCCUPIED",
-    },
-    {
-      'i18n_key': "INSECURE",
-    },
-    {
-      'i18n_key': "REPRESSED"
-    },
-    {
-      'i18n_key':"FRURSTRATED"
-    },
-    {
-      'i18n_key': "DISGUSTED",
-    },
-    {
-      'i18n_key': "GUILTY",
-    },
-    {
-      'i18n_key': "DISCOURAGED"
-    }
-  ]
+
+def get_freetime_available_choose():
+    return Activity.objects.filter(team=None)
+
+
 MY_SECRET_FOR_EVER = 'Sara Cannella' # This is input in the form of a string
-password = MY_SECRET_FOR_EVER.encode() # Convert to type bytes
-salt = b'salt_' # CHANGE THIS - recommend using a key from os.urandom(16), must be of type bytes
-kdf = PBKDF2HMAC(
+KDF = PBKDF2HMAC(
     algorithm=hashes.SHA256(),
     length=32,
-    salt=salt,
+    salt=b'salt_',
     iterations=100000,
     backend=default_backend()
 )
-key = base64.urlsafe_b64encode(kdf.derive(password)) # Can only use kdf oncefrom cryptography.fernet import Fernet
+key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can only use kdf oncefrom cryptography.fernet import Fernet
+
+
+
+def statistics_manager(request):
+    return render(request, 'core/manager/satistics.html', {
+        'foo': 'bar',
+    })
+
+
+def happy_curus_manager(request):
+    return render(request, 'core/manager/happy_curus.html', {
+        'foo': 'bar',
+    })
+
+
+def e_learning_manager(request):
+    return render(request, 'core/manager/e_learning.html', {
+        'foo': 'bar',
+    })
 
 
 
 
+def home_employee(request, employee):
+    return render(request, 'core/employee/index.html', {
+    'foo': 'bar',
+    })
+
+
+def statistics_employee(request, employee):
+    toughts = Tought.objects.all()
+    distinct_moods = set() #I'm to lazy to think about optimized solution now
+    for tought in toughts:
+        distinct_moods.add(tought.mood)
+
+    print(distinct_moods)
+    return render(request, 'core/employee/statistics.html', {
+        'distinct_moods' : distinct_moods,
+        'toughts' : toughts,
+    })
+
+
+def happy_curus_employee(request, employee):
+    return render(request, 'core/employee/happy_curus.html', {
+        'foo': 'bar',
+    })
+
+
+def e_learning_employee(request, employee):
+    return render(request, 'core/employee/e_learning.html', {
+        'foo': 'bar',
+    })
+
+
+@csrf_exempt
+def add_activity(request):
+    if request.method == 'POST':
+        employee = Employee.objects.get(email = request.user.email)
+        activity_name   = request.POST['name']
+        image_src       = request.POST['src']
+        print(str(employee.team))
+
+        activity = Activity.objects.create(
+            team = employee.team,
+            name  = activity_name,
+            icon =  image_src
+        )
+        activity.save()
+        print(activity.team)
+        return JsonResponse({
+            'icon' : activity.icon.name,
+            'name' : activity.name,
+            'id'   : activity.pk
+        })
 
     
-def check_survey(fn, request):
+def check_survey(fn, request, employee):
     toughts = get_toughts()
-    employee = Employee.objects.get(email = request.user.email)
+    default_freetime_choose = get_freetime_available_choose()
+    available_icons = get_icons()
+    moods = Mood.objects.all()
+
+    if employee.team:
+        team_freetime_choose = Activity.objects.filter(team=employee.team)
+    else:
+        team_freetime_choose = []
+        employee = Employee.objects.get(email = request.user.email)
     if not employee.has_seen_daily_survey():
         return render(request, 'core/employee/evaluate_mood.html', {
-        'toughts':toughts,
+            'toughts':toughts,
+            'moods' : moods,
+            'available_icons' : available_icons,
+            'freetime_available_choose': default_freetime_choose,
+            'team_freetime_available_choose': team_freetime_choose
         })
-    return fn(request)
+    return fn(request, employee)
 
-def is_manager(user):
+def get_employee_from_request_user(user):
     try:
-        return Manager.objects.get(email = user.email)
-    except Manager.DoesNotExist:
+        return Employee.objects.get(email = user.email)
+    except Employee.DoesNotExist:
         return False
 
-def home(request):
-    print(str(request.user is Employee))
-    return home_manager(request) if is_manager(request.user) else check_survey(home, request) 
 
-def statistic(request):
-    return statistic_manager(request) if is_manager(request.user) else check_survey(statistic_employee, request) 
+@csrf_exempt
+def tought_for_day(request):
+
+    try:
+        toughts = Tought.objects.filter(
+            created_at__day=request.GET['day'],
+            created_at__month=request.GET['month'],
+            created_at__year=request.GET['year'] 
+        )
+        return JsonResponse({
+            'toughts' : [t.to_public_dict() for t in toughts]
+        })
+    except Tought.DoesNotExist:
+        return JsonResponse({})
+
+@csrf_exempt
+def submit_survey(request):
+    if request.method == 'POST':
+        employee = Employee.objects.get(email = request.user.email)
+        employee.last_seen_survey = datetime.now()
+        employee.save()
+        mood = Mood.objects.get(pk=request.POST['selected_mood'])
+        tought_options = ToughtOption.objects.filter(pk__in=request.POST.getlist('toughts[]'))
+        activities = Activity.objects.filter(pk__in=request.POST.getlist('activities[]'))
+        tought = Tought.objects.create(  
+                        mood=mood,
+                        text=request.POST['current_tought'],
+                        employee=employee
+                        )
+
+        if tought_options and len(tought_options) > 0:
+            tought.tought_options.set(tought_options)
+        if activities and len(activities) > 0:
+            print(activities)
+            tought.activities.set(activities)
+            print('activities dddddone!')
+        return JsonResponse({
+          'status' : 200,
+          'stoc' : 'stoc'
+        })
+    return None
+
+
+def home(request):
+    employee = get_employee_from_request_user(request.user)
+    return check_survey(home_employee, request, employee) if employee else home_manager(request)
+
+def statistics(request):
+    employee = get_employee_from_request_user(request.user)
+    return check_survey(statistics_employee, request, employee) if employee else statistics_manager(request) 
 
 def happy_corus(request):
-    return happy_corus_manager(request) if is_manager(request.user) else check_survey(happy_corus_employee,request) 
+    employee = get_employee_from_request_user(request.user)
+    return check_survey(happy_curus_employee,request, employee) if employee else  happy_curus_manager(request) 
 
 def e_learning(request):
-    return e_learning_manager(request) if is_manager(request.user) else check_survey(e_learning_employee,request) 
+    employee = get_employee_from_request_user(request.user)
+    return check_survey(e_learning_employee,request, employee) if employee else e_learning_manager(request) 
 
 
 
@@ -183,49 +205,6 @@ def home_manager(request):
     return render(request, 'core/manager/index.html', {
         'foo': 'bar',
         })
-
-def statistic_manager(request):
-    return render(request, 'core/manager/satistics.html', {
-    'foo': 'bar',
-    })
-
-
-def happy_curus_manager(request):
-    return render(request, 'core/manager/happy_curus.html', {
-    'foo': 'bar',
-    })
-
-
-def e_learning_manager(request):
-    return render(request, 'core/manager/e_learning.html', {
-    'foo': 'bar',
-    })
-
-
-
-
-def home_employee(request):
-    return render(request, 'core/employee/index.html', {
-    'foo': 'bar',
-    })
-
-
-def statistic_employee(request):
-    return render(request, 'core/employee/statistics.html', {
-    'foo': 'bar',
-    })
-
-
-def happy_curus_employee(request):
-    return render(request, 'core/employee/happy_curus.html', {
-    'foo': 'bar',
-    })
-
-
-def e_learning_employee(request):
-    return render(request, 'core/employee/e_learning.html', {
-    'foo': 'bar',
-    })
 
 
 
@@ -289,54 +268,27 @@ def encrypt(plain):
 
 
 
+# def upload_file(request, user_dir, _filename = None):
+#     if request.method == 'POST':
+#         # check if the post request has the file part
+#         if 'file' not in request.files:
+#             print('hey niente', file=sys.stdout)
+#             return False
+#         file = request.files['file']
+#         #TODO: convert image to png always
 
-import os
+#         # if user does not select file, browser also
+#         # submit a empty part without filename
+#         if file.filename == '':
+#             print('hey niente', file=sys.stdout)
+#             return False
 
-BS = 8
-pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS) 
-unpad = lambda s : s[0:-ord(s[-1])]
-
-def encode(phrase):
-    key = MY_SECRET_FOR_EVER
-    c1  = Blowfish.new(key.encode('utf8'), Blowfish.MODE_ECB)
-    return c1.encrypt(pad(phrase))
-
-def doDecrypt(phrase):
-    c1  = Blowfish.new(key, Blowfish.MODE_ECB)
-    return unpad(c1.decrypt(phrase))
-
-
-def get_user(access_token):
-    jwt = from_jwt(access_token)
-    id = jwt.get('id', None)
-    return jwt, decode(id) if id else None, jwt.get('email',None)
-
-
-def allowed_file(filename):
-    filename, file_extension = os.path.splitext(filename)
-    return file_extension[1:] in ALLOWED_EXTENSIONS
-
-def upload_file(user_dir, _filename = None):
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            print('hey niente', file=sys.stdout)
-            return False
-        file = request.files['file']
-        #TODO: convert image to png always
-
-        # if user does not select file, browser also
-        # submit a empty part without filename
-        if file.filename == '':
-            print('hey niente', file=sys.stdout)
-            return False
-
-        if file and allowed_file(file.filename):
-            filename =  _filename if _filename else secure_filename(file.filename)
-            path = os.path.join(app.config['UPLOAD_FOLDER'], user_dir, filename)
-            os.makedirs(os.path.dirname(path), exist_ok=True)
-            file.save(path)
-            return url_for('static', filename=os.path.join('images',user_dir, filename), _external=True)
-    else:
-        print('method not was allowed')
-        return False
+#         if file and allowed_file(file.filename):
+#             filename =  _filename if _filename else secure_filename(file.filename)
+#             path = os.path.join(app.config['UPLOAD_FOLDER'], user_dir, filename)
+#             os.makedirs(os.path.dirname(path), exist_ok=True)
+#             file.save(path)
+#             return url_for('static', filename=os.path.join('images',user_dir, filename), _external=True)
+#     else:
+#         print('method not was allowed')
+#         return False

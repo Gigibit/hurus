@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
+from django.forms.models import model_to_dict
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -17,6 +18,11 @@ LANGUAGES = (
     (ITALIAN, 'Italian'),
     (ENGLISH, 'English'),
 )
+
+
+def activity_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'uploads/activities/team_{0}/{1}'.format(instance.team.id if instance.team else 0, filename)
 
 
 class Agency(models.Model):
@@ -112,13 +118,18 @@ class Team(models.Model):
 
 
 
+class Activity(models.Model):
+    i18n_key = models.CharField(max_length=50, null=True)
+    name = models.CharField(max_length=50, null=True)
+    icon = models.FileField(upload_to=activity_directory_path)
+    team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.CASCADE)    
+
+#todo: add same logic for the 
 
 
 class Employee(UserProfile):
-    
     team                = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
     last_seen_survey    = models.DateField(null=True)
-
 
     class Meta:
         verbose_name = 'Employee'
@@ -126,36 +137,60 @@ class Employee(UserProfile):
 
     def has_seen_daily_survey(self):
         today = datetime.today()
-        return self.last_seen_survey and (today - self.last_seen_survey).days >= 1
+        return self.last_seen_survey and (today.date() - self.last_seen_survey).days <= 1
+
+
+
+class ToughtOption(models.Model):
+    i18n_key = models.CharField(max_length=50, null=True)
+    text = models.CharField(max_length=50, null=True)
+    is_happy = models.BooleanField(default=False) # :(
+
+class Mood(models.Model):
+    value = models.IntegerField()
+    i18n_key = models.CharField(max_length=50, null=True)
+    icon = models.FileField()
+
 
 
 class Tought(models.Model):
-    HAPPY = 'HP'
-    SAD = 'SD'
-    ANGRY = 'NG'
-    IN_GOOD_MOOD = 'GM'
-    AWFUL = 'AW'
-    INSPIRED = 'SP'
-    MOODS = (
-        (HAPPY, 'Happy'),
-        (SAD, 'Sad'),
-        (ANGRY, 'Angry'),
-        (IN_GOOD_MOOD, 'In good mood'),
-        (AWFUL, 'Awful'),
-        (INSPIRED, 'Inspired'),
-    )
- 
 
 
-    mood = models.CharField(
-                max_length=2,
-                choices=MOODS,
-                default=SAD,
-            )
+
+    mood = models.ForeignKey(Mood, on_delete=models.DO_NOTHING)
+    tought_options = models.ManyToManyField(ToughtOption, blank=True)
+    activities = models.ManyToManyField(Activity, blank=True)
     employee = models.ForeignKey(Employee, null=True, on_delete=models.DO_NOTHING, related_name='toughts')
     text = models.CharField(max_length=100)
-    when = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    def to_public_dict(self):
+        tought_options = []
 
+        for option in self.tought_options.all(): 
+            tought_options.append({
+                'i18n_key' : option.i18n_key,
+                'text' : option.text,
+                'is_happy' : option.is_happy
+            })
+        print(self.mood)
+        activities = []
+        for activity in self.activities.all(): 
+            activities.append({
+                'i18n_key' : activity.i18n_key,
+                'name' : activity.name,
+                'icon' : activity.icon.name
+            })
+        return {
+            'mood' : {
+                'i18n_key':self.mood.i18n_key,
+                'icon' : self.mood.icon.name,
+                'value' : self.mood.value
+            },
+            'activities': activities,
+            'employee' : self.employee.email,
+            'tought' : self.text, 
+            'tought_options': tought_options,
+            'created_at' : self.created_at
+        }

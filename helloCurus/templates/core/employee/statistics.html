@@ -1,8 +1,59 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block head_css_section %}
+ <link href="{% static 'css/statistics.css' %}?{% now "U" %}" rel="stylesheet">
+{% endblock head_css_section %}
 
 {% block content %}
-    <script >
-        $.get('/testJavascript', function(response){
-        })
-    </script>
+<div class="row">
+    <div class="col-md-8">
+        
+        <div id="chart_and_labels_container" style="min-width:620px !important;">
+            <div class="row" style="height: 550px;"> 
+                <!-- THIS IS THE IMAGE THAT HAS THE LABELS IN IT -->
+                <div class="row col-md-2 mood-wrapper">
+                        {% for mood in distinct_moods %}
+                    <div class="mood-icon-wrapper col-md-12">
+                            <img class="mood-icon" src="{% static mood.icon.name %}" style="width:10%;"/>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div id="col-md-8 canvasDiv" >
+                    <canvas id="mood-chart"style="width: 100%; height: 550px;" ></canvas>
+                </div>
+            </div>  
+    </div>                
+</div>
+<script type="text/javascript">  
+    var yLabels = {
+        {% for tought in toughts %}
+            {{tought.mood.value}}: '{% trans tought.mood.i18n_key %}' ,
+        {% endfor %}
+    }
+     new Chart(document.getElementById('mood-chart'), {
+        type: 'line',
+        data: {
+            labels:[{% for tought in toughts %}"{{ tought.created_at|date:"M d, Y" }}",{% endfor %}],
+            datasets: [
+                {data: [{% for tought in toughts %}{{tought.mood.value}},{% endfor %}]
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        callback: function(value, index, values) {
+                            // for a value (tick) equals to 8
+                            return yLabels[value];
+                            // 'junior-dev' will be returned instead and displayed on your chart
+                        }
+                    }
+                }]
+            }
+        }
+        });
+
+</script>
 {% endblock %}

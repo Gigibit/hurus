@@ -1,0 +1,16 @@
+#mood-chart{
+    width: 200px;
+    height: 200px;
+}
+.mood-icon-wrapper { 
+    height: auto;
+    position: relative;
+    border: 3px solid #eee; 
+  }
+  
+.mood-icon {
+margin: 0;
+position: absolute;
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+}
