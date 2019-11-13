@@ -79,6 +79,7 @@ function barChart(){
                 .attr('y',0)
                 .attr('width',20)
                 .attr('height',20)
+                .attr('cursor', 'pointer')
                 .on('click', function(d){
                     configureRadarChartWith(d)
                 })
@@ -297,18 +298,22 @@ function lineChart(){
 
     function configureRadarChartWith(selectedMood){
         if(radarChart != null){
-            labels = getToughtsOption(selectedMood)
-            data = getDataForTought(labels, selectedMood)
-            radarChart.data.datasets[0].data = data
-            radarChart.update()
+            let labels = getToughtsOption(selectedMood)
+            let data = getDataForTought(labels, selectedMood)
+            if(labels.length > 0  && data.length > 0){
+                radarChart.data.labels = labels
+                radarChart.data.datasets[0].data = data
+                radarChart.update()
+            }
+          
         }
     }
 
     function causeEffectChart(selectedMood){
         var selectedMood = 7
         var causeEffectCanvas = document.getElementById("radar-chart");
-        labels = getToughtsOption(selectedMood)
-        data = getDataForTought(labels, selectedMood)
+        let labels = getToughtsOption(selectedMood)
+        let data = getDataForTought(labels, selectedMood)
         var causeEffectChartData = {
             labels: labels,
             datasets: [{
@@ -318,8 +323,7 @@ function lineChart(){
             
         };
 
-        radarChart = new Chart(causeEffectCanvas, {
-            type: 'radar',
+        radarChart = Chart.Radar(causeEffectCanvas, {
             data: causeEffectChartData,
             options: {
                 legend: {
@@ -335,9 +339,10 @@ function lineChart(){
                                 'i18n_key' : opt.i18n_key ,
                                 'name' : opt.name
                             }}))
+                            .map(opt=> opt.i18n_key || opt.name )
 
         return toughtOptions.filter((item, pos) => toughtOptions.indexOf(item) == pos)
-                            .map(opt=> opt.i18n_key || opt.name )
+                          
     }
 
     function getDataForTought(labels, forMood){
