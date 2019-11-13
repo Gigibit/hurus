@@ -1,3 +1,6 @@
+var radarChart;
+
+
 
 function barChart(){
     buff = []
@@ -34,7 +37,7 @@ function barChart(){
     // moves the 'group' element to the top left margin
     var svg = d3.select("#bar-chart").append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", '100%')
+        .attr("height", '400px')
         .append("g")
         .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")");
@@ -76,6 +79,9 @@ function barChart(){
                 .attr('y',0)
                 .attr('width',20)
                 .attr('height',20)
+                .on('click', function(d){
+                    configureRadarChartWith(d)
+                })
           
     }); // Create an axis component with d3.axisLeft;
 
@@ -283,4 +289,68 @@ function lineChart(){
                     .attr('height',20);
         });
 
+    }
+
+
+
+
+
+    function configureRadarChartWith(selectedMood){
+        if(radarChart != null){
+            labels = getToughtsOption(selectedMood)
+            data = getDataForTought(labels, selectedMood)
+            radarChart.data.datasets[0].data = data
+            radarChart.update()
+        }
+    }
+
+    function causeEffectChart(selectedMood){
+        var selectedMood = 7
+        var causeEffectCanvas = document.getElementById("radar-chart");
+        labels = getToughtsOption(selectedMood)
+        data = getDataForTought(labels, selectedMood)
+        var causeEffectChartData = {
+            labels: labels,
+            datasets: [{
+                backgroundColor: "rgba(200,0,0,0.2)",
+                data: data
+            }]
+            
+        };
+
+        radarChart = new Chart(causeEffectCanvas, {
+            type: 'radar',
+            data: causeEffectChartData,
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+    }
+
+    function getToughtsOption(forMood){
+        toughtOptions = data.filter(t => forMood == t.mood)
+                            .flatMap(tought => tought.toughtOptions.map(opt=> { return { 
+                                'i18n_key' : opt.i18n_key ,
+                                'name' : opt.name
+                            }}))
+
+        return toughtOptions.filter((item, pos) => toughtOptions.indexOf(item) == pos)
+                            .map(opt=> opt.i18n_key || opt.name )
+    }
+
+    function getDataForTought(labels, forMood){
+        var result = []
+        for(var i = 0; i<labels.length; i++){
+            let label = labels[i]
+            result[i] = data.filter(t => {
+                return t.toughtOptions.map(opt=> { 
+                    return { 
+                    'i18n_key' : opt.i18n_key ,
+                    'name' : opt.name
+                }}).filter( opt => opt.i18n_key == label || opt.name == label).length > 0 && t.mood == forMood
+            }).length
+        }
+        return result
     }

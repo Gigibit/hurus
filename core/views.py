@@ -66,9 +66,8 @@ def home_employee(request, employee):
 
 
 def statistics_employee(request, employee):
-    toughts = Tought.objects.all()
+    toughts = [ tought.to_public_dict() for tought in Tought.objects.all() ]
     moods = Mood.objects.all()
-
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
         'toughts' : toughts,
@@ -159,20 +158,20 @@ def submit_survey(request):
         employee.last_seen_survey = datetime.now()
         employee.save()
         mood = Mood.objects.get(pk=request.POST['selected_mood'])
-        tought_options = ToughtOption.objects.filter(pk__in=request.POST.getlist('toughts[]'))
+        tought_options = list(ToughtOption.objects.filter(pk__in=request.POST.getlist('toughts[]')))
         activities = Activity.objects.filter(pk__in=request.POST.getlist('activities[]'))
         tought = Tought.objects.create(  
                         mood=mood,
                         text=request.POST['current_tought'],
                         employee=employee
                         )
-
         if tought_options and len(tought_options) > 0:
-            tought.tought_options.set(tought_options)
+            tought.tought_options.add(*tought_options)
+
         if activities and len(activities) > 0:
-            print(activities)
-            tought.activities.set(activities)
-            print('activities dddddone!')
+            tought.activities.add(*activities)
+
+
         return JsonResponse({
           'status' : 200,
           'stoc' : 'stoc'

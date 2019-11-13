@@ -1,3 +1,4 @@
+import json
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
@@ -155,8 +156,6 @@ class Mood(models.Model):
 
 class Tought(models.Model):
 
-
-
     mood = models.ForeignKey(Mood, on_delete=models.DO_NOTHING)
     tought_options = models.ManyToManyField(ToughtOption, blank=True)
     activities = models.ManyToManyField(Activity, blank=True)
@@ -164,7 +163,7 @@ class Tought(models.Model):
     text = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     def to_public_dict(self):
         tought_options = []
 
@@ -174,7 +173,6 @@ class Tought(models.Model):
                 'text' : option.text,
                 'is_happy' : option.is_happy
             })
-        print(self.mood)
         activities = []
         for activity in self.activities.all(): 
             activities.append({
@@ -188,9 +186,9 @@ class Tought(models.Model):
                 'icon' : self.mood.icon.name,
                 'value' : self.mood.value
             },
-            'activities': activities,
+            'activities': json.dumps(activities),
             'employee' : self.employee.email,
-            'tought' : self.text, 
-            'tought_options': tought_options,
+            'tought' : self.text,
+            'tought_options': json.dumps(tought_options),
             'created_at' : self.created_at
         }
