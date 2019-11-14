@@ -100,7 +100,6 @@ def add_activity(request):
             icon =  image_src
         )
         activity.save()
-        print(activity.team)
         return JsonResponse({
             'icon' : activity.icon.name,
             'name' : activity.name,
@@ -185,15 +184,15 @@ def home(request):
 
 def statistics(request):
     employee = get_employee_from_request_user(request.user)
-    return check_survey(statistics_employee, request, employee) if employee else statistics_manager(request) 
+    return check_survey(statistics_employee, request, employee) if employee else statistics_manager(request)
 
 def happy_corus(request):
     employee = get_employee_from_request_user(request.user)
-    return check_survey(happy_curus_employee,request, employee) if employee else  happy_curus_manager(request) 
+    return check_survey(happy_curus_employee, request, employee) if employee else  happy_curus_manager(request)
 
 def e_learning(request):
     employee = get_employee_from_request_user(request.user)
-    return check_survey(e_learning_employee,request, employee) if employee else e_learning_manager(request) 
+    return check_survey(e_learning_employee, request, employee) if employee else e_learning_manager(request)
 
 
 

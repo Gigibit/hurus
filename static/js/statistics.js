@@ -298,8 +298,8 @@ function lineChart(){
 
     function configureRadarChartWith(selectedMood){
         if(radarChart != null){
-            let labels = getToughtsOption(selectedMood)
-            let data = getDataForTought(labels, selectedMood)
+            let labels = getActivities(selectedMood)
+            let data = getDataForActivities(labels, selectedMood)
             if(labels.length > 0  && data.length > 0){
                 radarChart.data.labels = labels
                 radarChart.data.datasets[0].data = data
@@ -312,8 +312,8 @@ function lineChart(){
     function causeEffectChart(selectedMood){
         var selectedMood = 7
         var causeEffectCanvas = document.getElementById("radar-chart");
-        let labels = getToughtsOption(selectedMood)
-        let data = getDataForTought(labels, selectedMood)
+        let labels = getActivities(selectedMood)
+        let data = getDataForActivities(labels, selectedMood)
         var causeEffectChartData = {
             labels: labels,
             datasets: [{
@@ -333,24 +333,24 @@ function lineChart(){
         });
     }
 
-    function getToughtsOption(forMood){
-        toughtOptions = data.filter(t => forMood == t.mood)
-                            .flatMap(tought => tought.toughtOptions.map(opt=> { return { 
+    function getActivities(forMood){
+        activities = data.filter(t => forMood == t.mood)
+                            .flatMap(tought => tought.activities.map(opt=> { return { 
                                 'i18n_key' : opt.i18n_key ,
                                 'name' : opt.name
                             }}))
                             .map(opt=> opt.i18n_key || opt.name )
 
-        return toughtOptions.filter((item, pos) => toughtOptions.indexOf(item) == pos)
+        return activities.filter((item, pos) => activities.indexOf(item) == pos)
                           
     }
 
-    function getDataForTought(labels, forMood){
+    function getDataForActivities(labels, forMood){
         var result = []
         for(var i = 0; i<labels.length; i++){
             let label = labels[i]
             result[i] = data.filter(t => {
-                return t.toughtOptions.map(opt=> { 
+                return t.activities.map(opt=> { 
                     return { 
                     'i18n_key' : opt.i18n_key ,
                     'name' : opt.name

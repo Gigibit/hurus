@@ -21,6 +21,17 @@ LANGUAGES = (
 )
 
 
+FREETIME     = 'FT'
+MARKET_PLACE = 'MP'
+
+
+TYPES = (
+    (FREETIME, 'Freetime'),
+    (MARKET_PLACE, 'MarketPlace'),
+)
+
+
+
 def activity_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'uploads/activities/team_{0}/{1}'.format(instance.team.id if instance.team else 0, filename)
@@ -120,6 +131,11 @@ class Team(models.Model):
 
 
 class Activity(models.Model):
+    activity_type = models.CharField(
+        max_length=2,
+        choices=TYPES,
+        default=FREETIME,
+    )
     i18n_key = models.CharField(max_length=50, null=True)
     name = models.CharField(max_length=50, null=True)
     icon = models.FileField(upload_to=activity_directory_path)
@@ -155,6 +171,13 @@ class Mood(models.Model):
 
 
 class Tought(models.Model):
+
+
+    tought_type = models.CharField(
+        max_length=2,
+        choices=TYPES,
+        default=FREETIME,
+    )
 
     mood = models.ForeignKey(Mood, on_delete=models.DO_NOTHING)
     tought_options = models.ManyToManyField(ToughtOption, blank=True)
