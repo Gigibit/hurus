@@ -23,7 +23,7 @@ def get_toughts():
     return ToughtOption.objects.all()
 
 
-def get_freetime_available_choose():
+def get_activity_available_choose():
     return Activity.objects.filter(team=None)
 
 
@@ -70,7 +70,8 @@ def statistics_employee(request, employee):
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
-        'toughts' : toughts,
+        'toughts' : filter( lambda t : t.tought_type == FREETIME, toughts),
+        'marketplace_toughts' : filter( lambda t : t.tought_type == MARKET_PLACE, toughts)
     })
 
 
@@ -109,22 +110,25 @@ def add_activity(request):
     
 def check_survey(fn, request, employee):
     toughts = get_toughts()
-    default_freetime_choose = get_freetime_available_choose()
+    default_activity_choose = get_activity_available_choose()
     available_icons = get_icons()
     moods = Mood.objects.all()
 
     if employee.team:
-        team_freetime_choose = Activity.objects.filter(team=employee.team)
+        team_activity_choose = Activity.objects.filter(team=employee.team)
     else:
-        team_freetime_choose = []
+        team_activity_choose = []
         employee = Employee.objects.get(email = request.user.email)
-    if not employee.has_seen_daily_survey():
+    if True or not employee.has_seen_daily_survey():
         return render(request, 'core/employee/evaluate_mood.html', {
             'toughts':toughts,
             'moods' : moods,
             'available_icons' : available_icons,
-            'freetime_available_choose': default_freetime_choose,
-            'team_freetime_available_choose': team_freetime_choose
+            'freetime_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, default_activity_choose),
+            'team_freetime_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, team_activity_choose),
+            'marketplace_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, default_activity_choose),
+            'team_marketplace_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, team_activity_choose),
+
         })
     return fn(request, employee)
 
@@ -153,15 +157,37 @@ def tought_for_day(request):
 @csrf_exempt
 def submit_survey(request):
     if request.method == 'POST':
+        #freetime
         employee = Employee.objects.get(email = request.user.email)
         employee.last_seen_survey = datetime.now()
         employee.save()
-        mood = Mood.objects.get(pk=request.POST['selected_mood'])
-        tought_options = list(ToughtOption.objects.filter(pk__in=request.POST.getlist('toughts[]')))
-        activities = Activity.objects.filter(pk__in=request.POST.getlist('activities[]'))
+        mood = Mood.objects.get(pk=request.POST['freetime']['selected_mood'])
+        tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
+        activities = Activity.objects.filter(pk__in=request.POST['freetime'].getlist('activities[]'))
         tought = Tought.objects.create(  
+                        tought_type = Tought.FREETIME,
                         mood=mood,
-                        text=request.POST['current_tought'],
+                        text=request.POST['freetime']['current_tought'],
+                        employee=employee
+                        )
+        if tought_options and len(tought_options) > 0:
+            tought.tought_options.add(*tought_options)
+
+        if activities and len(activities) > 0:
+            tought.activities.add(*activities)
+
+
+        ### marketplace
+        employee = Employee.objects.get(email = request.user.email)
+        employee.last_seen_survey = datetime.now()
+        employee.save()
+        mood = Mood.objects.get(pk=request.POST['marketplace']['selected_mood'])
+        tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
+        activities = Activity.objects.filter(pk__in=request.POST['marketplace'].getlist('activities[]'))
+        tought = Tought.objects.create(  
+                        tought_type = MARKET_PLACE,
+                        mood=mood,
+                        text=request.POST['marketplace']['current_tought'],
                         employee=employee
                         )
         if tought_options and len(tought_options) > 0:

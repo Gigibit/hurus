@@ -19,7 +19,7 @@
   margin: 0 auto;
   display: table;
 }
-.mood{
+.mood, .marketplace-mood{
   font-size: 65px;
   text-align: center;
   padding: 15px;
@@ -89,11 +89,11 @@ section{
 .tought-selected{
   background: #ccc;
 }
-.freetime-box-selected {
+.freetime-box-selected, .marketplace-box-selected {
   background: #ccc;
   border-radius: 15px;
 }
-.freetime-box-wrapper {
+.freetime-box-wrapper, .marketplace-box-wrapper {
   padding : 5px;
 }
 
@@ -142,7 +142,7 @@ section{
   display: block;
   margin: 0 auto;
 }
-.mood img{
+.mood img, .marketplace-mood img{
   width: 50px;
   height: 50px;
 }
