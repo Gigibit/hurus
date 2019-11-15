@@ -359,3 +359,31 @@ function lineChart(){
         }
         return result
     }
+
+
+    function doughnutChart(){
+        let doughnutDataSet = []
+        Object.keys(moods).forEach(function(mood,i){
+            doughnutDataSet[i] = toughts.filter((tought,i) => tought.mood == mood ).length
+        })
+        
+        new Chart(document.getElementById("doughnut-chart"), {
+            type: "doughnut",
+            data:{ labels :["Red","Blue","Yellow"],
+                  datasets:[{
+                          "label":"My First Dataset",
+                          data:doughnutDataSet,
+                          backgroundColor:
+                            [
+                                "rgb(255, 99, 132)",
+                                "rgb(54, 162, 235)",
+                                "rgb(255, 205, 86)"
+                            ]
+                        }]
+            },
+            options:{
+                rotation: 1 * Math.PI,
+                circumference: 1 * Math.PI
+            }
+        });
+    }
