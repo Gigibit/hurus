@@ -25,7 +25,7 @@ function barChart(chartDiv, data) {
 			bottom: 30,
 			left: 40
 		},
-		width = window.innerWidth / 2.5, // Use the window's width 
+		width = window.innerWidth / 2.5, // Use the window's width
 		height = window.innerHeight / 2.5; // Use the window's height
 
 	// set the ranges
@@ -116,7 +116,7 @@ function lineChart(chartDiv, data) {
 			bottom: 50,
 			left: 50
 		},
-		width = window.innerWidth / 2.5 // Use the window's width 
+		width = window.innerWidth / 2.5 // Use the window's width
 		,
 		height = window.innerHeight / 2.5; // Use the window's height
 
@@ -166,10 +166,10 @@ function lineChart(chartDiv, data) {
 			.ticks(5)
 			.tickFormat(d3.timeFormat("%d %b")));
 
-	// 6. Y scale will use the randomly generate number 
+	// 6. Y scale will use the randomly generate number
 	var yScale = d3.scaleLinear()
-		.domain([minMood, maxMood]) // input 
-		.range([height, 1]); // output 
+		.domain([minMood, maxMood]) // input
+		.range([height, 1]); // output
 
 
 	svg.on("dblclick", function () {
@@ -227,11 +227,11 @@ function lineChart(chartDiv, data) {
 
 	d3.selectAll('.x.axis .tick text').attr('style', 'transform:rotateZ(270deg) translate(-15px, -12px)')
 
-	// 9. Append the path, bind the data, and call the line generator 
+	// 9. Append the path, bind the data, and call the line generator
 	svg.append("path")
-		.datum(data) // 10. Binds data to the line 
-		.attr("class", "line") // Assign a class for styling 
-		.attr("d", line); // 11. Calls the line generator 
+		.datum(data) // 10. Binds data to the line
+		.attr("class", "line") // Assign a class for styling
+		.attr("d", line); // 11. Calls the line generator
 
 
 	var clip = svg.append("defs").append("svg:clipPath")
@@ -313,9 +313,9 @@ function lineChart(chartDiv, data) {
 			}) // set the x values for the line generator
 			.y(function (d) {
 				return yScale(d.mood);
-			}) // set the y values for the line generator 
+			}) // set the y values for the line generator
 			.curve(d3.curveMonotoneX))
-	// 12. Appends a circle for each datapoint 
+	// 12. Appends a circle for each datapoint
 	svg.selectAll(".dot")
 		.data(data)
 		.enter().append("g") // Uses the enter().append() method
@@ -359,7 +359,7 @@ function configureRadarChartWith(selectedMood, _data) {
 function configRadarChart(chartDiv, selectedMood, data) {
     var context = document.getElementById(chartDiv).getContext('2d');
     var relatedContext = document.getElementById('related-' + chartDiv).getContext('2d');
-    
+
 	let labels = getActivities(selectedMood, data)
 	let datasetData = getDataForActivities(labels, selectedMood, data)
 	var causeEffectChartData = {
@@ -379,7 +379,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
 			}
 		}
     });
-    
+
     var opt = {
         legend: {
             display: false
@@ -403,7 +403,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
             }]
         },
         maintainAspectRatio: false,
-       
+
     };
     radarCharts['related-' + chartDiv] = new Chart(relatedContext, {
         type: 'horizontalBar',
@@ -435,7 +435,6 @@ function getActivities(forMood, data) {
 	return activities.filter((item, pos) => activities.indexOf(item) == pos)
 
 }
-
 function getDataForActivities(labels, forMood, data) {
 	var result = []
 	for (var i = 0; i < labels.length; i++) {
@@ -451,3 +450,29 @@ function getDataForActivities(labels, forMood, data) {
 	}
 	return result
 }
+function doughnutChart(){
+        let doughnutDataSet = []
+        Object.keys(moods).forEach(function(mood,i){
+            doughnutDataSet[i] = toughts.filter((tought,i) => tought.mood == mood ).length
+        })
+
+        new Chart(document.getElementById("doughnut-chart"), {
+            type: "doughnut",
+            data:{ labels :["Red","Blue","Yellow"],
+                  datasets:[{
+                          "label":"My First Dataset",
+                          data:doughnutDataSet,
+                          backgroundColor:
+                            [
+                                "rgb(255, 99, 132)",
+                                "rgb(54, 162, 235)",
+                                "rgb(255, 205, 86)"
+                            ]
+                        }]
+            },
+            options:{
+                rotation: 1 * Math.PI,
+                circumference: 1 * Math.PI
+            }
+        });
+    }
