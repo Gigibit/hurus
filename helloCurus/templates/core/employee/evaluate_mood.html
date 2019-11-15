@@ -68,7 +68,7 @@
           </div>
         </div>
         {% endfor %}
-        <div type="button" class="add-edit-button freetime-box col-md-2" data-toggle="modal" data-target="#add-activity-modal">
+        <div type="button" class="add-edit-button freetime-box col-md-2" data-type="MP" href="#add-activity-modal">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
 
             <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -128,8 +128,8 @@
               </div>
             </div>
             {% endfor %}
-            <div type="button" class="add-edit-button freetime-box col-md-2" data-toggle="modal" data-target="#add-activity-modal">
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
+            <div type="button" class="add-edit-button freetime-box col-md-2" data-type="FT" href="#add-activity-modal">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
 
                 <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                   <path d="M6030 12793 c-753 -44 -1534 -233 -2220 -538 -1650 -733 -2911 -2118 -3480 -3825 -157 -469 -251 -913 -307 -1450 -25 -236 -25 -946 0 -1175 113 -1040 410 -1924 934 -2775 862 -1397 2248 -2418 3837 -2825 561 -144 1043 -205 1611 -205 883 0 1709 170 2523 519 1365 585 2494 1641 3171 2966 328 641 549 1350 645 2069 45 329 51 441 50 866 0 431 -8 554 -59 908 -200 1380 -869 2690 -1873 3663 -1099 1067 -2515 1694 -4060 1799 -138 9 -634 11 -772 3z m715 -1243 c488 -35 999 -144 1439 -307 999 -370 1852 -1030 2453 -1896 500 -722 802 -1535 900 -2427 25 -229 25 -806 0 -1030 -72 -645 -229 -1195 -501 -1755 -666 -1370 -1905 -2372 -3395 -2745 -422 -106 -756 -145 -1236 -145 -346 0 -462 7 -730 46 -1106 159 -2132 669 -2914 1448 -754 752 -1263 1727 -1446 2771 -57 329 -69 476 -69 875 0 406 10 539 64 863 221 1310 921 2469 1970 3264 793 600 1762 966 2742 1037 165 12 561 12 723 1z"/>
@@ -192,6 +192,8 @@
     <script>
         var activityName = null;
         var activitySrc = null;
+        var activityType = null;
+
 
         $('.next-available-icons').click(function(){ $('.icon-list').animate({scrollLeft:'+=' + 250 }) })
         $('.prev-available-icons').click(function(){ $('.icon-list').animate({scrollLeft:'-=' +  250 }) })
@@ -201,19 +203,22 @@
             $('#selected-icon').attr('src',activitySrc);
         })
 
+        $('.add-activity-modal').click(function(event){
+          activityType = $(this).data('type')
+        })
+
         $('#add-activity-submit-button').click(function(event){
             activityName = $('#new-activity-name').val()
             if(activityName == null || activityName.length == 0 || activitySrc == null) return;
             $('#add-activity-modal').modal('toggle');
             $.post('/add_activity/', {
+              'type': type,
               'src' : activitySrc,
               'name' : activityName
             },function(response){
-              console.log(response)
                 var id = response['id']
                 var src = response['icon']
                 var value = response['name']
-                console.log(response)
                 $('#activities-container').append(
                   '<div class="freetime-box-wrapper col-md-2" data-activity="'+id+'">' +
                     '<div class="freetime-box">' +

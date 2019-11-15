@@ -204,6 +204,7 @@ class Tought(models.Model):
                 'icon' : activity.icon.name
             })
         return {
+            'tought_type' : self.tought_type,
             'mood' : {
                 'i18n_key':self.mood.i18n_key,
                 'icon' : self.mood.icon.name,

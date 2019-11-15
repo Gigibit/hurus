@@ -1,7 +1,7 @@
 
 .line {
     fill: none;
-    stroke: #ffab00;
+    stroke: steelblue;
     stroke-width: 3;
 }
 
@@ -24,7 +24,7 @@
     stroke-width: 0;
   }
   .bar { 
-      fill: #F9D423;
+      fill: steelblue;
     
     }
   .chart-wrapper{
@@ -56,3 +56,23 @@
     color: #777;
     font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
   }
+
+
+  .axis {
+    font: 10px sans-serif;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+  svg text {
+    fill:white;
+   font: 10px sans-serif;
+   text-anchor: end;
+}
+.related-radar-chart{
+    margin: 15px
+}

@@ -24,6 +24,7 @@
                 rel="stylesheet" media="screen">
             <link href="{% static 'css/app.css' %}?v="{% now "U" %}""
                 rel="stylesheet" media="screen">
+
             <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.20/angular-material.css"
                 rel="stylesheet">
         {% endblock head_css_site %}
@@ -39,6 +40,8 @@
     
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/charts.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
         <script src="https://momentjs.com/downloads/moment.js"></script>
         <script src="https://d3js.org/d3.v4.js"></script>
 

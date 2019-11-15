@@ -285,3 +285,10 @@ def get_freetime_available_choose():
               'icon':  "img/freetime_icons/Cinema.ico"
           },
 ]
+
+
+#marketplace
+#['Meeting_with_management','Meeting_with_team','New_Tasks','Team_Rotation','Document_analysis','Held_a_Presentation','Working_with_Time_Pressure','Sick_leave','Everydays_routine','Project_Management' , 'External_Meeting','Worked_Closely_to_a_new_teammate','Mentored_someone']
+
+#for a in ['Meeting_with_management','Meeting_with_team','New_Tasks','Team_Rotation','Document_analysis','Held_a_Presentation','Working_with_Time_Pressure','Sick_leave','Everydays_routine','Project_Management' , 'External_Meeting','Worked_Closely_to_a_new_teammate','Mentored_someone']:
+ # Activity.objects.create(activity_type=MARKET_PLACE, i18n_key=a, icon='img/freetime_icons/'+a+'.ico')

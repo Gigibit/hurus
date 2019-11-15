@@ -66,12 +66,12 @@ def home_employee(request, employee):
 
 
 def statistics_employee(request, employee):
-    toughts = [ tought.to_public_dict() for tought in Tought.objects.all() ]
+    toughts = [ tought.to_public_dict() for tought in Tought.objects.all().order_by('created_at') ]
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
-        'toughts' : filter( lambda t : t.tought_type == FREETIME, toughts),
-        'marketplace_toughts' : filter( lambda t : t.tought_type == MARKET_PLACE, toughts)
+        'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
+        'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts)
     })
 
 
@@ -119,13 +119,13 @@ def check_survey(fn, request, employee):
     else:
         team_activity_choose = []
         employee = Employee.objects.get(email = request.user.email)
-    if True or not employee.has_seen_daily_survey():
+    if not employee.has_seen_daily_survey():
         return render(request, 'core/employee/evaluate_mood.html', {
             'toughts':toughts,
             'moods' : moods,
             'available_icons' : available_icons,
-            'freetime_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, default_activity_choose),
-            'team_freetime_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, team_activity_choose),
+            'freetime_available_choose':  filter( lambda a : a.activity_type == FREETIME, default_activity_choose),
+            'team_freetime_available_choose':  filter( lambda a : a.activity_type == FREETIME, team_activity_choose),
             'marketplace_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, default_activity_choose),
             'team_marketplace_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, team_activity_choose),
 
@@ -161,17 +161,17 @@ def submit_survey(request):
         employee = Employee.objects.get(email = request.user.email)
         employee.last_seen_survey = datetime.now()
         employee.save()
-        mood = Mood.objects.get(pk=request.POST['freetime']['selected_mood'])
-        tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
-        activities = Activity.objects.filter(pk__in=request.POST['freetime'].getlist('activities[]'))
+        mood = Mood.objects.get(pk=request.POST['freetime[selected_mood]'])
+        #tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
+        activities = Activity.objects.filter(pk__in=request.POST.getlist('freetime[activities][]'))
         tought = Tought.objects.create(  
-                        tought_type = Tought.FREETIME,
+                        tought_type = FREETIME,
                         mood=mood,
-                        text=request.POST['freetime']['current_tought'],
+                        text=request.POST['freetime[current_tought]'],
                         employee=employee
                         )
-        if tought_options and len(tought_options) > 0:
-            tought.tought_options.add(*tought_options)
+#        if tought_options and len(tought_options) > 0:
+#            tought.tought_options.add(*tought_options)
 
         if activities and len(activities) > 0:
             tought.activities.add(*activities)
@@ -181,17 +181,17 @@ def submit_survey(request):
         employee = Employee.objects.get(email = request.user.email)
         employee.last_seen_survey = datetime.now()
         employee.save()
-        mood = Mood.objects.get(pk=request.POST['marketplace']['selected_mood'])
-        tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
-        activities = Activity.objects.filter(pk__in=request.POST['marketplace'].getlist('activities[]'))
+        mood = Mood.objects.get(pk=request.POST['marketplace[selected_mood]'])
+       # tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
+        activities = Activity.objects.filter(pk__in=request.POST.getlist('marketplace[activities][]'))
         tought = Tought.objects.create(  
                         tought_type = MARKET_PLACE,
                         mood=mood,
-                        text=request.POST['marketplace']['current_tought'],
+                        text=request.POST['marketplace[current_tought]'],
                         employee=employee
                         )
-        if tought_options and len(tought_options) > 0:
-            tought.tought_options.add(*tought_options)
+#        if tought_options and len(tought_options) > 0:
+ #           tought.tought_options.add(*tought_options)
 
         if activities and len(activities) > 0:
             tought.activities.add(*activities)

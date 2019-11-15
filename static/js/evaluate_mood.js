@@ -23,8 +23,8 @@ $('#submit-button').click(function(event){
             evaluateMoodMarketPlace()
             break;
         
-        case 2: 
-            evaluateMarketplace()
+        case 3: 
+            evaluateMarketPlace()
             break;
     }
 })
@@ -62,7 +62,6 @@ $('.freetime-box-wrapper').click(function(event){
     else {
         $(element.children()[0]).addClass('freetime-box-selected')
         freetimeActivities.push(activity);
-        console.log(freetimeActivities)
     }
 })
 $('.marketplace-box-wrapper').click(function(event){
@@ -116,11 +115,11 @@ function evaluateMoodMarketPlace(){
 
 
 function evaluateMarketPlace(){
+    console.log(marketplaceActivities)
     if(marketplaceActivities.length > 0){
         let request = {
             'freetime': {
                 'selected_mood' : selectedMood,
-                'toughts' : toughts,
                 'current_tought': currentTought,
                 'activities' : freetimeActivities
     
