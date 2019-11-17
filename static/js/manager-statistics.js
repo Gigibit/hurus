@@ -385,9 +385,6 @@ function configRadarChart(chartDiv, selectedMood, data) {
 		type: 'radar',
 		data: causeEffectChartData,
 		options: {
-            wrapWidth: 60,
-            levels: 5,
-            roundStrokes: true,
 			legend: {
 				display: false
             },
@@ -529,4 +526,5 @@ function doughnutChart(div,toughts){
         var o = Math.round, r = Math.random, s = 255;
         return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
     }
+    
     

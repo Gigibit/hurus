@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from core.models import *
 from helloCurus.settings import BASE_DIR
 from django.forms.models import model_to_dict
-
+from django.db.models import Avg
 
 def get_icons():
     path = os.path.join(BASE_DIR, 'static/img/freetime_available_icons')
@@ -40,10 +40,64 @@ key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can on
 
 
 def statistics_manager(request):
-    return render(request, 'core/manager/satistics.html', {
-        'foo': 'bar',
+    moods = Mood.objects.all()
+    manager = Manager.objects.get(email = request.user.email)
+    mood_max_value = max(mood.value for mood in moods )
+    analysis = calculate_average_moods(manager, mood_max_value=mood_max_value)
+    average_moods = analysis['average_moods']
+    print(analysis['freetime_mood_value_percentage'])
+    return render(request, 'core/manager/statistics.html', {
+        'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
+        'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
+        'average_moods': average_moods,
+        'moods' : moods,
+        # 'toughts' : filter(lambda t: t['tought_type'] == FREETIME, toughts),
+        # 'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts)
     })
+def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_value = 8):
+    if start_day and end_day :
+        toughts = Tought.objects.filter(employee__team__manager=manager, created_at__gte=start_day, created_at__lte=end_day)
+    elif start_day and not end_day :
+        toughts = Tought.objects.filter(employee__team__manager=manager, created_at__gte=start_day)
+    elif not start_day and end_day :
+        toughts = Tought.objects.filter(employee__team__manager=manager, created_at__lte=end_day)
+    else :
+        toughts = Tought.objects.filter(employee__team__manager=manager)
 
+    average_moods = []
+    count = 0
+    average_mood_value_freetime      = .0
+    average_mood_value_marketplace   = .0
+
+    for date in set([t.created_at for t in toughts]):
+        average_mood_freetime = calculate_average_mood_for_day(date, toughts, FREETIME)
+        average_mood_marketplace = calculate_average_mood_for_day(date, toughts, MARKET_PLACE)
+        average_mood_value_freetime += average_mood_freetime / mood_max_value
+        average_mood_value_marketplace += average_mood_marketplace / mood_max_value
+        count += 1
+        
+        average_moods.append({
+            'date' : date,
+            'average_mood_freetime' : average_mood_freetime,
+            'average_mood_marketplace' : average_mood_marketplace
+        })
+
+    return {
+        'freetime_mood_value_percentage' : (average_mood_value_freetime / count) * 100,
+        'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count) * 100,
+        'average_moods' : average_moods
+    }
+
+def calculate_average_mood_for_day(date, toughts, for_type):
+    count = 0
+    moods = 0
+
+    for tought in filter(lambda t: t.created_at == date, toughts):
+        if tought.tought_type == for_type:
+            count += 1
+            moods += tought.mood.value
+
+    return moods/count if count > 0 else 1
 
 def happy_curus_manager(request):
     return render(request, 'core/manager/happy_curus.html', {
@@ -93,7 +147,6 @@ def add_activity(request):
         employee = Employee.objects.get(email = request.user.email)
         activity_name   = request.POST['name']
         image_src       = request.POST['src']
-        print(str(employee.team))
 
         activity = Activity.objects.create(
             team = employee.team,

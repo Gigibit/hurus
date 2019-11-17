@@ -56,10 +56,14 @@
     <div class="row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
-            <canvas id="doughnut-chart" class="chart"></canvas>
+            <div class="row legend">
+            </div>
+            <canvas id="doughnut-chart-freetime" class="chart"></canvas>
         </div>
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
+            <div class="row legend">
+            </div>
             <canvas id="doughnut-chart-marketplace" class="chart"></canvas>
         </div>
     </div>
@@ -154,6 +158,8 @@
         barChart("#marketplace-bar-chart", dataMarketPlace)
         configRadarChart('freetime-radar-chart',    7, dataFreetime)
         configRadarChart('marketplace-radar-chart', 1, dataMarketPlace)
+        doughnutChart('doughnut-chart-freetime',dataFreetime)
+        doughnutChart('doughnut-chart-marketplace',dataMarketPlace)
     })
 </script>
 
