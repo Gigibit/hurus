@@ -42,6 +42,16 @@
             <canvas id="marketplace-line-chart" class="chart"></canvas>
         </div>
     </div>
+    <div class="row sparkboxes mt-4 mb-4">
+        <div class="chart-wrapper col-md-6">
+            <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+            <div id="average-freetime-line-chart" class="chart"></div>
+        </div>
+        <div class="chart-wrapper col-md-6">
+            <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
+            <div id="average-marketplace-line-chart" class="chart"></div>
+        </div>
+    </div>
 </div>
 
 
@@ -58,6 +68,8 @@
         }
         
     var dates = []    
+    var freetimeAverageMoods= []
+    var marketplaceAverageMoods= []
     var dataMarketPlace = {}
     var dataFreetime = {}
     {% for average in average_moods%}
@@ -78,7 +90,31 @@
             dataMarketPlace[{{mood}}].data.push({{value}})
         {% endfor %}
         dates.push('{{average.date|date:"d-m-Y" }}')
+
+        freetimeAverageMoods.push({
+             "date": '{{average.date|date:"d-m-Y"}}', //H:i
+             "mood": '{{average.average_mood_freetime|stringformat:"f"}}'
+            
+            })
+
+        marketplaceAverageMoods.push({
+             "date": '{{average.date|date:"d-m-Y"}}', //H:i
+             "mood": '{{average.average_mood_marketplace|stringformat:"f"}}' 
+            })
+
     {% endfor %}
+
+    freetimeAverageMoods.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    marketplaceAverageMoods.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    console.log(freetimeAverageMoods)
+    
+
     
     
 </script>
@@ -87,8 +123,9 @@
     $(document).ready(function(){
         managerLineChart('freetime-line-chart', dataFreetime)
         managerLineChart('marketplace-line-chart', dataMarketPlace)
-        // lineChart("#freetime-line-chart", dataFreetime)
-        // lineChart("#marketplace-line-chart", dataMarketPlace)
+        lineChart("#average-freetime-line-chart", freetimeAverageMoods)
+        lineChart("#average-marketplace-line-chart", marketplaceAverageMoods)
+
         // barChart("#freetime-bar-chart", dataFreetime)
         // barChart("#marketplace-bar-chart", dataMarketPlace)
         // configRadarChart('freetime-radar-chart',    7, dataFreetime)

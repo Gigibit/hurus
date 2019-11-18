@@ -1,4 +1,5 @@
 var radarCharts = {};
+function count(obj) { return Object.keys(obj).length; }
 
 
 function barChart(chartDiv, data) {
@@ -91,7 +92,7 @@ function barChart(chartDiv, data) {
 			d3.select(this)
 				.append('image')
 				.attr('class', 'axis-image')
-				.attr('xlink:href', moods[d].icon)
+				.attr('xlink:href', moods[Math.round(d.mood.replace(",","."))].icon)
 				.attr("transform", "translate(-10 , 5)")
 				.attr('y', 0)
 				.attr('width', 20)
@@ -214,6 +215,9 @@ function lineChart(chartDiv, data) {
 		.attr("class", "y axis")
 		.call(d3.axisLeft(yScale).ticks(count(moods)))
 		.selectAll(".tick").each(function (d, i) {
+
+			console.log(moods)
+			console.log(d)
 			d3.select(this)
 				.append('image')
 				.attr('class', 'axis-image')
@@ -329,13 +333,14 @@ function lineChart(chartDiv, data) {
 		.attr("r", 5)
 		.each(function (d, i) {
 			if (i % 7 != 0 && i % 7 != 6) return
+			console.log(this.getAttributeNode("cx"))
 			d3.select(this)
 				.append('image')
 				.attr('class', 'path-image')
 				.attr('transform', 'translate(' +
 					(Math.ceil(this.getAttributeNode("cx").value) - 12) + ',' +
 					(Math.ceil(this.getAttributeNode("cy").value) - 4) + ')')
-				.attr('xlink:href', moods[d.mood].icon)
+				.attr('xlink:href', moods[Math.round(d.mood)].icon)
 				.attr('width', 20)
 				.attr('height', 20);
 		});

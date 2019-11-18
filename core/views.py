@@ -11,6 +11,10 @@ from core.models import *
 from helloCurus.settings import BASE_DIR
 from django.forms.models import model_to_dict
 from django.db.models import Avg
+import datetime
+
+
+def same_day(date1, date2): return date1.day == date2.day and date1.month == date2.month and date1.year == date2.year
 
 def get_icons():
     path = os.path.join(BASE_DIR, 'static/img/freetime_available_icons')
@@ -59,13 +63,15 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
         toughts = Tought.objects.filter(employee__team__manager=manager, created_at__lte=end_day)
     else :
         toughts = Tought.objects.filter(employee__team__manager=manager)
+    
 
     average_moods = []
     count = 0
     average_mood_value_freetime      = .0
     average_mood_value_marketplace   = .0
 
-    for date in set([t.created_at for t in toughts]):
+    for date in set([ datetime.date(t.created_at.year, t.created_at.month, t.created_at.day) for t in toughts]):
+
         average_mood_freetime = calculate_average_mood_for_day(date, toughts, FREETIME)
         average_mood_marketplace = calculate_average_mood_for_day(date, toughts, MARKET_PLACE)
         average_mood_value_freetime += average_mood_freetime / mood_max_value
@@ -88,7 +94,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     return {
         'freetime_mood_value_percentage' : (average_mood_value_freetime / count) * 100,
         'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count) * 100,
-        'average_moods' : average_moods
+        'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False)
     }
 
 
@@ -96,7 +102,7 @@ def get_mood_count_for_date(date, toughts, for_type):
     moods = {}
     for mood in Mood.objects.all():
         moods[mood.value] = 0
-    for tought in filter(lambda t: t.created_at == date, toughts):
+    for tought in filter(lambda t: same_day(t.created_at,date), toughts):
         if(tought.tought_type == for_type):
             moods[tought.mood.value] += 1
 
@@ -107,7 +113,8 @@ def calculate_average_mood_for_day(date, toughts, for_type):
     count = 0
     moods = 0
 
-    for tought in filter(lambda t: t.created_at == date, toughts):
+    for tought in filter(lambda t: same_day(t.created_at, date), toughts):
+
         if tought.tought_type == for_type:
             count += 1
             moods += tought.mood.value
@@ -298,27 +305,6 @@ def home_manager(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Login engine
 def engine(request):
     return JsonResponse({
@@ -351,33 +337,3 @@ def encrypt(plain):
 
 
 
-
-
-
-
-
-
-# def upload_file(request, user_dir, _filename = None):
-#     if request.method == 'POST':
-#         # check if the post request has the file part
-#         if 'file' not in request.files:
-#             print('hey niente', file=sys.stdout)
-#             return False
-#         file = request.files['file']
-#         #TODO: convert image to png always
-
-#         # if user does not select file, browser also
-#         # submit a empty part without filename
-#         if file.filename == '':
-#             print('hey niente', file=sys.stdout)
-#             return False
-
-#         if file and allowed_file(file.filename):
-#             filename =  _filename if _filename else secure_filename(file.filename)
-#             path = os.path.join(app.config['UPLOAD_FOLDER'], user_dir, filename)
-#             os.makedirs(os.path.dirname(path), exist_ok=True)
-#             file.save(path)
-#             return url_for('static', filename=os.path.join('images',user_dir, filename), _external=True)
-#     else:
-#         print('method not was allowed')
-#         return False
