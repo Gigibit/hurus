@@ -13,7 +13,7 @@
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
             <div class="progress progress-bar-vertical">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}%;
-                background-color:{% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}"
+                background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}"
                 >
                 {{average_mood_freetime_percentage}}%
                 </div>
@@ -22,102 +22,71 @@
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
             <div class="progress progress-bar-vertical">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_marketplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_marketplace_percentage}}%;
-                    background-color:{% if average_mood_marketplace_percentage > 65 %} lightgreen {% elif average_mood_marketplace_percentage > 40%} darkorange {% else %} red {% endif%}"
-                    >
-                    {{average_mood_marketplace_percentage}}%
-                    </div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_marketplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_marketplace_percentage}}%;
+                background-color: {% if average_mood_marketplace_percentage > 65 %} lightgreen {% elif average_mood_marketplace_percentage > 40%} darkorange {% else %} red {% endif%}"
+                >
+                {{average_mood_marketplace_percentage}}%
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row sparkboxes mt-4 mb-4">
+        <div class="chart-wrapper col-md-6">
+            <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+            <div class="row legend"></div>
+            <canvas id="freetime-line-chart" class="chart"></canvas>
+        </div>
+        <div class="chart-wrapper col-md-6">
+            <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
+            <div class="row legend"></div>
+            <canvas id="marketplace-line-chart" class="chart"></canvas>
+        </div>
     </div>
 </div>
 
 
 
+<script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
 
 <script>
-
-
-
-    function count(obj) { return Object.keys(obj).length; }
-    
     var moods = {
-        {% for mood in moods %}
-        {{mood.value}} : {
-            'icon'  : "{% static mood.icon.name %}"
-        },
+            {% for mood in moods %}
+            {{mood.value}} : {
+                'icon'  : "{% static mood.icon.name %}"
+            },
+            {% endfor %}
+        }
+        
+    var dates = []    
+    var dataMarketPlace = {}
+    var dataFreetime = {}
+    {% for average in average_moods%}
+        {% for mood,value in average.moods.freetime_moods_count.items %}
+            if(!dataFreetime[{{mood}}])
+            dataFreetime[{{mood}}]={
+                    backgroundColor : randomRgba(),
+                    data: []
+            } 
+            dataFreetime[{{mood}}].data.push({{value}})
         {% endfor %}
-    }
-    
-    var dataFreetime = [
-    {% for tought in toughts%}
-    {
-        "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
-        "mood": "{{tought.mood.value}}",
-        "name": "{{tought.mood.i18n_key}}",
-        "activities": {{tought.activities|safe}},
-        "freeTought" : "{{tought.text}}"
-
-        },
+        {% for mood,value in average.moods.marketplace_moods_count.items %}
+            if(!dataMarketPlace[{{mood}}])
+            dataMarketPlace[{{mood}}]={
+                    backgroundColor : randomRgba(),
+                    data: []
+                } 
+            dataMarketPlace[{{mood}}].data.push({{value}})
         {% endfor %}
-    ]
-    var dataMarketPlace = [
-        {% for tought in marketplace_toughts%}
-        {
-            "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
-            "mood": "{{tought.mood.value}}",
-            "name": "{{tought.mood.i18n_key}}",
-            "activities": {{tought.activities|safe}},
-            "freeTought" : "{{tought.text}}"
-
-        },
-        {% endfor %}
-    ]
-    var img = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
-    
-    
-    
-    dataFreetime.forEach(function(d){
-        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
-        d.mood = d.mood 
-    })
-    dataMarketPlace.forEach(function(d){
-        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
-        d.mood = d.mood 
-    })
-    
-    
-    
+        dates.push('{{average.date|date:"d-m-Y" }}')
+    {% endfor %}
     
     
 </script>
-<script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
 <script type="text/javascript">
-    function radarChart(chartDiv, selectedMood, data){
-        var selectedMood = 7
-        var causeEffectCanvas = document.getElementById(chartDiv);
-        let labels = getActivities(selectedMood,data)
-        let datasetData = getDataForActivities(labels, selectedMood,data)
-        var causeEffectChartData = {
-            labels: labels,
-            datasets: [{
-                backgroundColor: "rgba(200,0,0,0.2)",
-                data: datasetData
-            }]
-            
-        };
-
-        radarChart = Chart.Radar(causeEffectCanvas, {
-            data: causeEffectChartData,
-            options: {
-                legend: {
-                    display: false
-                }
-            }
-        });
-    }
     
     $(document).ready(function(){
+        managerLineChart('freetime-line-chart', dataFreetime)
+        managerLineChart('marketplace-line-chart', dataMarketPlace)
         // lineChart("#freetime-line-chart", dataFreetime)
         // lineChart("#marketplace-line-chart", dataMarketPlace)
         // barChart("#freetime-bar-chart", dataFreetime)

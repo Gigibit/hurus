@@ -38,21 +38,17 @@ KDF = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can only use kdf oncefrom cryptography.fernet import Fernet
 
 
-
 def statistics_manager(request):
     moods = Mood.objects.all()
     manager = Manager.objects.get(email = request.user.email)
     mood_max_value = max(mood.value for mood in moods )
     analysis = calculate_average_moods(manager, mood_max_value=mood_max_value)
     average_moods = analysis['average_moods']
-    print(analysis['freetime_mood_value_percentage'])
     return render(request, 'core/manager/statistics.html', {
         'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
         'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
         'average_moods': average_moods,
         'moods' : moods,
-        # 'toughts' : filter(lambda t: t['tought_type'] == FREETIME, toughts),
-        # 'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts)
     })
 def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_value = 8):
     if start_day and end_day :
@@ -75,11 +71,18 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
         average_mood_value_freetime += average_mood_freetime / mood_max_value
         average_mood_value_marketplace += average_mood_marketplace / mood_max_value
         count += 1
+        freetime_counts = get_mood_count_for_date(date, toughts, FREETIME)
+        marketplace_counts = get_mood_count_for_date(date, toughts, MARKET_PLACE)
+
         
         average_moods.append({
             'date' : date,
             'average_mood_freetime' : average_mood_freetime,
-            'average_mood_marketplace' : average_mood_marketplace
+            'average_mood_marketplace' : average_mood_marketplace,
+            'moods' : {
+                'freetime_moods_count': freetime_counts,
+                'marketplace_moods_count': marketplace_counts
+            }
         })
 
     return {
@@ -87,6 +90,18 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
         'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count) * 100,
         'average_moods' : average_moods
     }
+
+
+def get_mood_count_for_date(date, toughts, for_type):
+    moods = {}
+    for mood in Mood.objects.all():
+        moods[mood.value] = 0
+    for tought in filter(lambda t: t.created_at == date, toughts):
+        if(tought.tought_type == for_type):
+            moods[tought.mood.value] += 1
+
+    return moods
+
 
 def calculate_average_mood_for_day(date, toughts, for_type):
     count = 0

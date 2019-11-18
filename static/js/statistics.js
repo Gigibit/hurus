@@ -356,6 +356,66 @@ function configureRadarChartWith(selectedMood, _data) {
 	}
 }
 
+function managerLineChart(forDiv, data){
+	let ctx = document.getElementById(forDiv).getContext('2d')
+	let backgroundColors ={}
+	Object.keys(data).forEach(key=>{
+		backgroundColors[key] = randomRgba();
+		$('.legend').append(
+			'<div class="legend-mood col-md-2">' + 
+				'<div class="row">' + 
+					'<div class="legend-mood-img-wrp col-md-2">'+
+						'<img class="legend-mood-img" src="' + moods[key].icon + '"/>' + 
+					'</div>'+
+					'<div class="legend-mood-color col-md-6" style="background-color:' + backgroundColors[key] + '"></div>'+
+				'</div>' + 
+			'</div>'
+		)
+	})
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels : dates,
+			datasets:  Object.keys(data).map(key=>{ 
+				return {
+					fill: false,
+					lineTension: 0.3,
+					borderColor: backgroundColors[key],
+					borderCapStyle: 'square',
+					borderJoinStyle: 'miter',
+					pointBorderWidth: 1,
+					pointHoverRadius: 8,
+					pointHoverBorderWidth: 2,
+					pointRadius: 4,
+					pointHitRadius: 10,
+					data : data[key].data
+				}})
+		},
+		options: {
+			legend: {
+				display: false
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+			yAxes: [{
+				ticks: {
+				beginAtZero:true
+				}
+			}]
+		  },
+		}
+	  });
+}
+
+
+
 function configRadarChart(chartDiv, selectedMood, data) {
     var context = document.getElementById(chartDiv).getContext('2d');
     var relatedContext = document.getElementById('related-' + chartDiv).getContext('2d');
