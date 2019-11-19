@@ -52,77 +52,44 @@
             <div id="average-marketplace-line-chart" class="chart"></div>
         </div>
     </div>
+    {% for index in best_mood_counts %}
     <div class="row sparkboxes mt-4 mb-4">
-            <div class="chart-wrapper col-md-6">
-                <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
-                <div class="chart">
-                    <div>
-                        <canvas id="freetime-radar-chart1"></canvas>
+        <div class="chart-wrapper col-md-6">
+            <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
+            <div class="chart">
+                <div class="row">
+                        <div class="col-md-3">
+                            <img id="freetime-mood-{{index}}" class="radar-chart-mood-icon"/>
+                        </div>
                     </div>
-                    <div class="related-radar-chart">
-                        <canvas id="related-freetime-radar-chart1" ></canvas>
-                    </div>
+                <div>
+                    <canvas id="freetime-radar-chart{{index}}"></canvas>
+                </div>
+                <div class="related-radar-chart">
+                    <canvas id="related-freetime-radar-chart{{index}}" ></canvas>
                 </div>
             </div>
-            <div class="chart-wrapper col-md-6">
-                <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
-                <div class="chart">
-                    <div>
-                        <canvas id="marketplace-radar-chart1" ></canvas>
-                    </div>
-                    <div class="related-radar-chart">
-                        <canvas id="related-marketplace-radar-chart1" ></canvas>
-                    </div>
-                </div>
-            </div>
-    <div class="row sparkboxes mt-4 mb-4">
-            <div class="chart-wrapper col-md-6">
-                <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
-                <div class="chart">
-                    <div>
-                        <canvas id="freetime-radar-chart2"></canvas>
-                    </div>
-                    <div class="related-radar-chart">
-                        <canvas id="related-freetime-radar-chart2" ></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="chart-wrapper col-md-6">
-                <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
-                <div class="chart">
-                    <div>
-                        <canvas id="marketplace-radar-chart2" ></canvas>
-                    </div>
-                    <div class="related-radar-chart">
-                        <canvas id="related-marketplace-radar-chart2" ></canvas>
-                    </div>
-                </div>
-            </div>
-    <div class="row sparkboxes mt-4 mb-4">
-            <div class="chart-wrapper col-md-6">
-                <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
-                <div class="chart">
-                    <div>
-                        <canvas id="freetime-radar-chart3"></canvas>
-                    </div>
-                    <div class="related-radar-chart">
-                        <canvas id="related-freetime-radar-chart3" ></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="chart-wrapper col-md-6">
-                <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
-                <div class="chart">
-                    <div>
-                        <canvas id="marketplace-radar-chart3" ></canvas>
-                    </div>
-                    <div class="related-radar-chart">
-                        <canvas id="related-marketplace-radar-chart3" ></canvas>
-                    </div>
-                </div>
-            </div>
-
         </div>
+        <div class="chart-wrapper col-md-6">
+            <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
+            <div class="chart">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img id="marketplace-mood-{{index}}" class="radar-chart-mood-icon"/>
+                        </div>
+                    </div>
+                <div>
+                    <canvas id="marketplace-radar-chart{{index}}" ></canvas>
+                </div>
+                <div class="related-radar-chart">
+                    <canvas id="related-marketplace-radar-chart{{index}}" ></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
 </div>
 
 
@@ -228,9 +195,11 @@
         // barChart("#freetime-bar-chart", dataFreetime)
         // barChart("#marketplace-bar-chart", dataMarketPlace)
         {% for a in podium_moods_freetime_activities %}
+            $('#freetime-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
         {% endfor %}
         {% for a in podium_moods_marketplace_activities %}
+            $('#marketplace-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('marketplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataMarketPlace)
         {% endfor %}
         // doughnutChart('doughnut-chart-freetime',dataFreetime)

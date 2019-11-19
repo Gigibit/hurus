@@ -90,7 +90,10 @@
     display: flex;
     flex-direction: column-reverse;
  }   
-
+.radar-chart-mood-icon{
+    width: 40px;
+    height: 40px;
+}
 
 .progress-bar-vertical .progress-bar{
     width: 100%;
