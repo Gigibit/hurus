@@ -87,7 +87,6 @@
         "mood": "{{tought.mood.value}}",
         "name": "{{tought.mood.i18n_key}}",
         "activities": {{tought.activities|safe}},
-        "freeTought" : "{{tought.text}}"
 
         },
         {% endfor %}
@@ -99,7 +98,6 @@
             "mood": "{{tought.mood.value}}",
             "name": "{{tought.mood.i18n_key}}",
             "activities": {{tought.activities|safe}},
-            "freeTought" : "{{tought.text}}"
 
         },
         {% endfor %}
@@ -123,29 +121,7 @@
 </script>
 <script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
 <script type="text/javascript">
-    function radarChart(chartDiv, selectedMood, data){
-        var selectedMood = 7
-        var causeEffectCanvas = document.getElementById(chartDiv);
-        let labels = getActivities(selectedMood,data)
-        let datasetData = getDataForActivities(labels, selectedMood,data)
-        var causeEffectChartData = {
-            labels: labels,
-            datasets: [{
-                backgroundColor: "rgba(200,0,0,0.2)",
-                data: datasetData
-            }]
-            
-        };
-
-        radarChart = Chart.Radar(causeEffectCanvas, {
-            data: causeEffectChartData,
-            options: {
-                legend: {
-                    display: false
-                }
-            }
-        });
-    }
+ 
     
     $(document).ready(function(){
         lineChart("#freetime-line-chart", dataFreetime)

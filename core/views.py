@@ -12,6 +12,8 @@ from helloCurus.settings import BASE_DIR
 from django.forms.models import model_to_dict
 from django.db.models import Avg
 import datetime
+from django.db.models import IntegerField, CharField, Value
+
 
 
 def same_day(date1, date2): return date1.day == date2.day and date1.month == date2.month and date1.year == date2.year
@@ -52,6 +54,10 @@ def statistics_manager(request):
         'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
         'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
         'average_moods': average_moods,
+        'podium_moods_freetime': analysis['podium_moods_freetime'],
+        'podium_moods_marketplace': analysis['podium_moods_marketplace'],
+        'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
+        'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
         'moods' : moods,
     })
 def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_value = 8):
@@ -70,7 +76,58 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     average_mood_value_freetime      = .0
     average_mood_value_marketplace   = .0
 
-    for date in set([ datetime.date(t.created_at.year, t.created_at.month, t.created_at.day) for t in toughts]):
+    freetime_toughts = [t for t in toughts if t.tought_type == FREETIME ]
+    marketplace_toughts = [t for t in toughts if t.tought_type == MARKET_PLACE ]
+
+    moods = Mood.objects.all()
+    moods_count = {}
+    dates = []
+    for mood in moods:
+        moods_count[mood.value] = 0
+    for t in freetime_toughts:
+        dates.append( datetime.date(t.created_at.year, t.created_at.month, t.created_at.day) )
+        moods_count[t.mood.value] += 1
+    
+    podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key,value in moods_count.items()],key=lambda x: x['count'], reverse=True)
+
+    activities_for_podium_moods = flat([ list(tought.activities.all().annotate(mood_value=Value(tought.mood.value, output_field=IntegerField()),mood_i18n_key=Value(tought.mood.i18n_key, output_field=CharField())).values('name','i18n_key', 'mood_i18n_key', 'mood_value')) for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime] ])[:6]
+
+    activity_count_freetime = []
+    for mood in moods:
+        activities = [activity for activity in activities_for_podium_moods if activity['mood_value'] == mood.value]
+        if len(activities) > 0 : 
+            activity_count_freetime.append({
+                'mood_value' : mood.value,
+                'mood_i18n_key': mood.i18n_key,
+                'activities': activities
+            })
+
+
+
+    moods_count = {}
+    for mood in moods:
+        moods_count[mood.value] = 0
+    for t in marketplace_toughts:
+        moods_count[t.mood.value] += 1
+        
+    
+    podium_moods_marketplace = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)[:3]
+
+    activities_for_podium_moods = flat([ list(tought.activities.all().annotate(mood_value=Value(tought.mood.value, output_field=IntegerField()),mood_i18n_key=Value(tought.mood.i18n_key, output_field=CharField())).values('name','i18n_key', 'mood_i18n_key', 'mood_value')) for tought in marketplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_marketplace] ])[:6]
+    activity_count_marketplace = []
+    for mood in moods:
+        activities = [ activity for activity in activities_for_podium_moods if activity['mood_value'] == mood.value]
+        if len(activities) > 0:
+            activity_count_marketplace.append({
+                'mood_value': mood.value,
+                'mood_i18n_key': mood.i18n_key,
+                'activities': activities
+            })
+
+
+
+
+    for date in set(dates):
 
         average_mood_freetime = calculate_average_mood_for_day(date, toughts, FREETIME)
         average_mood_marketplace = calculate_average_mood_for_day(date, toughts, MARKET_PLACE)
@@ -79,7 +136,6 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
         count += 1
         freetime_counts = get_mood_count_for_date(date, toughts, FREETIME)
         marketplace_counts = get_mood_count_for_date(date, toughts, MARKET_PLACE)
-
         
         average_moods.append({
             'date' : date,
@@ -91,11 +147,20 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
             }
         })
 
+
+
     return {
         'freetime_mood_value_percentage' : (average_mood_value_freetime / count) * 100,
         'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count) * 100,
-        'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False)
+        'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False),
+        'podium_moods_freetime' : podium_moods_freetime,
+        'activities_podium_count_freetime': activity_count_freetime,
+        'podium_moods_marketplace' : podium_moods_marketplace,
+        'activities_podium_count_marketplace': activity_count_marketplace,
     }
+
+
+flat = lambda l: [item for sublist in l for item in sublist]
 
 
 def get_mood_count_for_date(date, toughts, for_type):
