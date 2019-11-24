@@ -11,6 +11,8 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new cl
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from tinymce.models import HTMLField
+
 GERMAN = 'DE'
 ENGLISH = 'EN'
 ITALIAN =  'IT'
@@ -34,7 +36,12 @@ TYPES = (
 
 def activity_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'uploads/activities/team_{0}/{1}'.format(instance.team.id if instance.team else 0, filename)
+    return 'static/img/activities/team_{0}/{1}'.format(instance.team.id if instance.team else 0, filename)
+
+def course_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'static/img/course/{0}/{1}'.format(instance.id, filename)
+
 
 
 class Agency(models.Model):
@@ -46,6 +53,7 @@ class Agency(models.Model):
 
 class EncouragingSentence(models.Model):
     text = models.TextField()
+    author = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     language = models.CharField(
@@ -53,6 +61,36 @@ class EncouragingSentence(models.Model):
         choices=LANGUAGES,
         default=GERMAN,
     )
+
+
+
+class Course(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    cover = models.ImageField(upload_to=course_directory_path, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    language = models.CharField(
+            max_length=2,
+            choices=LANGUAGES,
+            default=GERMAN,
+    )
+    def __str__(self):
+        return self.title
+
+class CourseSection(models.Model):
+    title   = models.CharField(max_length=200)
+    content = HTMLField()
+    course = models.ForeignKey(Course, related_name='sections', on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.title = self.course.title + ' - Section ' + str(len(self.course.sections.all()) + 1) 
+        super(CourseSection, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -112,6 +150,13 @@ class UserProfile(AbstractUser):
     objects = UserManager() ## This is the new line in the User model. ##
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    seen_courses            = models.ManyToManyField(Course, null=True, related_name='seen_by')
+    course_to_see           = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
+    last_seen_course_date   = models.DateTimeField(null=True)
+    
+    def has_to_get_new_course(self):
+        return not self.course_to_see or (datetime.today().date() - self.last_seen_course_date.date()).days < 1
+
 
 
 # Create your models here.
@@ -141,20 +186,18 @@ class Activity(models.Model):
     icon = models.FileField(upload_to=activity_directory_path)
     team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.CASCADE)    
 
-#todo: add same logic for the 
 
 
 class Employee(UserProfile):
-    team                = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
-    last_seen_survey    = models.DateField(null=True)
-
+    team                 = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')
+    last_seen_survey     = models.DateTimeField(null=True)
+    
     class Meta:
         verbose_name = 'Employee'
         verbose_name_plural = 'Employees'
 
     def has_seen_daily_survey(self):
-        today = datetime.today()
-        return self.last_seen_survey and (today.date() - self.last_seen_survey).days <= 1
+        return self.last_seen_survey and (datetime.today().date() - self.last_seen_survey.date()).days < 1
 
 
 
@@ -186,6 +229,8 @@ class Tought(models.Model):
     text = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    motivational_quote = models.ForeignKey(EncouragingSentence, null=True, on_delete=models.DO_NOTHING)
+
 
     def to_public_dict(self):
         tought_options = []
@@ -203,7 +248,8 @@ class Tought(models.Model):
                 'name' : activity.name,
                 'icon' : activity.icon.name
             })
-        return {
+
+        tought =  {
             'tought_type' : self.tought_type,
             'mood' : {
                 'i18n_key':self.mood.i18n_key,
@@ -216,3 +262,6 @@ class Tought(models.Model):
             'tought_options': json.dumps(tought_options),
             'created_at' : self.created_at
         }
+        if self.motivational_quote:
+            tought['motivational_quote'] = model_to_dict(self.motivational_quote)
+        return tought

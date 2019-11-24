@@ -1,6 +1,5 @@
 $( document ).ready(function() {
     var selectedDay = null;
-    $('#go-to-statistics').hide()    
 
     function c(passed_month, passed_year, calNum) {
 
@@ -56,29 +55,71 @@ $( document ).ready(function() {
             selectedDayInfo = getClickedInfo(clicked, calendar);
             if(selectedDay != null){
                 selectedDay.removeClass('selected')
-            }else { // is the first time
-                $('#go-to-statistics').hide().fadeIn(500)    
             }
-            selectedDay = clicked
-            selectedDay.addClass('selected')
-            $.get('/tought_for_day/?day='+selectedDayInfo.date + '&' +
-                    'month=' + (selectedDayInfo.month + 1) + '&' +
-                    'year='  + selectedDayInfo.year,function(response){
-                        console.log(response)
-                        $('#tought-for-day').text(response['toughts'][0]['tought'])
-                    })
+            
+            $.ajax({
+                url : '/tought_for_day/?day='+selectedDayInfo.date + '&' +
+                'month=' + (selectedDayInfo.month + 1) + '&' +
+                'year='  + selectedDayInfo.year,
+                method: 'GET',
+                success:function(response){
+                        console.log(JSON.parse(response['toughts'][0]['activities']))
+                        let freetime = response['toughts'][0]
+
+                        let marketplace = response['toughts'][1]
+                        $('#tought-modal-mood-freetime').html('<img class="mood" src="/static/'+ freetime['mood']['icon'] +'"/>')
+                        $('#tought-modal-tought-freetime').text(freetime['tought'])
+                        let freetimeActivities = JSON.parse(freetime['activities'])
+                        console.log(freetimeActivities)
+                        if(freetimeActivities){
+                            $('#tought-modal-activities-freetime').html()
+                            for( var i = 0; i < freetimeActivities.length; i++ ){
+                                let activity = freetimeActivities[i]
+                                $('#tought-modal-activities-freetime').append(
+                                    '<div class="col-md-2 activity-box-container">'+
+                                        '<div class="activity-box">' +
+                                            '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
+                                            '<p>'+ (activity['i18n_key'] || activity['name']) +'</p>'+
+                                        '</div>'+
+                                    '</div>'
+                                )
+                            }
+                        }
+
+                        $('#tought-modal-mood-marketplace').html('<img class="mood" src="/static/'+ marketplace['mood']['icon'] +'"/>')
+                        $('#tought-modal-tought-marketplace').text(marketplace['tought'])
+                        
+                        let marketplaceActivities = JSON.parse(marketplace['activities'])
+                        console.log(marketplaceActivities)
+                        if(marketplaceActivities){
+                            $('#tought-modal-activities-marketplace').html()
+                            for( var i = 0; i < marketplaceActivities.length; i++ ){
+                                let activity = marketplaceActivities[i]
+                                $('#tought-modal-activities-marketplace').append(
+                                    '<div class="col-md-2 activity-box-container">'+
+                                        '<div class="activity-box">' +
+                                            '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
+                                            '<p>'+ (activity['i18n_key'] || activity['name']) +'</p>'+
+                                        '</div>'+
+                                    '</div>'
+                                )
+                            }
+                        }
+
+                        $('#tought-modal').modal('toggle')
+
+                    }
+                });
         });			
 
     }
     function selectDates(selected) {
-        console.log('select')
 
         if (!$.isEmptyObject(selected)) {
             var dateElements1 = datesBody1.find('div');
             var dateElements2 = datesBody2.find('div');
 
             function highlightDates(passed_year, passed_month, dateElements){
-                console.log('hightliìdanf')
                 if (passed_year in selected && passed_month in selected[passed_year]) {
                     var daysToCompare = selected[passed_year][passed_month];
                     // console.log(daysToCompare);
@@ -254,7 +295,6 @@ $( document ).ready(function() {
             var added_year = secondClicked.year;
             var added_month = secondClicked.month;
             var added_date = secondClicked.date;
-            console.log(selected);
 
             if (added_year > firstClicked.year) {	
                 // first add all dates from all months of Second-Clicked-Year
@@ -267,7 +307,6 @@ $( document ).ready(function() {
                 }
         
                 added_month = added_month - 1;
-                console.log(added_month);
                 while (added_month >= 0) {
                     selected[added_year][added_month] = [];
                     for (var i = 1; 
@@ -297,7 +336,6 @@ $( document ).ready(function() {
             
             if (added_month > firstClicked.month) {
                 if (firstClicked.year == secondClicked.year) {
-                    console.log("here is the month:",added_month);
                     selected[added_year][added_month] = [];
                     for (var i = 1; 
                         i <= secondClicked.date;

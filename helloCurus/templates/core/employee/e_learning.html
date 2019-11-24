@@ -1,8 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block head_css_section %}
+<link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
+{% endblock head_css_section %}
+
 
 {% block content %}
-    <script >
-        $.get('/testJavascript', function(response){
-        })
-    </script>
+<div class="main">
+    <div class="row">
+        <h1>{% trans 'NEW_COURSE' %}</h1>
+        <div class="col-md-6">
+            <div class="course-wrapper row" onClick="location.href='/courses/{{course_to_see.pk}}'">
+                <div class="course-title col-md-10">{{course_to_see.title}} {% trans 'NEW' %}</div>
+                <div class="seen-icon col-md-2">
+                    {% if not course_to_see.seen %}
+                        <span class="course-seen glyphicon glyphicon-play"></span>
+                    {% else %}
+                        <span class="course-not-seen glyphicon glyphicon-repeat"></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h1>{% trans 'PREVIOUS_COURSE' %}</h1>
+        <div class="col-md-6">
+            <div class="course-wrapper row" onClick="location.href='/courses/{{course_to_see.pk}}'">
+                <div class="course-title col-md-10">{{course_to_see.title}} {% trans 'NEW' %}</div>
+                <div class="seen-icon col-md-2">
+                    {% if not course_to_see.seen %}
+                        <span class="course-seen glyphicon glyphicon-play"></span>
+                    {% else %}
+                        <span class="course-not-seen glyphicon glyphicon-repeat"></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% for course in courses|slice:":4" %}
+        <div class="col-md-6">
+            <div class="course-wrapper row" onClick="location.href='/courses/{{course.course.pk}}'">
+                <div class="course-title col-md-10">{{course.course.title}}</div>
+                <div class="seen-icon col-md-2">
+                    {% if not course.seen %}
+                        <span class="course-seen glyphicon glyphicon-play"></span>
+                    {% else %}
+                        <span class="course-not-seen glyphicon glyphicon-repeat"></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% for course in courses|slice:"4:" %}
+        <div class="collapse out budgets hidden-courses col-md-6">
+            <div class="">
+                <div class="course-wrapper row" onClick="location.href='/courses/{{course.course.pk}}'">
+                    <div class="course-title col-md-10">{{course.course.title}}</div>
+                    <div class="seen-icon col-md-2">
+                        {% if not course.seen %}
+                            <span class="course-seen glyphicon glyphicon-play"></span>
+                        {% else %}
+                            <span class="course-not-seen glyphicon glyphicon-repeat"></span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if courses|length > 4 %}
+        <button class="btn btn-primary show-more col-md-2" data-toggle="collapse" data-target=".hidden-courses">Show more</button>
+    {% endif %}
+</div>
 {% endblock %}

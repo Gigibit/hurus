@@ -9,6 +9,7 @@ var step = 0;
 $('#freetime-section').hide()
 $('#marketplace-mood-section').hide()
 $('#marketplace-section').hide()
+$('#daily-quote-section').hide()
 
 
 $('#submit-button').click(function(event){
@@ -25,6 +26,9 @@ $('#submit-button').click(function(event){
         
         case 3: 
             evaluateMarketPlace()
+            break;
+        case 4:
+            location.href='/'
             break;
     }
 })
@@ -133,8 +137,13 @@ function evaluateMarketPlace(){
         }
         console.log(request)
         $.post('/submit_survey/',request, function(response){
+            $('#marketplace-section').hide()
+            $('#daily-quote-section').show()
+            $('#quote').text('"' + response['motivational_quote']['text'] +'"')
+            if(response['motivational_quote']['author'])
+                $('#author').text(response['motivational_quote']['author'])
             if(response.status == 200){
-                location.href='/'
+                step++;
             }
         })
     }

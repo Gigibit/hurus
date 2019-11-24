@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'rubik';
+  src: local('Rubik'),
+       url('../fonts/Rubik/Rubik-Light.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'rubikBold';
+  src: local('RubikBold'),
+       url('../fonts/Rubik/Rubik-Bold.ttf') format("truetype");
+}
+
+
 #header-img{
     width: 100%;
     height: 10%;
@@ -12,3 +24,13 @@ img, icon, svg {
                                     supported by Chrome, Opera and Firefox */
   }
 
+  h1{
+    font-size : 24px;
+    width: 100%;
+  }
+p{
+  color: #222;
+}
+*{
+  font-family: 'rubik';
+}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-import os, base64, json
+import os, base64, json, random
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -45,9 +45,8 @@ KDF = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can only use kdf oncefrom cryptography.fernet import Fernet
 
 
-def statistics_manager(request):
+def statistics_manager(request, manager):
     moods = Mood.objects.all()
-    manager = Manager.objects.get(email = request.user.email)
     mood_max_value = max(mood.value for mood in moods )
     analysis = calculate_average_moods(manager, mood_max_value=mood_max_value)
     average_moods = analysis['average_moods']
@@ -192,17 +191,52 @@ def calculate_average_mood_for_day(date, toughts, for_type):
 
     return moods/count if count > 0 else 1
 
-def happy_curus_manager(request):
+def happy_curus_manager(request, manager):
     return render(request, 'core/manager/happy_curus.html', {
         'foo': 'bar',
     })
 
 
-def e_learning_manager(request):
-    return render(request, 'core/manager/e_learning.html', {
-        'foo': 'bar',
-    })
+def e_learning_manager(request, manager):
+    courses = list(Course.objects.all())
+    not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
+    if len(not_seen_courses) == 0:
+        request.user.seen_courses.set([])
+        not_seen_courses = courses
+        request.user.course_to_see = None
+        request.user.last_seen_course_date = None
+        request.user.save()
 
+
+    if request.user.has_to_get_new_course():
+        not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
+        course_to_see = not_seen_courses[0]
+        request.user.course_to_see = course_to_see
+        request.user.last_seen_course_date =  datetime.datetime.now()
+        # request.user.seen_courses.add(course_to_see)
+        request.user.save()
+    else:
+        course_to_see = request.user.course_to_see
+
+
+    courses_check_list = []
+    employees = Employee.objects.filter(team__manager = manager)
+    employees_length = len(employees)
+    for c in courses:
+        employees_that_have_seen_courses = len(list(filter(lambda e: c in e.seen_courses.all(), employees)))
+        if c.pk != course_to_see.pk:
+            courses_check_list.append({
+                'seen' : c in request.user.seen_courses.all(),
+                'employees_counter':  "%d/%d"%(employees_that_have_seen_courses, employees_length),
+                'course': c
+            })
+
+    course_to_see_counter =  "%d/%d"%(len(list(filter(lambda e: course_to_see in e.seen_courses.all(), employees))),employees_length)
+    return render(request, 'core/manager/e_learning.html', {
+        'courses': sorted(courses_check_list, key=lambda c: c['seen'], reverse=True),
+        'course_to_see': course_to_see,
+        'course_to_see_counter' : course_to_see_counter
+    })
 
 
 
@@ -229,10 +263,48 @@ def happy_curus_employee(request, employee):
 
 
 def e_learning_employee(request, employee):
+    courses = list(Course.objects.all())
+    not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
+    if len(not_seen_courses) == 0:
+        request.user.seen_courses.set([])
+        not_seen_courses = courses
+        request.user.course_to_see = None
+        request.user.last_seen_course_date = None
+        request.user.save()
+
+
+    if request.user.has_to_get_new_course():
+        not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
+        course_to_see = not_seen_courses[0]
+        request.user.course_to_see = course_to_see
+        request.user.last_seen_course_date =  datetime.datetime.now()
+        # request.user.seen_courses.add(course_to_see)
+        request.user.save()
+    else:
+        course_to_see = request.user.course_to_see
+
+
+    courses_check_list = []
+    for c in courses:
+        if c.pk != course_to_see.pk:
+            courses_check_list.append({
+                'seen' : c in request.user.seen_courses.all(),
+                'course': c
+            })
     return render(request, 'core/employee/e_learning.html', {
-        'foo': 'bar',
+        'courses': sorted(courses_check_list, key=lambda c: c['seen'], reverse=True),
+        'course_to_see': course_to_see
     })
 
+
+def e_learning_detail(request,id):
+    course = Course.objects.get(pk=id)
+    if course not in request.user.seen_courses.all():
+        request.user.seen_courses.add(course)
+    return render(request, 'core/employee/e_learning_detail.html', {
+        'course': course,
+        'sections' : course.sections.all()
+    })
 
 @csrf_exempt
 def add_activity(request):
@@ -280,9 +352,9 @@ def check_survey(fn, request, employee):
 
 def get_employee_from_request_user(user):
     try:
-        return Employee.objects.get(email = user.email)
+        return Employee.objects.get(email = user.email), True
     except Employee.DoesNotExist:
-        return False
+        return Manager.objects.get(email=user.email), False
 
 
 @csrf_exempt
@@ -305,14 +377,29 @@ def submit_survey(request):
     if request.method == 'POST':
         #freetime
         employee = Employee.objects.get(email = request.user.email)
-        employee.last_seen_survey = datetime.now()
+        employee.last_seen_survey = datetime.datetime.now()
         employee.save()
         mood = Mood.objects.get(pk=request.POST['freetime[selected_mood]'])
+
+
+        sentences = list(EncouragingSentence.objects.exclude(pk__in= request.user.read_encouraging_sentences.all().values('pk')))
+
+        if len(sentences) == 0:
+            daily_quote = EncouragingSentence.objects.first()
+            request.user.read_encouraging_sentences.set([daily_quote])
+        else:
+            daily_quote = random.sample(sentences, len(sentences))[0]
+            request.user.read_encouraging_sentences.add(daily_quote)
+
+        request.user.save()
+
+
         #tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
         activities = Activity.objects.filter(pk__in=request.POST.getlist('freetime[activities][]'))
         tought = Tought.objects.create(  
                         tought_type = FREETIME,
                         mood=mood,
+                        motivational_quote= daily_quote,
                         text=request.POST['freetime[current_tought]'],
                         employee=employee
                         )
@@ -325,14 +412,15 @@ def submit_survey(request):
 
         ### marketplace
         employee = Employee.objects.get(email = request.user.email)
-        employee.last_seen_survey = datetime.now()
+        employee.last_seen_survey = datetime.datetime.now()
         employee.save()
         mood = Mood.objects.get(pk=request.POST['marketplace[selected_mood]'])
        # tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
         activities = Activity.objects.filter(pk__in=request.POST.getlist('marketplace[activities][]'))
         tought = Tought.objects.create(  
-                        tought_type = MARKET_PLACE,
+                        tought_type=MARKET_PLACE,
                         mood=mood,
+                        motivational_quote=daily_quote,
                         text=request.POST['marketplace[current_tought]'],
                         employee=employee
                         )
@@ -343,32 +431,36 @@ def submit_survey(request):
             tought.activities.add(*activities)
 
 
+
         return JsonResponse({
           'status' : 200,
-          'stoc' : 'stoc'
+          'motivational_quote' : model_to_dict(daily_quote)
         })
     return None
 
 
 def home(request):
-    employee = get_employee_from_request_user(request.user)
-    return check_survey(home_employee, request, employee) if employee else home_manager(request)
+    user, is_employee = get_employee_from_request_user(request.user)
+
+    return check_survey(home_employee, request, user) if is_employee else home_manager(request, user)
 
 def statistics(request):
-    employee = get_employee_from_request_user(request.user)
-    return check_survey(statistics_employee, request, employee) if employee else statistics_manager(request)
+    user, is_employee = get_employee_from_request_user(request.user)
+    return check_survey(statistics_employee, request, user) if is_employee else statistics_manager(request, user)
 
 def happy_corus(request):
-    employee = get_employee_from_request_user(request.user)
-    return check_survey(happy_curus_employee, request, employee) if employee else  happy_curus_manager(request)
+    user, is_employee = get_employee_from_request_user(request.user)
+    return check_survey(happy_curus_employee, request, user) if is_employee else  happy_curus_manager(request, user)
 
 def e_learning(request):
-    employee = get_employee_from_request_user(request.user)
-    return check_survey(e_learning_employee, request, employee) if employee else e_learning_manager(request)
+    user, is_employee = get_employee_from_request_user(request.user)
+    return check_survey(e_learning_employee, request, user) if is_employee else e_learning_manager(request, user)
 
 
+   
 
-def home_manager(request):
+
+def home_manager(request, manager):
     return render(request, 'core/manager/index.html', {
         'foo': 'bar',
         })

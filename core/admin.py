@@ -40,9 +40,19 @@ class ManagerProfileAdmin(admin.ModelAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
+@admin.register(CourseSection)
+class CourseSectionAdmin(admin.ModelAdmin):
+    exclude = ('title',)
+
+
+
+
+
 admin.site.unregister(Group)
 
 admin.site.register(Team)
 admin.site.register(Tought)
 admin.site.register(Agency)
+admin.site.register(EncouragingSentence)
+admin.site.register(Course)
 

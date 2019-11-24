@@ -1,0 +1,56 @@
+{% load static %}
+{% load i18n %}
+
+{% block head_css_section %}
+<link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/reveal.css' %}?{% now "U" %}" rel="stylesheet">
+<script src="{% static 'js/reveal.js' %}?{% now "U" %}" "></script>
+
+{% endblock head_css_section %}
+
+<div class="page-header">
+        <img id="header-img" src="{% static 'img/website_assets/header_menu.jpg' %}" />
+        <!-- h1><a href="/">happyCurus</a></h1 -->
+    </div>
+<body>
+    <div class="content">
+
+        <div class="reveal-container">
+            <div class="reveal">
+                <div class="slides">
+                    <section data-transition="zoom">
+                        <div class="course-container">
+                            <div class="course-header" style="background-image: url('/{{course.cover}}');">
+                                <div class="course-shadow-layer"></div>
+                            </div>
+                            <div class="course-info">
+                                <h1 class="font-weight-light">{{course.title}}</h1>
+                                <p class="lead">{{course.description}}</p>
+                            </div>
+                        </div>
+                    </section>
+                    {% for section in sections %}
+                    <section>
+                        <div class="course-info">
+                            {{section.content|safe}}
+                        </div>
+                    </section>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // More info about config & dependencies:
+        // - https://github.com/hakimel/reveal.js#configuration
+        // - https://github.com/hakimel/reveal.js#dependencies
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true
+        });
+    </script>
+</body>
+    
