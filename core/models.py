@@ -232,7 +232,7 @@ class Tought(models.Model):
     motivational_quote = models.ForeignKey(EncouragingSentence, null=True, on_delete=models.DO_NOTHING)
 
 
-    def to_public_dict(self):
+    def to_public_dict(self, deep=False):
         tought_options = []
 
         for option in self.tought_options.all(): 
@@ -258,10 +258,13 @@ class Tought(models.Model):
             },
             'activities': json.dumps(activities),
             'employee' : self.employee.email,
-            'tought' : self.text,
             'tought_options': json.dumps(tought_options),
             'created_at' : self.created_at
         }
+        
+        if deep:
+            tought['tought'] = self.text
+
         if self.motivational_quote:
             tought['motivational_quote'] = model_to_dict(self.motivational_quote)
         return tought

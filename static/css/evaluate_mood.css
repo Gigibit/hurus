@@ -168,3 +168,7 @@ section{
 #author{
   font-size: 14px;
 }
+.current-tought{
+  width: 100%;
+  resize: none;
+}

@@ -64,13 +64,13 @@ $( document ).ready(function() {
                 method: 'GET',
                 success:function(response){
                         console.log(JSON.parse(response['toughts'][0]['activities']))
-                        let freetime = response['toughts'][0]
-
-                        let marketplace = response['toughts'][1]
+                        let freetime = response['toughts_for_day'][0]
+                        let marketplace = response['toughts_for_day'][1]
+                        
                         $('#tought-modal-mood-freetime').html('<img class="mood" src="/static/'+ freetime['mood']['icon'] +'"/>')
                         $('#tought-modal-tought-freetime').text(freetime['tought'])
                         let freetimeActivities = JSON.parse(freetime['activities'])
-                        console.log(freetimeActivities)
+                        console.log(freetime)
                         if(freetimeActivities){
                             $('#tought-modal-activities-freetime').html()
                             for( var i = 0; i < freetimeActivities.length; i++ ){
@@ -105,6 +105,7 @@ $( document ).ready(function() {
                                 )
                             }
                         }
+                        $('#tought-modal-motivational-quote').text(( freetime['motivational_quote'] && freetime['motivational_quote']['text'] ) || (marketplace['motivational_quote'] && marketplace['motivational_quote']['text']))
 
                         $('#tought-modal').modal('toggle')
 

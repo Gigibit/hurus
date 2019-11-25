@@ -247,7 +247,7 @@ def home_employee(request, employee):
 
 
 def statistics_employee(request, employee):
-    toughts = [ tought.to_public_dict() for tought in Tought.objects.all().order_by('created_at') ]
+    toughts = [ tought.to_public_dict() for tought in Tought.objects.filter(employee = employee).order_by('created_at') ]
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
@@ -361,14 +361,21 @@ def get_employee_from_request_user(user):
 def tought_for_day(request):
 
     try:
-        toughts = Tought.objects.filter(
+        toughts = [ tought.to_public_dict() for tought in Tought.objects.filter(employee__email = request.user.email)]
+        toughts_for_day = Tought.objects.filter(
             created_at__day=request.GET['day'],
             created_at__month=request.GET['month'],
-            created_at__year=request.GET['year'] 
+            created_at__year=request.GET['year'],
+            employee__email = request.user.email
         )
-        return JsonResponse({
-            'toughts' : [t.to_public_dict() for t in toughts]
-        })
+        
+        moods = Mood.objects.all()
+        return JsonResponse(json.dumps({
+            'moods' : moods,
+            'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
+            'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts),
+            'toughts_for_day' : [t.to_public_dict(deep=True) for t in toughts_for_day]
+        }))
     except Tought.DoesNotExist:
         return JsonResponse({})
 
