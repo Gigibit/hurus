@@ -200,6 +200,16 @@ class Employee(UserProfile):
         return self.last_seen_survey and (datetime.today().date() - self.last_seen_survey.date()).days < 1
 
 
+class Curus(models.Model):
+    description = HTMLField()
+    count = models.IntegerField(default=0)
+    language = models.CharField(
+        max_length=2,
+        choices=LANGUAGES,
+        default=GERMAN,
+    )
+
+
 
 class ToughtOption(models.Model):
     i18n_key = models.CharField(max_length=50, null=True)

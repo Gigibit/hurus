@@ -55,4 +55,5 @@ admin.site.register(Tought)
 admin.site.register(Agency)
 admin.site.register(EncouragingSentence)
 admin.site.register(Course)
+admin.site.register(Curus)
 
