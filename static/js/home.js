@@ -56,21 +56,20 @@ $( document ).ready(function() {
             if(selectedDay != null){
                 selectedDay.removeClass('selected')
             }
-            
+            if(!manager)
             $.ajax({
                 url : '/tought_for_day/?day='+selectedDayInfo.date + '&' +
                 'month=' + (selectedDayInfo.month + 1) + '&' +
                 'year='  + selectedDayInfo.year,
                 method: 'GET',
                 success:function(response){
-                        console.log(JSON.parse(response['toughts'][0]['activities']))
+                    console.log(response)
                         let freetime = response['toughts_for_day'][0]
                         let marketplace = response['toughts_for_day'][1]
-                        
+
                         $('#tought-modal-mood-freetime').html('<img class="mood" src="/static/'+ freetime['mood']['icon'] +'"/>')
                         $('#tought-modal-tought-freetime').text(freetime['tought'])
                         let freetimeActivities = JSON.parse(freetime['activities'])
-                        console.log(freetime)
                         if(freetimeActivities){
                             $('#tought-modal-activities-freetime').html()
                             for( var i = 0; i < freetimeActivities.length; i++ ){
@@ -90,7 +89,7 @@ $( document ).ready(function() {
                         $('#tought-modal-tought-marketplace').text(marketplace['tought'])
                         
                         let marketplaceActivities = JSON.parse(marketplace['activities'])
-                        console.log(marketplaceActivities)
+                        console.log(response)
                         if(marketplaceActivities){
                             $('#tought-modal-activities-marketplace').html()
                             for( var i = 0; i < marketplaceActivities.length; i++ ){
@@ -106,14 +105,23 @@ $( document ).ready(function() {
                             }
                         }
                         $('#tought-modal-motivational-quote').text(( freetime['motivational_quote'] && freetime['motivational_quote']['text'] ) || (marketplace['motivational_quote'] && marketplace['motivational_quote']['text']))
-
+         
                         $('#tought-modal').modal('toggle')
-
+                        $('#view-statistics').click(function(event){
+                            location.href = '/statistics_for_day?day='+selectedDayInfo.date + '&' +'month=' + (selectedDayInfo.month + 1) + '&' +'year='  + selectedDayInfo.year
+                        });
                     }
                 });
-        });			
+                else{
+                    $('#view-statistics').show(500)
+                    $('#view-statistics').click(function(event){
+                        location.href = '/statistics_manager_for_day?day='+selectedDayInfo.date + '&' +'month=' + (selectedDayInfo.month + 1) + '&' +'year='  + selectedDayInfo.year
+                    });
+                } 
+                });			
 
     }
+
     function selectDates(selected) {
 
         if (!$.isEmptyObject(selected)) {

@@ -21,6 +21,8 @@ urlpatterns = [
     path('submit_survey/', core.submit_survey),
     path('add_activity/', core.add_activity),
     path('tought_for_day/', core.tought_for_day),
+    path('statistics_for_day/', core.statistics_for_day),
+    path('statistics_manager_for_day/', core.statistics_manager_for_day),
     path('statistics/', core.statistics),
     path('courses/', core.e_learning),
     path('courses/<int:id>', core.e_learning_detail),

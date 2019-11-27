@@ -13,6 +13,7 @@ from django.forms.models import model_to_dict
 from django.db.models import Avg
 import datetime
 from django.db.models import IntegerField, Value
+from django.shortcuts import get_object_or_404
 
 flat = lambda l: [item for sublist in l for item in sublist]
 
@@ -45,14 +46,35 @@ KDF = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can only use kdf oncefrom cryptography.fernet import Fernet
 
 
+
+def statistics_manager_for_day(request):
+    manager = get_object_or_404(Manager, email=request.user.email)
+    moods = Mood.objects.all()
+    date_to_evaulate = datetime.date(year=int(request.GET['year']), 
+                                              month=int(request.GET['month']), 
+                                              day=int(request.GET['day'])) 
+    mood_max_value = max(mood.value for mood in moods )
+
+    analysis = calculate_average_moods(manager, mood_max_value=mood_max_value, end_day=date_to_evaulate)
+    average_moods = analysis['average_moods']
+    return render(request, 'core/manager/statistics.html', {
+        'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
+        'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
+        'average_moods': average_moods,
+        'podium_moods_freetime': analysis['podium_moods_freetime'],
+        'podium_moods_marketplace': analysis['podium_moods_marketplace'],
+        'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
+        'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
+        'moods' : moods,
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_marketplace'])+1)))
+
+    })
+
 def statistics_manager(request, manager):
     moods = Mood.objects.all()
     mood_max_value = max(mood.value for mood in moods )
     analysis = calculate_average_moods(manager, mood_max_value=mood_max_value)
     average_moods = analysis['average_moods']
-    print(analysis['activities_podium_count_freetime'])
-    print(analysis['activities_podium_count_marketplace'])
-    print(list(range(1, max(len(analysis['activities_podium_count_freetime']),len(analysis['activities_podium_count_marketplace'])))))
     return render(request, 'core/manager/statistics.html', {
         'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
         'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
@@ -361,7 +383,6 @@ def get_employee_from_request_user(user):
 def tought_for_day(request):
 
     try:
-        toughts = [ tought.to_public_dict() for tought in Tought.objects.filter(employee__email = request.user.email)]
         toughts_for_day = Tought.objects.filter(
             created_at__day=request.GET['day'],
             created_at__month=request.GET['month'],
@@ -370,14 +391,25 @@ def tought_for_day(request):
         )
         
         moods = Mood.objects.all()
-        return JsonResponse(json.dumps({
-            'moods' : moods,
-            'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
-            'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts),
-            'toughts_for_day' : [t.to_public_dict(deep=True) for t in toughts_for_day]
-        }))
+        return JsonResponse({
+             'toughts_for_day' : [t.to_public_dict(deep=True) for t in toughts_for_day]
+        })
     except Tought.DoesNotExist:
         return JsonResponse({})
+
+def statistics_for_day(request):
+    toughts = [t.to_public_dict() for t in Tought.objects.filter(
+        created_at__day__lte=request.GET['day'],
+        created_at__month__lte=request.GET['month'],
+        created_at__year__lte=request.GET['year'],
+        employee__email = request.user.email
+    ).order_by('created_at')]
+    moods = Mood.objects.all()
+    return render(request, 'core/employee/statistics.html', {
+        'moods' : moods,
+        'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
+        'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts)
+    })
 
 @csrf_exempt
 def submit_survey(request):

@@ -83,7 +83,7 @@
     var dataFreetime = [
     {% for tought in toughts%}
     {
-        "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
         "mood": "{{tought.mood.value}}",
         "name": "{{tought.mood.i18n_key}}",
         "activities": {{tought.activities|safe}},

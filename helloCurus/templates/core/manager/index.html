@@ -1,4 +1,67 @@
 {% extends 'base.html' %}
 
-{% block content %}Android 
+{% load static %}
+{% load i18n %}
+
+
+{% block head_css_section %}
+ <link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
+{% endblock head_css_section %}
+
+{% block footer_javascript_section %}
+<script type="text/javascript">
+        $(document).ready(()=>$('#view-statistics').hide())
+        var manager = true;
+</script>
+<script src="{% static 'js/home.js' %}?{% now "U" %}" type="text/javascript"></script>
+{% endblock footer_javascript_section %}
+
+{% block content %}
+
+<div class="container">
+    <div class="calendar-section">
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <div class="calendar calendar-first" id="calendar_first">
+            <div class="calendar_header">
+              <button class="switch-month switch-left">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+              </button>
+              <h2></h2>
+              <button class="switch-month switch-right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+              </button>
+            </div>
+            <div class="calendar_weekdays"></div>
+            <div class="calendar_content"></div>
+          </div>
+        </div>
+
+        <div class="col-sm-6" style="display: none;">
+
+          <div class="calendar calendar-second" id="calendar_second">
+            <div class="calendar_header">
+              <button class="switch-month switch-left">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+              </button>
+              <h2></h2>
+              <button class="switch-month switch-right">
+                <i class="glyphicon glyphicon-chevron-right"></i>
+              </button>
+            </div>
+            <div class="calendar_weekdays"></div>
+            <div class="calendar_content"></div>
+          </div>            
+
+        </div>
+
+      </div> <!-- End Row -->
+          
+    </div> <!-- End Calendar -->
+    <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
+</div> <!-- End Container -->
+
+  
 {% endblock %}

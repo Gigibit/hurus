@@ -89,10 +89,11 @@ function barChart(chartDiv, data) {
 		.attr("transform", "translate(0," + height + ")")
 		.call(d3.axisBottom(x))
 		.selectAll(".tick").each(function (d, i) {
+			console.log(d)
 			d3.select(this)
 				.append('image')
 				.attr('class', 'axis-image')
-				.attr('xlink:href', moods[Math.round(d.mood.replace(",","."))].icon)
+				.attr('xlink:href', moods[ d.mood && Math.round(d.mood.replace(",",".")) || d].icon)
 				.attr("transform", "translate(-10 , 5)")
 				.attr('y', 0)
 				.attr('width', 20)
