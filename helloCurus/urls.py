@@ -25,6 +25,7 @@ urlpatterns = [
     path('statistics_manager_for_day/', core.statistics_manager_for_day),
     path('statistics/', core.statistics),
     path('courses/', core.e_learning),
+    path('curus/', core.happy_corus),
     path('courses/<int:id>', core.e_learning_detail),
     path('login_with_token/<str:token>', core.login_user_from_token),
     path('tinymce/', include('tinymce.urls')),

@@ -1,8 +1,32 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block head_css_section %}
+<link href="{% static 'css/curus.css' %}?{% now "U" %}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
-    <script >
-        $.get('/testJavascript', function(response){
-        })
-    </script>
+    <div class="curus-description">
+        {{curus.description|safe}}
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <img class="tree" src="/static/img/website_assets/Icona_albero.png">
+            </div>
+        </div>
+        <div>
+            <div class="counter">{{curus.count}}</div>
+        </div>
+    </div>
+        <div class="col-md-8">
+            {% trans 'HAPPY_CURUS_INFO' %}
+            <p class="curus-greetin">{% trans 'YOUR_HAPPY_TEAM' %}</p>
+        </div>
+    </div>
+
+
 {% endblock %}

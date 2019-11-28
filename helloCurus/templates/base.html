@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <html>
     <head>
         <title>{% block title %}Home {% endblock title %} | CRM Easy</title>
@@ -57,10 +58,37 @@
     {% endblock footer_javascript %}
     </head>
 
-    <div class="page-header">
-        <img id="header-img" src="{% static 'img/website_assets/header_menu.jpg' %}" />
-        <!-- h1><a href="/">happyCurus</a></h1 -->
-    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light static-top">
+            <div class="container">
+            <a class="navbar-brand" href="#">
+                    <img src="http://placehold.it/150x50?text=Logo" alt="">
+                </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">{% trans 'MY_HAPPYCURUS' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statistics">{% trans 'MY_STATISTICS' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/courses">{% trans 'MY_LEARNING_MATERIAL' %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/curus">{% trans 'CURUS_FOR_THE_ENVIRONMENT' %}</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+        <script>
+            $('a[href="/' + location.pathname.split('/')[1] +'"]').parent().addClass('active')
+        </script>
     <body>
         {% block content %}
         {% endblock %}

@@ -9,6 +9,14 @@
        url('../fonts/Rubik/Rubik-Bold.ttf') format("truetype");
 }
 
+.navbar{
+  background-image: url(../img/website_assets/header_menu.jpg);
+}
+.nav-link{
+  color: #555;
+  font-weight: bold;
+  font-size: 18px;
+}
 
 #header-img{
     width: 100%;

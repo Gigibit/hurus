@@ -213,10 +213,7 @@ def calculate_average_mood_for_day(date, toughts, for_type):
 
     return moods/count if count > 0 else 1
 
-def happy_curus_manager(request, manager):
-    return render(request, 'core/manager/happy_curus.html', {
-        'foo': 'bar',
-    })
+
 
 
 def e_learning_manager(request, manager):
@@ -278,10 +275,7 @@ def statistics_employee(request, employee):
     })
 
 
-def happy_curus_employee(request, employee):
-    return render(request, 'core/employee/happy_curus.html', {
-        'foo': 'bar',
-    })
+
 
 
 def e_learning_employee(request, employee):
@@ -374,11 +368,12 @@ def check_survey(fn, request, employee):
 
 def get_employee_from_request_user(user):
     try:
-        return Employee.objects.get(email = user.email), True
+        return Employee.objects.get(email=user.email), True
     except Employee.DoesNotExist:
-        return Manager.objects.get(email=user.email), False
-
-
+        try:
+            return Manager.objects.get(email=user.email), False
+        except:
+            return None, False
 @csrf_exempt
 def tought_for_day(request):
 
@@ -487,9 +482,17 @@ def statistics(request):
     user, is_employee = get_employee_from_request_user(request.user)
     return check_survey(statistics_employee, request, user) if is_employee else statistics_manager(request, user)
 
+
+#TODO: uncomment right query
 def happy_corus(request):
-    user, is_employee = get_employee_from_request_user(request.user)
-    return check_survey(happy_curus_employee, request, user) if is_employee else  happy_curus_manager(request, user)
+    #curus = Curus.objects.get(language=request.user.preferred_language)
+    curus = Curus.objects.get(language= ENGLISH)
+    return render(request, 'core/employee/happy_curus.html', {
+        'curus': curus,
+    })
+    
+    
+    # return check_survey(happy_curus_employee, request, user) if is_employee else  happy_curus_manager(request, user)
 
 def e_learning(request):
     user, is_employee = get_employee_from_request_user(request.user)

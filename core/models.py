@@ -208,7 +208,16 @@ class Curus(models.Model):
         choices=LANGUAGES,
         default=GERMAN,
     )
+    def __str__(self):
+        return self.get_language_display()
+    def save(self, *args, **kwargs):
 
+        for c in Curus.objects.all():
+            if c.pk != self.pk:
+                c.count = self.count
+                c.save()
+            
+        super(Curus, self).save(*args, **kwargs)
 
 
 class ToughtOption(models.Model):

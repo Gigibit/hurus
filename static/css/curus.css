@@ -1,0 +1,20 @@
+.curus-description{
+    padding: 40px;
+}
+.tree{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+}
+.counter{
+    font-size:50px;
+    font-weight: bold;
+    border-radius: 50px;
+    border: 2px solid greenyellow;
+    text-align: center;
+    margin: 20px;
+}
+body{
+    margin-bottom: 100px;
+}
