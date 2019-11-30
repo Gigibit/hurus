@@ -293,3 +293,114 @@ msgstr "Cinema"
 
 msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
 msgstr "What you have been up today?"
+
+msgid "IN_A_GOOD_MOOD"
+msgstr "In a good mood"
+
+msgid "WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER"
+msgstr "Write something that you want to remember"
+
+
+msgid "LOW_ENERGY"
+msgstr "Low energy"
+
+
+msgid "YOUR_TOUGHTS_VISIBILE_ONLY_TO_YOU"
+msgstr "Your toughts visible only to you"
+
+msgid "Time_with_my_partner"
+msgstr "Time with my partner"
+
+msgid "Nothing_at_all"
+msgstr "Nothing at all"
+
+msgid "Phone_call"
+msgstr "Phone call"
+
+msgid "Meeting_with_management"
+msgstr "Meeting with management"
+
+
+
+
+msgid "Meeting_with_team"
+msgstr "Meeting with team"
+
+msgid "New_Tasks"
+msgstr "New Tasks"
+
+msgid "Team_Rotation"
+msgstr "Team Rotation"
+
+msgid "Document_analysis"
+msgstr "Document analysis"
+
+msgid "Held_a_Presentation"
+msgstr "Held a Presentation"
+
+msgid "Working_with_Time_Pressure"
+msgstr "Working with Time Pressure"
+
+msgid "Sick_leave"
+msgstr "Sick leave"
+
+msgid "Everydays_routine"
+msgstr "Everydays routine"
+
+msgid "Project_Management"
+msgstr "Project Management"
+
+msgid "External_Meeting"
+msgstr "External Meeting"
+
+msgid "Worked_Closely_to_a_new_teammate"
+msgstr "Worked Closely to a new teammate"
+
+msgid "Mentored_someone"
+msgstr "Mentored someone"
+
+msgid "MY_HAPPYCURUS"
+msgstr "Happycurus"
+
+msgid "MY_STATISTICS"
+msgstr "Statitistics"
+
+msgid "MY_LEARNING_MATERIAL"
+msgstr "Learning material"
+
+msgid "CURUS_FOR_THE_ENVIRONMENT"
+msgstr "Curus for the environment"
+
+msgid "HISTORICAL_TREND_FREETIME"
+msgstr "Historical trend freetime"
+
+msgid "HISTORICAL_TREND_MARKETPLACE"
+msgstr "Historical trend marketplace"
+
+msgid "CAUSE_EFFECT_FREETIME"
+msgstr "Cause-Effect: Free Time Mood"
+
+msgid "CAUSE_EFFECT_MARKETPLACE"
+msgstr "Cause-Effect: Workplace Mood"
+
+msgid "COUNTER_FREETIME"
+msgstr "Counter: Free Time Mood"
+
+msgid "COUNTER_MARKETPLACE"
+msgstr "Counter: Workplace Mood"
+
+msgid "NEW_COURSES"
+msgstr "New Courses"
+
+msgid "NEW"
+msgstr "New"
+
+
+msgid "PREVIOUS_COURSES"
+msgstr "Previous Courses"
+
+msgid "HAPPY_CURUS_INFO"
+msgstr "THE VALUE ON THE LEFT REPRESENTS THE NUMBER OF DONATIONS THAT HAPPYCURUS HAS BEEN ABLE TO MAKE SO FAR. THE DONATIONS HAVE DIFFERENT AMOUNTS AND ARE ALWAYS ALLOCATED TO ACTIONS OF REFORESTATION. THE SIZE OF THE DONATIONS DEPENDS ON SEVERAL FACTORS, SUCH AS THE NUMBER AND TYPE OF LICENSES SOLD, THE TIMING OF THE PAYMENTS, THE METHODS OF DONATION OF EACH PARTNER, THE TYPE OF PROJECT SUPPORTED AND THE UNEXPECTED EXPENSES THAT HAPPYCURUS MAY FACE. FOR MORE DETAILS ABOUT THE PROJECTS AND THE PARTNERS THAT HAPPYCURUS FINANCES, PLEASE VISIT OUR WEBSITE WWW.HAPPYCURUS.COM."
+
+msgid "YOUR_HAPPY_TEAM"
+msgstr "YOUR HAPPYCURUS TEAM."

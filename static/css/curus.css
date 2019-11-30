@@ -18,3 +18,14 @@
 body{
     margin-bottom: 100px;
 }
+.happy-corus-info{
+    color: #ee863f;
+    font-weight: bold;
+}
+.curus-greeting{
+    font-size: 11px;
+    color: steelblue;
+    margin-top: 10px;
+    font-weight: bold;
+}
+

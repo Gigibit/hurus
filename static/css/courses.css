@@ -89,3 +89,13 @@ section{
     font-size: 10px;
     padding: 15px;
 }
+
+.badge-new{
+    background: lightgreen;
+    font-size: 8px;
+    color: white;
+    margin: 0 5px;
+    padding: 5px;
+    border-radius: 100%;
+    font-weight: bold;
+}

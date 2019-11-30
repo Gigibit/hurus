@@ -13,7 +13,7 @@
         <h1>{% trans 'NEW_COURSE' %}</h1>
         <div class="col-md-6">
             <div class="course-wrapper row" onClick="location.href='/courses/{{course_to_see.pk}}'">
-                <div class="course-title col-md-10">{{course_to_see.title}} {% trans 'NEW' %}</div>
+                <div class="course-title col-md-10">{{course_to_see.title}}<span class="badge-new">{% trans 'NEW' %}</span></div>
                 <div class="seen-icon col-md-2">
                     {% if not course_to_see.seen %}
                         <span class="course-seen glyphicon glyphicon-play"></span>
@@ -28,7 +28,7 @@
         <h1>{% trans 'PREVIOUS_COURSE' %}</h1>
         <div class="col-md-6">
             <div class="course-wrapper row" onClick="location.href='/courses/{{course_to_see.pk}}'">
-                <div class="course-title col-md-10">{{course_to_see.title}} {% trans 'NEW' %}</div>
+                <div class="course-title col-md-10">{{course_to_see.title}}<span class="badge-new">{% trans 'NEW' %}</span></div>
                 <div class="seen-icon col-md-2">
                     {% if not course_to_see.seen %}
                         <span class="course-seen glyphicon glyphicon-play"></span>

@@ -32,6 +32,18 @@
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
             <div class="chart">
+                <div class="mood-buttons-container">
+                        <div class="mood-buttons-wrapper">
+                            {% for mood in moods %}
+                            <div class="freetime-mood-button mood-button" data-mood="{{mood.value}}">
+                                <img src="{% static mood.icon.name %}">
+                                <div class="mood-text">
+                                {% trans mood.i18n_key%}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 <div>
                     <canvas id="freetime-radar-chart"></canvas>
                 </div>
@@ -43,6 +55,18 @@
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
             <div class="chart">
+                <div class="mood-buttons-container">
+                    <div class="mood-buttons-wrapper">
+                        {% for mood in moods %}
+                        <div class="marketplace-mood-button mood-button" data-mood="{{mood.value}}">
+                        <img src="{% static mood.icon.name %}">
+                        <div class="mood-text">
+                            {% trans mood.i18n_key%}
+                        </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
                 <div>
                     <canvas id="marketplace-radar-chart" ></canvas>
                 </div>
@@ -126,8 +150,8 @@
     $(document).ready(function(){
         lineChart("#freetime-line-chart", dataFreetime)
         lineChart("#marketplace-line-chart", dataMarketPlace)
-        barChart("#freetime-bar-chart", dataFreetime)
-        barChart("#marketplace-bar-chart", dataMarketPlace)
+        barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart')
+        barChart("#marketplace-bar-chart", dataMarketPlace,'marketplace-radar-chart')
         configRadarChart('freetime-radar-chart',    7, dataFreetime)
         configRadarChart('marketplace-radar-chart', 1, dataMarketPlace)
         doughnutChart('doughnut-chart-freetime',dataFreetime)

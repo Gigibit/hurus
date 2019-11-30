@@ -2,7 +2,7 @@ var radarCharts = {};
 function count(obj) { return Object.keys(obj).length; }
 
 
-function barChart(chartDiv, data) {
+function barChart(chartDiv, data, relatedChart) {
 
 	buff = []
 
@@ -99,9 +99,7 @@ function barChart(chartDiv, data) {
 				.attr('width', 20)
 				.attr('height', 20)
 				.attr('cursor', 'pointer')
-				.on('click', function (d) {
-					configureRadarChartWith(freetimeRadarChart, d, data)
-				})
+				.on('click', (d) => updateChart(radarCharts[relatedChart], d, data))
 
 		}); // Create an axis component with d3.axisLeft;
 
@@ -349,14 +347,27 @@ function lineChart(chartDiv, data) {
 }
 
 
-function configureRadarChartWith(selectedMood, _data) {
-	if (radarChart != null) {
+$('.freetime-mood-button').click(function(event){
+	let mood = $(this).data('mood')
+	updateChart(radarCharts['freetime-radar-chart'], mood, dataFreetime)
+	updateChart(radarCharts['related-freetime-radar-chart'], mood, dataFreetime)
+
+})
+
+$('.marketplace-mood-button').click(function(event){
+	let mood = $(this).data('mood')
+	updateChart(radarCharts['marketplace-radar-chart'], mood, dataMarketPlace)
+	updateChart(radarCharts['related-marketplace-radar-chart'], mood, dataMarketPlace)
+})
+
+function updateChart(chart, selectedMood, _data) {
+	if (chart != null) {
 		let labels = getActivities(selectedMood, _data)
 		let data = getDataForActivities(labels, selectedMood, _data)
 		if (labels.length > 0 && data.length > 0) {
-			radarChart.data.labels = labels
-			radarChart.data.datasets[0].data = data
-			radarChart.update()
+			chart.data.labels = labels
+			chart.data.datasets[0].data = data
+			chart.update()
 		}
 
 	}
@@ -378,7 +389,7 @@ function managerLineChart(forDiv, data){
 			'</div>'
 		)
 	})
-	var myChart = new Chart(ctx, {
+	new Chart(ctx, {
 		type: 'line',
 		data: {
 			labels : dates,
