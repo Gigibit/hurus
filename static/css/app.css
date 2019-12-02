@@ -42,3 +42,158 @@ p{
 *{
   font-family: 'rubik';
 }
+
+
+.curus-badge{
+  background-image: url(../img/website_assets/pallino.png);
+  background-size: 57px 50px;
+  background-repeat: no-repeat;
+  width: 57px;
+  height: 50px;
+  margin: 0 auto;
+  display: block;
+}
+
+.curus-badge-white{
+  background-image: url(../img/website_assets/pallino-bianco.png);
+  background-size: 57px 50px;
+  background-repeat: no-repeat;
+  width: 57px;
+  height: 50px;
+  margin: 0 auto;
+  display: block;
+}
+
+#spinit {
+    background-image: url(../img/website_assets/pallino-bianco.png);
+    background-size: 57px 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin:-60px 0 0 -60px;
+    display: inline-block;
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 6s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 6s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.43,.84,.61,.14);
+  
+  
+  
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    -ms-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+  transform-origin: 50% 49.2%;
+}
+
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(2520deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(2520deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(2520deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(2520deg);
+    }
+}
+
+
+#navbarResponsive{
+  position: absolute;
+  top: 65px;
+
+}
+
+.navbar-brand{
+  width: 100%;
+  text-align: end;
+}
+
+.nav-item{
+  border-bottom: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+  border-bottom-left-radius: 25%;
+  margin:5px;
+
+}
+
+.nav-item.active{
+  border-bottom: 5px solid steelblue;
+}
+.nav-item .nav-link{
+  font-size: 14px;
+}
+
+
+.nav-item.active .nav-link{
+  font-size: 16px;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: steelblue;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

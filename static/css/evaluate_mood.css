@@ -42,6 +42,9 @@
   border-radius: 48px;
   background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
 }
+.current-tought{
+  margin-bottom: 150px;
+}
 .title {
   margin: 0;
   text-align: center;
