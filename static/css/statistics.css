@@ -97,6 +97,8 @@
     -o-transition: height 0.6s ease;
     transition: height 0.6s ease;
     display:block;
+    font-size: 25px;
+    font-weight: bold;
  }
 
  .mood-button{

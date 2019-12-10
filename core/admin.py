@@ -11,7 +11,7 @@ admin.site.site_header = 'HelloCurus Admin Console'
 class EmployeeProfileAdmin(admin.ModelAdmin):
     exclude = ('username',)
     fieldsets = (
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password','agency')}),
           ('Employee info' , {'fields': ('team',)}),
         )
     add_fieldsets = (
@@ -20,24 +20,24 @@ class EmployeeProfileAdmin(admin.ModelAdmin):
                 'fields': ('email', 'password1', 'password2'),
             }),
         )
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')
-    search_fields = ('email', 'first_name', 'last_name')
+    list_display = ('email', 'first_name', 'last_name', 'agency')
+    search_fields = ('email', 'first_name', 'last_name','agency')
     ordering = ('email',)
 
 @admin.register(Manager)
 class ManagerProfileAdmin(admin.ModelAdmin):
     exclude = ('username',)
     fieldsets = (
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password','agency')}),
         )
     add_fieldsets = (
             (None, {
                 'classes': ('wide',),
-                'fields': ('email', 'password1', 'password2'),
+                'fields': ('email', 'password1', 'password2','agency'),
             }),
         )
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')
-    search_fields = ('email', 'first_name', 'last_name')
+    list_display = ('email', 'first_name', 'last_name', 'agency')
+    search_fields = ('email', 'first_name', 'last_name','agency')
     ordering = ('email',)
 
 @admin.register(CourseSection)

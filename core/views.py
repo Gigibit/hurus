@@ -369,13 +369,8 @@ def check_survey(fn, request, employee):
     return fn(request, employee)
 
 def get_employee_from_request_user(user):
-    try:
-        return Employee.objects.get(email=user.email), True
-    except Employee.DoesNotExist:
-        try:
-            return Manager.objects.get(email=user.email), False
-        except:
-            return None, False
+    return user, not user.is_manager()
+
 @csrf_exempt
 def tought_for_day(request):
 

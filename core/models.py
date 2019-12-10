@@ -148,7 +148,7 @@ class UserProfile(AbstractUser):
             default=GERMAN,
     )
     read_encouraging_sentences = models.ManyToManyField(EncouragingSentence)
-    agency = models.ForeignKey(Agency, null=True, on_delete=models.DO_NOTHING)
+    agency = models.ForeignKey(Agency, on_delete=models.DO_NOTHING)
     
 
 
@@ -164,16 +164,10 @@ class UserProfile(AbstractUser):
     def has_to_get_new_course(self):
         return not self.course_to_see or (datetime.today().date() - self.last_seen_course_date.date()).days < 1
 
-    def is_manager(self):
-        try:
-            Employee.objects.get(email = self.email)
-            return False
-        except Employee.DoesNotExist:
-            return True #must find a better solution
+    def is_manager(self): return self.__class__.__name__ == 'Manager'
 
 # Create your models here.
 class Manager(UserProfile):
-    
     class Meta:
         verbose_name = 'Manager'
         verbose_name_plural = 'Managers'

@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
-from core.models import UserProfile
+from core.models import UserProfile, Manager, Employee
 
 class CurusBackend:
     """
@@ -14,19 +14,26 @@ class CurusBackend:
 
     def authenticate(self, request, username=None, password=None):
         try:
-            user = UserProfile.objects.get(email=username)
-
-        except UserProfile.DoesNotExist:
-            # Create a new user. There's no need to set a password
-            # because only the password from settings.py is checked.
-            user = UserProfile(email=username)
-            user.is_staff = True
-            user.is_superuser = True
-            user.save()
-        return user
+            user = Employee.objects.get(email=username)
+        except Employee.DoesNotExist:
+            try:
+                user = Manager.objects.get(email=username)
+            except Manager.DoesNotExist: 
+                try:
+                    return UserProfile.objects.get(email=username)
+                except UserProfile.DoesNotExist:
+                    return None
+        return user if user.agency.enabled else None
 
     def get_user(self, user_id):
         try:
-            return UserProfile.objects.get(pk=user_id)
-        except UserProfile.DoesNotExist:
-            return None
+            user = Employee.objects.get(pk=user_id)
+        except Employee.DoesNotExist:
+            try:
+                user = Manager.objects.get(pk=user_id)
+            except Manager.DoesNotExist: 
+                try:
+                    return UserProfile.objects.get(pk=user_id)
+                except UserProfile.DoesNotExist:
+                    return None
+        return user if user.agency.enabled else None
