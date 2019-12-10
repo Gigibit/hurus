@@ -77,12 +77,13 @@
     margin-bottom: 10px
 }
 .progress-bar-vertical{
-    width: 35px;
+    width: 200px;
     min-height: 286px;
     margin-right: 20px;
     border-radius: 10px !important;
     display: flex;
     flex-direction: column-reverse;
+    margin: 0 auto;
  }   
 .radar-chart-mood-icon{
     width: 40px;

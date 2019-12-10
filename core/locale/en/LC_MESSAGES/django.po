@@ -196,7 +196,7 @@ msgstr "discoraged"
 
 
 msgid "YOUR_TOUGHTS"
-msgstr "Your thoughts (visible only to you)"
+msgstr "Your toughts (visible only to you)"
 
 
 msgid "WRITE_TO_REMEMBER"
@@ -306,7 +306,7 @@ msgstr "Low energy"
 
 
 msgid "YOUR_TOUGHTS_VISIBILE_ONLY_TO_YOU"
-msgstr "Your toughts visible only to you"
+msgstr "Your toughts (visible only to you)"
 
 msgid "Time_with_my_partner"
 msgstr "Time with my partner"
@@ -360,13 +360,13 @@ msgid "Mentored_someone"
 msgstr "Mentored someone"
 
 msgid "MY_HAPPYCURUS"
-msgstr "Happycurus"
+msgstr "My Happycurus"
 
 msgid "MY_STATISTICS"
-msgstr "Statitistics"
+msgstr "My Statitistics"
 
 msgid "MY_LEARNING_MATERIAL"
-msgstr "Learning material"
+msgstr "My Learning material"
 
 msgid "CURUS_FOR_THE_ENVIRONMENT"
 msgstr "Curus for the environment"
@@ -408,3 +408,6 @@ msgstr "YOUR HAPPYCURUS TEAM."
 
 msgid "SELECT_A_DAY_BEFORE_TODAY"
 msgstr "Select a day before today"
+
+msgid "MISSING_FIELDS"
+msgstr "Please, fill every field"

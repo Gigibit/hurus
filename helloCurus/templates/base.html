@@ -46,6 +46,7 @@
     <script>window['False'] = false</script><!-- to avoid error from bknd -->
     
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/charts.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     
@@ -62,6 +63,7 @@
 <script>
     const i18n = {
         'SELECT_DATE_BEFORE_TODAY' : "{% trans 'SELECT_A_DAY_BEFORE_TODAY' %}",
+        'MISSING_FIELDS' : "{% trans 'MISSING_FIELDS' %}",
     }
 
 
@@ -79,12 +81,12 @@
         <nav class="navbar navbar-expand-lg navbar-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img width="150" height="50" src="{% static 'img/website_assets/logo-white.png' %}" alt="logo">
+                    <img width="94" height="50" src="{% static 'img/website_assets/logo-light.jpg' %}" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="collapse navbar-collapse" id="navbarResponsive" style="border-bottom: 1px solid {% if request.user.is_manager %} steelblue {% else %} #ccc {% endif %};">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="/">{% trans 'MY_HAPPYCURUS' %}</a>

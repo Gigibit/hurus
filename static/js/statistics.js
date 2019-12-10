@@ -89,7 +89,6 @@ function barChart(chartDiv, data, relatedChart) {
 		.attr("transform", "translate(0," + height + ")")
 		.call(d3.axisBottom(x))
 		.selectAll(".tick").each(function (d, i) {
-			console.log(d)
 			d3.select(this)
 				.append('image')
 				.attr('class', 'axis-image')
@@ -215,8 +214,6 @@ function lineChart(chartDiv, data) {
 		.call(d3.axisLeft(yScale).ticks(count(moods)))
 		.selectAll(".tick").each(function (d, i) {
 
-			console.log(moods)
-			console.log(d)
 			d3.select(this)
 				.append('image')
 				.attr('class', 'axis-image')
@@ -332,7 +329,6 @@ function lineChart(chartDiv, data) {
 		.attr("r", 5)
 		.each(function (d, i) {
 			if (i % 7 != 0 && i % 7 != 6) return
-			console.log(this.getAttributeNode("cx"))
 			d3.select(this)
 				.append('image')
 				.attr('class', 'path-image')
@@ -376,9 +372,10 @@ function updateChart(chart, selectedMood, _data) {
 function managerLineChart(forDiv, data){
 	let ctx = document.getElementById(forDiv).getContext('2d')
 	let backgroundColors ={}
+	console.log(Object.keys(data))
 	Object.keys(data).forEach(key=>{
 		backgroundColors[key] = randomRgba();
-		$('.legend').append(
+		$('#legend-'+forDiv).append(
 			'<div class="legend-mood col-md-2">' + 
 				'<div class="row">' + 
 					'<div class="legend-mood-img-wrp col-md-2">'+
@@ -413,8 +410,9 @@ function managerLineChart(forDiv, data){
 				display: false
 			},
 			tooltips: {
-				mode: 'index',
-				intersect: false,
+				// mode: 'index',
+				// intersect: false,
+				enabled: false
 			},
 			hover: {
 				mode: 'nearest',

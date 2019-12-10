@@ -106,8 +106,8 @@
     min-height: 100vh;
 }
 .mood, .activity-icon{
-    height: 20px;
-    width: 20px;
+    height: 35px;
+    width: 35px;
 }
 .activity-box{
   text-align: center;

@@ -12,13 +12,28 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}?v={% now "U" %}" type="text/javascript"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/app.js' %}?v={% now "U" %}" type="text/javascript"></script>
   <link rel="stylesheet" href="{% static 'css/evaluate_mood.css' %}?v={% now "U" %}">
-  
+  <script>
+    const i18n = {
+        'SELECT_DATE_BEFORE_TODAY' : "{% trans 'SELECT_A_DAY_BEFORE_TODAY' %}",
+        'MISSING_FIELDS' : "{% trans 'MISSING_FIELDS' %}",
+    }
+
+
+    $('document').ready(()=>{
+        $('a[href="/' + location.pathname.split('/')[1] +'"]').parent().addClass('active')
+        $('#page-wrapper').css('display', 'block');
+        $('#spinit').hide(500)
+    })
+    
+</script>
 </head>
 <html>
 <body>
-  <div class="page-wrapper">
+  <div id="spinit"></div>
+  <div id="page-wrapper" style="display:none">
     <section id="mood-section">
       <div class="container">
         <div class="corus-dot"></div>
@@ -35,9 +50,9 @@
           </div>
         </div>
         
-        <div class="moods-wrapper row">
+        <div class="moods-wrapper row d-flex justify-content-center">
           {% for mood in moods %}
-          <div class="mood col-md-2" data-mood="{{mood.pk}}">
+          <div class="mood col-md-1" data-mood="{{mood.pk}}">
             <img src="{% static mood.icon.name %}">
             <div class="mood-text">
               {% trans mood.i18n_key%}
@@ -68,11 +83,11 @@
         <div class="freetime-box-wrapper col-md-2" data-activity="{{freetime_choose.pk}}">
           <div class="freetime-box">
             <img src="{{ freetime_choose.icon.name }}">
-            <p> {% trans freetime_choose.i18n_key %} </p>
+            <p> {% trans freetime_choose.name %} </p>
           </div>
         </div>
         {% endfor %}
-        <div type="button" class="add-edit-button freetime-box col-md-2" data-type="MP" href="#add-activity-modal">
+        <div type="button" class="add-edit-button freetime-box col-md-2" data-type="FT" href="#add-activity-modal">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
 
             <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -99,9 +114,9 @@
             </div>
           </div>
           
-          <div class="moods-wrapper row">
+          <div class="moods-wrapper row d-flex justify-content-center">
             {% for mood in moods %}
-            <div class="marketplace-mood col-md-2" data-mood="{{mood.pk}}">
+            <div class="marketplace-mood col-md-1" data-mood="{{mood.pk}}">
               <img src="{% static mood.icon.name %}">
               <div class="mood-text">
                 {% trans mood.i18n_key%}
@@ -132,11 +147,11 @@
             <div class="marketplace-box-wrapper col-md-2" data-activity="{{marketplace_choose.pk}}">
               <div class="freetime-box">
                 <img src="{{ marketplace_choose.icon.name }}">
-                <p> {% trans marketplace_choose.i18n_key %} </p>
+                <p> {% trans marketplace_choose.name %} </p>
               </div>
             </div>
             {% endfor %}
-            <div type="button" class="add-edit-button freetime-box col-md-2" data-type="FT" href="#add-activity-modal">
+            <div type="button" class="add-edit-button freetime-box col-md-2" data-type="MP" href="#add-activity-modal">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
 
                 <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -169,7 +184,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add activity</h4>
+        <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body">
           <div class="row">
@@ -218,24 +233,28 @@
             $('#selected-icon').attr('src',activitySrc);
         })
 
-        $('.add-activity-modal').click(function(event){
+        $('.add-edit-button').click(function(event){
           activityType = $(this).data('type')
+          $('#add-activity-modal').modal('toggle');
         })
 
         $('#add-activity-submit-button').click(function(event){
             activityName = $('#new-activity-name').val()
-            if(activityName == null || activityName.length == 0 || activitySrc == null) return;
+            if(activityName == null || activityName.length == 0 || activitySrc == null) 
+              return snackbar(i18n['MISSING_FIELDS'])
+            
             $('#add-activity-modal').modal('toggle');
             $.post('/add_activity/', {
-              'type': type,
+              'type': activityType,
               'src' : activitySrc,
               'name' : activityName
             },function(response){
+                $('#new-activity-name').val('')
                 var id = response['id']
                 var src = response['icon']
                 var value = response['name']
-                $('#activities-container').append(
-                  '<div class="freetime-box-wrapper col-md-2" data-activity="'+id+'">' +
+                $('#activities-container').prepend(
+                  '<div class="' + (activityType == 'MP' ? 'marketplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
                     '<div class="freetime-box">' +
                       '<img src="'+src+'">'+
                       '<p> '+ value +'</p>'+

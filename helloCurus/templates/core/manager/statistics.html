@@ -9,7 +9,7 @@
 {% block content %}
 <div class="main">
     <div class="row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
+        <div class="chart-wrapper col-md-6 ">
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
             <div class="progress progress-bar-vertical">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}%;
@@ -33,12 +33,12 @@
     <div class="row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
-            <div class="row legend"></div>
+            <div id="legend-freetime-line-chart" class="row legend"></div>
             <canvas id="freetime-line-chart" class="chart"></canvas>
         </div>
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
-            <div class="row legend"></div>
+            <div id="legend-marketplace-line-chart" class="row legend"></div>
             <canvas id="marketplace-line-chart" class="chart"></canvas>
         </div>
     </div>
@@ -119,6 +119,7 @@
             } 
             dataFreetime[{{mood}}].data.push({{value}})
         {% endfor %}
+
         {% for mood,value in average.moods.marketplace_moods_count.items %}
             if(!dataMarketPlace[{{mood}}])
             dataMarketPlace[{{mood}}]={
@@ -187,6 +188,7 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
+
         managerLineChart('freetime-line-chart', dataFreetime)
         managerLineChart('marketplace-line-chart', dataMarketPlace)
         lineChart("#average-freetime-line-chart", freetimeAverageMoods)

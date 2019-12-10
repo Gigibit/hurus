@@ -8,12 +8,14 @@
     display: block;
 }
 .counter{
-    font-size:50px;
+    font-size: 36px;
     font-weight: bold;
-    border-radius: 50px;
-    border: 2px solid greenyellow;
+    border-top-right-radius: 84px;
+    border-bottom-left-radius: 50px;
+    /* border: 2px solid greenyellow; */
     text-align: center;
     margin: 20px;
+    color: #36acb8;
 }
 body{
     margin-bottom: 100px;

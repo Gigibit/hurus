@@ -51,6 +51,12 @@ class Agency(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name + ' : ' + self.p_iva
+
+    class Meta:
+        verbose_name_plural = 'Agencies'
+
 class EncouragingSentence(models.Model):
     text = models.TextField()
     author = models.CharField(max_length=100, null=True)
@@ -61,7 +67,8 @@ class EncouragingSentence(models.Model):
         choices=LANGUAGES,
         default=GERMAN,
     )
-
+    def __str__(self):
+        return self.text 
 
 
 class Course(models.Model):
@@ -157,7 +164,12 @@ class UserProfile(AbstractUser):
     def has_to_get_new_course(self):
         return not self.course_to_see or (datetime.today().date() - self.last_seen_course_date.date()).days < 1
 
-
+    def is_manager(self):
+        try:
+            Employee.objects.get(email = self.email)
+            return False
+        except Employee.DoesNotExist:
+            return True #must find a better solution
 
 # Create your models here.
 class Manager(UserProfile):
@@ -172,6 +184,9 @@ class Manager(UserProfile):
 class Team(models.Model):
     name = models.CharField(max_length=50)
     manager = models.ManyToManyField(Manager, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 
@@ -218,6 +233,10 @@ class Curus(models.Model):
                 c.save()
             
         super(Curus, self).save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name = 'Curus for the Environment Page'
+        verbose_name_plural = 'Curus for the Environment Page'
 
 
 class ToughtOption(models.Model):

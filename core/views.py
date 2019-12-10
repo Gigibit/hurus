@@ -16,7 +16,7 @@ from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
 
 flat = lambda l: [item for sublist in l for item in sublist]
-
+MAX_NUMBER_DISPLAYED = 6
 
 def same_day(date1, date2): return date1.day == date2.day and date1.month == date2.month and date1.year == date2.year
 
@@ -121,7 +121,8 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
 
     activity_count_freetime = []
     for mood in moods:
-        activities = [activity for activity in activities_for_podium_moods if activity['mood'] == mood.pk]
+        #max number of activity displayed
+        activities = [activity for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
         if len(activities) > 0 : 
             activity_count_freetime.append({
                 'mood_value' : mood.value,
@@ -144,7 +145,8 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in marketplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_marketplace] ])[:6]
     activity_count_marketplace = []
     for mood in moods:
-        activities = [ activity for activity in activities_for_podium_moods if activity['mood'] == mood.pk]
+        #max number of activity displayed
+        activities = [ activity for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
         if len(activities) > 0:
             activity_count_marketplace.append({
                 'mood_value': mood.value,
@@ -428,7 +430,6 @@ def submit_survey(request):
         request.user.save()
 
 
-        #tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
         activities = Activity.objects.filter(pk__in=request.POST.getlist('freetime[activities][]'))
         tought = Tought.objects.create(  
                         tought_type = FREETIME,
@@ -437,8 +438,6 @@ def submit_survey(request):
                         text=request.POST['freetime[current_tought]'],
                         employee=employee
                         )
-#        if tought_options and len(tought_options) > 0:
-#            tought.tought_options.add(*tought_options)
 
         if activities and len(activities) > 0:
             tought.activities.add(*activities)
@@ -449,7 +448,6 @@ def submit_survey(request):
         employee.last_seen_survey = datetime.datetime.now()
         employee.save()
         mood = Mood.objects.get(pk=request.POST['marketplace[selected_mood]'])
-       # tought_options = list(ToughtOption.objects.filter(pk__in=request.POST['freetime'].getlist('toughts[]')))
         activities = Activity.objects.filter(pk__in=request.POST.getlist('marketplace[activities][]'))
         tought = Tought.objects.create(  
                         tought_type=MARKET_PLACE,
@@ -458,9 +456,6 @@ def submit_survey(request):
                         text=request.POST['marketplace[current_tought]'],
                         employee=employee
                         )
-#        if tought_options and len(tought_options) > 0:
- #           tought.tought_options.add(*tought_options)
-
         if activities and len(activities) > 0:
             tought.activities.add(*activities)
 

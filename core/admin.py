@@ -51,7 +51,6 @@ class CourseSectionAdmin(admin.ModelAdmin):
 admin.site.unregister(Group)
 
 admin.site.register(Team)
-admin.site.register(Tought)
 admin.site.register(Agency)
 admin.site.register(EncouragingSentence)
 admin.site.register(Course)

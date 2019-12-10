@@ -56,7 +56,7 @@ $('#current-tought-marketplace').on('input propertychange paste', function() {
     currentToughtMarketplace = $(this).val();
 });
 
-$('.freetime-box-wrapper').click(function(event){
+$(document).on('click','.freetime-box-wrapper', function(){
     let element = $(this)
     let activity = element.data('activity')
     if(freetimeActivities.indexOf(activity) != -1){
@@ -68,7 +68,7 @@ $('.freetime-box-wrapper').click(function(event){
         freetimeActivities.push(activity);
     }
 })
-$('.marketplace-box-wrapper').click(function(event){
+$(document).on('click','.marketplace-box-wrapper', function(){
     let element = $(this)
     let activity = element.data('activity')
     if(marketplaceActivities.indexOf(activity) != -1){

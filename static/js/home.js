@@ -38,10 +38,7 @@ class Calendar {
             computeDate(this.selected.date(), this.selected.month(), this.selected.year())
           }
           else{
-            var snackbar = document.getElementById("snackbar");
-            snackbar.className = "show";
-            snackbar.innerText = i18n['SELECT_DATE_BEFORE_TODAY']
-            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+            toast(i18n['SELECT_DATE_BEFORE_TODAY'])
           }
           this.update()
         })
