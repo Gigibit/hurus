@@ -141,9 +141,7 @@ class Calendar {
 
 
 function computeDate(day, month, year){
-    console.log( '/tought_for_day/?day='+day + '&' +
-    'month=' + (month + 1) + '&' +
-    'year='  + year)
+
     if(!manager)
             $.ajax({
                 url : '/tought_for_day/?day='+day + '&' +
@@ -166,7 +164,7 @@ function computeDate(day, month, year){
                                     '<div class="col-md-2 activity-box-container">'+
                                         '<div class="activity-box">' +
                                             '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
-                                            '<p>'+ (activity['i18n_key'] || activity['name']) +'</p>'+
+                                            '<p>'+ (activity['text'] || activity['name']) +'</p>'+
                                         '</div>'+
                                     '</div>'
                                 )
@@ -186,7 +184,7 @@ function computeDate(day, month, year){
                                     '<div class="col-md-2 activity-box-container">'+
                                         '<div class="activity-box">' +
                                             '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
-                                            '<p>'+ (activity['i18n_key'] || activity['name']) +'</p>'+
+                                            '<p>'+ (activity['text']) +'</p>'+
                                         '</div>'+
                                     '</div>'
                                 )

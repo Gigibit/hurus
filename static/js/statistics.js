@@ -1,4 +1,6 @@
 var radarCharts = {};
+const MIN_DAYS_FOR_CHART = 200;
+
 function count(obj) { return Object.keys(obj).length; }
 
 
@@ -18,7 +20,6 @@ function barChart(chartDiv, data, relatedChart) {
 			value: buff[key]
 		})
 	});
-
 
 	var margin = {
 			top: 20,
@@ -61,9 +62,12 @@ function barChart(chartDiv, data, relatedChart) {
 	}));
 	y.domain([0, maxValue]);
 	// append the rectangles for the bar chart
-	svg.selectAll(".bar")
+	let bars = svg.selectAll(".bar")
 		.data(barData)
-		.enter().append("rect")
+		.enter()
+		.append("g")
+		bars.append("rect")
+		.attr('fill', function(d){ return moods[d.key]['color']})
 		.attr("class", "bar")
 		.attr("x", function (d) {
 			return x(d.key);
@@ -75,18 +79,23 @@ function barChart(chartDiv, data, relatedChart) {
 		.attr("height", function (d) {
 			return height - y(d.value);
 		})
-		.append('text')
-		.attr("dx", -5)
-		.attr("dy", ".36em")
-		.attr("text-anchor", "end")
+		bars.append('text')
+		.attr('class', 'bar-text')
+		.attr("x", function (d) {
+			return x(d.key) + x.bandwidth()/2;
+		})
+		.attr("y", function (d) {
+			return (height+y(d.value))/2;
+		})
 		.text(function (d) {
-			return d.key
+			return d.value
 		})
 
 
 	// add the x Axis
 	svg.append("g")
 		.attr("transform", "translate(0," + height + ")")
+		.attr('class', 'axis')
 		.call(d3.axisBottom(x))
 		.selectAll(".tick").each(function (d, i) {
 			d3.select(this)
@@ -102,13 +111,13 @@ function barChart(chartDiv, data, relatedChart) {
 
 		}); // Create an axis component with d3.axisLeft;
 
-	// add the y Axis
-	svg.append("g")
-		.call(d3.axisLeft(y).ticks(maxValue));
 }
 
 
 function lineChart(chartDiv, data) {
+	if(diffBetweenDateInDays(data[0].date, data[data.length-1].date) < MIN_DAYS_FOR_CHART)
+		throw new Exception('data evaluation unavailable')
+	
 	var margin = {
 			top: 50,
 			right: 50,
@@ -370,11 +379,11 @@ function updateChart(chart, selectedMood, _data) {
 }
 
 function managerLineChart(forDiv, data){
+
 	let ctx = document.getElementById(forDiv).getContext('2d')
 	let backgroundColors ={}
-	console.log(Object.keys(data))
 	Object.keys(data).forEach(key=>{
-		backgroundColors[key] = randomRgba();
+		backgroundColors[key] = moods[key]['color'];
 		$('#legend-'+forDiv).append(
 			'<div class="legend-mood col-md-2">' + 
 				'<div class="row">' + 
@@ -391,10 +400,11 @@ function managerLineChart(forDiv, data){
 		data: {
 			labels : dates,
 			datasets:  Object.keys(data).map(key=>{ 
+				console.log(key)
 				return {
 					fill: false,
 					lineTension: 0.3,
-					borderColor: backgroundColors[key],
+					borderColor: moods[key]['color'],
 					borderCapStyle: 'square',
 					borderJoinStyle: 'miter',
 					pointBorderWidth: 1,
@@ -429,6 +439,10 @@ function managerLineChart(forDiv, data){
 	  });
 }
 
+function diffBetweenDateInDays(date1, date2){
+	const diffTime = Math.abs(date2 - date1);
+	return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+}
 
 
 function configRadarChart(chartDiv, selectedMood, data) {
@@ -451,7 +465,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
             pointStrokeColor: "#ccc",
             pointHighlightFill: "#333",
             pointHighlightStroke: "rgba(255,255,0,1)",
-			backgroundColor: randomRgba(),
+			backgroundColor: moods[selectedMood]['color'],
 			data: [0].concat(datasetData)
 		}]
 
@@ -559,13 +573,20 @@ function getDataForActivities(labels, forMood, data) {
 let backgroundColors = []
 function doughnutChart(div,toughts){
         let doughnutDataSet = []
-        let moodsLabels = []
+		let moodsLabels = []
+		let moodssssss = []
         Object.keys(moods).forEach(function(mood,i){
-            moodsLabels.push(mood)
-            doughnutDataSet[i] = toughts.filter((tought,i) => tought.mood == mood ).length 
+			moodsLabels.push(mood)
+
+			doughnutDataSet[i] = toughts.filter((tought,i) => tought.mood == mood ).length 
+			moodssssss.push({
+				'data':doughnutDataSet[i],
+				'mood' : mood
+			})
             if(!backgroundColors[i] ) //not configured yet
             {
-                backgroundColors[i] = randomRgba();
+
+                backgroundColors[i] = moods[mood]['color'];
                 $('.legend').append(
                     '<div class="legend-mood col-md-2">' + 
                         '<div class="row">' + 
@@ -577,11 +598,12 @@ function doughnutChart(div,toughts){
                     '</div>'
                 )
             }
-        })
-        doughnutDataSet.sort((a, b) => b - a)
+		})
+
         new Chart(document.getElementById(div).getContext('2d'), {
             type: "doughnut",
-            data:{ labels :moodsLabels,
+            data:{ 
+				  labels :moodsLabels,
                   datasets:[{
                           data:doughnutDataSet,
                           backgroundColor: backgroundColors

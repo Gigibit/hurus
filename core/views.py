@@ -118,7 +118,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key,value in moods_count.items()],key=lambda x: x['count'], reverse=True)
 
     activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime] ])[:6]
-
+    
     activity_count_freetime = []
     for mood in moods:
         #max number of activity displayed
@@ -127,6 +127,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
             activity_count_freetime.append({
                 'mood_value' : mood.value,
                 'mood_icon': mood.icon.name,
+                'mood_color_code': mood.color_code,
                 'mood_i18n_key': mood.i18n_key,
                 'activities': activities
             })
@@ -151,6 +152,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
             activity_count_marketplace.append({
                 'mood_value': mood.value,
                 'mood_icon': mood.icon.name,
+                'mood_color_code': mood.color_code,
                 'mood_i18n_key': mood.i18n_key,
                 'activities': activities
             })
@@ -262,8 +264,18 @@ def e_learning_manager(request, manager):
 
 
 def home_employee(request, employee):
+    courses = list(Course.objects.all())
+    not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
+    if len(not_seen_courses) == 0:
+        request.user.seen_courses.set([])
+        not_seen_courses = courses
+        request.user.course_to_see = None
+        request.user.last_seen_course_date = None
+        request.user.save()
+
+
     return render(request, 'core/employee/index.html', {
-    'foo': 'bar',
+        'courses': not_seen_courses[:2],
     })
 
 
@@ -319,6 +331,9 @@ def e_learning_detail(request,id):
     course = Course.objects.get(pk=id)
     if course not in request.user.seen_courses.all():
         request.user.seen_courses.add(course)
+    if request.user.course_to_see and request.user.course_to_see == course.pk:
+        request.user.course_to_see = None
+
     return render(request, 'core/employee/e_learning_detail.html', {
         'course': course,
         'sections' : course.sections.all()
@@ -396,6 +411,7 @@ def statistics_for_day(request):
         created_at__year__lte=request.GET['year'],
         employee__email = request.user.email
     ).order_by('created_at')]
+        
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
@@ -493,10 +509,19 @@ def e_learning(request):
 
 
 def home_manager(request, manager):
-    return render(request, 'core/manager/index.html', {
-        'foo': 'bar',
-        })
+    courses = list(Course.objects.all())
+    not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
+    if len(not_seen_courses) == 0:
+        request.user.seen_courses.set([])
+        not_seen_courses = courses
+        request.user.course_to_see = None
+        request.user.last_seen_course_date = None
+        request.user.save()
+    print(not_seen_courses)
 
+    return render(request, 'core/employee/index.html', {
+        'courses': not_seen_courses[:2],
+    })
 
 
 

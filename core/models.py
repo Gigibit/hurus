@@ -9,8 +9,7 @@ from django.dispatch import receiver
 from datetime import datetime
 from django.contrib.auth.models import AbstractUser, BaseUserManager ## A new class is imported. ##
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-
+from django.utils.translation import gettext as _
 from tinymce.models import HTMLField
 
 GERMAN = 'DE'
@@ -83,6 +82,8 @@ class Course(models.Model):
             default=GERMAN,
     )
     def __str__(self):
+        return self.title
+    def __unicode__(self):
         return self.title
 
 class CourseSection(models.Model):
@@ -241,7 +242,10 @@ class ToughtOption(models.Model):
 class Mood(models.Model):
     value = models.IntegerField()
     i18n_key = models.CharField(max_length=50, null=True)
+    color_code = models.CharField(max_length=9)
     icon = models.FileField()
+    def __str__(self):
+        return _(self.i18n_key)
 
 
 
@@ -277,6 +281,7 @@ class Tought(models.Model):
         for activity in self.activities.all(): 
             activities.append({
                 'i18n_key' : activity.i18n_key,
+                'text': _(activity.i18n_key) if activity.i18n_key else activity.name,
                 'name' : activity.name,
                 'icon' : activity.icon.name
             })
@@ -285,7 +290,9 @@ class Tought(models.Model):
             'tought_type' : self.tought_type,
             'mood' : {
                 'i18n_key':self.mood.i18n_key,
+                'text' : _(self.mood.i18n_key) if self.mood.i18n_key else self.mood.i18n_key,
                 'icon' : self.mood.icon.name,
+                'color_code' : self.mood.color_code,
                 'value' : self.mood.value
             },
             'activities': json.dumps(activities),

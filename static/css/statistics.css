@@ -1,145 +1,158 @@
 
 .line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 3;
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 3;
 }
 
 /* Style the dots by assigning a fill and stroke */
 .dot {
-    fill: #ffab00;
-    stroke: #fff;
+  fill: #ffab00;
+  stroke: #fff;
 }
 .axis{
-    stroke: orange;
+  stroke: orange;
 }
 
 .grid line {
-    stroke: lightgrey;
-    stroke-opacity: 0.7;
-    shape-rendering: crispEdges;
-  }
-  
-  .grid path {
-    stroke-width: 0;
-  }
-  .bar { 
-      fill: steelblue;
-    
-    }
-  .chart-wrapper{
-    margin-top: 15px;
-    padding: 0 15px;
-  }
-  .chart {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    background-color: white;
-    padding: 30px;
-  }
-  
+  stroke: lightgrey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
 
-  .main{
-    padding: 15px;
-    background-color: #eff4f7;
-    color: #777;
-    font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
-  }
+.grid path {
+  stroke-width: 0;
+}
+.chart-wrapper{
+  margin-top: 15px;
+  padding: 0 15px;
+}
+.chart {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  background-color: white;
+  padding: 30px;
+}
 
 
-  .axis {
-    font: 10px sans-serif;
-  }
+.main{
+  padding: 15px;
+  background-color: #eff4f7;
+  color: #777;
+  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}
 
-  .axis path,
-  .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-  }
-  svg text {
-    fill:white;
-   font: 10px sans-serif;
-   text-anchor: end;
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.wip-warning{
+  background: url(../img/website_assets/icona_lavori_in_corso.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: steelblue;
+  shape-rendering: crispEdges;
+}
+svg text {
+  fill:white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+.bar-text {
+    fill:#222;
+    font-size: 18px;
+    font-weight: bold;
+    text-anchor: middle;
 }
 .related-radar-chart{
-    margin: 15px
+  margin: 15px
 }
 .legend-mood-img{
-    width: 10px;
-    height: 10px;   
-    padding: 0;
+  width: 10px;
+  height: 10px;   
+  padding: 0;
 }
 .legend-mood-color{
-    width: 10px;
-    height: 10px;
+  width: 10px;
+  height: 10px;
 }
 .legend-mood{
-    margin-bottom: 10px
+  margin-bottom: 10px
 }
 .progress-bar-vertical{
-    width: 200px;
-    min-height: 286px;
-    margin-right: 20px;
-    border-radius: 10px !important;
-    display: flex;
-    flex-direction: column-reverse;
-    margin: 0 auto;
- }   
+  width: 200px;
+  min-height: 286px;
+  margin-right: 20px;
+  border-radius: 10px !important;
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 0 auto;
+}   
 .radar-chart-mood-icon{
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .progress-bar-vertical .progress-bar{
-    width: 100%;
-    height: 0;
-    -webkit-transition: height 0.6s ease;
-    -o-transition: height 0.6s ease;
-    transition: height 0.6s ease;
-    display:block;
-    font-size: 25px;
-    font-weight: bold;
- }
+  width: 100%;
+  height: 0;
+  -webkit-transition: height 0.6s ease;
+  -o-transition: height 0.6s ease;
+  transition: height 0.6s ease;
+  display:block;
+  font-size: 25px;
+  font-weight: bold;
+}
 
- .mood-button{
+.mood-button{
   display: inline-block;
   width: 57px;
   height: 50px;
   padding: 0;
- }
- .mood-button img:hover{
-   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-   border: 2px solid yellow;
-   background-color: #fbb034;
-   border-radius: 48px;
-   background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
-   cursor:pointer;
- }
+}
+.mood-button img:hover{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border: 2px solid yellow;
+  background-color: #fbb034;
+  border-radius: 48px;
+  background-image: linear-gradient(315deg, #fbb034 0%, #ffdd00 74%);
+  cursor:pointer;
+}
 
 
- .mood-button img{
-   width: 20px;
-   height: 20px;
-   margin: 0 auto;
-   display: block;
- }
- .mood-buttons-container{
+.mood-button img{
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  display: block;
+}
+.mood-buttons-container{
   height: 100px;
   border: 1px steelblue solid;
   border-radius: 15px;
   padding: 6px;
   position: relative;
   width: 100%;
- }
- .mood-text{
+}
+.mood-text{
   font-size: 8px;
   text-align: center;
   display: inline-table;
- }
- .mood-buttons-wrapper{
+}
+.mood-buttons-wrapper{
   width: 100%;
   margin: 0 auto;
   text-align: center;
   position: absolute;
   top: 30%;
- }
+}

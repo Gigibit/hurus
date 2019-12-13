@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="main">
-    <div class="row sparkboxes mt-4 mb-4">
+    <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6 ">
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
             <div class="progress progress-bar-vertical">
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="chart-wrapper col-md-6">
+        <div class="percentage-evaluation chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
             <div class="progress progress-bar-vertical">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_marketplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_marketplace_percentage}}%;
@@ -154,7 +154,9 @@
     var moods = {
         {% for mood in moods %}
         {{mood.value}} : {
-            'icon'  : "{% static mood.icon.name %}"
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
+
         },
         {% endfor %}
     }
@@ -188,11 +190,27 @@
 <script type="text/javascript">
     
     $(document).ready(function(){
+        var somethingFailed = false
+        try{
+            lineChart("#average-freetime-line-chart", freetimeAverageMoods)
+            managerLineChart('freetime-line-chart', dataFreetime)
+        }catch(ex){
+            somethingFailed = true
+            $("#average-freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $('#freetime-line-chart').parent().hide();
+        }
+        try{
+            lineChart("#average-marketplace-line-chart", marketplaceAverageMoods)
+            managerLineChart('marketplace-line-chart', dataMarketPlace)
+        }catch(ex){
+            somethingFailed = true
+            $("#average-marketplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $('#marketplace-line-chart').parent().hide();
+        }
 
-        managerLineChart('freetime-line-chart', dataFreetime)
-        managerLineChart('marketplace-line-chart', dataMarketPlace)
-        lineChart("#average-freetime-line-chart", freetimeAverageMoods)
-        lineChart("#average-marketplace-line-chart", marketplaceAverageMoods)
+        if(somethingFailed){
+            $('.percentage-evaluation').hide()
+        }
 
         // barChart("#freetime-bar-chart", dataFreetime)
         // barChart("#marketplace-bar-chart", dataMarketPlace)

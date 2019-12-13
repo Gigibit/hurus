@@ -96,7 +96,7 @@ msgstr "surprised"
 
 
 msgid "CHEERFUL"
-msgstr "cheerful"
+msgstr "Cheerful"
 
 
 msgid "CONFIDENT"
@@ -106,6 +106,8 @@ msgstr "confident"
 msgid "RELIEVED"
 msgstr "relieved"
 
+msgid "SHOW_MORE"
+msgstr "See more..."
 
 msgid "IN_LOVE"
 msgstr "in love"
@@ -194,10 +196,15 @@ msgstr "guilty"
 msgid "DISCOURAGED"
 msgstr "discoraged"
 
+msgid "YOUR_MOOD"
+msgstr "Your mood"
 
 msgid "YOUR_TOUGHTS"
 msgstr "Your toughts (visible only to you)"
 
+
+msgid "YOUR_TOUGHT"
+msgstr "Your tought"
 
 msgid "WRITE_TO_REMEMBER"
 msgstr "Write down something you want to remember…"
@@ -321,8 +328,6 @@ msgid "Meeting_with_management"
 msgstr "Meeting with management"
 
 
-
-
 msgid "Meeting_with_team"
 msgstr "Meeting with team"
 
@@ -394,6 +399,12 @@ msgstr "New Courses"
 
 msgid "NEW"
 msgstr "New"
+
+msgid "MOTIVATIONAL_QUOTE"
+msgstr "Motivational quote"
+
+msgid "ACTIVITIES"
+msgstr "Activities"
 
 
 msgid "PREVIOUS_COURSES"

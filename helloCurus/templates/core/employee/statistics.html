@@ -99,7 +99,8 @@
     var moods = {
         {% for mood in moods %}
         {{mood.value}} : {
-            'icon'  : "{% static mood.icon.name %}"
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
         },
         {% endfor %}
     }
@@ -110,6 +111,7 @@
         "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
         "mood": "{{tought.mood.value}}",
         "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
         "activities": {{tought.activities|safe}},
 
         },
@@ -121,6 +123,7 @@
             "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
             "mood": "{{tought.mood.value}}",
             "name": "{{tought.mood.i18n_key}}",
+            'mood_color' : '{{tought.mood.color_code}}',
             "activities": {{tought.activities|safe}},
 
         },
@@ -148,8 +151,16 @@
  
     
     $(document).ready(function(){
-        lineChart("#freetime-line-chart", dataFreetime)
-        lineChart("#marketplace-line-chart", dataMarketPlace)
+        try{
+            lineChart("#freetime-line-chart", dataFreetime)
+        }catch(ex){
+            $("#freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
+        }
+        try{
+            lineChart("#marketplace-line-chart", dataMarketPlace)
+        }catch(ex){
+            $("#marketplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+        }
         barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart')
         barChart("#marketplace-bar-chart", dataMarketPlace,'marketplace-radar-chart')
         configRadarChart('freetime-radar-chart',    7, dataFreetime)

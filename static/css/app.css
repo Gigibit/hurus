@@ -14,6 +14,7 @@ body{
 
 .navbar{
   background-image: url(../img/website_assets/header_menu.jpg);
+  z-index: 99999999999;
 }
 .nav-link{
   color: #555;

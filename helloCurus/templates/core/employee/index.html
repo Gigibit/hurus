@@ -5,7 +5,8 @@
 
 
 {% block head_css_section %}
- <link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
@@ -16,133 +17,148 @@
 {% block content %}
 
 <div class="container">
+  <div class="row">
     <div class="calendar">
-  <div class="calendar__month">
-    <div class="cal-month__previous"><</div>
-    <div class="cal-month__current"></div>
-    <div class="cal-month__next">></div>
+      <div class="calendar__month">
+        <div class="cal-month__previous"><</div>
+        <div class="cal-month__current"></div>
+        <div class="cal-month__next">></div>
+      </div>
+      <div class="calendar__head">
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+      </div>
+      <div class="calendar__body">
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="calendar__head">
-    <div class="cal-head__day"></div>
-    <div class="cal-head__day"></div>
-    <div class="cal-head__day"></div>
-    <div class="cal-head__day"></div>
-    <div class="cal-head__day"></div>
-    <div class="cal-head__day"></div>
-    <div class="cal-head__day"></div>
+  
+  <div class="row">
+    <h1>{% trans 'NEW_COURSES' %}</h1>
+    {% for course in courses %}
+        <div class="col-md-6">
+            <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
+                <div class="course-title col-md-10">{{course.title}}</div>
+                <div class="seen-icon col-md-2">
+                    <span class="course-seen glyphicon glyphicon-play"></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
   </div>
-  <div class="calendar__body">
-    <div class="cal-body__week">
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-    </div>
-    <div class="cal-body__week">
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-    </div>
-    <div class="cal-body__week">
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-    </div>
-    <div class="cal-body__week">
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-    </div>
-    <div class="cal-body__week">
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-    </div>
-    <div class="cal-body__week">
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
-      <div class="cal-body__day"></div>
+  <div class="col-md-12 show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
+<!-- End Container -->
+
+
+
+
+<div class="modal fade" id="tought-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-full" role="document">
+    <div class="modal-content">
+      <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="modal-body p-4" id="result">
+        <div class="row">
+          <div class="col-md-2 section-title"><h1>{% trans 'FREETIME'%}</h1></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'YOUR_MOOD'%}</div>
+          <div id="tought-modal-mood-freetime" class="col-md-10"></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'YOUR_TOUGHT'%}</div>
+          <div id="tought-modal-tought-freetime" class="col-md-10"></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'ACTIVITIES'%}</div>
+          <div id="tought-modal-activities-freetime" class="row col-md-10"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 section-title"><h1>{% trans 'MARKETPLACE'%}</h1></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'YOUR_MOOD'%}</div>
+          <div id="tought-modal-mood-marketplace" class="col-md-10"></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'YOUR_TOUGHT'%}</div>
+          <div id="tought-modal-tought-marketplace" class="col-md-10"></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'ACTIVITIES'%}</div>
+          <div id="tought-modal-activities-marketplace" class="row col-md-10"></div>
+        </div>
+        <div class="row info-row">
+          <div class="col-md-2">{% trans 'MOTIVATIONAL_QUOTE'%}</div>
+          <div id="tought-modal-motivational-quote" class="col-md-10"></div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
+      </div>
     </div>
   </div>
 </div>
-
-  </div> <!-- End Container -->
-
-
-
-
-
-  <div class="modal fade" id="tought-modal" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-full" role="document">
-          <div class="modal-content">
-              <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-              </button>
-              <div class="modal-body p-4" id="result">
-                <div class="row">
-                  <div class="col-md-2 section-title"><h1>{% trans 'FREETIME'%}</h1></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'YOUR_MOOD'%}</div>
-                  <div id="tought-modal-mood-freetime" class="col-md-10"></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'YOUR_TOUGHT'%}</div>
-                  <div id="tought-modal-tought-freetime" class="col-md-10"></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'ACTIVITIES'%}</div>
-                  <div id="tought-modal-activities-freetime" class="row col-md-10"></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-2 section-title"><h1>{% trans 'MARKETPLACE'%}</h1></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'YOUR_MOOD'%}</div>
-                  <div id="tought-modal-mood-marketplace" class="col-md-10"></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'YOUR_TOUGHT'%}</div>
-                  <div id="tought-modal-tought-marketplace" class="col-md-10"></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'ACTIVITIES'%}</div>
-                  <div id="tought-modal-activities-marketplace" class="row col-md-10"></div>
-                </div>
-                <div class="row info-row">
-                  <div class="col-md-2">{% trans 'MOTIVATIONAL_QUOTE'%}</div>
-                  <div id="tought-modal-motivational-quote" class="col-md-10"></div>
-                </div>
-                
-              </div>
-              <div class="modal-footer">
-                  <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
-              </div>
-          </div>
-      </div>
-  </div>
 
 {% endblock %}
