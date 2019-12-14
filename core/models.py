@@ -197,6 +197,17 @@ class Activity(models.Model):
     team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.CASCADE)    
 
 
+    # @property
+    # def balance(self):
+    #     if self._balance:
+    #        return self._balance
+    #     return 0.15 * 50
+
+    # @balance.setter
+    # def balance(self, value):
+    #     self._balance = value
+
+        
 
 class Employee(UserProfile):
     team                 = models.ForeignKey(Team, null=True, on_delete=models.SET_NULL, related_name='employees')

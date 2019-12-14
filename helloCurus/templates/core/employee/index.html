@@ -5,8 +5,9 @@
 
 
 {% block head_css_section %}
-<link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
 <link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/statistics.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
@@ -104,8 +105,19 @@
             </div>
         </div>
         {% endfor %}
+        <div class="col-md-12 show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
   </div>
-  <div class="col-md-12 show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
+
+  <div class="row">
+    <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>  
+    <div class="col-md-4">
+      <div id="freetime-bar-chart" class="chart"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="freetime-line-chart" class="chart"></div>
+    </div>
+    <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div>
+  </div>
 <!-- End Container -->
 
 
@@ -160,5 +172,66 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">    
+    var moods = {
+        {% for mood in moods %}
+        {{mood.value}} : {
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
+        },
+        {% endfor %}
+    }
+    
+    var dataFreetime = [
+    {% for tought in toughts%}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
 
+        },
+        {% endfor %}
+    ]
+    var dataMarketPlace = [
+        {% for tought in marketplace_toughts%}
+        {
+            "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
+            "mood": "{{tought.mood.value}}",
+            "name": "{{tought.mood.i18n_key}}",
+            'mood_color' : '{{tought.mood.color_code}}',
+            "activities": {{tought.activities|safe}},
+
+        },
+        {% endfor %}
+    ]
+    
+    
+    
+    dataFreetime.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    dataMarketPlace.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    
+    
+
+</script>
+<script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
+<script type="text/javascript">
+ 
+  $(document).ready(function(){
+      try{
+          lineChart("#freetime-line-chart", dataFreetime, 200 ,200)
+          $('.path-image').hide(200)
+      }catch(ex){
+          $("#freetime-line-chart").hide();
+      }
+      barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart', 200, 200)
+  })
+  </script>
 {% endblock %}

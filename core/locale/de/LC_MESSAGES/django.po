@@ -422,3 +422,6 @@ msgstr "Select a day before today"
 
 msgid "MISSING_FIELDS"
 msgstr "Please, fill every field"
+
+msgid "COMPLETE_STATISTICS"
+msgstr "Complete Statistics"

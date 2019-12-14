@@ -71,7 +71,10 @@
   height: 1px;
   background-color: #90CAF9;
 }
-
+.chart{
+  padding:0;
+  height: 100%;
+}
 .cal-body__day {
   color: #e1e1e1;
   line-height: 50px;

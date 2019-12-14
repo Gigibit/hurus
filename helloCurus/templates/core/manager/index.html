@@ -5,6 +5,8 @@
 
 
 {% block head_css_section %}
+<link href="{% static 'css/statistics.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
 <link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
 {% endblock head_css_section %}
 
@@ -92,8 +94,154 @@
       </div>
     </div>
   </div>
-  
+  <div class="row">
+    <h1>{% trans 'NEW_COURSES' %}</h1>
+    {% for course in courses %}
+        <div class="col-md-6">
+            <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
+                <div class="course-title col-md-10">{{course.title}}</div>
+                <div class="seen-icon col-md-2">
+                    <span class="course-seen glyphicon glyphicon-play"></span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col-md-12 show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
+  </div>
+
+  <div class="row">
+    <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>  
+    <div class="col-md-4">
+      <canvas id="freetime-line-chart" class="chart"></canvas>
+    </div>
+    <div class="col-md-4">
+      <canvas id="marketplace-radar-chart1" ></canvas>
+    </div>
+    <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div>
+  </div>
 </div> <!-- End Container -->
 
+
+
+<script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var moods = {
+            {% for mood in moods %}
+            {{mood.value}} : {
+                'icon'  : "{% static mood.icon.name %}"
+            },
+            {% endfor %}
+        }
+        
+    var dates = []    
+    var freetimeAverageMoods= []
+    var marketplaceAverageMoods= []
+    var dataMarketPlace = {}
+    var dataFreetime = {}
+    {% for average in average_moods%}
+        {% for mood,value in average.moods.freetime_moods_count.items %}
+            if(!dataFreetime[{{mood}}])
+            dataFreetime[{{mood}}]={
+                    backgroundColor : randomRgba(),
+                    data: []
+            } 
+            dataFreetime[{{mood}}].data.push({{value}})
+        {% endfor %}
+
+        {% for mood,value in average.moods.marketplace_moods_count.items %}
+            if(!dataMarketPlace[{{mood}}])
+            dataMarketPlace[{{mood}}]={
+                    backgroundColor : randomRgba(),
+                    data: []
+                } 
+            dataMarketPlace[{{mood}}].data.push({{value}})
+        {% endfor %}
+        dates.push('{{average.date|date:"d-m-Y" }}')
+
+        freetimeAverageMoods.push({
+             "date": '{{average.date|date:"d-m-Y"}}', //H:i
+             "mood": '{{average.average_mood_freetime|stringformat:"f"}}'
+            
+            })
+
+        marketplaceAverageMoods.push({
+             "date": '{{average.date|date:"d-m-Y"}}', //H:i
+             "mood": '{{average.average_mood_marketplace|stringformat:"f"}}' 
+            })
+
+    {% endfor %}
+
+    freetimeAverageMoods.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    marketplaceAverageMoods.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    var moods = {
+        {% for mood in moods %}
+        {{mood.value}} : {
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
+
+        },
+        {% endfor %}
+    }
+    
+    var chartDataFreetime = [
+    {% for a in podium_moods_freetime_activities%}
+        {
+        "mood": "{{a.mood_value}}",
+        "name": "{{a.mood_i18n_key}}",
+        "activities": {{a.activities|safe}},
+        },
+        {% endfor %}
+    ]
+    var chartDataMarketPlace = [
+        {% for a in podium_moods_marketplace_activities%}
+        {
+            "mood": "{{a.mood_value}}",
+            "name": "{{a.mood_i18n_key}}",
+            "activities": {{a.activities|safe}},
+
+        },
+
+
+
+        {% endfor %}
+    ]
+
+    
+    
+</script>
+<script type="text/javascript">
+ 
+  $(document).ready(function(){
+    var somethingFailed = false
+        try{
+            lineChart("#average-freetime-line-chart", freetimeAverageMoods)
+            managerLineChart('freetime-line-chart', dataFreetime)
+        }catch(ex){
+            somethingFailed = true
+            $("#average-freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $('#freetime-line-chart').parent().hide();
+        }
+        try{
+            lineChart("#average-marketplace-line-chart", marketplaceAverageMoods)
+            managerLineChart('marketplace-line-chart', dataMarketPlace)
+        }catch(ex){
+            somethingFailed = true
+            $("#average-marketplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $('#marketplace-line-chart').parent().hide();
+        }
+        {% for a in podium_moods_freetime_activities %}
+            $('#freetime-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
+            configRadarChart('freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
+        {% endfor %}
+
+  })
+  </script>
 
 {% endblock %}

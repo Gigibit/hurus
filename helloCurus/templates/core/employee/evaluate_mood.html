@@ -246,12 +246,12 @@
             $('#add-activity-modal').modal('toggle');
             $.post('/add_activity/', {
               'type': activityType,
-              'src' : activitySrc,
+              'src' : activitySrc.replace('/static',''),
               'name' : activityName
             },function(response){
                 $('#new-activity-name').val('')
                 var id = response['id']
-                var src = response['icon']
+                var src = "{% static '' %}" +response['icon']
                 var value = response['name']
                 $('#activities-container').prepend(
                   '<div class="' + (activityType == 'MP' ? 'marketplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +

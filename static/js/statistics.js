@@ -1,10 +1,11 @@
 var radarCharts = {};
-const MIN_DAYS_FOR_CHART = 200;
+const MIN_DAYS_FOR_CHART = 14;
+const DEFAULT_SAFE_CHART_OFFSET = 18;
 
 function count(obj) { return Object.keys(obj).length; }
 
 
-function barChart(chartDiv, data, relatedChart) {
+function barChart(chartDiv, data, relatedChart, width, height) {
 
 	buff = []
 
@@ -27,8 +28,8 @@ function barChart(chartDiv, data, relatedChart) {
 			bottom: 30,
 			left: 40
 		},
-		width = window.innerWidth / 2.5, // Use the window's width
-		height = window.innerHeight / 2.5; // Use the window's height
+		width = width? width : window.innerWidth / 2.5, // Use the window's width
+		height = height? height : window.innerHeight / 2.5; // Use the window's height
 
 	// set the ranges
 	var x = d3.scaleBand()
@@ -46,7 +47,7 @@ function barChart(chartDiv, data, relatedChart) {
 	// moves the 'group' element to the top left margin
 	var svg = d3.select(chartDiv).append("svg")
 		.attr("width", width + margin.left + margin.right)
-		.attr("height", '400px')
+		.attr("height", height ? height + margin.top + margin.right + DEFAULT_SAFE_CHART_OFFSET : '400px')
 		.append("g")
 		.attr("transform",
 			"translate(" + margin.left + "," + margin.top + ")");
@@ -114,19 +115,19 @@ function barChart(chartDiv, data, relatedChart) {
 }
 
 
-function lineChart(chartDiv, data) {
+function lineChart(chartDiv, data, width, height) {
 	if(diffBetweenDateInDays(data[0].date, data[data.length-1].date) < MIN_DAYS_FOR_CHART)
 		throw new Exception('data evaluation unavailable')
-	
+	console.log(width,height, 'was')
 	var margin = {
 			top: 50,
 			right: 50,
 			bottom: 50,
 			left: 50
 		},
-		width = window.innerWidth / 2.5 // Use the window's width
+		width = width? width :window.innerWidth / 2.5 // Use the window's width
 		,
-		height = window.innerHeight / 2.5; // Use the window's height
+		height = height? height: window.innerHeight / 2.5; // Use the window's height
 
 
 	// 1. Add the SVG to the page and employ #2
