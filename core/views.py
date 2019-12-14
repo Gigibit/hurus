@@ -14,7 +14,7 @@ from django.db.models import Avg
 import datetime
 from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
-
+from django.utils import translation
 flat = lambda l: [item for sublist in l for item in sublist]
 MAX_NUMBER_DISPLAYED = 6
 
@@ -48,7 +48,7 @@ key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can on
 
 
 def statistics_manager_for_day(request):
-    manager = get_object_or_404(Manager, email=request.user.email)
+    manager = request.user
     moods = Mood.objects.all()
     date_to_evaulate = datetime.date(year=int(request.GET['year']), 
                                               month=int(request.GET['month']), 
@@ -122,7 +122,11 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     activity_count_freetime = []
     for mood in moods:
         #max number of activity displayed
-        activities = [activity for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+        activities = [ 
+            {   'mood': activity['name'],
+                'i18n_key' : translation.gettext( activity['18n_key'] ) if activity.get('18n_key', None) else activity['name'],
+                'mood' : activity['mood']
+            } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
         if len(activities) > 0 : 
             activity_count_freetime.append({
                 'mood_value' : mood.value,
@@ -147,7 +151,12 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     activity_count_marketplace = []
     for mood in moods:
         #max number of activity displayed
-        activities = [ activity for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+        activities = [ 
+        {   'name': activity['name'],
+            'i18n_key' : translation.gettext( activity['18n_key'] ) if activity.get('18n_key', None) else activity['name'],
+            'mood' : activity['mood']
+        } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+        print(activities)
         if len(activities) > 0:
             activity_count_marketplace.append({
                 'mood_value': mood.value,
@@ -221,7 +230,7 @@ def calculate_average_mood_for_day(date, toughts, for_type):
 
 
 def e_learning_manager(request, manager):
-    courses = list(Course.objects.all())
+    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -264,7 +273,7 @@ def e_learning_manager(request, manager):
 
 
 def home_employee(request, employee):
-    courses = list(Course.objects.all())
+    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -272,9 +281,12 @@ def home_employee(request, employee):
         request.user.course_to_see = None
         request.user.last_seen_course_date = None
         request.user.save()
-
-
+    toughts = [ tought.to_public_dict() for tought in Tought.objects.filter(employee = employee).order_by('created_at') ]
+    moods = Mood.objects.all()
     return render(request, 'core/employee/index.html', {
+        'moods' : moods,
+        'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
+        'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts),
         'courses': not_seen_courses[:2],
     })
 
@@ -293,7 +305,7 @@ def statistics_employee(request, employee):
 
 
 def e_learning_employee(request, employee):
-    courses = list(Course.objects.all())
+    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -492,7 +504,7 @@ def statistics(request):
 #TODO: uncomment right query
 def happy_corus(request):
     #curus = Curus.objects.get(language=request.user.preferred_language)
-    curus = Curus.objects.get(language= ENGLISH)
+    curus = Curus.objects.get(language__iexact= translation.get_language())
     return render(request, 'core/employee/happy_curus.html', {
         'curus': curus,
     })
@@ -509,7 +521,7 @@ def e_learning(request):
 
 
 def home_manager(request, manager):
-    courses = list(Course.objects.all())
+    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -517,14 +529,23 @@ def home_manager(request, manager):
         request.user.course_to_see = None
         request.user.last_seen_course_date = None
         request.user.save()
-    print(not_seen_courses)
-
-    return render(request, 'core/employee/index.html', {
+   
+    moods = Mood.objects.all()
+    mood_max_value = max(mood.value for mood in moods )
+    analysis = calculate_average_moods(manager, mood_max_value=mood_max_value)
+    average_moods = analysis['average_moods']
+    return render(request, 'core/manager/index.html', {
+        'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
+        'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
+        'average_moods': average_moods,
+        'podium_moods_freetime': analysis['podium_moods_freetime'],
+        'podium_moods_marketplace': analysis['podium_moods_marketplace'],
+        'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
+        'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
+        'moods' : moods,
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_marketplace'])+1))),
         'courses': not_seen_courses[:2],
     })
-
-
-
 # Login engine
 def engine(request):
     return JsonResponse({

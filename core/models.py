@@ -280,8 +280,7 @@ class Tought(models.Model):
         activities = []
         for activity in self.activities.all(): 
             activities.append({
-                'i18n_key' : activity.i18n_key,
-                'text': _(activity.i18n_key) if activity.i18n_key else activity.name,
+                'i18n_key' : _(activity.i18n_key) if activity.i18n_key else activity.name,
                 'name' : activity.name,
                 'icon' : activity.icon.name
             })
