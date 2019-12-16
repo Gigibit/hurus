@@ -6,6 +6,8 @@
 
 {% block head_css_section %}
 <link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/statistics.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
@@ -14,6 +16,7 @@
   var manager = true;
 </script>
 <script src="{% static 'js/home.js' %}?{% now "U" %}" type="text/javascript"></script>
+<script src="{% static 'js/statistics.js' %}?{% now "U" %}" type="text/javascript"></script>
 {% endblock footer_javascript_section %}
 
 {% block content %}
@@ -92,8 +95,85 @@
       </div>
     </div>
   </div>
+  <div class="row">
+      <h1>{% trans 'NEW_COURSES' %}</h1>
+      {% for course in courses %}
+          <div class="col-md-6">
+              <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
+                  <div class="course-title col-md-10">{{course.title}}</div>
+                  <div class="seen-icon col-md-2">
+                      <span class="course-seen glyphicon glyphicon-play"></span>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+    </div>
+    <div class="col-md-12 show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
+
+
+  <div class="row overview-charts">
+    <div class="col-md-4">
+        <div class="chart">
+          <div id="first-mood-counter-chart-legend"></div>
+          <canvas id="first-mood-counter-chart" ></canvas>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="chart">
+            <div id="second-mood-counter-chart-legend"></div>
+            <canvas id="second-mood-counter-chart" ></canvas>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-12 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div>
   
 </div> <!-- End Container -->
 
+
+
+<div class="modal fade" id="tought-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full" role="document">
+      <div class="modal-content">
+        
+      </div>
+      <div class="modal-footer">
+        <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+  $.ajax({
+          url : '/manager_tought_moods_count/',
+          method: 'GET',
+          success:function(response){
+            let ftMoods = Object.keys(response['FT'])
+            let mpMoods = Object.keys(response['MP'])
+            
+            doughnutMoodCountChart('first-mood-counter-chart', response['FT'][ftMoods[0]])
+            doughnutMoodCountChart('second-mood-counter-chart', response['MP'][mpMoods[1]])
+            
+
+          }
+        })
+</script>
 
 {% endblock %}

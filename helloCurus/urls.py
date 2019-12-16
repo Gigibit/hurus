@@ -23,6 +23,8 @@ urlpatterns = [
     path('tought_for_day/', core.tought_for_day),
     path('statistics_for_day/', core.statistics_for_day),
     path('statistics_manager_for_day/', core.statistics_manager_for_day),
+    path('manager_tought_moods_count_in_day/', core.manager_tought_moods_count_in_day),
+    path('manager_tought_moods_count/', core.manager_tought_moods_count_overview),
     path('statistics/', core.statistics),
     path('courses/', core.e_learning),
     path('curus/', core.happy_corus),

@@ -1,5 +1,5 @@
 var radarCharts = {};
-const MIN_DAYS_FOR_CHART = 200;
+const MIN_DAYS_FOR_CHART = 14;
 
 function count(obj) { return Object.keys(obj).length; }
 
@@ -447,7 +447,6 @@ function diffBetweenDateInDays(date1, date2){
 
 function configRadarChart(chartDiv, selectedMood, data) {
     var context = document.getElementById(chartDiv).getContext('2d');
-    var relatedContext = document.getElementById('related-' + chartDiv).getContext('2d');
 
 	let labels = getActivities(selectedMood, data)
     let datasetData = getDataForActivities(labels, selectedMood, data)
@@ -493,6 +492,13 @@ function configRadarChart(chartDiv, selectedMood, data) {
 		}
     });
 
+}
+
+function activityRadarChart(chartDiv, selectedMood, data){
+	var relatedContext = document.getElementById(chartDiv).getContext('2d');
+
+	let labels = getActivities(selectedMood, data)
+    let datasetData = getDataForActivities(labels, selectedMood, data)
     var opt = {
         legend: {
             display: false
@@ -524,7 +530,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
         maintainAspectRatio: false,
 
     };
-    radarCharts['related-' + chartDiv] = new Chart(relatedContext, {
+	radarCharts[chartDiv] = new Chart(relatedContext, {
         type: 'horizontalBar',
         data: {
           labels: labels,
@@ -574,15 +580,10 @@ let backgroundColors = []
 function doughnutChart(div,toughts){
         let doughnutDataSet = []
 		let moodsLabels = []
-		let moodssssss = []
         Object.keys(moods).forEach(function(mood,i){
 			moodsLabels.push(mood)
-
 			doughnutDataSet[i] = toughts.filter((tought,i) => tought.mood == mood ).length 
-			moodssssss.push({
-				'data':doughnutDataSet[i],
-				'mood' : mood
-			})
+
             if(!backgroundColors[i] ) //not configured yet
             {
 
@@ -621,6 +622,44 @@ function doughnutChart(div,toughts){
             }
         });
     }
+
+	function doughnutMoodCountChart(div,mood){
+        let doughnutDataSet = []
+		doughnutDataSet = [mood.value] 
+
+		let backgroundColors = [mood.color];
+		$('#'+div+'-legend').append(
+			'<div class="legend-mood col-md-2">' + 
+				'<div class="row">' + 
+					'<div class="legend-mood-img-wrp col-md-2">'+
+						'<img style="height:20px; width:20px;" class="legend-mood-img" src="/static/' + mood.icon + '"/>' + 
+					'</div>'+
+				'</div>' + 
+			'</div>'
+		)
+
+        new Chart(document.getElementById(div).getContext('2d'), {
+            type: "doughnut",
+            data:{ 
+                  datasets:[{
+                          data:doughnutDataSet,
+                          backgroundColor: backgroundColors
+                        }]
+            },
+            options:{
+                rotation: 1 * Math.PI,
+                circumference: 1 * Math.PI,
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    enabled: false
+               }
+            }
+        });
+    }
+
+
 
     function randomRgba() {
         var o = Math.round, r = Math.random, s = 255;

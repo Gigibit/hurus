@@ -38,7 +38,7 @@ class Calendar {
             computeDate(this.selected.date(), this.selected.month(), this.selected.year())
           }
           else{
-            toast(i18n['SELECT_DATE_BEFORE_TODAY'])
+            snackbar(i18n['SELECT_DATE_BEFORE_TODAY'])
           }
           this.update()
         })
@@ -149,7 +149,6 @@ function computeDate(day, month, year){
                 'year='  + year,
                 method: 'GET',
                 success:function(response){
-                    console.log(response)
                         let freetime = response['toughts_for_day'][0]
                         let marketplace = response['toughts_for_day'][1]
 
@@ -198,11 +197,37 @@ function computeDate(day, month, year){
                         });
                     }
                 });
-                else{
-                    $('#view-statistics').show(500)
-                    $('#view-statistics').click(function(event){
-                        location.href = '/statistics_manager_for_day?day='+day + '&' +'month=' + (month + 1) + '&' +'year='  + year
-                    });
-                } 
-
+                else {
+                  $.ajax({
+                    url : '/manager_tought_moods_count_in_day/?day='+ day + '&' +
+                    'month=' + ( month + 1 ) + '&' +
+                    'year='  + year,
+                    method: 'GET',
+                    success:function(response){
+                      let ftMoods = Object.keys(response['FT'])
+                      let mpMoods = Object.keys(response['MP'])
+                      console.log(response)
+                      $('#tought-modal .modal-content').empty()
+                      ftMoods.forEach((value,i)=>{
+                        $('#tought-modal .modal-content').append(
+                          '<div class="chart">'+
+                            '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
+                            '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
+                          '</div>'
+                          )
+                        doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value])
+                      })
+                      mpMoods.forEach((value,i)=>{
+                        $('#tought-modal .modal-content').append(
+                          '<div class="chart">'+
+                            '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
+                            '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
+                          '</div>'
+                        )
+                        doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value])
+                      })
+                      $('#tought-modal').modal('toggle')
+                    }
+                  })
+                }
 }

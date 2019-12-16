@@ -217,10 +217,13 @@
         {% for a in podium_moods_freetime_activities %}
             $('#freetime-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
+            activityRadarChart('related-freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
+
         {% endfor %}
         {% for a in podium_moods_marketplace_activities %}
             $('#marketplace-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('marketplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataMarketPlace)
+            activityRadarChart('related-marketplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataMarketPlace)
         {% endfor %}
         // doughnutChart('doughnut-chart-freetime',dataFreetime)
         // doughnutChart('doughnut-chart-marketplace',dataMarketPlace)

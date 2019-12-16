@@ -164,7 +164,10 @@
         barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart')
         barChart("#marketplace-bar-chart", dataMarketPlace,'marketplace-radar-chart')
         configRadarChart('freetime-radar-chart',    7, dataFreetime)
+        activityRadarChart('related-freetime-radar-chart',    7, dataFreetime)
         configRadarChart('marketplace-radar-chart', 1, dataMarketPlace)
+        activityRadarChart('related-marketplace-radar-chart',    1, dataFreetime)
+
         doughnutChart('doughnut-chart-freetime',dataFreetime)
         doughnutChart('doughnut-chart-marketplace',dataMarketPlace)
     })

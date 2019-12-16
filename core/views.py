@@ -66,9 +66,48 @@ def statistics_manager_for_day(request):
         'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
         'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
         'moods' : moods,
-        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_marketplace'])+1)))
-
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1, len(analysis['activities_podium_count_marketplace'])+1)))
     })
+
+
+def manager_tought_moods_count_in_day(request) : return JsonResponse(tought_moods_count(request, True))
+def manager_tought_moods_count_overview(request) : return JsonResponse(tought_moods_count(request, False))
+
+
+def tought_moods_count(request, in_day):
+    if in_day:
+        toughts = Tought.objects.filter( 
+                                            employee__team__manager = request.user, 
+                                            created_at__year=int(request.GET['year']), 
+                                            created_at__month=int(request.GET['month']), 
+                                            created_at__day=int(request.GET['day'])
+                                        )
+    else:
+        toughts = Tought.objects.filter( employee__team__manager = request.user)
+
+    moods = {
+        FREETIME: {},
+        MARKET_PLACE : {}
+    }
+
+    for tought in toughts :
+
+        if tought.mood.value in [key for key,value in moods.items()]:
+            moods[tought.tought_type][tought.mood.value]['count'] += 1
+        else:
+            moods[tought.tought_type][tought.mood.value] = {
+                'value': tought.mood.value,
+                'color': tought.mood.color_code,
+                'count': 1,
+                'icon' : tought.mood.icon.name,
+                'name' : translation.gettext(tought.mood.i18n_key) 
+            } 
+    print(moods)
+    return moods
+
+
+
+
 
 def statistics_manager(request, manager):
     moods = Mood.objects.all()
@@ -156,7 +195,6 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
             'i18n_key' : translation.gettext( activity['18n_key'] ) if activity.get('18n_key', None) else activity['name'],
             'mood' : activity['mood']
         } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
-        print(activities)
         if len(activities) > 0:
             activity_count_marketplace.append({
                 'mood_value': mood.value,
