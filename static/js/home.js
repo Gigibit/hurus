@@ -207,19 +207,21 @@ function computeDate(day, month, year){
                       let ftMoods = Object.keys(response['FT'])
                       let mpMoods = Object.keys(response['MP'])
                       console.log(response)
-                      $('#tought-modal .modal-content').empty()
+                      $('#tought-modal #result').empty()
+                      $('#tought-modal #result').append('<div class="row" id="ft-row"></div>')
                       ftMoods.forEach((value,i)=>{
-                        $('#tought-modal .modal-content').append(
-                          '<div class="chart">'+
+                        $('#ft-row').append(
+                          '<div class="chart col-md-3">'+
                             '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
                             '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
                           '</div>'
                           )
                         doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value])
                       })
+                      $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
                       mpMoods.forEach((value,i)=>{
-                        $('#tought-modal .modal-content').append(
-                          '<div class="chart">'+
+                        $('#mp-row').append(
+                          '<div class="chart col-md-3">'+
                             '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
                             '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
                           '</div>'

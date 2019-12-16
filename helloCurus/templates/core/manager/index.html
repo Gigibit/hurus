@@ -134,7 +134,10 @@
 <div class="modal fade" id="tought-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-full" role="document">
       <div class="modal-content">
-        
+        <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <div class="modal-body p-4" id="result"></div>
       </div>
       <div class="modal-footer">
         <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
