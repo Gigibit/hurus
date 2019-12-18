@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from core import views as core
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('submit_survey/', core.submit_survey),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('curus/', core.happy_corus),
     path('courses/<int:id>', core.e_learning_detail),
     path('login_with_token/<str:token>', core.login_user_from_token),
+    path('website/', include('website.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('', core.home),
 ]

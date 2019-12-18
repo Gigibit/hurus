@@ -102,7 +102,6 @@ def tought_moods_count(request, in_day):
                 'icon' : tought.mood.icon.name,
                 'name' : translation.gettext(tought.mood.i18n_key) 
             } 
-    print(moods)
     return moods
 
 

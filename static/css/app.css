@@ -12,10 +12,14 @@ body{
   position: relative;
 }
 
-.navbar{
+#application-navbar{
   background-image: url(../img/website_assets/header_menu.jpg);
   z-index: 99999999999;
 }
+
+
+
+
 .nav-link{
   color: #555;
   font-weight: bold;
@@ -142,7 +146,7 @@ p{
   margin-bottom: 15px;
 }
 
-.navbar-brand{
+#application-brand{
   width: 100%;
   text-align: end;
 }
