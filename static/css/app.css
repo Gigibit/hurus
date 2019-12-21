@@ -35,6 +35,13 @@ img, icon, svg {
   user-select: none; /* Non-prefixed version, currently
   supported by Chrome, Opera and Firefox */
 }
+.col-centered{
+  float: none!important;
+  margin: 0 auto!important;
+}
+#page-wrapper{
+  margin-bottom: 100px
+}
 
 .modal{
   z-index: 999999999999999;

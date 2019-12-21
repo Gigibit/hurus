@@ -208,27 +208,37 @@ function computeDate(day, month, year){
                       let mpMoods = Object.keys(response['MP'])
                       console.log(response)
                       $('#tought-modal #result').empty()
+                      
+                      
                       $('#tought-modal #result').append('<div class="row" id="ft-row"></div>')
+                      $('#ft-row').append('<h1>'+ i18n['FREETIME_MOOD_COUNT'] + '</h1>')
                       ftMoods.forEach((value,i)=>{
                         $('#ft-row').append(
-                          '<div class="chart col-md-3">'+
+                          '<div class="chart col-md-3 col-centered">'+
                             '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
                             '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
                           '</div>'
                           )
                         doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value])
                       })
+                      
                       $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
+                      $('#mp-row').append('<h1>'+ i18n['MARKETPLACE_MOOD_COUNT'] + '</h1>')
                       mpMoods.forEach((value,i)=>{
                         $('#mp-row').append(
-                          '<div class="chart col-md-3">'+
+                          '<div class="chart col-md-3 col-centered">'+
                             '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
                             '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
                           '</div>'
                         )
                         doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value])
                       })
+                      
+                      
                       $('#tought-modal').modal('toggle')
+
+
+
                     }
                   })
                 }

@@ -394,8 +394,14 @@ msgstr "Counter: Free Time Mood"
 msgid "COUNTER_MARKETPLACE"
 msgstr "Counter: Workplace Mood"
 
+msgid "COMPLETE_STATISTICS"
+msgstr "Complete Statistics"
+
 msgid "NEW_COURSES"
 msgstr "New Courses"
+
+msgid "COURSES"
+msgstr "Courses"
 
 msgid "NEW"
 msgstr "New"

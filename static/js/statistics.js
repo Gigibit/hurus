@@ -625,7 +625,7 @@ function doughnutChart(div,toughts){
 
 	function doughnutMoodCountChart(div,mood){
         let doughnutDataSet = []
-		doughnutDataSet = [mood.value] 
+		doughnutDataSet = [mood.count] 
 
 		let backgroundColors = [mood.color];
 		$('#'+div+'-legend').append(
