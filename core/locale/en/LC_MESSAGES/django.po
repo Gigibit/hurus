@@ -428,3 +428,19 @@ msgstr "Select a day before today"
 
 msgid "MISSING_FIELDS"
 msgstr "Please, fill every field"
+
+
+msgid 'ABOUT_HAPPY_CURUS'
+msgstr 'About Happycurus'
+
+msgid 'HAPPY_CURUS_AND_THE_ENVIRONMENT'
+msgstr 'Happycurus and the Environment'
+
+msgid 'THE_CURUS_EFFECT'
+msgstr 'The Curus Effect'
+
+msgid 'CONTACT'
+msgstr 'Contact'
+
+msgid 'LANGUAGE'
+msgstr 'Language'

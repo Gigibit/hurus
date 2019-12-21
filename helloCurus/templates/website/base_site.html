@@ -1,0 +1,93 @@
+{% load static %}
+{% load i18n %}
+<html>
+<head>
+    <title>{% block title %}Home {% endblock title %} | CRM Easy</title>
+    {% block head_meta %}
+    {% block head_meta_charset %}
+    <meta http-equiv="Content-Type"
+    content="text/html; charset=utf-8" />
+    {% endblock head_meta_charset %}
+    {% block head_meta_contentlanguage %}
+    <meta http-equiv="Content-Language" value="en-US" />
+    {% endblock head_meta_contentlanguage %}
+    {% block head_meta_viewport %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock head_meta_viewport %}
+    {% endblock head_meta %}
+    {% block head_favicon %}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
+    {% endblock head_favicon %}
+    {% block head_css %}
+    <link href="{% static 'css/bootstrap.min.css' %}"
+    rel="stylesheet" media="screen">
+    <link href="{% static 'css/website.css' %}?v={% now "U" %}" rel="stylesheet" media="screen">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.20/angular-material.css" rel="stylesheet">
+    
+    {% block head_css_site %}
+    
+    {% endblock head_css_site %}
+    
+    {% block head_css_section %}{% endblock head_css_section %}
+    {% block head_css_page %}{% endblock head_css_page %}
+    {% endblock head_css %}
+    {% block footer_javascript %}
+    {% block footer_javascript_site %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script>window['None']  = null</script><!-- to avoid error from bknd -->
+    <script>window['True']  = true</script><!-- to avoid error from bknd -->
+    <script>window['False'] = false</script><!-- to avoid error from bknd -->
+    
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+        
+    {% endblock footer_javascript_site %}
+    {% block footer_javascript_section %}{% endblock footer_javascript_section %}
+    {% block footer_javascript_page %}{% endblock footer_javascript_page %}
+    {% endblock footer_javascript %}
+</head>
+
+
+<body>
+    <div id="page-wrapper" >
+        <!-- Navigation -->
+        <nav id="application-navbar" class="navbar navbar-expand-lg navbar-light static-top">
+            <div class="container">
+                <div class="wrapper">
+                    <a class="navbar-brand" href="#">
+                        <img width="94" height="50" src="{% static 'img/website_assets/logo-light.jpg' %}" alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive" style="border-bottom: 1px solid {% if request.user.is_manager %} steelblue {% else %} #ccc {% endif %};">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">{% trans 'ABOUT_HAPPY_CURUS' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/statistics">{% trans 'HAPPY_CURUS_AND_THE_ENVIRONMENT' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/courses">{% trans 'THE_CURUS_EFFECT' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/curus">{% trans 'CONTACT' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/curus">{% trans 'LANGUAGE' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+        <div id="snackbar"></div>
+    </div>
+</body>
+</html>

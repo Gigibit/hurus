@@ -1,0 +1,28 @@
+.navbar .wrapper{
+    display: flex;
+    border: 1px solid #222;
+}
+.section-container{
+    position: relative;
+
+}
+
+.home-image{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpeg);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.home-box{
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    background-color: steelblue;
+    transform: skewX(-10deg);
+    left: 0;
+    right: 0;
+    display: block;
+    bottom: -20%;
+    margin: 0 auto;
+    color: white;
+}
