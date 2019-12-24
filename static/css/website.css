@@ -4,25 +4,72 @@
 }
 .section-container{
     position: relative;
+    height: 100%;
+}
+.happy-curus-section-image{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_220836324.jpeg);
+    background-repeat: no-repeat;
+    background-size: auto 80%;
+    background-position: center;
+    height: 500px;    
 
+}
+
+.happy-environment-image{
+    height: 300px;
+}
+.happy-environment-image img{
+    height: 100%;
+    width: auto;
+}
+.home-about-box {
+    padding: 15px 40px 15px 15px;
+}
+#first-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_306317760.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+#second-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_132150794.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+#third-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/man-1209494_1920.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+#fourth-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_290521699.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
 }
 
 .home-image{
     background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpeg);
     background-size: cover;
-    height: 100%;
+    height: 80%;
     width: 100%;
 }
 .home-box{
     position: absolute;
-    width: 30%;
+    width: 50%;
     height: 30%;
     background-color: steelblue;
     transform: skewX(-10deg);
     left: 0;
     right: 0;
     display: block;
-    bottom: -20%;
+    bottom: 0;
     margin: 0 auto;
     color: white;
 }

@@ -1,45 +1,216 @@
 {% extends 'website/base_site.html' %}
+{% load static %}
 {% load i18n %}
 {% block content %}
-    <div class="main">
-        <div class="section-container">
-            <div class="home-image"></div>
-            <div class="home-box">
-                <h1>{% trans 'home_box_title' %}</h1>
-                <p> {% trans 'home_box_description' %}</p>
-            </div>
-        </div>
-        <div class="section-container">
-            <h1 class="section-title">{% trans 'ABOUT_HAPPY_CURUS' %}</h1>
-            <h4 class="section-subtitle">{% trans 'ABOUT_HAPPY_CURUS_DESCRIPTION' %}</h4>
-            <div class="row">
-                <div class="col-md-6 col-xs-12 about-wrapper-description">
-
-                </div>
-                <div class="col-md-6 xs-hidden">
-                    <img >
-                </div>
-                <div class="col-md-6 col-xs-12 about-wrapper-description">
-
-                </div>
-                <div class="col-md-6 xs-hidden">
-                    <img >
-                </div>
-                <div class="col-md-6 col-xs-12 about-wrapper-description">
-
-                </div>
-                <div class="col-md-6 xs-hidden">
-                    <img >
-                </div>
-                <div class="col-md-6 col-xs-12 about-wrapper-description">
-
-                </div>
-                <div class="col-md-6 xs-hidden">
-                    <img >
-                </div>
-            </div>
-            
+<div class="main">
+    <div class="section-container header">
+        <div class="home-image"></div>
+        <div class="home-box">
+            <h1>{% trans 'home_box_title' %}</h1>
+            <p> {% trans 'home_box_description' %}</p>
         </div>
     </div>
-
+    <div class="section-container main-container">
+        <h1 class="section-title">{% trans 'ABOUT_HAPPY_CURUS' %}</h1>
+        <h4 class="section-subtitle">{% trans 'ABOUT_HAPPY_CURUS_DESCRIPTION' %}</h4>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="about-wrapper-description">
+                    BE AWARE of your team ‘s commitment.
+                    KEEP TRACK of how your team’s morale and
+                    engagement change over time. Find out about how
+                    tasks influence their mood. As a manager, you have
+                    exclusive access to statistics based on data that
+                    your employees provide.
+                </div>
+            </div>
+            <div  class="col-md-6 xs-hidden home-about-box">
+                <div id="first-about"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="about-wrapper-description">
+                    DISCOVER EXPLANATORY FACTORS in your
+                    employees’ morale: What type of tasks make them
+                    more satisfied with their job? Are they happy at work
+                    or are they relieved when they leave the office? How
+                    does their attitude on the workplace compare to
+                    their attitude on their free time? Happycurus brings
+                    out cases of demotivated employees. Your business
+                    will benefit from knowing your personnel.
+                </div>
+            </div>
+            <div  class="col-md-6 xs-hidden home-about-box">
+                <div id="second-about">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="about-wrapper-description">
+                    COMMUNICATE to your team through the courses
+                    included in Happycurus. The articles address useful
+                    topics such as psychology, productivity,
+                    communication, career, efficiency, charisma and
+                    many others.
+                    Managers don’t have time to instruct employees on
+                    a personal level. Happycurus advises them for you.
+                </div>
+            </div>
+            <div  class="col-md-6 xs-hidden home-about-box">
+                <div id="third-about"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="about-wrapper-description">
+                    SUPPORT THE ENVIRONMENT! Happycurus
+                    devotes 50% of its profits to reforestation projects.
+                    Thanks to partnerships with solid organizations, we
+                    support concrete green actions, such as planting
+                    trees in areas of the world where they are most
+                    needed to support biodiversity and to fight
+                    deforestation. Using Happycurus will not only
+                    improve your company but also our planet. Find out
+                    more in the dedicated section below.
+                </div>
+            </div>
+            <div  class="col-md-6 xs-hidden home-about-box">
+                <div id="fourth-about" ></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title">The Curus Effect</h1>
+                <h4 class="section-subtitle">Know how your employees feel. Encourage team spirit, optimism and attachment to the company.</h4>
+                <div class="happy-curus-section-image"></div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 curus-effect-box">
+                        <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Keys.ico' %}">
+                        <p class="curus-effect-box-description">COLLECT KEY DATA
+                            ABOUT YOUR
+                            EMPLOYEES
+                        </p>
+                    </div>
+                    <div class="col-md-4 curus-effect-box">
+                        <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-System-analysis.ico' %}">
+                        <p class="curus-effect-box-description">KEEP TRACK OF THEIR
+                            COMMITMENT THANKS TO
+                            RELIABLE STATISTICS
+                        </p>
+                    </div>
+                    <div class="col-md-4 curus-effect-box">
+                        <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Global.ico' %}">
+                        <p class="curus-effect-box-description">IMPROVE YOUR TEAM’S
+                            ENGAGEMENT OVER
+                            TIME
+                        </p>
+                    </div>
+                    <div class="col-md-4 curus-effect-box">
+                        <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Like.ico' %}">
+                        <p class="curus-effect-box-description">CREATE A POSITIVE AND
+                            OPTIMISTIC ENVIRONMENT
+                            IN THE OFFICE
+                        </p>
+                    </div>
+                    <div class="col-md-4 curus-effect-box">
+                        <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Diamond.ico' %}">
+                        <p class="curus-effect-box-description">PROMOTE PERSONAL
+                            DEVELOPMENT AND
+                            MOTIVATION IN YOUR TEAM
+                        </p>
+                    </div>
+                    <div class="col-md-4 curus-effect-box">
+                        <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Dollar-rotation.ico' %}">
+                        <p class="curus-effect-box-description">INCREASE PRODUCTIVITY
+                            AND TEAM-WORK
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="button find-more-button">FIND OUT MORE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title">Happycurus and the Environment</h1>
+                <h4 class="section-subtitle">Happycurus is not interested in making big profits. We donate the 50% of our profits to the Planet.</h4>
+            </div>
+            <div class="row">
+                
+                <div class="col-md-6 happy-environment-description">Every single little green space on the
+                    Earth is the effect of the pulsing life that
+                    permeates our planet.
+                    Earth’s flourishing beauty is unique. Life
+                    in every conceivable shape and size
+                    pervades our Planet. And it also
+                    sustains it.
+                </div>
+                <div class="col-md-6 happy-environment-image">
+                    <img src="{% static 'img/website_assets/site/Immagini Sito/spring-276014_1920.jpg' %}">
+                </div>
+                <div class="col-md-6 happy-environment-image">
+                    <img src="{% static 'img/website_assets/site/Immagini Sito/desert-1803878_1920.jpg' %}">
+                </div>
+                <div class="col-md-6 happy-environment-description">Human activity is altering the balance of the Earth.
+                    Forests, Oceans, Wildlife population sizes, whole
+                    Ecosystems are suffering human’s neglectful
+                    presence.
+                    The effects of our actions are already having alarming
+                    consequences, such as global warming, melting
+                    glaciers and draining of drinking water supplies.
+                    This is putting many people’s lives and homes at
+                    serious risk.
+                </div>
+                
+                <div class="col-md-6 happy-environment-description">The Greenland and Antarctic ice sheets
+                    have decreased in mass. Data from
+                    NASA's Gravity Recovery and Climate
+                    Experiment show Greenland lost an
+                    average of 286 billion tons of ice per year
+                    between 1993 and 2016, while
+                    Antarctica lost about 127 billion tons of
+                    ice per year during the same time period.
+                </div>
+                <div class="col-md-6 happy-environment-image">
+                    <img src="{% static 'img/website_assets/site/Immagini Sito/glacier-2083379_1920.jpg' %}">
+                </div>
+                <div class="col-md-6 happy-environment-image">
+                    <img src="{% static 'img/website_assets/site/Immagini Sito/16.PNG' %}">
+                </div>
+                <div class="col-md-6 happy-environment-description">Trees benefit the Planet in plenty of ways: they reduce
+                    carbon dioxide, they produce oxygen, they reduce the
+                    level of ozone, they fight against sole erosion, create
+                    ecosystems, they give food and much more.
+                </div>
+                <div class="col-md-6 happy-environment-description">For Happycurus, care of the environment
+                    should not be a one-off commitment. We
+                    set it as part of our business model, and it
+                    will always be. If all existing companies took
+                    the same decision, the planet would be safe.
+                    Unfortunately, this is not yet the case, but
+                    there is one positive side: with Happycurus
+                    every single team can help!
+                </div>
+                <div class="col-md-6 happy-environment-image">
+                    <img src="{% static 'img/website_assets/site/Immagini Sito/seconda.PNG' %}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title">Our Motivation</h1>
+                <h4 class="section-subtitle">Team synergy for company efficiency.</h4>
+            </div>
+            <div class="row">
+            
+            </div>
+    </div>
+</div>
 {% endblock %}
