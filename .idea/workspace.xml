@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/helloCurus/templates/core/manager/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/core/manager/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helloCurus/templates/website/index2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/website_assets/site/Icone Sito Internet/Designbolts-Seo-Market-Analysis.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/website.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/locale/en/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/core/locale/en/LC_MESSAGES/django.po" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloCurus/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloCurus/templates/website/base_site.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/website/base_site.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/website.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/website.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/statistics.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+            <state relative-caret-position="221">
+              <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -52,14 +58,10 @@
     <option name="height" value="723" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -103,12 +105,18 @@
       <option name="project" value="LOCAL" />
       <updated>1573821600642</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="wip on website">
+      <created>1577190209319</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577190209319</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="723" extended-state="6" />
-    <editor active="true" />
+    <frame x="227" y="23" width="883" height="723" extended-state="0" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" weight="0.3295099" />
@@ -118,10 +126,10 @@
       <window_info id="Resources Explorer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="0" sideWeight="0.4980143" visible="true" weight="0.3280507" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="0" sideWeight="0.4965197" visible="true" weight="0.3280507" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.5019857" side_tool="true" visible="true" weight="0.3280507" />
+      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50348026" side_tool="true" visible="true" weight="0.3280507" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
@@ -130,13 +138,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'master' of https://github.com/Gigibit/hurus&#10;&#10;# Conflicts:&#10;#&#9;helloCurus/templates/base.html&#10;#&#9;helloCurus/templates/core/employee/statistics.html" />
     <MESSAGE value="wip on freetime and market charts" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip on freetime and market charts" />
+    <MESSAGE value="wip on website" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip on website" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/statistics.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+        <state relative-caret-position="221">
+          <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
         </state>
       </provider>
     </entry>

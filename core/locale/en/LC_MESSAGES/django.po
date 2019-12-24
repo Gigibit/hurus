@@ -455,6 +455,15 @@ msgid "ABOUT_HAPPY_CURUS_DESCRIPTION"
 msgstr "People don't leave jobs but unhealthy workplaces. Thanks to Happycurus you can:"
 
 
+msgid 'LANGUAGE'
+msgstr 'Language'
+
+
+msgid 'OUR_MOTIVATION'
+msgstr 'Our Motivation'
+
+msgid 'OUR_MOTIVATION_DESCRIPTION'
+msgstr 'Team synergy for company efficiency.'
 msgid "home_box_description"
 msgstr "How committed is your team? How satisfied are your\
         employees with their tasks? Are they happy on the workplace?\

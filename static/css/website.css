@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'rubik';
+    src: local('Rubik'),
+    url('../fonts/Rubik/Rubik-Light.ttf') format("truetype");
+  }
+  @font-face {
+    font-family: 'rubikBold';
+    src: local('RubikBold'),
+    url('../fonts/Rubik/Rubik-Bold.ttf') format("truetype");
+  }
+  *{
+    font-family: 'rubik';
+  }
+
 .navbar .wrapper{
     display: flex;
     border: 1px solid #222;
@@ -11,7 +25,7 @@
     background-repeat: no-repeat;
     background-size: auto 80%;
     background-position: center;
-    height: 500px;    
+    height: 500px;
 
 }
 
@@ -72,4 +86,233 @@
     bottom: 0;
     margin: 0 auto;
     color: white;
+}
+
+
+
+/*
+Form
+*/
+.form > div ~ div {
+    margin-top: 20px;
+}
+.form > div.is-hidden {
+    display: none;
+}
+.form-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font: 0.875rem/1.5 sans-serif;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*
+Contact Form
+*/
+.contact-form {
+    width: 100%;
+    max-width: 568px;
+    margin: 0 auto;
+
+    padding: 40px;
+    background-color: lightblue;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.125);
+    box-sizing: border-box;
+}
+.contact-form--loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.contact-form--sent > div ~ div {
+    margin: 0;
+}
+
+/*
+Button
+*/
+.button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 5px 10px;
+    font: 0.875rem/1.5 sans-serif;
+    background-color: #ddd;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.motivation-box{
+    position: relative;
+    height: 550px;
+}
+.motivation-info-wrapper{
+    position: absolute;
+    width: 60%;
+    height: 65%;
+    top: 45%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+}
+.motivation-info-content{
+    background: steelblue;
+    color: white;
+    padding: 10px 30px;
+    margin: 0 auto;
+
+}
+
+.motivation-img{
+    width: 100%;
+}
+.motivation-img-wrapper{
+    height: 350px;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.motivation-boxes{
+    margin-bottom: 50px;
+}
+
+.glance-section{
+    width: 100%;
+}
+.glance-section-container{
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    background-color: lightblue;
+    transform: skewX(-10deg);
+    left: 0;
+    right: 0;
+    display: block;
+    bottom: -20%;
+    margin: 0 auto;
+    color: #222;
+    padding: 0 100px;
+}
+.glance-row{
+    display: table;
+    width: 100%;
+}
+.glance-row .description{
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 16px;
+    font-family: rubikBold;
+    color: white;
+}
+.glance-row img{
+    width: 150px;
+    height: 150px;
+}
+
+.glance-section .section-title{
+    color: steelblue;
+    padding-top: 30px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 35px;
+}
+.glance-row .description.left{
+    text-align: left;
+}
+.glance-row .description.right{
+    text-align: right;
+}
+.contact-form-section{
+    text-align: center;
+}
+
+.padded-section{
+    margin-bottom: 50px;
+}
+
+.agreements{
+    display: table;
+}
+.agreements label{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.career-section{
+    position: relative;
+    background: url('/static/img/website_assets/site/Immagini sito/writing-1149962_1920.jpg');
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    padding: 50px;
+
+}
+
+.career-info{
+    position: absolute;
+    bottom: 30px;
+    color: white;
+}
+.career-info p, .career-info h1{
+    font-weight: bold;
+}
+.career-info p{
+    font-size: 24px;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+footer{
+    background: #142841;
+    padding-bottom: 50px;
+}
+
+footer img{
+    height: 100px;
+}
+.agreements-box{
+    padding: 15px;
+    color: white;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.motivation-title{
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.motivation-info-wrapper:hover .motivation-info-content{
+    height: 100%;
+}
+.motivation-info-content {
+    height: 15%;
+    overflow: hidden;
+    transition: height .3s ease-in;
+}
+.contact-form-section{
+    width: 100%;
+}
+
+.contact-form-header{
+    background: url('img/website_assets/site/Immagini sito\adventure-1807524.jpg');
+    height: 200px;
+    width: 100%;
 }

@@ -1,0 +1,213 @@
+            {% extends 'website/base_site.html' %}
+            {% load i18n %}
+            {% load static %}
+            {% block content %}
+            <div class="main">
+                <div class="section-container">
+                    <div class="home-image"></div>
+                    <div class="home-box">
+                        <h1>{% trans 'home_box_title' %}</h1>
+                        <p> {% trans 'home_box_description' %}</p>
+                    </div>
+                </div>
+                <div class="section-container">
+                    <h1 class="section-title">{% trans 'OUR_MOTIVATION' %}</h1>
+                    <h4 class="section-subtitle">{% trans 'OUR_MOTIVATION_DESCRIPTION' %}</h4>
+                    <div class="row">
+                        <div class="motivation-boxes row col-md-12 padded-section">
+                            <div class="col-md-4">
+                                <div class="motivation-box">
+                                    <div class="motivation-img-wrapper" data-aos="fade">
+                                        <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\woman.jpg' %}">
+                                    </div>
+                                    <div class="motivation-info-wrapper" data-aos="fade-left">
+                                        <div class="motivation-info-content">
+                                            <div class="motivation-title">WHY HAPPYCURUS</div>
+                                            <div class="motivation-description">
+                                                Most of the managers do
+                                                not have time to talk to
+                                                their employees on a
+                                                personal level.
+                                                Happycurus provides
+                                                awareness: its algorithm
+                                                brings out cases of
+                                                demotivated employees
+                                                and supports supervisors
+                                                to act effectively.
+                                                Engaged teams means
+                                                success for companies.
+                                                Happycurus also makes
+                                                your business CO2
+                                                neutral.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="motivation-box">
+                                    <div class="motivation-img-wrapper" data-aos="fade">
+                                        <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\innovation-561388.jpg' %}">
+                                    </div>
+                                    <div class="motivation-info-wrapper" data-aos="fade-up">
+                                        <div class="motivation-info-content">
+                                            <div class="motivation-title">WHAT IS HAPPYCURUS</div>
+                                            <div class="motivation-description">
+                                                Happycurus is a digital
+                                                solution that helps busy
+                                                managers to control the
+                                                engagement of their
+                                                workers and to maintain
+                                                high levels of
+                                                commitment on the
+                                                workplace.
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="motivation-box" >
+                                    <div class="motivation-img-wrapper" data-aos="fade">
+                                        <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\document-3268750.jpg' %}">
+                                    </div>
+                                    <div class="motivation-info-wrapper" data-aos="fade-right">
+                                        <div class="motivation-info-content">
+                                            
+                                            <div class="motivation-title">HOW HAPPYCURUS WORKS</div>
+                                            <div class="motivation-description">
+                                                Happycurus’ algorithm
+                                                produces innovative
+                                                statistics and graphs using
+                                                data provided by the
+                                                employees. The software
+                                                helps managers to know
+                                                their teams in depth and to
+                                                keep them engaged.
+                                                Happycurus provides with
+                                                daily motivational quotes
+                                                and with effective
+                                                motivational courses.
+                                                Happycurus donates 50% of
+                                                its net profits to finance
+                                                reforestation, helping
+                                                companies to reduce their
+                                                impact on the environment
+                                                in terms of CO2.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glance-section padded-section">
+                            <div class="glance-section-container">
+                                <h1 class="section-title">HAPPYCURUS AT A GLANCE</h1>
+                                <div class="glance-row"  data-aos="fade-up">
+                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Practice.ico' %}">
+                                    <div class="description">
+                                        Happycurus keeps managers updated about their teams.
+                                    </div>
+                                </div>
+                                <div class="glance-row" data-aos="fade-up">
+                                    <div class="description">
+                                        Happycurus supports engagement on the workplace.
+                                    </div>
+                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Places-Optimization.ico' %}">
+                                </div>
+                                <div class="glance-row" data-aos="fade-up">
+                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Goals.ico' %}">
+                                    <div class="description">
+                                        Happycurus promotes a goal-oriented mentality.
+                                    </div>
+                                </div>
+                                <div class="glance-row" data-aos="fade-up">
+                                    <div class="description">
+                                        Happycurus makes your business CO2 neutral.
+                                    </div>
+                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Market-Analysis.ico' %}">
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="contact-form-section padded-section">
+                            <div class="contact-form-container"> 
+                                <!-- img src="{% static 'img/website_assets/site/Immagini sito\adventure-1807524.jpg' %}" -->
+                                <div class="contact-form-header"
+                                data-aos="fade"
+                                data-aos-delay="50"
+                                data-aos-duration="1000"
+                                data-aos-easing="ease-in-out"
+                                data-aos-mirror="true"
+                                data-aos-once="false"
+                                data-aos-anchor-placement="top-center"></div>
+                                <form class="form contact-form" action="https://formspree.io/donnyburnside1@gmail.com" data-aos="fade-up">
+                                    <div>
+                                        <label class="form-label" for="name">FIRSTNAME AND LASTNAME</label>
+                                        <input class="form-control" id="name" name="name" type="text" required />
+                                    </div>
+                                    <div>
+                                        <label class="form-label" for="email">EMAIL</label>
+                                        <input class="form-control" id="email" name="email" type="email" required />
+                                    </div>
+                                    <div>
+                                        <input class="form-control" id="phonenumber" name="phonenumber" type="phonenumber" required />
+                                        <label class="form-label" for="phonenumber">PHONENUMBER</label>
+                                    </div>                                        
+                                    <!-- div>
+                                        <label class="form-label" for="subject">Subject</label>
+                                        <select class="form-control" id="subject" name="subject" required>
+                                            <option value="" selected disabled>Choose a Subject</option>
+                                            <optgroup label="Option Group">
+                                                <option value="subject-one">Subject One</option>
+                                                <option value="subject-two">Subject Two</option>
+                                                <option value="subject-three">Subject Three</option>
+                                            </optgroup>
+                                            <option value="subject-four">Subject Four</option>
+                                            <option value="subject-five">Subject Five</option>
+                                            <option value="subject-six">Subject Six</option>
+                                        </select>
+                                    </div-->
+                                    <div>
+                                        <label class="form-label" for="message">MESSAGE</label>
+                                        <textarea class="form-control" id="message" name="message" required></textarea>
+                                    </div>
+                                    <div class="agreements">
+                                        <input class="" id="subscribe" name="subscribe" type="checkbox" />
+                                        <label class="form-label" for="subscribe">I agree, that in order to process my submission, the provided information and related data are collected and stored electronically. I have read the privacy policy.</label>
+                                    </div>
+                                    <div>
+                                        <button class="button" type="reset">Clear</button>
+                                        <button class="button" type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="career-section padded-section">
+                            <div class="career-info">
+                                <h1>CAREER</h1>
+                                <p>Are you interested in working with us? We are looking forword to knowing you.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{% static 'img/website_assets/Happycurus-Invers.png' %}">
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{% static 'img/website_assets/Happycurus-Invers_Claim.png' %}">
+                    </div>
+                </div>
+                <div class="agreements-box col-md-6 col-centered">
+                    <div class="row">
+                        <div class="col-md-4">Legal</div>
+                        <div class="col-md-4">Terms</div>
+                        <div class="col-md-4">Privacy policy</div>
+                    </div>
+                </div>
+            </footer>
+            
+            {% endblock %}

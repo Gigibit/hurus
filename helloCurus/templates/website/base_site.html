@@ -16,7 +16,7 @@
     {% endblock head_meta_viewport %}
     {% endblock head_meta %}
     {% block head_favicon %}
-    <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
     {% endblock head_favicon %}
     {% block head_css %}
     <link href="{% static 'css/bootstrap.min.css' %}"
@@ -35,6 +35,7 @@
     {% endblock head_css %}
     {% block footer_javascript %}
     {% block footer_javascript_site %}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
     <script>window['None']  = null</script><!-- to avoid error from bknd -->
@@ -42,7 +43,7 @@
     <script>window['False'] = false</script><!-- to avoid error from bknd -->
     
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <script src="{% static 'js/website.js' %}"></script>
         
     {% endblock footer_javascript_site %}
     {% block footer_javascript_section %}{% endblock footer_javascript_section %}
@@ -89,5 +90,9 @@
         {% endblock %}
         <div id="snackbar"></div>
     </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
 </body>
 </html>
