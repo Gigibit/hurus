@@ -444,3 +444,10 @@ msgstr 'Contact'
 
 msgid 'LANGUAGE'
 msgstr 'Language'
+
+
+msgid 'OUR_MOTIVATION'
+msgstr 'Our Motivation'
+
+msgid 'OUR_MOTIVATION_DESCRIPTION'
+msgstr 'Team synergy for company efficiency.'

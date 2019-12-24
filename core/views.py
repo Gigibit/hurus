@@ -612,6 +612,7 @@ def encrypt(plain):
 
 
 
-
+def website(request):
+    return render(request, 'core/employee/index2.html')    
 
 

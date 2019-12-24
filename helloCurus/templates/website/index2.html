@@ -1,0 +1,95 @@
+            {% extends 'website/base_site.html' %}
+            {% load i18n %}
+            {% load static %}
+            {% block content %}
+            <div class="main">
+                <div class="section-container">
+                    <div class="home-image"></div>
+                    <div class="home-box">
+                        <h1>{% trans 'home_box_title' %}</h1>
+                        <p> {% trans 'home_box_description' %}</p>
+                    </div>
+                </div>
+                <div class="section-container">
+                    <h1 class="section-title">{% trans 'OUR_MOTIVATION' %}</h1>
+                    <h4 class="section-subtitle">{% trans 'OUR_MOTIVATION_DESCRIPTION' %}</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="motivation-box">
+                                <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\woman.jpg' %}">
+                                <div class="motivation-info-wrapper">
+                                    <div class="motivation-title">WHY HAPPYCURUS</div>
+                                    <div class="motivation-description">
+                                        Most of the managers do
+                                        not have time to talk to
+                                        their employees on a
+                                        personal level.
+                                        Happycurus provides
+                                        awareness: its algorithm
+                                        brings out cases of
+                                        demotivated employees
+                                        and supports supervisors
+                                        to act effectively.
+                                        Engaged teams means
+                                        success for companies.
+                                        Happycurus also makes
+                                        your business CO2
+                                        neutral.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="motivation-box">
+                                <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\innovation-561388.jpg' %}">
+                                <div class="motivation-info-wrapper">
+                                    <div class="motivation-title">WHAT IS HAPPYCURUS</div>
+                                    <div class="motivation-description">
+                                        Happycurus is a digital
+                                        solution that helps busy
+                                        managers to control the
+                                        engagement of their
+                                        workers and to maintain
+                                        high levels of
+                                        commitment on the
+                                        workplace.
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="motivation-box">
+                                
+                                <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\document-3268750.jpg' %}">
+                                <div class="motivation-info-wrapper">
+                                    <div class="motivation-title">HOW HAPPYCURUS WORKS</div>
+                                    <div class="motivation-description">
+                                        Happycurus’ algorithm
+                                        produces innovative
+                                        statistics and graphs using
+                                        data provided by the
+                                        employees. The software
+                                        helps managers to know
+                                        their teams in depth and to
+                                        keep them engaged.
+                                        Happycurus provides with
+                                        daily motivational quotes
+                                        and with effective
+                                        motivational courses.
+                                        Happycurus donates 50% of
+                                        its net profits to finance
+                                        reforestation, helping
+                                        companies to reduce their
+                                        impact on the environment
+                                        in terms of CO2.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+            {% endblock %}
