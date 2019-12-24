@@ -2,15 +2,15 @@
     font-family: 'rubik';
     src: local('Rubik'),
     url('../fonts/Rubik/Rubik-Light.ttf') format("truetype");
-  }
-  @font-face {
+}
+@font-face {
     font-family: 'rubikBold';
     src: local('RubikBold'),
     url('../fonts/Rubik/Rubik-Bold.ttf') format("truetype");
-  }
-  *{
+}
+*{
     font-family: 'rubik';
-  }
+}
 
 .navbar .wrapper{
     display: flex;
@@ -26,7 +26,29 @@
     background-size: auto 80%;
     background-position: center;
     height: 500px;
-
+    
+}
+.curus-effect-box{
+    border: 1px solid steelblue;
+    border-radius: 25px;
+    margin: 10px;
+    height: 270px;
+    padding-top: 18px;
+}
+.curus-effect-box-description{
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px;
+}
+.curus-effect-box img{
+    width: 130px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
 }
 
 .happy-environment-image{
@@ -35,6 +57,15 @@
 .happy-environment-image img{
     height: 100%;
     width: auto;
+    margin: 55px auto;
+    text-align: center;
+    display: block;
+}
+.left{
+    float:left;
+}
+.right{
+    float: right;
 }
 .home-about-box {
     padding: 15px 40px 15px 15px;
@@ -120,17 +151,7 @@ Form
 /*
 Contact Form
 */
-.contact-form {
-    width: 100%;
-    max-width: 568px;
-    margin: 0 auto;
 
-    padding: 40px;
-    background-color: lightblue;
-    border-radius: 4px;
-    box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.125);
-    box-sizing: border-box;
-}
 .contact-form--loading {
     opacity: 0.5;
     pointer-events: none;
@@ -166,14 +187,14 @@ Button
     left: 0;
     right: 0;
     margin: 0 auto;
-
+    
 }
 .motivation-info-content{
     background: steelblue;
     color: white;
     padding: 10px 30px;
     margin: 0 auto;
-
+    
 }
 
 .motivation-img{
@@ -258,7 +279,7 @@ Button
     height: 300px;
     background-repeat: no-repeat;
     padding: 50px;
-
+    
 }
 
 .career-info{
@@ -277,9 +298,12 @@ Button
     margin: 0 auto;
 }
 
+
 footer{
     background: #142841;
     padding-bottom: 50px;
+    width: 100%;
+    
 }
 
 footer img{
@@ -309,10 +333,96 @@ footer img{
 }
 .contact-form-section{
     width: 100%;
+    height: 800px;
+    
 }
 
 .contact-form-header{
-    background: url('img/website_assets/site/Immagini sito\adventure-1807524.jpg');
-    height: 200px;
+    left: 0;
+    right: 0;
+    background: url('/static/img/website_assets/site/Immagini sito/adventure-1807524.jpg');
+    height: 100%;
     width: 100%;
+    z-index: 2;
+    background-size: cover;
+}
+.contact-form-container{
+    position: relative;
+    height: 100%;
+    
+}
+.contact-form {
+    position:absolute;
+    height:90%;
+    width:50vw;
+    margin: 0 auto;
+    z-index: 3;
+    
+    padding: 50px;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.125);
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom:0;
+    
+}
+.form-label{
+    font-weight: bold;
+    font-size: 24px;
+}
+input[type="checkbox"]{
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    border-radius: 1px;
+    box-sizing: border-box;
+    position: relative;
+    box-sizing: content-box ;
+    width: 30px;
+    height: 30px;
+    border-width: 0;
+    transition: all .3s linear;
+    border: 3px solid #222;
+    
+}
+input[type="checkbox"]:checked{
+    background-color: #2ECC71;
+}
+input[type="checkbox"]:focus{
+    outline: 0 none;
+    box-shadow: none;
+}
+
+.happy-environment-description {
+
+    padding-top: 10%;
+    padding: 90px;
+    font-weight: bold;
+    font-size: 25px;
+    color: white;
+    background: #7474BF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin: 5px 0;
+    display: block;
+
+}
+
+
+.contact-form::after{
+    position:absolute;
+    top:-30px;
+    content:"";
+    height: 0; 
+    width: 0px;
+    border-right: 50vw solid rgba(255, 255, 255, .8);
+    border-top: 30px solid transparent;
+    left: 0;
+    right: 0;
+    bottom:0;
+    
+    
 }
