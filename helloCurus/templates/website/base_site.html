@@ -43,7 +43,7 @@
     <script>window['False'] = false</script><!-- to avoid error from bknd -->
     
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/website.js' %}"></script>
+    <script src="{% static 'js/website.js' %}?v={% now "U" %}" "></script>
         
     {% endblock footer_javascript_site %}
     {% block footer_javascript_section %}{% endblock footer_javascript_section %}
@@ -53,18 +53,23 @@
 
 
 <body>
+    <div class="backgrounds overlay">
+        <div class="background aos-init aos-animate" data-aos="fade-in" data-aos-duration="1500" data-aos-anchor=".section--hero" ></div>
+    </div>
     <div id="page-wrapper" >
+
         <!-- Navigation -->
         <nav id="application-navbar" class="navbar navbar-expand-lg navbar-light static-top">
+            <a class="navbar-brand" href="#">
+                <img width="94" height="50" src="{% static 'img/website_assets/logo-light.jpg' %}" alt="logo">
+            </a>
             <div class="container">
                 <div class="wrapper">
-                    <a class="navbar-brand" href="#">
-                        <img width="94" height="50" src="{% static 'img/website_assets/logo-light.jpg' %}" alt="logo">
-                    </a>
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive" style="border-bottom: 1px solid {% if request.user.is_manager %} steelblue {% else %} #ccc {% endif %};">
+                    <div class="collapse navbar-collapse" id="navbarResponsive" >
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="/">{% trans 'ABOUT_HAPPY_CURUS' %}</a>
@@ -83,8 +88,12 @@
                             </li>
                         </ul>
                     </div>
+
                 </div>
             </div>
+            <a class="navbar-brand second-navbar-brand" href="#">
+                <img width="94" height="50" src="{% static 'img/website_assets/Happycurus-Claim_SW.png' %}" alt="logo">
+            </a>
         </nav>
         {% block content %}
         {% endblock %}
@@ -92,7 +101,13 @@
     </div>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      AOS.init();
+        AOS.init();
+      window.onload= ()=>{
+          // fixes aos issue https://github.com/michalsnik/aos/issues/416
+        $('body').css('overflow-x','hidden')
+        $('.swipeBox').animate( { scrollLeft: '-=460' }, 1000);
+      }
+
     </script>
 </body>
 </html>

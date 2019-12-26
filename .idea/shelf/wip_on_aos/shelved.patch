@@ -1,0 +1,501 @@
+Index: helloCurus/templates/website/index2.html
+===================================================================
+--- helloCurus/templates/website/index2.html	(revision ae8b7a461bc84ae8046b92b291e9fde5873140f6)
++++ helloCurus/templates/website/index2.html	(revision ae8b7a461bc84ae8046b92b291e9fde5873140f6)
+@@ -1,213 +0,0 @@
+-            {% extends 'website/base_site.html' %}
+-            {% load i18n %}
+-            {% load static %}
+-            {% block content %}
+-            <div class="main">
+-                <div class="section-container">
+-                    <div class="home-image"></div>
+-                    <div class="home-box">
+-                        <h1>{% trans 'home_box_title' %}</h1>
+-                        <p> {% trans 'home_box_description' %}</p>
+-                    </div>
+-                </div>
+-                <div class="section-container">
+-                    <h1 class="section-title">{% trans 'OUR_MOTIVATION' %}</h1>
+-                    <h4 class="section-subtitle">{% trans 'OUR_MOTIVATION_DESCRIPTION' %}</h4>
+-                    <div class="row">
+-                        <div class="motivation-boxes row col-md-12 padded-section">
+-                            <div class="col-md-4">
+-                                <div class="motivation-box">
+-                                    <div class="motivation-img-wrapper" data-aos="fade">
+-                                        <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\woman.jpg' %}">
+-                                    </div>
+-                                    <div class="motivation-info-wrapper" data-aos="fade-left">
+-                                        <div class="motivation-info-content">
+-                                            <div class="motivation-title">WHY HAPPYCURUS</div>
+-                                            <div class="motivation-description">
+-                                                Most of the managers do
+-                                                not have time to talk to
+-                                                their employees on a
+-                                                personal level.
+-                                                Happycurus provides
+-                                                awareness: its algorithm
+-                                                brings out cases of
+-                                                demotivated employees
+-                                                and supports supervisors
+-                                                to act effectively.
+-                                                Engaged teams means
+-                                                success for companies.
+-                                                Happycurus also makes
+-                                                your business CO2
+-                                                neutral.
+-                                            </div>
+-                                        </div>
+-                                    </div>
+-                                </div>
+-                            </div>
+-                            <div class="col-md-4">
+-                                <div class="motivation-box">
+-                                    <div class="motivation-img-wrapper" data-aos="fade">
+-                                        <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\innovation-561388.jpg' %}">
+-                                    </div>
+-                                    <div class="motivation-info-wrapper" data-aos="fade-up">
+-                                        <div class="motivation-info-content">
+-                                            <div class="motivation-title">WHAT IS HAPPYCURUS</div>
+-                                            <div class="motivation-description">
+-                                                Happycurus is a digital
+-                                                solution that helps busy
+-                                                managers to control the
+-                                                engagement of their
+-                                                workers and to maintain
+-                                                high levels of
+-                                                commitment on the
+-                                                workplace.
+-                                            </div>
+-                                        </div> 
+-                                    </div>
+-                                </div>
+-                            </div>
+-                            <div class="col-md-4">
+-                                <div class="motivation-box" >
+-                                    <div class="motivation-img-wrapper" data-aos="fade">
+-                                        <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\document-3268750.jpg' %}">
+-                                    </div>
+-                                    <div class="motivation-info-wrapper" data-aos="fade-right">
+-                                        <div class="motivation-info-content">
+-                                            
+-                                            <div class="motivation-title">HOW HAPPYCURUS WORKS</div>
+-                                            <div class="motivation-description">
+-                                                Happycurus’ algorithm
+-                                                produces innovative
+-                                                statistics and graphs using
+-                                                data provided by the
+-                                                employees. The software
+-                                                helps managers to know
+-                                                their teams in depth and to
+-                                                keep them engaged.
+-                                                Happycurus provides with
+-                                                daily motivational quotes
+-                                                and with effective
+-                                                motivational courses.
+-                                                Happycurus donates 50% of
+-                                                its net profits to finance
+-                                                reforestation, helping
+-                                                companies to reduce their
+-                                                impact on the environment
+-                                                in terms of CO2.
+-                                            </div>
+-                                        </div>
+-                                    </div>
+-                                </div>
+-                            </div>
+-                        </div>
+-                        <div class="glance-section padded-section">
+-                            <div class="glance-section-container">
+-                                <h1 class="section-title">HAPPYCURUS AT A GLANCE</h1>
+-                                <div class="glance-row"  data-aos="fade-up">
+-                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Practice.ico' %}">
+-                                    <div class="description">
+-                                        Happycurus keeps managers updated about their teams.
+-                                    </div>
+-                                </div>
+-                                <div class="glance-row" data-aos="fade-up">
+-                                    <div class="description">
+-                                        Happycurus supports engagement on the workplace.
+-                                    </div>
+-                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Places-Optimization.ico' %}">
+-                                </div>
+-                                <div class="glance-row" data-aos="fade-up">
+-                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Goals.ico' %}">
+-                                    <div class="description">
+-                                        Happycurus promotes a goal-oriented mentality.
+-                                    </div>
+-                                </div>
+-                                <div class="glance-row" data-aos="fade-up">
+-                                    <div class="description">
+-                                        Happycurus makes your business CO2 neutral.
+-                                    </div>
+-                                    <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Market-Analysis.ico' %}">
+-                                </div>
+-                            </div>    
+-                        </div>
+-                        <div class="contact-form-section padded-section">
+-                            <div class="contact-form-container"> 
+-                                <!-- img src="{% static 'img/website_assets/site/Immagini sito\adventure-1807524.jpg' %}" -->
+-                                <div class="contact-form-header"
+-                                data-aos="fade"
+-                                data-aos-delay="50"
+-                                data-aos-duration="1000"
+-                                data-aos-easing="ease-in-out"
+-                                data-aos-mirror="true"
+-                                data-aos-once="false"
+-                                data-aos-anchor-placement="top-center"></div>
+-                                <form class="form contact-form" action="https://formspree.io/donnyburnside1@gmail.com" data-aos="fade-up">
+-                                    <div>
+-                                        <label class="form-label" for="name">FIRSTNAME AND LASTNAME</label>
+-                                        <input class="form-control" id="name" name="name" type="text" required />
+-                                    </div>
+-                                    <div>
+-                                        <label class="form-label" for="email">EMAIL</label>
+-                                        <input class="form-control" id="email" name="email" type="email" required />
+-                                    </div>
+-                                    <div>
+-                                        <input class="form-control" id="phonenumber" name="phonenumber" type="phonenumber" required />
+-                                        <label class="form-label" for="phonenumber">PHONENUMBER</label>
+-                                    </div>                                        
+-                                    <!-- div>
+-                                        <label class="form-label" for="subject">Subject</label>
+-                                        <select class="form-control" id="subject" name="subject" required>
+-                                            <option value="" selected disabled>Choose a Subject</option>
+-                                            <optgroup label="Option Group">
+-                                                <option value="subject-one">Subject One</option>
+-                                                <option value="subject-two">Subject Two</option>
+-                                                <option value="subject-three">Subject Three</option>
+-                                            </optgroup>
+-                                            <option value="subject-four">Subject Four</option>
+-                                            <option value="subject-five">Subject Five</option>
+-                                            <option value="subject-six">Subject Six</option>
+-                                        </select>
+-                                    </div-->
+-                                    <div>
+-                                        <label class="form-label" for="message">MESSAGE</label>
+-                                        <textarea class="form-control" id="message" name="message" required></textarea>
+-                                    </div>
+-                                    <div class="agreements">
+-                                        <input class="" id="subscribe" name="subscribe" type="checkbox" />
+-                                        <label class="form-label" for="subscribe">I agree, that in order to process my submission, the provided information and related data are collected and stored electronically. I have read the privacy policy.</label>
+-                                    </div>
+-                                    <div>
+-                                        <button class="button" type="reset">Clear</button>
+-                                        <button class="button" type="submit">Submit</button>
+-                                    </div>
+-                                </form>
+-                            </div>
+-                        </div>
+-                        <div class="career-section padded-section">
+-                            <div class="career-info">
+-                                <h1>CAREER</h1>
+-                                <p>Are you interested in working with us? We are looking forword to knowing you.</p>
+-                            </div>
+-                        </div>
+-                    </div>
+-                </div>
+-            </div>
+-            
+-            <footer>
+-                <div class="row">
+-                    <div class="col-md-6">
+-                        <img src="{% static 'img/website_assets/Happycurus-Invers.png' %}">
+-                    </div>
+-                    <div class="col-md-6">
+-                        <img src="{% static 'img/website_assets/Happycurus-Invers_Claim.png' %}">
+-                    </div>
+-                </div>
+-                <div class="agreements-box col-md-6 col-centered">
+-                    <div class="row">
+-                        <div class="col-md-4">Legal</div>
+-                        <div class="col-md-4">Terms</div>
+-                        <div class="col-md-4">Privacy policy</div>
+-                    </div>
+-                </div>
+-            </footer>
+-            
+-            {% endblock %}
+\ No newline at end of file
+Index: static/css/website.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@font-face {\n    font-family: 'rubik';\n    src: local('Rubik'),\n    url('../fonts/Rubik/Rubik-Light.ttf') format(\"truetype\");\n  }\n  @font-face {\n    font-family: 'rubikBold';\n    src: local('RubikBold'),\n    url('../fonts/Rubik/Rubik-Bold.ttf') format(\"truetype\");\n  }\n  *{\n    font-family: 'rubik';\n  }\n\n.navbar .wrapper{\n    display: flex;\n    border: 1px solid #222;\n}\n.section-container{\n    position: relative;\n    height: 100%;\n}\n.happy-curus-section-image{\n    background-image: url(../img/website_assets/site/Immagini\\ sito/AdobeStock_220836324.jpeg);\n    background-repeat: no-repeat;\n    background-size: auto 80%;\n    background-position: center;\n    height: 500px;\n\n}\n\n.happy-environment-image{\n    height: 300px;\n}\n.happy-environment-image img{\n    height: 100%;\n    width: auto;\n}\n.home-about-box {\n    padding: 15px 40px 15px 15px;\n}\n#first-about{\n    background-image: url(../img/website_assets/site/Immagini\\ sito/AdobeStock_306317760.jpeg);\n    background-repeat: no-repeat;\n    background-size: cover;\n    height: 350px;\n    width: 100%;\n}\n#second-about{\n    background-image: url(../img/website_assets/site/Immagini\\ sito/AdobeStock_132150794.jpeg);\n    background-repeat: no-repeat;\n    background-size: cover;\n    height: 350px;\n    width: 100%;\n}\n#third-about{\n    background-image: url(../img/website_assets/site/Immagini\\ sito/man-1209494_1920.jpg);\n    background-repeat: no-repeat;\n    background-size: cover;\n    height: 350px;\n    width: 100%;\n}\n#fourth-about{\n    background-image: url(../img/website_assets/site/Immagini\\ sito/AdobeStock_290521699.jpeg);\n    background-repeat: no-repeat;\n    background-size: cover;\n    height: 350px;\n    width: 100%;\n}\n\n.home-image{\n    background-image: url(../img/website_assets/site/Immagini\\ sito/AdobeStock_96391741.jpeg);\n    background-size: cover;\n    height: 80%;\n    width: 100%;\n}\n.home-box{\n    position: absolute;\n    width: 50%;\n    height: 30%;\n    background-color: steelblue;\n    transform: skewX(-10deg);\n    left: 0;\n    right: 0;\n    display: block;\n    bottom: 0;\n    margin: 0 auto;\n    color: white;\n}\n\n\n\n/*\nForm\n*/\n.form > div ~ div {\n    margin-top: 20px;\n}\n.form > div.is-hidden {\n    display: none;\n}\n.form-label {\n    display: inline-block;\n    margin-bottom: 5px;\n    font-size: 0.875rem;\n    font-weight: 700;\n}\n.form-control {\n    display: block;\n    width: 100%;\n    padding: 10px;\n    font: 0.875rem/1.5 sans-serif;\n    color: #333;\n    background-color: #fff;\n    border: 1px solid #bbb;\n    border-radius: 4px;\n    box-sizing: border-box;\n}\n\n/*\nContact Form\n*/\n.contact-form {\n    width: 100%;\n    max-width: 568px;\n    margin: 0 auto;\n\n    padding: 40px;\n    background-color: lightblue;\n    border-radius: 4px;\n    box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.125);\n    box-sizing: border-box;\n}\n.contact-form--loading {\n    opacity: 0.5;\n    pointer-events: none;\n}\n.contact-form--sent > div ~ div {\n    margin: 0;\n}\n\n/*\nButton\n*/\n.button {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    padding: 5px 10px;\n    font: 0.875rem/1.5 sans-serif;\n    background-color: #ddd;\n    border: 1px solid transparent;\n    border-radius: 4px;\n    cursor: pointer;\n    box-sizing: border-box;\n}\n.motivation-box{\n    position: relative;\n    height: 550px;\n}\n.motivation-info-wrapper{\n    position: absolute;\n    width: 60%;\n    height: 65%;\n    top: 45%;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n\n}\n.motivation-info-content{\n    background: steelblue;\n    color: white;\n    padding: 10px 30px;\n    margin: 0 auto;\n\n}\n\n.motivation-img{\n    width: 100%;\n}\n.motivation-img-wrapper{\n    height: 350px;\n    overflow: hidden;\n    border-radius: 5px;\n}\n\n.motivation-boxes{\n    margin-bottom: 50px;\n}\n\n.glance-section{\n    width: 100%;\n}\n.glance-section-container{\n    width: 50%;\n    display: block;\n    margin: 0 auto;\n    background-color: lightblue;\n    transform: skewX(-10deg);\n    left: 0;\n    right: 0;\n    display: block;\n    bottom: -20%;\n    margin: 0 auto;\n    color: #222;\n    padding: 0 100px;\n}\n.glance-row{\n    display: table;\n    width: 100%;\n}\n.glance-row .description{\n    display: table-cell;\n    vertical-align: middle;\n    font-size: 16px;\n    font-family: rubikBold;\n    color: white;\n}\n.glance-row img{\n    width: 150px;\n    height: 150px;\n}\n\n.glance-section .section-title{\n    color: steelblue;\n    padding-top: 30px;\n    font-weight: bold;\n    text-align: center;\n    font-size: 35px;\n}\n.glance-row .description.left{\n    text-align: left;\n}\n.glance-row .description.right{\n    text-align: right;\n}\n.contact-form-section{\n    text-align: center;\n}\n\n.padded-section{\n    margin-bottom: 50px;\n}\n\n.agreements{\n    display: table;\n}\n.agreements label{\n    display: table-cell;\n    vertical-align: middle;\n}\n\n.career-section{\n    position: relative;\n    background: url('/static/img/website_assets/site/Immagini sito/writing-1149962_1920.jpg');\n    width: 100%;\n    height: 300px;\n    background-repeat: no-repeat;\n    padding: 50px;\n\n}\n\n.career-info{\n    position: absolute;\n    bottom: 30px;\n    color: white;\n}\n.career-info p, .career-info h1{\n    font-weight: bold;\n}\n.career-info p{\n    font-size: 24px;\n}\n.col-centered{\n    float: none;\n    margin: 0 auto;\n}\n\nfooter{\n    background: #142841;\n    padding-bottom: 50px;\n}\n\nfooter img{\n    height: 100px;\n}\n.agreements-box{\n    padding: 15px;\n    color: white;\n    border: 1px solid #fff;\n    border-radius: 5px;\n    text-align: center;\n}\n\n.motivation-title{\n    font-weight: bold;\n    font-size: 18px;\n    margin-bottom: 20px;\n    text-align: center;\n}\n.motivation-info-wrapper:hover .motivation-info-content{\n    height: 100%;\n}\n.motivation-info-content {\n    height: 15%;\n    overflow: hidden;\n    transition: height .3s ease-in;\n}\n.contact-form-section{\n    width: 100%;\n}\n\n.contact-form-header{\n    background: url('img/website_assets/site/Immagini sito\\adventure-1807524.jpg');\n    height: 200px;\n    width: 100%;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- static/css/website.css	(revision ae8b7a461bc84ae8046b92b291e9fde5873140f6)
++++ static/css/website.css	(date 1577191362000)
+@@ -312,7 +312,40 @@
+ }
+ 
+ .contact-form-header{
+-    background: url('img/website_assets/site/Immagini sito\adventure-1807524.jpg');
++    background: url('/static/img/website_assets/site/Immagini sito/adventure-1807524.jpg');
+     height: 200px;
+     width: 100%;
++}
++
++
++
++/* check */
++
++.contact-form-header{
++    position: absolute;
++    background-size: 100%;
++    background-position: center;
++    height: 100%;
++    z-index: 2;
++    opacity: 0.3;
++    top: 0;
++    bottom: 0;
++    background-repeat: no-repeat;
++    display: table-cell;
++    vertical-align: middle;
++}
++.contact-form{
++    z-index: 5;
++    position: absolute;
++    width: 100%;
++    left: 0;
++    right: 0;
++    
++    background: none;
++}
++.contact-form-container{
++    display: table;
++    position: relative;
++    height: 500px;
++    width: 100%;
+ }
+\ No newline at end of file
+Index: helloCurus/templates/website/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% extends 'website/base_site.html' %}\n{% load static %}\n{% load i18n %}\n{% block content %}\n<div class=\"main\">\n    <div class=\"section-container header\">\n        <div class=\"home-image\"></div>\n        <div class=\"home-box\">\n            <h1>{% trans 'home_box_title' %}</h1>\n            <p> {% trans 'home_box_description' %}</p>\n        </div>\n    </div>\n    <div class=\"section-container main-container\">\n        <h1 class=\"section-title\">{% trans 'ABOUT_HAPPY_CURUS' %}</h1>\n        <h4 class=\"section-subtitle\">{% trans 'ABOUT_HAPPY_CURUS_DESCRIPTION' %}</h4>\n        <div class=\"row\">\n            <div class=\"col-md-6 col-xs-12\">\n                <div class=\"about-wrapper-description\">\n                    BE AWARE of your team ‘s commitment.\n                    KEEP TRACK of how your team’s morale and\n                    engagement change over time. Find out about how\n                    tasks influence their mood. As a manager, you have\n                    exclusive access to statistics based on data that\n                    your employees provide.\n                </div>\n            </div>\n            <div  class=\"col-md-6 xs-hidden home-about-box\">\n                <div id=\"first-about\"></div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6 col-xs-12\">\n                <div class=\"about-wrapper-description\">\n                    DISCOVER EXPLANATORY FACTORS in your\n                    employees’ morale: What type of tasks make them\n                    more satisfied with their job? Are they happy at work\n                    or are they relieved when they leave the office? How\n                    does their attitude on the workplace compare to\n                    their attitude on their free time? Happycurus brings\n                    out cases of demotivated employees. Your business\n                    will benefit from knowing your personnel.\n                </div>\n            </div>\n            <div  class=\"col-md-6 xs-hidden home-about-box\">\n                <div id=\"second-about\">\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6 col-xs-12\">\n                <div class=\"about-wrapper-description\">\n                    COMMUNICATE to your team through the courses\n                    included in Happycurus. The articles address useful\n                    topics such as psychology, productivity,\n                    communication, career, efficiency, charisma and\n                    many others.\n                    Managers don’t have time to instruct employees on\n                    a personal level. Happycurus advises them for you.\n                </div>\n            </div>\n            <div  class=\"col-md-6 xs-hidden home-about-box\">\n                <div id=\"third-about\"></div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-6 col-xs-12\">\n                <div class=\"about-wrapper-description\">\n                    SUPPORT THE ENVIRONMENT! Happycurus\n                    devotes 50% of its profits to reforestation projects.\n                    Thanks to partnerships with solid organizations, we\n                    support concrete green actions, such as planting\n                    trees in areas of the world where they are most\n                    needed to support biodiversity and to fight\n                    deforestation. Using Happycurus will not only\n                    improve your company but also our planet. Find out\n                    more in the dedicated section below.\n                </div>\n            </div>\n            <div  class=\"col-md-6 xs-hidden home-about-box\">\n                <div id=\"fourth-about\" ></div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h1 class=\"section-title\">The Curus Effect</h1>\n                <h4 class=\"section-subtitle\">Know how your employees feel. Encourage team spirit, optimism and attachment to the company.</h4>\n                <div class=\"happy-curus-section-image\"></div>\n            </div>\n            <div class=\"col-md-12\">\n                <div class=\"row\">\n                    <div class=\"col-md-4 curus-effect-box\">\n                        <img src=\"{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Keys.ico' %}\">\n                        <p class=\"curus-effect-box-description\">COLLECT KEY DATA\n                            ABOUT YOUR\n                            EMPLOYEES\n                        </p>\n                    </div>\n                    <div class=\"col-md-4 curus-effect-box\">\n                        <img src=\"{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-System-analysis.ico' %}\">\n                        <p class=\"curus-effect-box-description\">KEEP TRACK OF THEIR\n                            COMMITMENT THANKS TO\n                            RELIABLE STATISTICS\n                        </p>\n                    </div>\n                    <div class=\"col-md-4 curus-effect-box\">\n                        <img src=\"{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Global.ico' %}\">\n                        <p class=\"curus-effect-box-description\">IMPROVE YOUR TEAM’S\n                            ENGAGEMENT OVER\n                            TIME\n                        </p>\n                    </div>\n                    <div class=\"col-md-4 curus-effect-box\">\n                        <img src=\"{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Like.ico' %}\">\n                        <p class=\"curus-effect-box-description\">CREATE A POSITIVE AND\n                            OPTIMISTIC ENVIRONMENT\n                            IN THE OFFICE\n                        </p>\n                    </div>\n                    <div class=\"col-md-4 curus-effect-box\">\n                        <img src=\"{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Diamond.ico' %}\">\n                        <p class=\"curus-effect-box-description\">PROMOTE PERSONAL\n                            DEVELOPMENT AND\n                            MOTIVATION IN YOUR TEAM\n                        </p>\n                    </div>\n                    <div class=\"col-md-4 curus-effect-box\">\n                        <img src=\"{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Dollar-rotation.ico' %}\">\n                        <p class=\"curus-effect-box-description\">INCREASE PRODUCTIVITY\n                            AND TEAM-WORK\n                        </p>\n                    </div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-md-12\">\n                        <div class=\"button find-more-button\">FIND OUT MORE</div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h1 class=\"section-title\">Happycurus and the Environment</h1>\n                <h4 class=\"section-subtitle\">Happycurus is not interested in making big profits. We donate the 50% of our profits to the Planet.</h4>\n            </div>\n            <div class=\"row\">\n                \n                <div class=\"col-md-6 happy-environment-description\">Every single little green space on the\n                    Earth is the effect of the pulsing life that\n                    permeates our planet.\n                    Earth’s flourishing beauty is unique. Life\n                    in every conceivable shape and size\n                    pervades our Planet. And it also\n                    sustains it.\n                </div>\n                <div class=\"col-md-6 happy-environment-image\">\n                    <img src=\"{% static 'img/website_assets/site/Immagini Sito/spring-276014_1920.jpg' %}\">\n                </div>\n                <div class=\"col-md-6 happy-environment-image\">\n                    <img src=\"{% static 'img/website_assets/site/Immagini Sito/desert-1803878_1920.jpg' %}\">\n                </div>\n                <div class=\"col-md-6 happy-environment-description\">Human activity is altering the balance of the Earth.\n                    Forests, Oceans, Wildlife population sizes, whole\n                    Ecosystems are suffering human’s neglectful\n                    presence.\n                    The effects of our actions are already having alarming\n                    consequences, such as global warming, melting\n                    glaciers and draining of drinking water supplies.\n                    This is putting many people’s lives and homes at\n                    serious risk.\n                </div>\n                \n                <div class=\"col-md-6 happy-environment-description\">The Greenland and Antarctic ice sheets\n                    have decreased in mass. Data from\n                    NASA's Gravity Recovery and Climate\n                    Experiment show Greenland lost an\n                    average of 286 billion tons of ice per year\n                    between 1993 and 2016, while\n                    Antarctica lost about 127 billion tons of\n                    ice per year during the same time period.\n                </div>\n                <div class=\"col-md-6 happy-environment-image\">\n                    <img src=\"{% static 'img/website_assets/site/Immagini Sito/glacier-2083379_1920.jpg' %}\">\n                </div>\n                <div class=\"col-md-6 happy-environment-image\">\n                    <img src=\"{% static 'img/website_assets/site/Immagini Sito/16.PNG' %}\">\n                </div>\n                <div class=\"col-md-6 happy-environment-description\">Trees benefit the Planet in plenty of ways: they reduce\n                    carbon dioxide, they produce oxygen, they reduce the\n                    level of ozone, they fight against sole erosion, create\n                    ecosystems, they give food and much more.\n                </div>\n                <div class=\"col-md-6 happy-environment-description\">For Happycurus, care of the environment\n                    should not be a one-off commitment. We\n                    set it as part of our business model, and it\n                    will always be. If all existing companies took\n                    the same decision, the planet would be safe.\n                    Unfortunately, this is not yet the case, but\n                    there is one positive side: with Happycurus\n                    every single team can help!\n                </div>\n                <div class=\"col-md-6 happy-environment-image\">\n                    <img src=\"{% static 'img/website_assets/site/Immagini Sito/seconda.PNG' %}\">\n                </div>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <h1 class=\"section-title\">Our Motivation</h1>\n                <h4 class=\"section-subtitle\">Team synergy for company efficiency.</h4>\n            </div>\n            <div class=\"row\">\n            \n            </div>\n    </div>\n</div>\n{% endblock %}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- helloCurus/templates/website/index.html	(revision ae8b7a461bc84ae8046b92b291e9fde5873140f6)
++++ helloCurus/templates/website/index.html	(date 1577190470000)
+@@ -204,13 +204,197 @@
+             </div>
+         </div>
+         <div class="row">
+-            <div class="col-md-12">
+-                <h1 class="section-title">Our Motivation</h1>
+-                <h4 class="section-subtitle">Team synergy for company efficiency.</h4>
+-            </div>
+-            <div class="row">
+-            
+-            </div>
++            <div class="motivation-boxes row col-md-12 padded-section">
++                <div class="col-md-4">
++                    <div class="motivation-box">
++                        <div class="motivation-img-wrapper" data-aos="fade">
++                            <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\woman.jpg' %}">
++                        </div>
++                        <div class="motivation-info-wrapper" data-aos="fade-left">
++                            <div class="motivation-info-content">
++                                <div class="motivation-title">WHY HAPPYCURUS</div>
++                                <div class="motivation-description">
++                                    Most of the managers do
++                                    not have time to talk to
++                                    their employees on a
++                                    personal level.
++                                    Happycurus provides
++                                    awareness: its algorithm
++                                    brings out cases of
++                                    demotivated employees
++                                    and supports supervisors
++                                    to act effectively.
++                                    Engaged teams means
++                                    success for companies.
++                                    Happycurus also makes
++                                    your business CO2
++                                    neutral.
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="col-md-4">
++                    <div class="motivation-box">
++                        <div class="motivation-img-wrapper" data-aos="fade">
++                            <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\innovation-561388.jpg' %}">
++                        </div>
++                        <div class="motivation-info-wrapper" data-aos="fade-up">
++                            <div class="motivation-info-content">
++                                <div class="motivation-title">WHAT IS HAPPYCURUS</div>
++                                <div class="motivation-description">
++                                    Happycurus is a digital
++                                    solution that helps busy
++                                    managers to control the
++                                    engagement of their
++                                    workers and to maintain
++                                    high levels of
++                                    commitment on the
++                                    workplace.
++                                </div>
++                            </div> 
++                        </div>
++                    </div>
++                </div>
++                <div class="col-md-4">
++                    <div class="motivation-box" >
++                        <div class="motivation-img-wrapper" data-aos="fade">
++                            <img class="motivation-img" src="{% static 'img/website_assets/site/Immagini Sito\document-3268750.jpg' %}">
++                        </div>
++                        <div class="motivation-info-wrapper" data-aos="fade-right">
++                            <div class="motivation-info-content">
++                                
++                                <div class="motivation-title">HOW HAPPYCURUS WORKS</div>
++                                <div class="motivation-description">
++                                    Happycurus’ algorithm
++                                    produces innovative
++                                    statistics and graphs using
++                                    data provided by the
++                                    employees. The software
++                                    helps managers to know
++                                    their teams in depth and to
++                                    keep them engaged.
++                                    Happycurus provides with
++                                    daily motivational quotes
++                                    and with effective
++                                    motivational courses.
++                                    Happycurus donates 50% of
++                                    its net profits to finance
++                                    reforestation, helping
++                                    companies to reduce their
++                                    impact on the environment
++                                    in terms of CO2.
++                                </div>
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++            <div class="glance-section padded-section">
++                <div class="glance-section-container">
++                    <h1 class="section-title">HAPPYCURUS AT A GLANCE</h1>
++                    <div class="glance-row"  data-aos="fade-up">
++                        <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Practice.ico' %}">
++                        <div class="description">
++                            Happycurus keeps managers updated about their teams.
++                        </div>
++                    </div>
++                    <div class="glance-row" data-aos="fade-up">
++                        <div class="description">
++                            Happycurus supports engagement on the workplace.
++                        </div>
++                        <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Places-Optimization.ico' %}">
++                    </div>
++                    <div class="glance-row" data-aos="fade-up">
++                        <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Goals.ico' %}">
++                        <div class="description">
++                            Happycurus promotes a goal-oriented mentality.
++                        </div>
++                    </div>
++                    <div class="glance-row" data-aos="fade-up">
++                        <div class="description">
++                            Happycurus makes your business CO2 neutral.
++                        </div>
++                        <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Market-Analysis.ico' %}">
++                    </div>
++                </div>    
++            </div>
++            <div class="contact-form-section padded-section">
++                <div class="contact-form-container"> 
++                    <!-- img src="{% static 'img/website_assets/site/Immagini sito\adventure-1807524.jpg' %}" -->
++                    <div class="contact-form-header"
++                    data-aos="fade"
++                    data-aos-delay="50"
++                    data-aos-duration="1000"
++                    data-aos-easing="ease-in-out"
++                    data-aos-mirror="true"
++                    data-aos-once="false"
++                    data-aos-anchor-placement="top-center"></div>
++                    <form class="form contact-form" action="https://formspree.io/donnyburnside1@gmail.com" data-aos="fade-up">
++                        <div>
++                            <label class="form-label" for="name">FIRSTNAME AND LASTNAME</label>
++                            <input class="form-control" id="name" name="name" type="text" required />
++                        </div>
++                        <div>
++                            <label class="form-label" for="email">EMAIL</label>
++                            <input class="form-control" id="email" name="email" type="email" required />
++                        </div>
++                        <div>
++                            <input class="form-control" id="phonenumber" name="phonenumber" type="phonenumber" required />
++                            <label class="form-label" for="phonenumber">PHONENUMBER</label>
++                        </div>                                        
++                        <!-- div>
++                            <label class="form-label" for="subject">Subject</label>
++                            <select class="form-control" id="subject" name="subject" required>
++                                <option value="" selected disabled>Choose a Subject</option>
++                                <optgroup label="Option Group">
++                                    <option value="subject-one">Subject One</option>
++                                    <option value="subject-two">Subject Two</option>
++                                    <option value="subject-three">Subject Three</option>
++                                </optgroup>
++                                <option value="subject-four">Subject Four</option>
++                                <option value="subject-five">Subject Five</option>
++                                <option value="subject-six">Subject Six</option>
++                            </select>
++                        </div-->
++                        <div>
++                            <label class="form-label" for="message">MESSAGE</label>
++                            <textarea class="form-control" id="message" name="message" required></textarea>
++                        </div>
++                        <div class="agreements">
++                            <input class="" id="subscribe" name="subscribe" type="checkbox" />
++                            <label class="form-label" for="subscribe">I agree, that in order to process my submission, the provided information and related data are collected and stored electronically. I have read the privacy policy.</label>
++                        </div>
++                        <div>
++                            <button class="button" type="reset">Clear</button>
++                            <button class="button" type="submit">Submit</button>
++                        </div>
++                    </form>
++                </div>
++            </div>
++            <div class="career-section padded-section">
++                <div class="career-info">
++                    <h1>CAREER</h1>
++                    <p>Are you interested in working with us? We are looking forword to knowing you.</p>
++                </div>
++            </div>
++</div>
++
++<footer>
++    <div class="row">
++        <div class="col-md-6">
++            <img src="{% static 'img/website_assets/Happycurus-Invers.png' %}">
++        </div>
++        <div class="col-md-6">
++            <img src="{% static 'img/website_assets/Happycurus-Invers_Claim.png' %}">
++        </div>
+     </div>
+-</div>
++    <div class="agreements-box col-md-6 col-centered">
++        <div class="row">
++            <div class="col-md-4">Legal</div>
++            <div class="col-md-4">Terms</div>
++            <div class="col-md-4">Privacy policy</div>
++        </div>
++    </div>
++</footer>
+ {% endblock %}
+Index: website/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.shortcuts import render\n\ndef index(request):\n    return render(request, 'website/index2.html', {})\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- website/views.py	(revision ae8b7a461bc84ae8046b92b291e9fde5873140f6)
++++ website/views.py	(date 1577190501000)
+@@ -1,4 +1,4 @@
+ from django.shortcuts import render
+ 
+ def index(request):
+-    return render(request, 'website/index2.html', {})
++    return render(request, 'website/index.html', {})

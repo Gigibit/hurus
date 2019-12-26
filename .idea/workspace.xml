@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/helloCurus/templates/website/index2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/img/website_assets/site/Icone Sito Internet/Designbolts-Seo-Market-Analysis.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/website.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/locale/en/LC_MESSAGES/django.po" beforeDir="false" afterPath="$PROJECT_DIR$/core/locale/en/LC_MESSAGES/django.po" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helloCurus/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helloCurus/templates/website/base_site.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/website/base_site.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloCurus/templates/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/website/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/website.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/website.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/website.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/website.js" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,11 +110,19 @@
       <option name="project" value="LOCAL" />
       <updated>1577190209319</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="wip on aos">
+      <created>1577300141113</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577300141114</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="227" y="23" width="883" height="723" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" weight="0.3295099" />
@@ -126,10 +132,11 @@
       <window_info id="Resources Explorer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="0" sideWeight="0.4965197" visible="true" weight="0.3280507" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="0" sideWeight="0.49419954" visible="true" weight="0.3280507" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50348026" side_tool="true" visible="true" weight="0.3280507" />
+      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.5058005" side_tool="true" visible="true" weight="0.3280507" />
+      <window_info anchor="bottom" id="Messages" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
@@ -139,7 +146,8 @@
     <MESSAGE value="Merge branch 'master' of https://github.com/Gigibit/hurus&#10;&#10;# Conflicts:&#10;#&#9;helloCurus/templates/base.html&#10;#&#9;helloCurus/templates/core/employee/statistics.html" />
     <MESSAGE value="wip on freetime and market charts" />
     <MESSAGE value="wip on website" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip on website" />
+    <MESSAGE value="wip on aos" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip on aos" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/statistics.html">
