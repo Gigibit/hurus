@@ -44,7 +44,7 @@
     
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/website.js' %}?v={% now "U" %}" "></script>
-        
+    
     {% endblock footer_javascript_site %}
     {% block footer_javascript_section %}{% endblock footer_javascript_section %}
     {% block footer_javascript_page %}{% endblock footer_javascript_page %}
@@ -57,7 +57,7 @@
         <div class="background aos-init aos-animate" data-aos="fade-in" data-aos-duration="1500" data-aos-anchor=".section--hero" ></div>
     </div>
     <div id="page-wrapper" >
-
+        
         <!-- Navigation -->
         <nav id="application-navbar" class="navbar navbar-expand-lg navbar-light static-top">
             <a class="navbar-brand" href="#">
@@ -65,30 +65,30 @@
             </a>
             <div class="container">
                 <div class="wrapper">
-
+                    
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive" >
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/">{% trans 'ABOUT_HAPPY_CURUS' %}</a>
+                            <li class="nav-item goto-button" data-target="about-happy-curus-section">
+                                <a class="nav-link" >{% trans 'ABOUT_HAPPY_CURUS' %}</a>
+                            </li>
+                            <li class="nav-item goto-button" data-target="environment-section">
+                                <a class="nav-link" >{% trans 'HAPPY_CURUS_AND_THE_ENVIRONMENT' %}</a>
+                            </li>
+                            <li class="nav-item goto-button" data-target="curus-effect-section">
+                                <a class="nav-link">{% trans 'THE_CURUS_EFFECT' %}</a>
+                            </li>
+                            <li class="nav-item goto-button" data-target="contact-section">
+                                <a class="nav-link" >{% trans 'CONTACT' %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/statistics">{% trans 'HAPPY_CURUS_AND_THE_ENVIRONMENT' %}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/courses">{% trans 'THE_CURUS_EFFECT' %}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/curus">{% trans 'CONTACT' %}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/curus">{% trans 'LANGUAGE' %}</a>
+                                <a class="nav-link">{% trans 'LANGUAGE' %}</a>
                             </li>
                         </ul>
                     </div>
-
+                    
                 </div>
             </div>
             <a class="navbar-brand second-navbar-brand" href="#">
@@ -102,12 +102,19 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
-      window.onload= ()=>{
-          // fixes aos issue https://github.com/michalsnik/aos/issues/416
-        $('body').css('overflow-x','hidden')
-        $('.swipeBox').animate( { scrollLeft: '-=460' }, 1000);
-      }
-
+        window.onload= ()=>{
+            $(".goto-button").click(function(event) {
+                event.preventDefault()
+                let id = $(this).data('target')
+                $('html, body').animate({
+                    scrollTop: $(`#${id}`).offset().top
+                }, 2000);
+            });
+            // fixes aos issue https://github.com/michalsnik/aos/issues/416
+            $('body').css('overflow-x','hidden')
+            $('.swipeBox').animate( { scrollLeft: '-=460' }, 1000);
+        }
+        
     </script>
 </body>
 </html>

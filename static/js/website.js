@@ -110,7 +110,8 @@ class ContactForm {
   // Initialise our instance of the ContactForm class when document has loaded
   window.onload = (event) => {
     const form = new ContactForm(document.querySelector('.contact-form'))
-      form.init()
+    form.init()
+
   }
 
 
