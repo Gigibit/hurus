@@ -44,7 +44,7 @@ body{
 }
 .happy-curus-section-image ul{
     position: absolute;
-    top: 20%;
+    top: 10px;
     list-style: none;
 }
 
@@ -149,7 +149,7 @@ body{
 }
 
 .home-image{
-    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpeg);
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpg);
     background-size: cover;
     height: 80%;
     width: 100%;
@@ -634,6 +634,9 @@ li.nav-item{
     width: 100%;
     padding: 0;
     margin: 15px 0 60px 0;
+}
+.curus-effect-monitor{
+    margin-bottom: 50px;
 }
 
 .find-more-button{
