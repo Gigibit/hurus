@@ -263,7 +263,7 @@ Button
     
 }
 .motivation-info-content{
-    height:50px;
+    height:60px;
     background: steelblue;
     color: white;
     padding: 2px 15px 10px 15px;
@@ -633,7 +633,7 @@ li.nav-item{
 .find-more-container{
     width: 100%;
     padding: 0;
-    margin: 30px 0;
+    margin: 15px 0 60px 0;
 }
 
 .find-more-button{

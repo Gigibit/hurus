@@ -95,7 +95,7 @@
                 </div>
             </div>
             <a class="navbar-brand second-navbar-brand" href="#">
-                <img width="94" height="50" src="{% static 'img/website_assets/Happycurus-Claim_SW.png' %}" alt="logo">
+                <img width="144" height="55" src="{% static 'img/website_assets/Happycurus-Claim_SW.png' %}" alt="logo">
             </a>
         </nav>
         {% block content %}
@@ -110,7 +110,7 @@
                 event.preventDefault()
                 let id = $(this).data('target')
                 $('html, body').animate({
-                    scrollTop: $(`#${id}`).offset().top
+                    scrollTop: $(`#${id}`).offset().top - 100
                 }, 2000);
             });
             // fixes aos issue https://github.com/michalsnik/aos/issues/416
