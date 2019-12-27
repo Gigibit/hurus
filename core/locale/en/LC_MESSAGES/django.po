@@ -464,9 +464,14 @@ msgstr 'Our Motivation'
 
 msgid 'OUR_MOTIVATION_DESCRIPTION'
 msgstr 'Team synergy for company efficiency.'
+
 msgid "home_box_description"
 msgstr "How committed is your team? How satisfied are your\
         employees with their tasks? Are they happy on the workplace?\
         Collect and store important data about your employees. Learn\
         how to keep them engaged. Increase productivity through\
         Happycurus."
+
+
+msgid "CAREER"
+msgstr "Career"

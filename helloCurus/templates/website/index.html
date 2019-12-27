@@ -2,6 +2,20 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
+<style>
+    .find-more-button span:after{
+        content:'FIND OUT MORE';
+    }
+    /*
+    .find-more-button:hover span:after{
+        content:'Growth through Awareness';
+    }
+
+    */
+    
+</style>
+
+
 <div class="main">
     <div class="section-container header">
         <div class="home-image"></div>
@@ -86,11 +100,44 @@
                                     <div id="fourth-about" ></div>
                                 </div>
                             </div>
+                            <div class="row find-more-container">
+                                <div class="col-md-12">
+                                    <div class="find-more-button">
+                                        <span></span>    
+                                    </div>
+                                </div>
+                            </div>
                             <div id="curus-effect-section" class="row">
                                 <div class="col-md-12">
                                     <h1 class="section-title">The Curus Effect</h1>
                                     <h4 class="section-subtitle">Know how your employees feel. Encourage team spirit, optimism and attachment to the company.</h4>
-                                    <div class="happy-curus-section-image"></div>
+                                    <div class="happy-curus-section-image">
+                                        <ul>
+                                            <li 
+                                            data-aos-easing="ease-in-back"
+                                            data-aos="fade-right">
+                                                <span>&#10004;</span> <span>Analyse</span>
+                                            </li>
+                                            <li 
+                                            data-aos-easing="ease-in-back"
+                                            data-aos-delay="300"
+                                            data-aos="fade-right">
+                                                <span>&#10004;</span> <span>Act</span>
+                                            </li>
+                                            <li 
+                                            data-aos-easing="ease-in-back"
+                                            data-aos-delay="600"
+                                            data-aos="fade-right">
+                                                <span>&#10004;</span> <span>Improve</span>
+                                            </li>
+                                            <li class="make-it-green" 
+                                            data-aos-easing="ease-in-back"
+                                            data-aos-delay="1200"
+                                            data-aos="fade-right">
+                                                <span>&#10004;</span> <span>Make it green</span></li>
+                                        </ul>
+                                        <img src="{% static 'img/website_assets/site/Immagini sito/AdobeStock_220836324.jpeg' %}">
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="row">
@@ -153,11 +200,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- div class="row">
+                                    <div class="row find-more-container">
                                         <div class="col-md-12">
-                                            <div class="button find-more-button">FIND OUT MORE</div>
+                                            <div class="find-more-button">
+                                                <span></span>
+                                            </div>
                                         </div>
-                                    </div-->
+                                    </div>
                                 </div>
                             </div>
                             <div class="row" id="environment-section">
@@ -243,10 +292,10 @@
                                     </div>
                                     <div class="row  col-md-12">
                                         <div class="col-md-12 curus-donate-section">
-                                                <p>
-                                                    <img src="{% static 'img/website_assets/pallino.png' %}">
-                                                    <span>Happycurus donates 50% of its profits to finance reforestation.</span>
-                                                </p>
+                                            <p>
+                                                <img src="{% static 'img/website_assets/pallino.png' %}">
+                                                <span>Happycurus donates 50% of its profits to finance reforestation.</span>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -269,6 +318,13 @@
                                         <div class="col-md-6 happy-environment-image" data-aos="fade-left">
                                             <img class="left" src="{% static 'img/website_assets/site/Immagini Sito/seconda.PNG' %}">
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row find-more-container">
+                                <div class="col-md-12">
+                                    <div class="find-more-button">
+                                        <span></span>
                                     </div>
                                 </div>
                             </div>
@@ -362,32 +418,39 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row find-more-container">
+                                        <div class="col-md-12">
+                                            <div class="find-more-button">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="glance-section padded-section">
                                         <div class="glance-section-container">
                                             <h1 class="section-title">HAPPYCURUS AT A GLANCE</h1>
-                                            <div class="glance-row"  data-aos="fade-up">
-                                                <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Practice.ico' %}">
+                                            <div class="glance-row">
+                                                <img data-aos="fade-right" src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Practice.ico' %}">
                                                 <div class="description">
                                                     Happycurus keeps managers updated about their teams.
                                                 </div>
                                             </div>
-                                            <div class="glance-row" data-aos="fade-up">
+                                            <div class="glance-row" >
                                                 <div class="description">
                                                     Happycurus supports engagement on the workplace.
                                                 </div>
-                                                <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Places-Optimization.ico' %}">
+                                                <img data-aos="fade-left" src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Places-Optimization.ico' %}">
                                             </div>
-                                            <div class="glance-row" data-aos="fade-up">
-                                                <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Goals.ico' %}">
+                                            <div class="glance-row" >
+                                                <img data-aos="fade-right" src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-SEO-Goals.ico' %}">
                                                 <div class="description">
                                                     Happycurus promotes a goal-oriented mentality.
                                                 </div>
                                             </div>
-                                            <div class="glance-row" data-aos="fade-up">
+                                            <div class="glance-row">
                                                 <div class="description">
                                                     Happycurus makes your business CO&#8322; neutral.
                                                 </div>
-                                                <img src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Market-Analysis.ico' %}">
+                                                <img  data-aos="fade-left" src="{% static 'img/website_assets/site/Icone Sito Internet\Designbolts-Seo-Market-Analysis.ico' %}">
                                             </div>
                                         </div>    
                                     </div>
@@ -442,7 +505,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div id="carrer-section" class="career-section padded-section">
+                                    <div id="career-section" class="career-section padded-section">
                                         <div class="career-info">
                                             <h1>CAREER</h1>
                                             <p>Are you interested in working with us? We are looking forword to knowing you.</p>

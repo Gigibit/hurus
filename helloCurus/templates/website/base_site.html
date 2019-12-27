@@ -83,6 +83,9 @@
                             <li class="nav-item goto-button" data-target="contact-section">
                                 <a class="nav-link" >{% trans 'CONTACT' %}</a>
                             </li>
+                            <li class="nav-item goto-button" data-target="career-section">
+                                <a class="nav-link" >{% trans 'CAREER' %}</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link">{% trans 'LANGUAGE' %}</a>
                             </li>
@@ -111,8 +114,8 @@
                 }, 2000);
             });
             // fixes aos issue https://github.com/michalsnik/aos/issues/416
+            $('body').animate( { scrollLeft: '-=460' }, 1000);
             $('body').css('overflow-x','hidden')
-            $('.swipeBox').animate( { scrollLeft: '-=460' }, 1000);
         }
         
     </script>

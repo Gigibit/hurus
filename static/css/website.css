@@ -40,12 +40,36 @@ body{
     height: 100%;
 }
 .happy-curus-section-image{
-    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_220836324.jpeg);
-    background-repeat: no-repeat;
-    background-size: auto 80%;
-    background-position: center;
-    height: 500px;
-    
+    position: relative;
+}
+.happy-curus-section-image ul{
+    position: absolute;
+    top: 20%;
+    list-style: none;
+}
+
+.happy-curus-section-image ul li{
+    background-color: steelblue;
+    margin: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 15px;
+    color: white;
+}
+
+.happy-curus-section-image ul li.make-it-green{
+    background-color: green;
+}
+.happy-curus-section-image ul li span:first-child{
+    color: greenyellow;
+}
+.happy-curus-section-image ul li span:nth-child(2){
+    margin: 0 50px;
+}
+
+
+.happy-curus-section-image img{
+    width: 100%;
 }
 .curus-effect-box{
     border: 1px solid steelblue;
@@ -228,12 +252,10 @@ Button
 }
 .motivation-box{
     position: relative;
-    height: 550px;
+    padding-top: 150px;
 }
 .motivation-info-wrapper{
-    position: absolute;
     width: 60%;
-    height: 65%;
     top: 45%;
     left: 0;
     right: 0;
@@ -241,13 +263,16 @@ Button
     
 }
 .motivation-info-content{
+    height:50px;
     background: steelblue;
     color: white;
     padding: 2px 15px 10px 15px;
     margin: 0 auto;
-    height: 15%;
     overflow: hidden;
-    transition: height 250ms ease;
+    z-index: 1;
+    position: relative;
+    margin-top: 50%;
+    transition: height 200ms ease-in;
 }
 
 .motivation-img{
@@ -255,6 +280,9 @@ Button
 }
 .motivation-img-wrapper{
     height: 350px;
+    position: absolute;
+    top: 0;
+    z-index: 0;
     overflow: hidden;
     border-radius: 5px;
 }
@@ -267,11 +295,7 @@ Button
     width: 100%;
 }
 .glance-section-container{
-    width: 50%;
-    display: block;
-    margin: 0 auto;
-    background-color: lightblue;
-    transform: skewX(-10deg);
+    width: 100vw;
     left: 0;
     right: 0;
     display: block;
@@ -279,6 +303,27 @@ Button
     margin: 0 auto;
     color: #222;
     padding: 0 100px;
+    position: relative;
+    background-color: rgba(173,216,230 , 1);
+    z-index: 1;
+    margin: 0 auto 200px auto;
+    display: block;
+    text-align: center;
+    padding: 30px;
+    padding-bottom: 50px;
+}
+
+.glance-section-container::after{
+    height: 100%;
+    width: auto;
+    position: absolute;
+    content: '';
+    right: 0;
+    top: -69px;
+    z-index: -1;
+    border-style: solid;
+    border-color: transparent rgba(173,216,230 , 1) transparent transparent;
+    border-width: 70px 100vw 0 0;
 }
 .glance-row{
     display: table;
@@ -289,7 +334,9 @@ Button
     vertical-align: middle;
     font-size: 16px;
     font-family: rubikBold;
-    color: white;
+    color: #1E1E1E;
+    font-size: 1.875rem;
+    line-height: 2.5rem;
 }
 .glance-row img{
     width: 150px;
@@ -397,7 +444,8 @@ footer img{
     margin-top: 5px;
 }
 .motivation-info-wrapper:hover .motivation-info-content{
-    height: 100%;
+    height: 350px;
+
 }
 
 .contact-form-section{
@@ -580,4 +628,30 @@ li.nav-item{
     font-size: 14px;
     width: 20%;
     text-align: center;
+}
+
+.find-more-container{
+    width: 100%;
+    padding: 0;
+    margin: 30px 0;
+}
+
+.find-more-button{
+    cursor: pointer;
+    transition: width 500ms ease-in, background-color 1s ease-in;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    background-color: #F0A10B;
+    width: 150px;
+    height: 45px;
+    padding: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+}
+.find-more-button:hover{
+    background-color: #142841;
+    width: 250px;
+
 }

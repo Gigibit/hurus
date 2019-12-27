@@ -113,6 +113,13 @@ class ContactForm {
     form.init()
 
   }
+  $(document).ready(()=>{
+    $('.find-more-button').click(()=>   
+            $('html, body').animate({
+                scrollTop: $('#contact-section').offset().top
+            }, 1500)
+        )
+  })
 
 
 
