@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helloCurus/templates/website/base_site.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/website/base_site.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helloCurus/templates/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/website/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/website.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/website.css" afterDir="false" />
@@ -122,7 +121,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="227" y="23" width="883" height="723" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" weight="0.3295099" />
