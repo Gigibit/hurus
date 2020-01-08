@@ -15,6 +15,7 @@ import datetime
 from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
 from django.utils import translation
+
 flat = lambda l: [item for sublist in l for item in sublist]
 MAX_NUMBER_DISPLAYED = 6
 
@@ -586,20 +587,29 @@ def home_manager(request, manager):
 # Login engine
 def engine(request):
     return JsonResponse({
-     's':  encrypt('sara cannella')
-    })
+     's':  ''
+     })
 
 
 def login_user_from_token(request, token):
     try:
-        decrypted_email = decrypt(token)
-        user = UserProfile.objects.get(email = decrypted_email)
-        login(request, user)
-        return redirect('/')
+        decrypted = json.loads(decrypt(token))
+        expiring_date = datetime.datetime.strptime(decrypted['expiring_time'], "%Y-%m-%d").date()
+        if expiring_date > datetime.datetime.now().date():
+            user = UserProfile.objects.get(email = decrypted['email'])
+            login(request, user)
+            return redirect('/')
+        else:
+            return render(request, 'core/token_expired.html')
+                
     except (InvalidToken, UserProfile.DoesNotExist):
-        return JsonResponse({
-            'info_cripted':  encrypt(token)
-        })
+        expiring_time = datetime.date.today() + datetime.timedelta(days=1)
+
+        return JsonResponse(encrypt(str(json.dumps({
+            'email':  token,
+            'expiring_time' : expiring_time
+        }, indent=4, sort_keys=True, default=str)
+    )),safe=False)
 
 
 

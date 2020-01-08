@@ -29,7 +29,7 @@ admin.site.site_header = 'HelloCurus Admin Console'
 class EmployeeProfileAdmin(admin.ModelAdmin):
     exclude = ('username',)
     fieldsets = (
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password','agency')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'agency')}),
           ('Employee info' , {'fields': ('team',)}),
         )
     add_fieldsets = (
@@ -46,7 +46,7 @@ class EmployeeProfileAdmin(admin.ModelAdmin):
 class ManagerProfileAdmin(admin.ModelAdmin):
     exclude = ('username',)
     fieldsets = (
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'password','agency')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'agency')}),
         )
     add_fieldsets = (
             (None, {

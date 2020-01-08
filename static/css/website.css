@@ -21,7 +21,6 @@ body{
     top: 0;
     z-index: 9999999999999;
     width: 100%;
-    padding-top: 30px;
 }
 #application-navbar .container{
     padding: 0;
@@ -96,16 +95,21 @@ body{
 
 .enviroment-row{
     height: 100%;
+    padding: 0 122px;
 }
 
 .happy-environment-image{
     height: 100%;
     overflow: hidden;
     background: rgba(70,130,180 ,0.4);
+    position: relative;
 }
 .happy-environment-image img{
     height: auto;
     width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
     margin: 0 auto 30px auto;
     text-align: center;
     display: block;
@@ -160,7 +164,7 @@ body{
     right: 0;
     display: block;
     border-radius: 5px;
-    bottom: 0;
+    bottom: -65px;
     margin: 0 auto;
     color: #222;
     padding: 15px;
@@ -170,13 +174,15 @@ body{
     position: relative;
     background-color: rgba(173,216,230 , 1);
     z-index: 1;
-    width: 80vw;
+    width: 50vw;
     margin: 0 auto;
     display: block;
     text-align: center;
     padding: 30px;
 }
-
+#about-happy-curus-section{
+    padding-top: 45px;
+}
 .home-box-content::after{
     height: 100%;
     width: auto;
@@ -187,7 +193,7 @@ body{
     z-index: -1;
     border-style: solid;
     border-color: transparent rgba(173,216,230 , 1) transparent transparent;
-    border-width: 70px 80vw 0 0;
+    border-width: 70px 50vw 0 0;
 }
 
 /*
@@ -215,14 +221,16 @@ Form
     display: block;
     width: 100%;
     padding: 10px;
-    font: 0.875rem/1.5 sans-serif;
+    font: 1.575rem sans-serif;
     color: #333;
     background-color: #fff;
     border: 1px solid #bbb;
     border-radius: 4px;
     box-sizing: border-box;
 }
-
+.motivation-description{
+    font-size: 14px;
+}
 /*
 Contact Form
 */
@@ -262,6 +270,9 @@ Button
     margin: 0 auto;
     
 }
+.motivation-boxes{
+    overflow: hidden;
+}
 .motivation-info-content{
     height:60px;
     background: steelblue;
@@ -271,7 +282,7 @@ Button
     overflow: hidden;
     z-index: 1;
     position: relative;
-    margin-top: 50%;
+    margin-top: 54%;
     transition: height 200ms ease-in;
 }
 
@@ -286,9 +297,13 @@ Button
     overflow: hidden;
     border-radius: 5px;
 }
-
+.no-margin {
+    margin: 0;
+}
+.no-padding{
+    padding: 0;
+}
 .motivation-boxes{
-    margin-bottom: 50px;
 }
 
 .glance-section{
@@ -346,7 +361,6 @@ Button
 .section-title{
     color: steelblue;
     padding-top: 30px;
-    padding-left: 30px;
     font-weight: bold;
     text-align: left;
     font-size: 35px;
@@ -398,13 +412,14 @@ Button
     height: 300px;
     background-repeat: no-repeat;
     padding: 50px;
+    background-position: center;
     
 }
 
 .career-info{
     position: absolute;
     bottom: 30px;
-    color: white;
+    color: #222;
 }
 .career-info p, .career-info h1{
     font-weight: bold;
@@ -441,7 +456,7 @@ footer img{
     font-size: 18px;
     margin-bottom: 25px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 .motivation-info-wrapper:hover .motivation-info-content{
     height: 350px;
@@ -515,7 +530,7 @@ input[type="checkbox"]:focus{
 
 .happy-environment-description-container{
     background: rgba(70,130,180 ,0.4);
-
+    min-height: 350px;
 }
 
 .curus-donate-section{
@@ -529,18 +544,29 @@ input[type="checkbox"]:focus{
 
 .curus-donate-section:hover{
     background: greenyellow;
-
 }
 
 
 .happy-environment-description {
-    padding: 40px;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 21px;
     margin: 5px 0;
     display: block;
     height: 100%;
 
+}
+#environment-section{
+    margin-top: -85px;
+}
+#motivation-section, #curus-effect-section{
+    margin-top: -75px;
+
+}
+#contact-section{
+    margin-top: -220px;
+}
+#message{
+    resize: none;
 }
 .curus-donate-section{
     text-align: center;
@@ -609,10 +635,15 @@ input[type="checkbox"]:focus{
     background: #fff;
     opacity: 0.8;
 }
-
+.about-happy-curus-find-more{
+    border-top: 5px solid steelblue;
+}
+.about-happy-curus-find-more > div{
+    padding-top: 25px;
+}
 .about-happy-curus-row{
     border-top: 5px solid steelblue;
-    border-bottom: 5px solid steelblue;
+    margin: 0 25px;
 }
 
 
@@ -620,14 +651,21 @@ input[type="checkbox"]:focus{
     transition: background-color 300ms ease-in-out;
 }
 .curus-effect-box:hover{
-    background: white;
+    background: steelblue;
+    color: white;
+}
+
+.navbar-nav{
+    display: table;
 }
 
 li.nav-item{
     padding-top: 14px;
-    font-size: 14px;
+    font-size: 15px;
     width: 20%;
     text-align: center;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .find-more-container{

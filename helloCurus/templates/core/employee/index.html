@@ -16,8 +16,26 @@
 
 {% block content %}
 
+
 <div class="container">
+  
   <div class="row">
+    <div class="date-picker col-md-12 justify">
+
+      <div class="row">
+        <div class='col-sm-3 mx-auto'>
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker'>
+              <input id="date-picker" type='text' class="form-control" />
+              <div id="date-picker-info" class="row">
+                Date formats: dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
     <div class="calendar">
       <div class="calendar__month">
         <div class="cal-month__previous"><</div>
@@ -95,70 +113,74 @@
   <div class="row">
     <h1>{% trans 'COURSES' %}</h1>
     {% for course in courses %}
-        <div class="col-md-6">
-            <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
-                <div class="course-title col-md-10">{{course.title}}</div>
-                <div class="seen-icon col-md-2">
-                    <span class="course-seen glyphicon glyphicon-play"></span>
-                </div>
-            </div>
+    <div class="col-md-6">
+      <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
+        <div class="course-title col-md-12">{{course.title}}</div>
+        <div class="seen-icon col-md-2">
+          <span class="course-seen glyphicon glyphicon-play"></span>
         </div>
-        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
   </div>
   <div class="col-md-12 show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
-<!-- End Container -->
+  <!-- End Container -->
+  
+  
+  
+  
+  <div class="modal fade" id="tought-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-full" role="document">
+      <div class="modal-content">
+        <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <div class="modal-body p-4 row" id="result">
+          <div class="col-md-6">
+            <div class="col-md-12 section-title"><h1>{% trans 'FREETIME'%}</h1></div>
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-12 section-title"><h1>{% trans 'MARKETPLACE'%}</h1></div>
+          </div>
+          <div class="col-md-6 info-row">
+            <div class="col-md-12">{% trans 'YOUR_MOOD'%}</div>
+            <div id="tought-modal-mood-freetime" class="col-md-12"></div>
+          </div>
+          <div class="col-md-6 info-row">
+            <div class="col-md-12">{% trans 'YOUR_MOOD'%}</div>
+            <div id="tought-modal-mood-marketplace" class="col-md-12"></div>
+          </div>
+          <div class="col-md-6 info-row">
+            <div class="col-md-12">{% trans 'YOUR_TOUGHT'%}</div>
+            <div id="tought-modal-tought-freetime" class="col-md-12"></div>
+          </div>
 
+          <div class="col-md-6 info-row">
+            <div class="col-md-12">{% trans 'YOUR_TOUGHT'%}</div>
+            <div id="tought-modal-tought-marketplace" class="col-md-12"></div>
+          </div>
 
-
-
-<div class="modal fade" id="tought-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-full" role="document">
-    <div class="modal-content">
-      <button type="button" class="close close-button" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span>
-      </button>
-      <div class="modal-body p-4" id="result">
-        <div class="row">
-          <div class="col-md-2 section-title"><h1>{% trans 'FREETIME'%}</h1></div>
+          <div class="col-md-6 info-row">
+            <div class="col-md-12">{% trans 'ACTIVITIES'%}</div>
+            <div id="tought-modal-activities-freetime" class="row col-md-12"></div>
+          </div>
+          <div class="col-md-6 info-row">
+            <div class="col-md-12">{% trans 'ACTIVITIES'%}</div>
+            <div id="tought-modal-activities-marketplace" class="row col-md-12"></div>
+          </div>
+   
+      
+          <div class="col-md-12 info-row">
+            <div class="col-md-12">{% trans 'MOTIVATIONAL_QUOTE'%}</div>
+            <div id="tought-modal-motivational-quote" class="col-md-12"></div>
+          </div>
+          
         </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'YOUR_MOOD'%}</div>
-          <div id="tought-modal-mood-freetime" class="col-md-10"></div>
+        <div class="modal-footer">
+          <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
         </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'YOUR_TOUGHT'%}</div>
-          <div id="tought-modal-tought-freetime" class="col-md-10"></div>
-        </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'ACTIVITIES'%}</div>
-          <div id="tought-modal-activities-freetime" class="row col-md-10"></div>
-        </div>
-        <div class="row">
-          <div class="col-md-2 section-title"><h1>{% trans 'MARKETPLACE'%}</h1></div>
-        </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'YOUR_MOOD'%}</div>
-          <div id="tought-modal-mood-marketplace" class="col-md-10"></div>
-        </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'YOUR_TOUGHT'%}</div>
-          <div id="tought-modal-tought-marketplace" class="col-md-10"></div>
-        </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'ACTIVITIES'%}</div>
-          <div id="tought-modal-activities-marketplace" class="row col-md-10"></div>
-        </div>
-        <div class="row info-row">
-          <div class="col-md-2">{% trans 'MOTIVATIONAL_QUOTE'%}</div>
-          <div id="tought-modal-motivational-quote" class="col-md-10"></div>
-        </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
       </div>
     </div>
   </div>
-</div>
-
-{% endblock %}
+  
+  {% endblock %}

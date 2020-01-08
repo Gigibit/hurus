@@ -2,7 +2,7 @@
 {% load i18n %}
 <html>
 <head>
-    <title>{% block title %}Home {% endblock title %} | CRM Easy</title>
+    <title>Hellocurus</title>
     {% block head_meta %}
     {% block head_meta_charset %}
     <meta http-equiv="Content-Type"
@@ -10,6 +10,8 @@
     {% endblock head_meta_charset %}
     {% block head_meta_contentlanguage %}
     <meta http-equiv="Content-Language" value="en-US" />
+    <meta name="author" content="Luigi Chougrad" />
+
     {% endblock head_meta_contentlanguage %}
     {% block head_meta_viewport %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,15 +55,12 @@
 
 
 <body>
-    <div class="backgrounds overlay">
-        <div class="background aos-init aos-animate" data-aos="fade-in" data-aos-duration="1500" data-aos-anchor=".section--hero" ></div>
-    </div>
     <div id="page-wrapper" >
         
         <!-- Navigation -->
         <nav id="application-navbar" class="navbar navbar-expand-lg navbar-light static-top">
             <a class="navbar-brand" href="#">
-                <img width="94" height="50" src="{% static 'img/website_assets/logo-light.jpg' %}" alt="logo">
+                <img width="140" height="80" src="{% static 'img/website_assets/logo-light.jpg' %}" alt="logo">
             </a>
             <div class="container">
                 <div class="wrapper">
@@ -75,7 +74,7 @@
                                 <a class="nav-link" >{% trans 'ABOUT_HAPPY_CURUS' %}</a>
                             </li>
                             <li class="nav-item goto-button" data-target="environment-section">
-                                <a class="nav-link" >{% trans 'HAPPY_CURUS_AND_THE_ENVIRONMENT' %}</a>
+                                <a class="nav-link" >{% trans 'CURUS_AND_THE_ENVIRONMENT' %}</a>
                             </li>
                             <li class="nav-item goto-button" data-target="curus-effect-section">
                                 <a class="nav-link">{% trans 'THE_CURUS_EFFECT' %}</a>
@@ -95,7 +94,7 @@
                 </div>
             </div>
             <a class="navbar-brand second-navbar-brand" href="#">
-                <img width="144" height="55" src="{% static 'img/website_assets/Happycurus-Claim_SW.png' %}" alt="logo">
+                <img width="184" height="75" src="{% static 'img/website_assets/Happycurus-Claim_SW.png' %}" alt="logo">
             </a>
         </nav>
         {% block content %}
@@ -110,7 +109,7 @@
                 event.preventDefault()
                 let id = $(this).data('target')
                 $('html, body').animate({
-                    scrollTop: $(`#${id}`).offset().top - 100
+                    scrollTop: $(`#${id}`).offset().top - 50
                 }, 2000);
             });
             // fixes aos issue https://github.com/michalsnik/aos/issues/416

@@ -2,7 +2,7 @@
 
 .calendar {
   width: 350px;
-  margin: 50px auto 0;
+  margin: 10px auto 0;
 }
 
 .calendar__month {
@@ -12,13 +12,22 @@
   width: 100%;
   position: relative;
 }
+#date-picker-info{
+  opacity: 0;
+  font-size: 10px;
+  margin-top: 7px;
+  transition: opacity 200ms ease-in;
+}
+#date-picker:focus + #date-picker-info{
+  opacity: 1;
+}
 
 .cal-month__previous,
 .cal-month__next {
   position: absolute;
   top: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -40,7 +49,7 @@
 .cal-month__current {
   text-align: center;
   color: #777;
-
+  
 }
 
 .cal-head__day,
@@ -98,16 +107,16 @@
 
 
 .modal-full {
-    min-width: 100%;
-    margin: 0;
+  min-width: 100%;
+  margin: 0;
 }
 
 .modal-full .modal-content {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 .mood, .activity-icon{
-    height: 35px;
-    width: 35px;
+  height: 35px;
+  width: 35px;
 }
 .activity-box{
   text-align: center;
@@ -145,4 +154,18 @@
 .show-more-button{
   font-size: 21px;
   margin-top: 15px;
+}
+
+.hide-month .ui-datepicker-month,
+.hide-current .ui-datepicker-current,
+.hide-calendar .ui-datepicker-calendar{
+  display: none;
+}
+.date-picker{
+  margin-top: 65px;
+}
+.date-picker .row{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
 }

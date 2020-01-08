@@ -58,12 +58,23 @@ $('#current-tought-marketplace').on('input propertychange paste', function() {
 
 $(document).on('click','.freetime-box-wrapper', function(){
     let element = $(this)
-    let activity = element.data('activity')
-    if(freetimeActivities.indexOf(activity) != -1){
+    let activity = element.data('activity');
+    let index = freetimeActivities.indexOf(activity) 
+    if( index != -1){
         $(element.children()[0]).removeClass('freetime-box-selected')
         freetimeActivities.splice(index, 1);
     }
-    else {
+    else if (freetimeActivities.length < 5) {
+        $(element.children()[0]).addClass('freetime-box-selected')
+        freetimeActivities.push(activity);
+    } else {
+        let selectedActivities = $('.freetime-box-selected')
+
+        let lastActivitySelect = $(selectedActivities[selectedActivities.length - 1 ])
+        let indexOfLastSelectedActivity = freetimeActivities.indexOf(lastActivitySelect.parent().data('activity'))
+        
+        lastActivitySelect.removeClass('freetime-box-selected')
+        freetimeActivities.splice(indexOfLastSelectedActivity, 1);
         $(element.children()[0]).addClass('freetime-box-selected')
         freetimeActivities.push(activity);
     }
@@ -71,11 +82,22 @@ $(document).on('click','.freetime-box-wrapper', function(){
 $(document).on('click','.marketplace-box-wrapper', function(){
     let element = $(this)
     let activity = element.data('activity')
-    if(marketplaceActivities.indexOf(activity) != -1){
+    let index = marketplaceActivities.indexOf(activity) 
+    if( index != -1){
         $(element.children()[0]).removeClass('marketplace-box-selected')
         marketplaceActivities.splice(index, 1);
     }
-    else {
+    else if(marketplaceActivities.length < 5 ) {
+        $(element.children()[0]).addClass('marketplace-box-selected')
+        marketplaceActivities.push(activity);
+    } else {
+        let selectedActivities = $('.marketplace-box-selected')
+
+        let lastActivitySelect = $(selectedActivities[selectedActivities.length - 1 ])
+        let indexOfLastSelectedActivity = marketplaceActivities.indexOf(lastActivitySelect.parent().data('activity'))
+        
+        lastActivitySelect.removeClass('marketplace-box-selected')
+        marketplaceActivities.splice(indexOfLastSelectedActivity, 1);
         $(element.children()[0]).addClass('marketplace-box-selected')
         marketplaceActivities.push(activity);
     }

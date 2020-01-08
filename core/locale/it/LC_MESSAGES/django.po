@@ -433,11 +433,11 @@ msgstr "Please, fill every field"
 msgid "ABOUT_HAPPY_CURUS"
 msgstr "About Happycurus"
 
-msgid "HAPPY_CURUS_AND_THE_ENVIRONMENT"
-msgstr "Happycurus and the Environment"
+msgid "CURUS_AND_THE_ENVIRONMENT"
+msgstr "Curus and the Environment"
 
 msgid "THE_CURUS_EFFECT"
-msgstr "The Curus Effect"
+msgstr "The Happycurus Effect"
 
 msgid "CONTACT"
 msgstr "Contact"
@@ -455,9 +455,22 @@ msgid "ABOUT_HAPPY_CURUS_DESCRIPTION"
 msgstr "People don't leave jobs but unhealthy workplaces. Thanks to Happycurus you can:"
 
 
+msgid "OUR_MOTIVATION"
+msgstr "Our Motivation"
+
+msgid "OUR_MOTIVATION_DESCRIPTION"
+msgstr "Team synergy for company efficiency."
+
 msgid "home_box_description"
 msgstr "How committed is your team? How satisfied are your\
         employees with their tasks? Are they happy on the workplace?\
         Collect and store important data about your employees. Learn\
         how to keep them engaged. Increase productivity through\
         Happycurus."
+
+
+msgid "CAREER"
+msgstr "Career"
+
+msgid "COULD_NOT_PROCESS_SELECTED_DATE"
+msgstr "Cannot process selected date!"

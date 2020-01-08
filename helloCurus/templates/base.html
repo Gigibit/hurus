@@ -2,11 +2,12 @@
 {% load i18n %}
 <html>
 <head>
-    <title>{% block title %}Home {% endblock title %} | CRM Easy</title>
+    <title>{% block title %} Application {% endblock title %} | Happycurus</title>
     {% block head_meta %}
     {% block head_meta_charset %}
     <meta http-equiv="Content-Type"
     content="text/html; charset=utf-8" />
+    <meta name="author" content="Luigi Chougrad" />
     {% endblock head_meta_charset %}
     {% block head_meta_contentlanguage %}
     <meta http-equiv="Content-Language" value="en-US" />
@@ -38,10 +39,10 @@
     {% endblock head_css %}
     {% block footer_javascript %}
     {% block footer_javascript_site %}
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
-    <script>window['None']  = null</script><!-- to avoid error from bknd -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
     <script>window['True']  = true</script><!-- to avoid error from bknd -->
     <script>window['False'] = false</script><!-- to avoid error from bknd -->
     
@@ -50,7 +51,6 @@
     <script src="{% static 'js/charts.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     
-    <script src="https://momentjs.com/downloads/moment.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
     
     {% endblock footer_javascript_site %}
@@ -65,7 +65,8 @@
         'SELECT_DATE_BEFORE_TODAY' : "{% trans 'SELECT_A_DAY_BEFORE_TODAY' %}",
         'MISSING_FIELDS' : "{% trans 'MISSING_FIELDS' %}",
         'FREETIME_MOOD_COUNT': "{% trans 'CAUSE_EFFECT_FREETIME' %}",
-        'MARKETPLACE_MOOD_COUNT': "{% trans 'CAUSE_EFFECT_MARKETPLACE' %}"
+        'MARKETPLACE_MOOD_COUNT': "{% trans 'CAUSE_EFFECT_MARKETPLACE' %}",
+        'COULD_NOT_PROCESS_SELECTED_DATE': "{% trans 'COULD_NOT_PROCESS_SELECTED_DATE' %}",
     }
 
 
