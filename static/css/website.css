@@ -172,7 +172,6 @@ body{
 }
 .home-box-content{
     position: relative;
-    background-color: rgba(173,216,230 , 1);
     z-index: 1;
     width: 50vw;
     margin: 0 auto;
@@ -184,16 +183,20 @@ body{
     padding-top: 45px;
 }
 .home-box-content::after{
+    background-color: rgba(173,216,230 , 1);
     height: 100%;
-    width: auto;
+    width: 100%;
     position: absolute;
     content: '';
     right: 0;
-    top: -69px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    /* top: -25px; */
     z-index: -1;
-    border-style: solid;
-    border-color: transparent rgba(173,216,230 , 1) transparent transparent;
-    border-width: 70px 50vw 0 0;
+    transform: skewX(-11deg);
+    /* border-color: transparent rgba(173,216,230 , 1) transparent transparent; */
+    /* border-width: 25px 50vw 0 0; */
 }
 
 /*
@@ -205,8 +208,12 @@ Form
 .form h1{
     font-weight: bold;
 }
-
-
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 .form > div.is-hidden {
     display: none;
@@ -660,6 +667,7 @@ input[type="checkbox"]:focus{
 }
 
 li.nav-item{
+    cursor: pointer;
     padding-top: 14px;
     font-size: 15px;
     width: 20%;
@@ -684,7 +692,7 @@ li.nav-item{
     margin: 0 auto;
     display: block;
     background-color: #F0A10B;
-    width: 150px;
+    width: 190px;
     height: 45px;
     padding: 12px;
     font-size: 17px;
