@@ -15,6 +15,7 @@ import datetime
 from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
 from django.utils import translation
+from django.contrib.auth.decorators import login_required
 
 flat = lambda l: [item for sublist in l for item in sublist]
 MAX_NUMBER_DISPLAYED = 6
@@ -376,7 +377,7 @@ def e_learning_employee(request, employee):
         'course_to_see': course_to_see
     })
 
-
+@login_required(login_url='/website')
 def e_learning_detail(request,id):
     course = Course.objects.get(pk=id)
     if course not in request.user.seen_courses.all():
@@ -408,7 +409,7 @@ def add_activity(request):
             'id'   : activity.pk
         })
 
-    
+
 def check_survey(fn, request, employee):
     toughts = get_toughts()
     default_activity_choose = get_activity_available_choose()
@@ -433,6 +434,7 @@ def check_survey(fn, request, employee):
         })
     return fn(request, employee)
 
+
 def get_employee_from_request_user(user):
     return user, not user.is_manager()
 
@@ -454,6 +456,7 @@ def tought_for_day(request):
     except Tought.DoesNotExist:
         return JsonResponse({})
 
+@login_required(login_url='/website')
 def statistics_for_day(request):
     toughts = [t.to_public_dict() for t in Tought.objects.filter(
         created_at__day__lte=request.GET['day'],
@@ -528,28 +531,25 @@ def submit_survey(request):
         })
     return None
 
-
+@login_required(login_url='/website')
 def home(request):
     user, is_employee = get_employee_from_request_user(request.user)
-
     return check_survey(home_employee, request, user) if is_employee else home_manager(request, user)
 
+@login_required(login_url='/website')
 def statistics(request):
     user, is_employee = get_employee_from_request_user(request.user)
     return check_survey(statistics_employee, request, user) if is_employee else statistics_manager(request, user)
 
-
-#TODO: uncomment right query
+@login_required(login_url='/website')
 def happy_corus(request):
-    #curus = Curus.objects.get(language=request.user.preferred_language)
     curus = Curus.objects.get(language__iexact= translation.get_language())
     return render(request, 'core/employee/happy_curus.html', {
         'curus': curus,
     })
     
     
-    # return check_survey(happy_curus_employee, request, user) if is_employee else  happy_curus_manager(request, user)
-
+@login_required(login_url='/website')
 def e_learning(request):
     user, is_employee = get_employee_from_request_user(request.user)
     return check_survey(e_learning_employee, request, user) if is_employee else e_learning_manager(request, user)
