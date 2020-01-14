@@ -21,6 +21,10 @@ body{
     top: 0;
     z-index: 9999999999999;
     width: 100%;
+    height: 75px;
+}
+.main{
+    margin-top: 75px;
 }
 #application-navbar .container{
     padding: 0;
@@ -48,7 +52,7 @@ body{
 }
 
 .happy-curus-section-image ul li{
-    background-color: steelblue;
+    background-color: deepskyblue;
     margin: 30px;
     font-size: 18px;
     font-weight: bold;
@@ -71,7 +75,7 @@ body{
     width: 100%;
 }
 .curus-effect-box{
-    border: 1px solid steelblue;
+    border: 1px solid deepskyblue;
     border-radius: 25px;
     margin: 10px;
     height: 270px;
@@ -101,7 +105,7 @@ body{
 .happy-environment-image{
     height: 100%;
     overflow: hidden;
-    background: rgba(70,130,180 ,0.4);
+    background-color: rgba(173,216,230 , 1);
     position: relative;
 }
 .happy-environment-image img{
@@ -155,8 +159,9 @@ body{
 .home-image{
     background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpg);
     background-size: cover;
-    height: 80%;
+    height: 100%;
     width: 100%;
+    background-position: center;
 }
 .home-box{
     position: absolute;
@@ -164,7 +169,7 @@ body{
     right: 0;
     display: block;
     border-radius: 5px;
-    bottom: -65px;
+    bottom: -265px;
     margin: 0 auto;
     color: #222;
     padding: 15px;
@@ -176,14 +181,15 @@ body{
     width: 50vw;
     margin: 0 auto;
     display: block;
+    color: white;
     text-align: center;
     padding: 30px;
 }
 #about-happy-curus-section{
-    padding-top: 45px;
+    padding-top: 240px;
 }
 .home-box-content::after{
-    background-color: rgba(173,216,230 , 1);
+    background-color: deepskyblue;
     height: 100%;
     width: 100%;
     position: absolute;
@@ -275,14 +281,14 @@ Button
     left: 0;
     right: 0;
     margin: 0 auto;
-    
+
 }
 .motivation-boxes{
     overflow: hidden;
 }
 .motivation-info-content{
     height:60px;
-    background: steelblue;
+    background: deepskyblue;
     color: white;
     padding: 2px 15px 10px 15px;
     margin: 0 auto;
@@ -367,7 +373,7 @@ Button
 
 .section-title{
     color: steelblue;
-    padding-top: 30px;
+    padding-top: 45px;
     font-weight: bold;
     text-align: left;
     font-size: 35px;
@@ -416,17 +422,17 @@ Button
     position: relative;
     background: url('/static/img/website_assets/site/Immagini sito/writing-1149962_1920.jpg');
     width: 100%;
-    height: 300px;
+    height: 750px;
     background-repeat: no-repeat;
     padding: 50px;
     background-position: center;
-    
+
 }
 
 .career-info{
     position: absolute;
-    bottom: 30px;
-    color: #222;
+    top: 30px;
+    color: white;
 }
 .career-info p, .career-info h1{
     font-weight: bold;
@@ -444,7 +450,7 @@ footer{
     background: #142841;
     padding-bottom: 50px;
     width: 100%;
-    
+
 }
 
 footer img{
@@ -473,7 +479,7 @@ footer img{
 .contact-form-section{
     width: 100%;
     height: 800px;
-    
+
 }
 
 .contact-form-header{
@@ -488,7 +494,7 @@ footer img{
 .contact-form-container{
     position: relative;
     height: 100%;
-    
+
 }
 .contact-form {
     position:absolute;
@@ -496,7 +502,7 @@ footer img{
     width:50vw;
     margin: 0 auto;
     z-index: 3;
-    
+
     padding: 50px;
     background-color: rgba(255, 255, 255, .8);
     border-radius: 4px;
@@ -505,7 +511,7 @@ footer img{
     left: 0;
     right: 0;
     bottom:0;
-    
+
 }
 .form-label{
     font-weight: bold;
@@ -525,7 +531,7 @@ input[type="checkbox"]{
     border-width: 0;
     transition: all .3s linear;
     border: 3px solid #222;
-    
+
 }
 input[type="checkbox"]:checked{
     background-color: #2ECC71;
@@ -536,7 +542,7 @@ input[type="checkbox"]:focus{
 }
 
 .happy-environment-description-container{
-    background: rgba(70,130,180 ,0.4);
+    background-color: rgba(173,216,230 , 1);
     min-height: 350px;
 }
 
@@ -594,7 +600,7 @@ input[type="checkbox"]:focus{
   /* fallback for old browsers */
     /* background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
     /* background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
+
 }
 
 
@@ -602,15 +608,15 @@ input[type="checkbox"]:focus{
     position:absolute;
     top:-30px;
     content:"";
-    height: 0; 
+    height: 0;
     width: 0px;
     border-right: 50vw solid rgba(255, 255, 255, .8);
     border-top: 30px solid transparent;
     left: 0;
     right: 0;
     bottom:0;
-    
-    
+
+
 }
 .backgrounds{
     width: 100%;
@@ -643,13 +649,13 @@ input[type="checkbox"]:focus{
     opacity: 0.8;
 }
 .about-happy-curus-find-more{
-    border-top: 5px solid steelblue;
+    border-top: 5px solid deepskyblue;
 }
 .about-happy-curus-find-more > div{
     padding-top: 25px;
 }
 .about-happy-curus-row{
-    border-top: 5px solid steelblue;
+    border-top: 5px solid deepskyblue;
     margin: 0 25px;
 }
 
@@ -658,7 +664,7 @@ input[type="checkbox"]:focus{
     transition: background-color 300ms ease-in-out;
 }
 .curus-effect-box:hover{
-    background: steelblue;
+    background: deepskyblue;
     color: white;
 }
 
@@ -670,11 +676,22 @@ li.nav-item{
     cursor: pointer;
     padding-top: 14px;
     font-size: 15px;
-    width: 20%;
+    width: 140px;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
 }
+.home-box-content h1{
+    font-weight: bold;
+    line-height: 40px;
+}
+.home-box-content p{
+    font-size:17px;
+}
+.width-80{
+    width: 80px!important;
+}
+
 
 .find-more-container{
     width: 100%;
