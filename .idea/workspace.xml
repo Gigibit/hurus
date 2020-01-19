@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helloCurus/templates/website/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/website/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/website.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/website.css" afterDir="false" />
-    </list>
+    <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helloCurus/templates/website/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="225">
+              <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -181,15 +177,21 @@
       <option name="project" value="LOCAL" />
       <updated>1577300141114</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="restored giordy's requirements lost during scp from server to get edit (stupid move)">
+      <created>1579040225774</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1579040225774</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="723" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22557585" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22557585" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -261,7 +263,8 @@
     <MESSAGE value="wip on freetime and market charts" />
     <MESSAGE value="wip on website" />
     <MESSAGE value="wip on aos" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip on aos" />
+    <MESSAGE value="restored giordy's requirements lost during scp from server to get edit (stupid move)" />
+    <option name="LAST_COMMIT_MESSAGE" value="restored giordy's requirements lost during scp from server to get edit (stupid move)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/statistics.html">
@@ -290,8 +293,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/helloCurus/templates/website/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="225">
+          <caret line="15" column="8" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
         </state>
       </provider>
     </entry>

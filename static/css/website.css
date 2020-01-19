@@ -19,9 +19,13 @@ body{
     background-color: white;
     position: fixed;
     top: 0;
-    z-index: 9999999999999;
+    z-index: 9999999;
     width: 100%;
     height: 75px;
+}
+#application-navbar .container{
+    height: 80px;
+    width: 55%;
 }
 .main{
     margin-top: 75px;
@@ -38,6 +42,7 @@ body{
     display: flex;
     margin: 0 auto;
 }
+
 .section-container{
     position: relative;
     height: 100%;
@@ -185,6 +190,37 @@ body{
     text-align: center;
     padding: 30px;
 }
+@media only screen and (max-width: 600px) {
+    #navbarResponsive{
+        position: absolute;
+        left: 0px;
+        background: rgb(255, 255, 255);
+        margin-top: 42px;
+    }
+    #navbarResponsive .nav-item{
+        font-size: 10px;
+        margin: 0 auto;
+    }
+    #navbarResponsive .navbar-nav{
+        width: 100vw;
+        background: #fff;
+        text-align: center;
+        display: flex!important;
+    }
+    .navbar-toggler{
+        position: fixed;
+        z-index: 99999999;
+    }
+    #application-navbar .container {
+        padding: 0;
+        margin: 0;
+        display: inline-grid;
+    }
+    .navbar .wrapper {
+        margin: 0 0 0 110px;
+    }
+}
+
 #about-happy-curus-section{
     padding-top: 240px;
 }
@@ -243,6 +279,11 @@ h1{
 }
 .motivation-description{
     font-size: 14px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 200ms ease-in;
+    margin-top: 15px;
+    padding: 0 15px;
 }
 /*
 Contact Form
@@ -281,22 +322,21 @@ Button
     left: 0;
     right: 0;
     margin: 0 auto;
-
+    
 }
 .motivation-boxes{
     overflow: hidden;
 }
+
 .motivation-info-content{
-    height:60px;
     background: deepskyblue;
     color: white;
-    padding: 2px 15px 10px 15px;
+    padding: 2px 0 10px 0;
     margin: 0 auto;
     overflow: hidden;
     z-index: 1;
     position: relative;
     margin-top: 54%;
-    transition: height 200ms ease-in;
 }
 
 .motivation-img{
@@ -385,13 +425,14 @@ Button
     font-size: 21px;
 }
 .section-subtitle{
-    padding-bottom: 30px;
-    padding-left: 30px;
+    padding: 0 30px 30px 30px;
     text-align: left;
     font-size: 18px;
     text-align: center;
 }
-
+form button{
+    margin: 15px auto;
+}
 .glance-section .section-title{
     text-align: center;
 }
@@ -416,6 +457,8 @@ Button
     display: table-cell;
     vertical-align: middle;
     font-size: 12px;
+    text-align: initial;
+    padding-left: 5px;
 }
 
 .career-section{
@@ -426,7 +469,7 @@ Button
     background-repeat: no-repeat;
     padding: 50px;
     background-position: center;
-
+    
 }
 
 .career-info{
@@ -450,7 +493,7 @@ footer{
     background: #142841;
     padding-bottom: 50px;
     width: 100%;
-
+    
 }
 
 footer img{
@@ -465,21 +508,23 @@ footer img{
 }
 
 .motivation-title{
+    height: 48px;
     font-weight: bold;
     font-size: 18px;
-    margin-bottom: 25px;
     text-align: center;
-    margin-top: 15px;
+    padding-top: 15px;
+    margin: 0 auto;
 }
-.motivation-info-wrapper:hover .motivation-info-content{
+.motivation-info-content:hover .motivation-description{
     height: 350px;
-
+    padding-top: 25px;
+    
 }
 
 .contact-form-section{
     width: 100%;
     height: 800px;
-
+    
 }
 
 .contact-form-header{
@@ -494,7 +539,7 @@ footer img{
 .contact-form-container{
     position: relative;
     height: 100%;
-
+    
 }
 .contact-form {
     position:absolute;
@@ -502,7 +547,7 @@ footer img{
     width:50vw;
     margin: 0 auto;
     z-index: 3;
-
+    
     padding: 50px;
     background-color: rgba(255, 255, 255, .8);
     border-radius: 4px;
@@ -511,7 +556,7 @@ footer img{
     left: 0;
     right: 0;
     bottom:0;
-
+    
 }
 .form-label{
     font-weight: bold;
@@ -531,7 +576,7 @@ input[type="checkbox"]{
     border-width: 0;
     transition: all .3s linear;
     border: 3px solid #222;
-
+    
 }
 input[type="checkbox"]:checked{
     background-color: #2ECC71;
@@ -566,14 +611,14 @@ input[type="checkbox"]:focus{
     margin: 5px 0;
     display: block;
     height: 100%;
-
+    
 }
 #environment-section{
     margin-top: -85px;
 }
 #motivation-section, #curus-effect-section{
     margin-top: -75px;
-
+    
 }
 #contact-section{
     margin-top: -220px;
@@ -597,14 +642,14 @@ input[type="checkbox"]:focus{
 }
 .happy-environment-description .content{
     padding:25px;
-  /* fallback for old browsers */
+    /* fallback for old browsers */
     /* background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
     /* background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    
 }
 
 
-.contact-form::after{
+/* .contact-form::after{
     position:absolute;
     top:-30px;
     content:"";
@@ -615,9 +660,9 @@ input[type="checkbox"]:focus{
     left: 0;
     right: 0;
     bottom:0;
-
-
-}
+    
+    
+} */
 .backgrounds{
     width: 100%;
     height: 100%;
@@ -719,5 +764,5 @@ li.nav-item{
 .find-more-button:hover{
     background-color: #142841;
     width: 250px;
-
+    
 }
