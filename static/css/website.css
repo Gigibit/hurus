@@ -105,6 +105,7 @@ body{
 .enviroment-row{
     height: 100%;
     padding: 0 122px;
+    display: -webkit-box;
 }
 
 .happy-environment-image{
