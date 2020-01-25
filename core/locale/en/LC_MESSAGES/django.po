@@ -452,7 +452,7 @@ msgstr "Collect data about your team. Take care of them."
 
 
 msgid "ABOUT_HAPPY_CURUS_DESCRIPTION"
-msgstr "People don't leave jobs but unhealthy workplaces. Thanks to Happycurus you can:"
+msgstr "People don’t leave jobs but toxic workplaces. Thanks to Happycurus you can:"
 
 
 msgid "OUR_MOTIVATION"

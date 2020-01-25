@@ -105,7 +105,6 @@ body{
 .enviroment-row{
     height: 100%;
     padding: 0 122px;
-    display: -webkit-box;
 }
 
 .happy-environment-image{
@@ -643,27 +642,9 @@ input[type="checkbox"]:focus{
 }
 .happy-environment-description .content{
     padding:25px;
-    /* fallback for old browsers */
-    /* background: -webkit-linear-gradient(to right, #348AC7, #7474BF);  /* Chrome 10-25, Safari 5.1-6 */
-    /* background: linear-gradient(to right, #348AC7, #7474BF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
 }
 
 
-/* .contact-form::after{
-    position:absolute;
-    top:-30px;
-    content:"";
-    height: 0;
-    width: 0px;
-    border-right: 50vw solid rgba(255, 255, 255, .8);
-    border-top: 30px solid transparent;
-    left: 0;
-    right: 0;
-    bottom:0;
-    
-    
-} */
 .backgrounds{
     width: 100%;
     height: 100%;
