@@ -105,12 +105,13 @@ body{
 
 .happy-environment-image{
     height: 100%;
+    width: 100%;
     overflow: hidden;
     background-color: rgba(173,216,230 , 1);
     position: relative;
 }
 .happy-environment-image img{
-    height: 351px;
+    height: 360px;
     width: 594px;
     position: absolute;
     top: 0;
@@ -119,11 +120,11 @@ body{
     text-align: center;
     display: block;
 }
-.left{
-    float:left;
+img.left{
+    right: 0;
 }
-.right{
-    float: right;
+img.right{
+    left: 0;
 }
 .home-about-box {
     padding: 15px 40px 15px 15px;
@@ -585,7 +586,6 @@ input[type="checkbox"]:focus{
 
 .happy-environment-description-container{
     background-color: rgba(173,216,230 , 1);
-    min-height: 355px;
 }
 
 .curus-donate-section{
@@ -607,8 +607,13 @@ input[type="checkbox"]:focus{
     font-size: 21px;
     margin: 5px 0;
     display: block;
-    height: 100%;
-    
+    min-height: 355px;
+    display: table;
+}
+
+.happy-environment-description .content{
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #motivation-section, #curus-effect-section{
