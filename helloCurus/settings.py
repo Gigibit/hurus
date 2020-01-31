@@ -20,7 +20,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',    #causes verbose duplicate notifications in django 1.9
+)
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_AGE = 9999999 * 60 #
@@ -33,9 +36,9 @@ SESSION_COOKIE_AGE = 9999999 * 60 #
 SECRET_KEY = 'p#@*6f328%=c$@-okkr=%19%g@)j@vdwh!!q#evg+6%()$_ovi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS=['127.0.0.1','localhost',]
+ALLOWED_HOSTS=['127.0.0.1','localhost','happycurus.de']
 
 # Application definition
 
@@ -184,5 +187,5 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = '/var/www/happycurus.de/html/hurus/static/assets/'
 STATICFILES_DIRS = ( os.path.join('static'), )

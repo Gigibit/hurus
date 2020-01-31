@@ -1,0 +1,171 @@
+
+
+.calendar {
+  width: 350px;
+  margin: 10px auto 0;
+}
+
+.calendar__month {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 10px 0;
+  width: 100%;
+  position: relative;
+}
+#date-picker-info{
+  opacity: 0;
+  font-size: 10px;
+  margin-top: 7px;
+  transition: opacity 200ms ease-in;
+}
+#date-picker:focus + #date-picker-info{
+  opacity: 1;
+}
+
+.cal-month__previous,
+.cal-month__next {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.cal-month__previous:hover,
+.cal-month__next:hover {
+  background-color: #42A5F5;
+  box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  font-weight: 800;
+  color: #111;
+}
+
+.cal-month__next {
+  right: 0;
+}
+
+.cal-month__current {
+  text-align: center;
+  color: #777;
+  
+}
+
+.cal-head__day,
+.cal-body__day {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+
+.cal-body__week,
+.calendar__head {
+  display: block;
+  height: 50px;
+  width: 350px;
+}
+
+.calendar__head {
+  line-height: 50px;
+  position: relative;
+}
+.calendar__head:after {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #90CAF9;
+}
+
+.cal-body__day {
+  color: #e1e1e1;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cal-day__month--current {
+  color: #777;
+}
+
+.cal-day__day--today {
+  font-weight: 800;
+  color: #2196f3;
+}
+
+.cal-day__day--selected {
+  background-color: #2196f3;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  color: #111;
+}
+
+
+
+.modal-full {
+  min-width: 100%;
+  margin: 0;
+}
+
+.modal-full .modal-content {
+  min-height: 100vh;
+}
+.mood, .activity-icon{
+  height: 35px;
+  width: 35px;
+}
+.activity-box{
+  text-align: center;
+}
+
+.info-row{
+  border: 0.5px solid #ccccccee;
+  padding: 15px;
+}
+.info-row > :first-child{
+  font-size: 19px;
+}
+.activity-box-container{
+  padding:0;
+  margin:5px;
+}
+.activity-box{
+  border-radius: 25px;
+  border: 0.5px solid #ccccccee;
+  padding:15px;
+}
+.close-button{
+  font-size: 66px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 99999;
+}
+
+#tought-modal .chart{
+  margin: 15px;
+  
+}
+
+.show-more-button{
+  font-size: 21px;
+  margin-top: 15px;
+}
+
+.hide-month .ui-datepicker-month,
+.hide-current .ui-datepicker-current,
+.hide-calendar .ui-datepicker-calendar{
+  display: none;
+}
+.date-picker{
+  margin-top: 65px;
+}
+.date-picker .row{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}

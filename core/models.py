@@ -58,7 +58,7 @@ class Agency(models.Model):
 
 class EncouragingSentence(models.Model):
     text = models.TextField()
-    author = models.CharField(max_length=100, null=True)
+    author = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     language = models.CharField(

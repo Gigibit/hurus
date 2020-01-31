@@ -1,0 +1,750 @@
+@font-face {
+    font-family: 'rubik';
+    src: local('Rubik'),
+    url('../fonts/Rubik/Rubik-Light.ttf') format("truetype");
+}
+@font-face {
+    font-family: 'rubikBold';
+    src: local('RubikBold'),
+    url('../fonts/Rubik/Rubik-Bold.ttf') format("truetype");
+}
+*{
+    font-family: 'rubik';
+}
+body{
+    width: 100%;
+}
+
+#application-navbar{
+    background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 9999999;
+    width: 100%;
+    height: 75px;
+}
+#application-navbar .container{
+    height: 80px;
+    width: 55%;
+}
+.main{
+    margin-top: 75px;
+}
+#application-navbar .container{
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+}
+
+.navbar .wrapper{
+    display: flex;
+    margin: 0 auto;
+}
+
+.happy-curus-section-image{
+    position: relative;
+}
+.happy-curus-section-image ul{
+    position: absolute;
+    top: 10px;
+    list-style: none;
+}
+
+.happy-curus-section-image ul li{
+    background-color: deepskyblue;
+    margin: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 15px;
+    color: white;
+}
+
+.happy-curus-section-image ul li.make-it-green{
+    background-color: green;
+}
+.happy-curus-section-image ul li span:first-child{
+    color: greenyellow;
+}
+.happy-curus-section-image ul li span:nth-child(2){
+    margin: 0 50px;
+}
+
+
+.happy-curus-section-image img{
+    width: 100%;
+}
+.curus-effect-box{
+    border: 1px solid deepskyblue;
+    border-radius: 25px;
+    margin: 10px;
+    height: 270px;
+    padding-top: 18px;
+}
+.curus-effect-box-description{
+    width: 50%;
+    text-align: center;
+    margin: 30px auto;
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 5px;
+}
+.curus-effect-box img{
+    width: 130px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.enviroment-row{
+    height: 100%;
+    padding: 0 122px;
+}
+
+.happy-environment-image{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(173,216,230 , 1);
+    position: relative;
+}
+.happy-environment-image img{
+    height: 360px;
+    width: 594px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    display: block;
+}
+img.left{
+    right: 0;
+}
+img.right{
+    left: 0;
+}
+.home-about-box {
+    padding: 15px 40px 15px 15px;
+}
+#first-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_306317760.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+#second-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_132150794.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+#third-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/man-1209494_1920.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+#fourth-about{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_290521699.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 350px;
+    width: 100%;
+}
+
+.home-image{
+    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpg);
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+}
+.home-box{
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: block;
+    border-radius: 5px;
+    bottom: -265px;
+    margin: 0 auto;
+    color: #222;
+    padding: 15px;
+    width: 100%;
+}
+.home-box-content{
+    position: relative;
+    z-index: 1;
+    width: 50vw;
+    margin: 0 auto;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+@media only screen and (max-width: 600px) {
+    #navbarResponsive{
+        position: absolute;
+        left: 0px;
+        background: rgb(255, 255, 255);
+        margin-top: 42px;
+    }
+    #navbarResponsive .nav-item{
+        font-size: 10px;
+        margin: 0 auto;
+    }
+    #navbarResponsive .navbar-nav{
+        width: 100vw;
+        background: #fff;
+        text-align: center;
+        display: flex!important;
+    }
+    .navbar-toggler{
+        position: fixed;
+        z-index: 99999999;
+    }
+    #application-navbar .container {
+        padding: 0;
+        margin: 0;
+        display: inline-grid;
+    }
+    .navbar .wrapper {
+        margin: 0 0 0 110px;
+    }
+}
+
+#about-happy-curus-section{
+    padding-top: 240px;
+}
+.home-box-content::after{
+    background-color: deepskyblue;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    content: '';
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    /* top: -25px; */
+    z-index: -1;
+    transform: skewX(-11deg);
+    /* border-color: transparent rgba(173,216,230 , 1) transparent transparent; */
+    /* border-width: 25px 50vw 0 0; */
+}
+
+/*
+Form
+*/
+.form > div ~ div {
+    margin-top: 20px;
+}
+.form h1{
+    font-weight: bold;
+}
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.form > div.is-hidden {
+    display: none;
+}
+.form-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font: 1.575rem sans-serif;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.motivation-description{
+    font-size: 14px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 200ms ease-in;
+    margin-top: 15px;
+    padding: 0 15px;
+}
+/*
+Contact Form
+*/
+
+.contact-form--loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.contact-form--sent > div ~ div {
+    margin: 0;
+}
+
+/*
+Button
+*/
+.button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 5px 10px;
+    font: 0.875rem/1.5 sans-serif;
+    background-color: #ddd;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.motivation-box{
+    position: relative;
+    padding-top: 150px;
+}
+.motivation-info-wrapper{
+    width: 60%;
+    top: 45%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    
+}
+.motivation-boxes{
+    overflow: hidden;
+}
+
+.motivation-info-content{
+    background: deepskyblue;
+    color: white;
+    padding: 2px 0 10px 0;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+    margin-top: 54%;
+}
+
+.motivation-img{
+    width: 100%;
+}
+.motivation-img-wrapper{
+    height: 350px;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.no-margin {
+    margin: 0;
+}
+.no-padding{
+    padding: 0;
+}
+.motivation-boxes{
+}
+
+.glance-section{
+    width: 100%;
+}
+.glance-section-container{
+    width: 100vw;
+    left: 0;
+    right: 0;
+    display: block;
+    bottom: -20%;
+    margin: 0 auto;
+    color: #222;
+    padding: 0 100px;
+    position: relative;
+    background-color: rgba(173,216,230 , 1);
+    z-index: 1;
+    margin: 0 auto 200px auto;
+    display: block;
+    text-align: center;
+    padding: 30px;
+    padding-bottom: 50px;
+}
+
+.glance-section-container::after{
+    height: 100%;
+    width: auto;
+    position: absolute;
+    content: '';
+    right: 0;
+    top: -69px;
+    z-index: -1;
+    border-style: solid;
+    border-color: transparent rgba(173,216,230 , 1) transparent transparent;
+    border-width: 70px 100vw 0 0;
+}
+.glance-row{
+    display: table;
+    width: 100%;
+}
+.glance-row .description{
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 16px;
+    font-family: rubikBold;
+    color: #1E1E1E;
+    font-size: 1.875rem;
+    line-height: 2.5rem;
+}
+.glance-row img{
+    width: 150px;
+    height: 150px;
+}
+
+.section-title{
+    color: steelblue;
+    padding-top: 45px;
+    font-weight: bold;
+    text-align: left;
+    font-size: 35px;
+    text-align: center;
+}
+.about-wrapper-description{
+    margin: 0 50px;
+    padding: 0 15px;
+    font-size: 21px;
+}
+.section-subtitle{
+    padding: 0 30px 30px 30px;
+    text-align: left;
+    font-size: 18px;
+    text-align: center;
+}
+form button{
+    margin: 15px auto;
+}
+.glance-section .section-title{
+    text-align: center;
+}
+.glance-row .description.left{
+    text-align: left;
+}
+.glance-row .description.right{
+    text-align: right;
+}
+.contact-form-section{
+    text-align: center;
+}
+
+.padded-section{
+    margin-bottom: 50px;
+}
+
+.agreements{
+    display: table;
+}
+.agreements label{
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 12px;
+    text-align: initial;
+    padding-left: 5px;
+}
+
+.career-section{
+    position: relative;
+    background: url('/static/img/website_assets/site/Immagini sito/writing-1149962_1920.jpg');
+    width: 102vw;
+    height: 676px;
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    padding: 50px;
+    margin: 0 auto;
+    background-position: center;
+}
+
+.career-info{
+    position: absolute;
+    top: 30px;
+    color: white;
+}
+.career-info p, .career-info h1{
+    font-weight: bold;
+}
+.career-info p{
+    font-size: 24px;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+
+footer{
+    background: #142841;
+    padding-bottom: 50px;
+    width: 100%;
+    
+}
+
+footer img{
+    height: 100px;
+}
+.agreements-box{
+    padding: 15px;
+    color: white;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.motivation-title{
+    height: 48px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 15px;
+    margin: 0 auto;
+}
+.motivation-info-content:hover .motivation-description{
+    height: 350px;
+    padding-top: 25px;
+    
+}
+
+.contact-form-section{
+    width: 100%;
+    height: 800px;
+    
+}
+
+.contact-form-header{
+    left: 0;
+    right: 0;
+    background: url('/static/img/website_assets/site/Immagini sito/adventure-1807524.jpg');
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background-size: cover;
+}
+.contact-form-container{
+    position: relative;
+    height: 100%;
+    
+}
+.contact-form {
+    position:absolute;
+    height:90%;
+    width:50vw;
+    margin: 0 auto;
+    z-index: 3;
+    
+    padding: 50px;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.125);
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom:0;
+    
+}
+.form-label{
+    font-weight: bold;
+    font-size: 14px;
+}
+input[type="checkbox"]{
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    border-radius: 1px;
+    box-sizing: border-box;
+    position: relative;
+    box-sizing: content-box ;
+    width: 30px;
+    height: 30px;
+    border-width: 0;
+    transition: all .3s linear;
+    border: 3px solid #222;
+    
+}
+input[type="checkbox"]:checked{
+    background-color: #2ECC71;
+}
+input[type="checkbox"]:focus{
+    outline: 0 none;
+    box-shadow: none;
+}
+
+.happy-environment-description-container{
+    background-color: rgba(173,216,230 , 1);
+}
+
+.curus-donate-section{
+    font-size: 30px;
+}
+
+
+.curus-donate-section:hover img{
+    transform: rotate(720deg);
+}
+
+.curus-donate-section:hover{
+    background: greenyellow;
+}
+
+
+.happy-environment-description {
+    font-weight: bold;
+    font-size: 21px;
+    margin: 5px 0;
+    display: block;
+    min-height: 355px;
+    display: table;
+}
+
+.happy-environment-description .content{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#motivation-section, #curus-effect-section{
+    margin-top: -75px;
+    
+}
+#contact-section{
+    margin-top: -220px;
+}
+#message{
+    resize: none;
+}
+.curus-donate-section{
+    text-align: center;
+    display: inline;
+    padding: 50px;
+}
+.curus-donate-section{
+    height: 100%;
+    transition: background-color 1s ease-in-out;
+}
+.curus-donate-section img{
+    width: 50px;
+    height: 50px;
+    transition: transform 1s ease-in-out;
+}
+.happy-environment-description .content{
+    padding:25px;
+}
+
+
+.backgrounds{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    z-index: -1;
+}
+.backgrounds .background {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-attachment: fixed;
+}
+.background{
+    background-image: url("/static/img/website_assets/site/Immagini sito/adventure-1807524.jpg");
+}
+.background::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: #fff;
+    opacity: 0.8;
+}
+.about-happy-curus-find-more{
+    border-top: 5px solid deepskyblue;
+}
+.about-happy-curus-find-more > div{
+    padding-top: 25px;
+}
+.about-happy-curus-row{
+    border-top: 5px solid deepskyblue;
+    margin: 0 25px;
+}
+
+
+.curus-effect-box{
+    transition: background-color 300ms ease-in-out;
+}
+.curus-effect-box:hover{
+    background: deepskyblue;
+    color: white;
+}
+
+.navbar-nav{
+    display: table;
+}
+
+li.nav-item{
+    cursor: pointer;
+    padding-top: 14px;
+    font-size: 15px;
+    width: 140px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.home-box-content h1{
+    font-weight: bold;
+    line-height: 40px;
+}
+.home-box-content p{
+    font-size:17px;
+}
+.width-80{
+    width: 80px!important;
+}
+
+
+.find-more-container{
+    width: 100%;
+    padding: 0;
+    margin: 15px 0 60px 0;
+}
+.curus-effect-monitor{
+    margin-bottom: 50px;
+}
+
+.find-more-button{
+    cursor: pointer;
+    transition: width 500ms ease-in, background-color 1s ease-in;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    background-color: #F0A10B;
+    width: 190px;
+    height: 45px;
+    padding: 12px;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+}
+.find-more-button:hover{
+    background-color: #142841;
+    width: 250px;
+    
+}
