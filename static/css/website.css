@@ -334,6 +334,7 @@ Button
     z-index: 1;
     position: relative;
     margin-top: 54%;
+    border-radius: 5px;
 }
 
 .motivation-img{

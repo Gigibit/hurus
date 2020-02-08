@@ -149,7 +149,7 @@ class UserProfile(AbstractUser):
             default=GERMAN,
     )
     read_encouraging_sentences = models.ManyToManyField(EncouragingSentence, blank=True)
-    agency = models.ForeignKey(Agency, on_delete=models.DO_NOTHING, null=True)
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     
 
 
