@@ -230,8 +230,8 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
 
 
     return {
-        'freetime_mood_value_percentage' : (average_mood_value_freetime / count) * 100,
-        'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count) * 100,
+        'freetime_mood_value_percentage' : (average_mood_value_freetime / count if count > 0 else average_mood_value_freetime + 1) * 100,
+        'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count if count > 0 else average_mood_value_marketplace + 1) * 100,
         'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False),
         'podium_moods_freetime' : podium_moods_freetime,
         'activities_podium_count_freetime': activity_count_freetime,

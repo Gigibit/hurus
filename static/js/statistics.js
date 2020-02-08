@@ -624,7 +624,8 @@ function doughnutChart(div,toughts){
     }
 
 	function doughnutMoodCountChart(div,mood){
-        let doughnutDataSet = []
+	        let doughnutDataSet = []
+		if(!mood) return
 		doughnutDataSet = [mood.count] 
 
 		let backgroundColors = [mood.color];

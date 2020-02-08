@@ -36,7 +36,7 @@ SESSION_COOKIE_AGE = 9999999 * 60 #
 SECRET_KEY = 'p#@*6f328%=c$@-okkr=%19%g@)j@vdwh!!q#evg+6%()$_ovi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS=['127.0.0.1','localhost','happycurus.de']
 

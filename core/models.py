@@ -58,7 +58,7 @@ class Agency(models.Model):
 
 class EncouragingSentence(models.Model):
     text = models.TextField()
-    author = models.TextField()
+    author = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     language = models.CharField(
@@ -89,7 +89,7 @@ class Course(models.Model):
 class CourseSection(models.Model):
     title   = models.CharField(max_length=200)
     content = HTMLField()
-    course = models.ForeignKey(Course, related_name='sections', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, related_name='sections', on_delete=models.DO_NOTHING, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -148,8 +148,8 @@ class UserProfile(AbstractUser):
             choices=LANGUAGES,
             default=GERMAN,
     )
-    read_encouraging_sentences = models.ManyToManyField(EncouragingSentence)
-    agency = models.ForeignKey(Agency, on_delete=models.DO_NOTHING)
+    read_encouraging_sentences = models.ManyToManyField(EncouragingSentence, blank=True)
+    agency = models.ForeignKey(Agency, on_delete=models.DO_NOTHING, null=True)
     
 
 
@@ -158,8 +158,8 @@ class UserProfile(AbstractUser):
     objects = UserManager() ## This is the new line in the User model. ##
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    seen_courses            = models.ManyToManyField(Course, null=True, related_name='seen_by')
-    course_to_see           = models.ForeignKey(Course, null=True, on_delete=models.CASCADE)
+    seen_courses            = models.ManyToManyField(Course, blank=True, related_name='seen_by')
+    course_to_see           = models.ForeignKey(Course, null=True, on_delete=models.DO_NOTHING)
     last_seen_course_date   = models.DateTimeField(null=True)
     
     def has_to_get_new_course(self):
@@ -178,7 +178,7 @@ class Manager(UserProfile):
 
 class Team(models.Model):
     name = models.CharField(max_length=50)
-    manager = models.ManyToManyField(Manager, null=True)
+    manager = models.ManyToManyField(Manager, blank=True)
 
     def __str__(self):
         return self.name
@@ -194,7 +194,7 @@ class Activity(models.Model):
     i18n_key = models.CharField(max_length=50, null=True)
     name = models.CharField(max_length=50, null=True)
     icon = models.FileField(upload_to=activity_directory_path)
-    team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.CASCADE)    
+    team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.DO_NOTHING)
 
 
 
@@ -258,14 +258,14 @@ class Tought(models.Model):
         default=FREETIME,
     )
 
-    mood = models.ForeignKey(Mood, on_delete=models.DO_NOTHING)
+    mood = models.ForeignKey(Mood, on_delete=models.DO_NOTHING, null=True)
     tought_options = models.ManyToManyField(ToughtOption, blank=True)
     activities = models.ManyToManyField(Activity, blank=True)
     employee = models.ForeignKey(Employee, null=True, on_delete=models.DO_NOTHING, related_name='toughts')
     text = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    motivational_quote = models.ForeignKey(EncouragingSentence, null=True, on_delete=models.DO_NOTHING)
+    motivational_quote = models.ForeignKey(EncouragingSentence, null=True, on_delete=models.SET_NULL)
 
 
     def to_public_dict(self, deep=False):
