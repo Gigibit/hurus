@@ -78,9 +78,11 @@ body{
 .curus-effect-box{
     border: 1px solid deepskyblue;
     border-radius: 25px;
-    margin: 10px;
-    height: 270px;
+    height: 100%;
     padding-top: 18px;
+}
+.curus-effect-box-wrapper{
+    margin-bottom: 15px;
 }
 .curus-effect-box-description{
     width: 50%;
@@ -180,7 +182,7 @@ img.right{
 .home-box-content{
     position: relative;
     z-index: 1;
-    width: 50vw;
+    width: 47vw;
     margin: 0 auto;
     display: block;
     color: white;
@@ -515,7 +517,7 @@ footer img{
     margin: 0 auto;
 }
 .motivation-info-content:hover .motivation-description{
-    height: 350px;
+    height: auto;
     padding-top: 25px;
     
 }
@@ -593,6 +595,10 @@ input[type="checkbox"]:focus{
     font-size: 30px;
 }
 
+#environment-section .section-title{
+    padding-top: 0;
+    margin-top: 0;
+}
 
 .curus-donate-section:hover img{
     transform: rotate(720deg);
@@ -620,6 +626,10 @@ input[type="checkbox"]:focus{
 #motivation-section, #curus-effect-section{
     margin-top: -75px;
     
+}
+
+#motivation-section .section-title{
+    padding-top: 70px;
 }
 #contact-section{
     margin-top: -220px;
@@ -743,6 +753,11 @@ li.nav-item{
     font-size: 17px;
     font-weight: bold;
     color: white;
+}
+.submit-button{
+    background-color: #F0A10B;
+    color: white;
+    font-weight: bold;
 }
 .find-more-button:hover{
     background-color: #142841;

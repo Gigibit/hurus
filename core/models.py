@@ -266,7 +266,13 @@ class Mood(models.Model):
     def __str__(self):
         return _(self.i18n_key)
 
-
+class ContactEmail(models.Model):
+    name = models.CharField(max_length=300, null=True)
+    email = models.CharField(max_length=300, null=True)
+    phonenumber = models.CharField(max_length=50, null=True)
+    message = models.TextField()
+    def __str__(self):
+        return _(self.email)
 
 class Tought(models.Model):
 

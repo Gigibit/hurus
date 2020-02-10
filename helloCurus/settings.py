@@ -142,8 +142,8 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gigibit92@gmail.com'
-EMAIL_HOST_PASSWORD = 'gigibit1'
+EMAIL_HOST_USER = 'contattodalsitohappycurus@gmail.com'
+EMAIL_HOST_PASSWORD = '110295Luca!'
 EMAIL_PORT = 587
 
 # Password validation
@@ -189,3 +189,5 @@ LOCALE_PATHS = (
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/happycurus.de/html/hurus/static/assets/'
 STATICFILES_DIRS = ( os.path.join('static'), )
+
+CONTACT_EMAILS_RECEIVER  = 'margheritamorganelli@gmail.com'
