@@ -39,7 +39,7 @@ class EmployeeProfileAdmin(admin.ModelAdmin):
             }),
         )
     list_display = ('email', 'first_name', 'last_name', 'agency')
-    search_fields = ('email', 'first_name', 'last_name','agency')
+    search_fields = ('email', 'first_name', 'last_name','agency__name')
     ordering = ('email',)
 
 @admin.register(Manager)
@@ -55,7 +55,7 @@ class ManagerProfileAdmin(admin.ModelAdmin):
             }),
         )
     list_display = ('email', 'first_name', 'last_name', 'agency')
-    search_fields = ('email', 'first_name', 'last_name','agency')
+    search_fields = ('email', 'first_name', 'last_name','agency__name')
     ordering = ('email',)
 
 @admin.register(CourseSection)

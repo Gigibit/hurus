@@ -86,10 +86,29 @@ class Course(models.Model):
     def __unicode__(self):
         return self.title
 
+    def delete(self):
+        user_profiles_that_have_seen_this = self.userprofile_set.all()
+        user_profiles_that_have_to_see_this = UserProfile.objects.filter(course_to_see=self)
+        if user_profiles_that_have_seen_this:
+            for user in user_profiles_that_have_seen_this:
+                user.seen_courses.remove(self)
+                user.save()
+
+        if user_profiles_that_have_to_see_this:
+            for user in user_profiles_that_have_to_see_this:
+                user.course_to_see = None
+                user.save()
+        course_sections = CourseSection.objects.filter(course=self)
+        for section in course_sections:
+            section.course = None
+            section.save()
+
+        super(Course, self).delete()
+
 class CourseSection(models.Model):
     title   = models.CharField(max_length=200)
     content = HTMLField()
-    course = models.ForeignKey(Course, related_name='sections', on_delete=models.DO_NOTHING, null=True)
+    course = models.ForeignKey(Course, related_name='sections', on_delete=models.SET_NULL, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.pk is None:
@@ -149,7 +168,7 @@ class UserProfile(AbstractUser):
             default=GERMAN,
     )
     read_encouraging_sentences = models.ManyToManyField(EncouragingSentence, blank=True)
-    agency = models.ForeignKey(Agency, on_delete=models.DO_NOTHING, null=True)
+    agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     
 
 
@@ -159,7 +178,7 @@ class UserProfile(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     seen_courses            = models.ManyToManyField(Course, blank=True, related_name='seen_by')
-    course_to_see           = models.ForeignKey(Course, null=True, on_delete=models.DO_NOTHING)
+    course_to_see           = models.ForeignKey(Course, null=True, on_delete=models.SET_NULL)
     last_seen_course_date   = models.DateTimeField(null=True)
     
     def has_to_get_new_course(self):
@@ -194,7 +213,7 @@ class Activity(models.Model):
     i18n_key = models.CharField(max_length=50, null=True)
     name = models.CharField(max_length=50, null=True)
     icon = models.FileField(upload_to=activity_directory_path)
-    team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.DO_NOTHING)
+    team = models.ForeignKey(Team, null=True, related_name='activities', on_delete=models.SET_NULL)
 
 
 
@@ -247,7 +266,13 @@ class Mood(models.Model):
     def __str__(self):
         return _(self.i18n_key)
 
-
+class ContactEmail(models.Model):
+    name = models.CharField(max_length=300, null=True)
+    email = models.CharField(max_length=300, null=True)
+    phonenumber = models.CharField(max_length=50, null=True)
+    message = models.TextField()
+    def __str__(self):
+        return _(self.email)
 
 class Tought(models.Model):
 
@@ -258,10 +283,10 @@ class Tought(models.Model):
         default=FREETIME,
     )
 
-    mood = models.ForeignKey(Mood, on_delete=models.DO_NOTHING, null=True)
+    mood = models.ForeignKey(Mood, on_delete=models.SET_NULL, null=True)
     tought_options = models.ManyToManyField(ToughtOption, blank=True)
     activities = models.ManyToManyField(Activity, blank=True)
-    employee = models.ForeignKey(Employee, null=True, on_delete=models.DO_NOTHING, related_name='toughts')
+    employee = models.ForeignKey(Employee, null=True, on_delete=models.CASCADE, related_name='toughts')
     text = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

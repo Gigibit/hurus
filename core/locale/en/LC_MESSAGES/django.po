@@ -28,7 +28,10 @@ msgstr "Enter name..."
 
 
 msgid "HOW_DO_YOU_FEEL"
-msgstr "Welcome! How are you feeling today?"
+msgstr "Welcome! How did you feel during your free time?"
+
+msgid "HOW_DO_YOU_FEEL_WP"
+msgstr "How did you feel during the last day you spent at work?"
 
 
 msgid "HAPPY"
@@ -299,7 +302,10 @@ msgid "Cinema"
 msgstr "Cinema"
 
 msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
-msgstr "What you have been up today?"
+msgstr "What activities did you do during your free time?"
+
+msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY_WP"
+msgstr "What activities kept you busy at work?"
 
 msgid "IN_A_GOOD_MOOD"
 msgstr "In a good mood"

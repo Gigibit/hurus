@@ -21,8 +21,6 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
 
-    message = 'Your newsletter.'
-
     for e in Employee.objects.all():
         if e.agency.enabled:
             newsletters = get_email_body_for_employee(e)

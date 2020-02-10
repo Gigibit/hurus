@@ -103,7 +103,7 @@
           <div class="corus-dot"></div>
           <h1 class="title">
             <div class="curus-badge"></div>
-            {% trans 'HOW_DO_YOU_FEEL' %}
+            {% trans 'HOW_DO_YOU_FEEL_WP' %}
           </h1>
           <div class="date row">
             <div class="date-icon">
@@ -132,7 +132,7 @@
       <section id="marketplace-section">
           <h1 class="title">
             <div class="curus-badge"></div>
-            {% trans 'WHAT_HAVE_YOU_BEEN_UP_TODAY' %}
+            {% trans 'WHAT_HAVE_YOU_BEEN_UP_TODAY_WP' %}
           </h1>
           <div id="marketplace-activities-container" class="row">
             {% for marketplace_choose in marketplace_available_choose %}
@@ -253,7 +253,7 @@
                 var id = response['id']
                 var src = response['icon']
                 var value = response['name']
-                $('#activities-container').prepend(
+                $('#activities-container').append(
                   '<div class="' + (activityType == 'MP' ? 'marketplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
                     '<div class="freetime-box">' +
                       '<img src="'+src+'">'+

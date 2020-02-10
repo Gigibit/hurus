@@ -16,6 +16,9 @@ from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
 from django.utils import translation
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+from helloCurus.settings import CONTACT_EMAILS_RECEIVER
+
 
 flat = lambda l: [item for sublist in l for item in sublist]
 MAX_NUMBER_DISPLAYED = 6
@@ -620,8 +623,22 @@ def decrypt(plain):
 def encrypt(plain): 
     return Fernet(key).encrypt(plain.encode()).decode('utf-8')
 
-
-
-
+def send_contact_email(request):
+    if request.POST:
+        name = request.POST.get('name', None)
+        email = request.POST.get('email', None)
+        phonenumber = request.POST.get('phonenumber', None)
+        message = request.POST.get('message', None)
+        ContactEmail.objects.create(
+            name = name,
+            email = email,
+            phonenumber = phonenumber,
+            message = message
+        )
+        EmailMessage("Email from happycurus.de", "User: "+ email + 
+                            '\n phonenumber: '+ phonenumber +
+                            '\n name: ' + name +
+                             '\n\n\n says: \n' + message, to=[CONTACT_EMAILS_RECEIVER]).send()
+    return redirect('/')
 
 

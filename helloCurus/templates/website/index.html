@@ -73,7 +73,7 @@
                         <b>COMMUNICATE</b> to your team through the courses
                         included in Happycurus. The courses are articles
                         addressing useful topics such as psychology,
-                        <b>pproductivity, communication, career, efficiency</b>
+                        <b>productivity, communication, career, efficiency</b>
                         and <b>charisma</b>.
                         Managers do not have time to instruct employees
                         on a personal level. <b>Happycurus</b> advises them for
@@ -153,7 +153,7 @@
     </div>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 curus-effect-box-wrapper">
                 <div class="curus-effect-box">
                     <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Keys.ico' %}">
                     <p class="curus-effect-box-description">COLLECT KEY DATA
@@ -162,7 +162,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 curus-effect-box-wrapper">
                 <div class="curus-effect-box">
                     
                     <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-System-analysis.ico' %}">
@@ -172,7 +172,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 curus-effect-box-wrapper">
                 <div class="curus-effect-box">
                     
                     <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Global.ico' %}">
@@ -182,7 +182,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 curus-effect-box-wrapper">
                 <div class="curus-effect-box">
                     
                     <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Like.ico' %}">
@@ -192,7 +192,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 curus-effect-box-wrapper">
                 <div class="curus-effect-box">
                     
                     <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Diamond.ico' %}">
@@ -202,7 +202,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 curus-effect-box-wrapper">
                 <div class="curus-effect-box">
                     
                     <img src="{% static 'img/website_assets/site/Icone Sito Internet/Graphicloads-Flat-Finance-Dollar-rotation.ico' %}">
@@ -471,7 +471,8 @@
                 
                 <!-- img src="{% static 'img/website_assets/site/Immagini sito\adventure-1807524.jpg' %}" -->
                 <div class="contact-form-header" data-aos="fade"></div>
-                <form class="form contact-form" action="https://formspree.io/donnyburnside1@gmail.com" data-aos="fade-up">
+                <form method="POST" class="form contact-form" action="/send_contact_email/" data-aos="fade-up">
+                    {% csrf_token %}
                     <h1>CONTACT</h1>
                     <p> Are you ready to skyrocket your business?<br>
                         We are looking forward to helping you too! Get your free information now!
@@ -505,10 +506,10 @@
                     <div>
                         <label class="form-label" for="message">MESSAGE</label>
                         <textarea class="form-control" id="message" rows="8" name="message" required>
-                            Hi Happycurus,
-                            I want to know how my team feels on our workplace and improve their engagement.
-                            Please send me further information.
-                            Yours sincerely,
+Hi Happycurus,
+I want to know how my team feels on our workplace and improve their engagement.
+Please send me further information.
+Yours sincerely,
                         </textarea>
                     </div>
                     <div class="agreements">
@@ -516,8 +517,7 @@
                         <label class="form-label" for="subscribe">I agree, that in order to process my submission, the provided information and related data are collected and stored electronically. I have read the privacy policy.</label>
                     </div>
                     <div class="row">
-                        <button class="button col-5" type="reset">Clear</button>
-                        <button class="button col-5" type="submit">Submit</button>
+                        <button class="button col-12 submit-button" type="submit">Submit</button>
                     </div>
                 </form>
             </div>

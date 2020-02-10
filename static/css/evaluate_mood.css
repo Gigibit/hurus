@@ -34,7 +34,8 @@
 .submit-button{
   margin: 0 auto;
   display: block;
-  width: 100%;
+  width: 50%;
+  height: 45px;
   margin-bottom: 15px;
 }
 .mood-selected{
@@ -46,6 +47,7 @@
 
 .current-tought{
   margin-bottom: 150px;
+  overflow: hidden;
 }
 .title {
   margin: 0;
