@@ -63,7 +63,7 @@ TINYMCE_DEFAULT_CONFIG = {
 'content_style': '.mcecontentbody{font-size:13px;}',
 'theme_advanced_resizing': True,
 'theme_advanced_path': False,
-'theme_advanced_buttons1': 'bold,italic,underline,bullist,numlist,link,|,unlink,image,fontselect,fontsizeselect,forecolor,backcolor',
+'theme_advanced_buttons1': 'bold,italic,underline,bullist,numlist,link,|,unlink,fontselect,fontsizeselect,forecolor,backcolor',
 'width': '100%',
 'height': 300,
 'relative_urls': False,
