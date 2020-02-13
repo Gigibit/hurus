@@ -1,6 +1,6 @@
+import os, base64, json, random, datetime, threading
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-import os, base64, json, random
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
@@ -11,7 +11,7 @@ from core.models import *
 from helloCurus.settings import BASE_DIR
 from django.forms.models import model_to_dict
 from django.db.models import Avg
-import datetime
+
 from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
 from django.utils import translation
@@ -81,7 +81,7 @@ def manager_tought_moods_count_overview(request) : return JsonResponse(tought_mo
 
 def tought_moods_count(request, in_day):
     if in_day:
-        toughts = Tought.objects.filter( 
+        toughts = Tought.objects.filter(
                                             employee__team__manager = request.user, 
                                             created_at__year=int(request.GET['year']), 
                                             created_at__month=int(request.GET['month']), 
@@ -95,7 +95,7 @@ def tought_moods_count(request, in_day):
         MARKET_PLACE : {}
     }
 
-    for tought in toughts :
+    for tought in toughts:
 
         if tought.mood.value in [key for key,value in moods.items()]:
             moods[tought.tought_type][tought.mood.value]['count'] += 1
@@ -537,6 +537,10 @@ def submit_survey(request):
 @login_required(login_url='/website')
 def home(request):
     user, is_employee = get_employee_from_request_user(request.user)
+    if user:
+        user.preferred_language = request.LANGUAGE_CODE
+        threading.Thread(target=user.save).start()
+        
     return check_survey(home_employee, request, user) if is_employee else home_manager(request, user)
 
 @login_required(login_url='/website')

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from core.models import UserProfile, Manager, Employee
 from django.contrib.auth import logout
+
 class CurusBackend:
     """
     Authenticate against the settings ADMIN_LOGIN and ADMIN_PASSWORD.
@@ -13,7 +14,6 @@ class CurusBackend:
     """
 
     def authenticate(self, request, username=None, password=None):
-
         try:
             user = Employee.objects.get(email=username)
         except Employee.DoesNotExist:
@@ -24,6 +24,8 @@ class CurusBackend:
                     return UserProfile.objects.get(email=username)
                 except UserProfile.DoesNotExist:
                     return None
+
+
         return user if user.agency.enabled else None
 
     def get_user(self, user_id):
