@@ -165,7 +165,7 @@ function computeDate(day, month, year){
               '<div class="col-md-3 activity-box-container">'+
               '<div class="activity-box">' +
               '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
-              '<p>'+ (activity['text'] || activity['name']) +'</p>'+
+              '<p>'+ (activity['i18n_key'] || activity['name']) +'</p>'+
               '</div>'+
               '</div>'
               )
@@ -185,7 +185,7 @@ function computeDate(day, month, year){
                 '<div class="col-md-3 activity-box-container">'+
                 '<div class="activity-box">' +
                 '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
-                '<p>'+ (activity['text']) +'</p>'+
+                '<p>'+ (activity['i18n_key']) +'</p>'+
                 '</div>'+
                 '</div>'
                 )
