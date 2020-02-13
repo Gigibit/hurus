@@ -21,13 +21,19 @@
     <div class="row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'COUNTER_FREETIME'%}</h1>
-            <div id="freetime-bar-chart" class="chart"></div>
-            <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
+            <div id="freetime-bar-chart" class="chart" style="position: relative;">
+                <div class="chart-helper-wrapper">
+                    <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
+                </div>
+            </div>
         </div>
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'COUNTER_WORKPLACE'%}</h1>
-            <div id="workplace-bar-chart" class="chart"></div>
-            <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
+            <div id="workplace-bar-chart" class="chart" style="position: relative;">
+                <div class="chart-helper-wrapper">
+                    <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row sparkboxes mt-4 mb-4">

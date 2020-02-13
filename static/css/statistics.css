@@ -130,6 +130,14 @@ svg text {
   cursor:pointer;
 }
 
+.chart-helper-wrapper{
+  height: 100px;
+  width: 200px;
+  top: 30px;
+  left: 30px;
+  position: absolute;
+}
+
 
 .mood-button img{
   width: 20px;
