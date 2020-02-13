@@ -1,4 +1,5 @@
 import os, base64, json, random, datetime, threading
+from datetime import date, datetime, timedelta
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from cryptography.hazmat.backends import default_backend
@@ -105,7 +106,7 @@ def tought_moods_count(request, in_day):
                 'color': tought.mood.color_code,
                 'count': 1,
                 'icon' : tought.mood.icon.name,
-                'name' : translation.gettext(tought.mood.i18n_key) 
+                'name' : translation.gettext(tought.mood.i18n_key)
             } 
     return moods
 
@@ -155,7 +156,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     for mood in moods:
         moods_count[mood.value] = 0
     for t in freetime_toughts:
-        dates.append( datetime.date(t.created_at.year, t.created_at.month, t.created_at.day) )
+        dates.append( date(t.created_at.year, t.created_at.month, t.created_at.day) )
         moods_count[t.mood.value] += 1
     
     podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key,value in moods_count.items()],key=lambda x: x['count'], reverse=True)
@@ -272,7 +273,7 @@ def calculate_average_mood_for_day(date, toughts, for_type):
 
 
 def e_learning_manager(request, manager):
-    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
+    courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -286,7 +287,7 @@ def e_learning_manager(request, manager):
         not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
         course_to_see = not_seen_courses[0]
         request.user.course_to_see = course_to_see
-        request.user.last_seen_course_date =  datetime.datetime.now()
+        request.user.last_seen_course_date =  datetime.now()
         # request.user.seen_courses.add(course_to_see)
         request.user.save()
     else:
@@ -315,7 +316,7 @@ def e_learning_manager(request, manager):
 
 
 def home_employee(request, employee):
-    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
+    courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -347,7 +348,7 @@ def statistics_employee(request, employee):
 
 
 def e_learning_employee(request, employee):
-    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
+    courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -361,7 +362,7 @@ def e_learning_employee(request, employee):
         not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
         course_to_see = not_seen_courses[0]
         request.user.course_to_see = course_to_see
-        request.user.last_seen_course_date =  datetime.datetime.now()
+        request.user.last_seen_course_date =  datetime.now()
         # request.user.seen_courses.add(course_to_see)
         request.user.save()
     else:
@@ -480,15 +481,13 @@ def submit_survey(request):
     if request.method == 'POST':
         #freetime
         employee = Employee.objects.get(email = request.user.email)
-        employee.last_seen_survey = datetime.datetime.now()
+        employee.last_seen_survey = datetime.now()
         employee.save()
         mood = Mood.objects.get(pk=request.POST['freetime[selected_mood]'])
 
-
-        sentences = list(EncouragingSentence.objects.exclude(pk__in= request.user.read_encouraging_sentences.all().values('pk')))
-
+        sentences = list(EncouragingSentence.objects.filter(language=request.user.preferred_language).exclude(pk__in= request.user.read_encouraging_sentences.all().values('pk')))
         if len(sentences) == 0:
-            daily_quote = EncouragingSentence.objects.first()
+            daily_quote = EncouragingSentence.objects.filter(language=request.user.preferred_language).first()
             request.user.read_encouraging_sentences.set([daily_quote])
         else:
             daily_quote = random.sample(sentences, len(sentences))[0]
@@ -512,7 +511,7 @@ def submit_survey(request):
 
         ### marketplace
         employee = Employee.objects.get(email = request.user.email)
-        employee.last_seen_survey = datetime.datetime.now()
+        employee.last_seen_survey = datetime.now()
         employee.save()
         mood = Mood.objects.get(pk=request.POST['marketplace[selected_mood]'])
         activities = Activity.objects.filter(pk__in=request.POST.getlist('marketplace[activities][]'))
@@ -538,7 +537,7 @@ def submit_survey(request):
 def home(request):
     user, is_employee = get_employee_from_request_user(request.user)
     if user:
-        user.preferred_language = request.LANGUAGE_CODE
+        user.preferred_language = request.LANGUAGE_CODE.upper()
         threading.Thread(target=user.save).start()
         
     return check_survey(home_employee, request, user) if is_employee else home_manager(request, user)
@@ -550,7 +549,7 @@ def statistics(request):
 
 @login_required(login_url='/website')
 def happy_corus(request):
-    curus = Curus.objects.get(language__iexact= translation.get_language())
+    curus = Curus.objects.get(language__iexact= request.user.preferred_language)
     return render(request, 'core/employee/happy_curus.html', {
         'curus': curus,
     })
@@ -566,7 +565,7 @@ def e_learning(request):
 
 
 def home_manager(request, manager):
-    courses = list(Course.objects.filter(language__iexact=translation.get_language()))
+    courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -601,8 +600,8 @@ def engine(request):
 def login_user_from_token(request, token):
     try:
         decrypted = json.loads(decrypt(token))
-        expiring_date = datetime.datetime.strptime(decrypted['expiring_time'], "%Y-%m-%d").date()
-        if expiring_date > datetime.datetime.now().date():
+        expiring_date = datetime.strptime(decrypted['expiring_time'], "%Y-%m-%d").date()
+        if expiring_date > datetime.now().date():
             user = UserProfile.objects.get(email = decrypted['email'])
             login(request, user)
             return redirect('/')
@@ -610,7 +609,7 @@ def login_user_from_token(request, token):
             return render(request, 'core/token_expired.html')
                 
     except (InvalidToken, UserProfile.DoesNotExist):
-        expiring_time = datetime.date.today() + datetime.timedelta(days=1)
+        expiring_time = date.today() + timedelta(days=1)
 
         return JsonResponse(encrypt(str(json.dumps({
             'email':  token,

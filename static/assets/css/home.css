@@ -163,6 +163,7 @@
 }
 .date-picker{
   margin-top: 65px;
+  display: none!important;
 }
 .date-picker .row{
   text-align: center;
