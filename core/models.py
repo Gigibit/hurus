@@ -242,10 +242,9 @@ class Curus(models.Model):
     def save(self, *args, **kwargs):
 
         for c in Curus.objects.all():
-            if c.pk != self.pk:
+            if c.pk != self.pk and c.count != self.count:
                 c.count = self.count
-                c.save()
-            
+                super(Curus, c).save()
         super(Curus, self).save(*args, **kwargs)
     
     class Meta:
