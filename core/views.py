@@ -65,14 +65,14 @@ def statistics_manager_for_day(request):
     average_moods = analysis['average_moods']
     return render(request, 'core/manager/statistics.html', {
         'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
-        'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
+        'average_mood_workplace_percentage': round(analysis['workplace_mood_value_percentage']),
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
-        'podium_moods_marketplace': analysis['podium_moods_marketplace'],
+        'podium_moods_workplace': analysis['podium_moods_workplace'],
         'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
-        'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
+        'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
-        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1, len(analysis['activities_podium_count_marketplace'])+1)))
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1, len(analysis['activities_podium_count_workplace'])+1)))
     })
 
 
@@ -93,7 +93,7 @@ def tought_moods_count(request, in_day):
 
     moods = {
         FREETIME: {},
-        MARKET_PLACE : {}
+        WORK_PLACE : {}
     }
 
     for tought in toughts:
@@ -121,14 +121,14 @@ def statistics_manager(request, manager):
     average_moods = analysis['average_moods']
     return render(request, 'core/manager/statistics.html', {
         'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
-        'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
+        'average_mood_workplace_percentage': round(analysis['workplace_mood_value_percentage']),
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
-        'podium_moods_marketplace': analysis['podium_moods_marketplace'],
+        'podium_moods_workplace': analysis['podium_moods_workplace'],
         'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
-        'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
+        'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
-        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_marketplace'])+1)))
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1)))
 
     })
 def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_value = 8):
@@ -145,10 +145,10 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     average_moods = []
     count = 0
     average_mood_value_freetime      = .0
-    average_mood_value_marketplace   = .0
+    average_mood_value_workplace   = .0
 
     freetime_toughts = [t for t in toughts if t.tought_type == FREETIME ]
-    marketplace_toughts = [t for t in toughts if t.tought_type == MARKET_PLACE ]
+    workplace_toughts = [t for t in toughts if t.tought_type == WORK_PLACE ]
 
     moods = Mood.objects.all()
     moods_count = {}
@@ -185,14 +185,14 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     moods_count = {}
     for mood in moods:
         moods_count[mood.value] = 0
-    for t in marketplace_toughts:
+    for t in workplace_toughts:
         moods_count[t.mood.value] += 1
         
     
-    podium_moods_marketplace = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)[:3]
+    podium_moods_workplace = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)[:3]
 
-    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in marketplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_marketplace] ])[:6]
-    activity_count_marketplace = []
+    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in workplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_workplace] ])[:6]
+    activity_count_workplace = []
     for mood in moods:
         #max number of activity displayed
         activities = [ 
@@ -201,7 +201,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
             'mood' : activity['mood']
         } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
         if len(activities) > 0:
-            activity_count_marketplace.append({
+            activity_count_workplace.append({
                 'mood_value': mood.value,
                 'mood_icon': mood.icon.name,
                 'mood_color_code': mood.color_code,
@@ -215,32 +215,32 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     for date in set(dates):
 
         average_mood_freetime = calculate_average_mood_for_day(date, toughts, FREETIME)
-        average_mood_marketplace = calculate_average_mood_for_day(date, toughts, MARKET_PLACE)
+        average_mood_workplace = calculate_average_mood_for_day(date, toughts, WORK_PLACE)
         average_mood_value_freetime += average_mood_freetime / mood_max_value
-        average_mood_value_marketplace += average_mood_marketplace / mood_max_value
+        average_mood_value_workplace += average_mood_workplace / mood_max_value
         count += 1
         freetime_counts = get_mood_count_for_date(date, toughts, FREETIME)
-        marketplace_counts = get_mood_count_for_date(date, toughts, MARKET_PLACE)
+        workplace_counts = get_mood_count_for_date(date, toughts, WORK_PLACE)
         
         average_moods.append({
             'date' : date,
             'average_mood_freetime' : average_mood_freetime,
-            'average_mood_marketplace' : average_mood_marketplace,
+            'average_mood_workplace' : average_mood_workplace,
             'moods' : {
                 'freetime_moods_count': freetime_counts,
-                'marketplace_moods_count': marketplace_counts
+                'workplace_moods_count': workplace_counts
             }
         })
 
 
     return {
         'freetime_mood_value_percentage' : (average_mood_value_freetime / count if count > 0 else average_mood_value_freetime + 1) * 100,
-        'marketplace_mood_value_percentage' : (average_mood_value_marketplace/ count if count > 0 else average_mood_value_marketplace + 1) * 100,
+        'workplace_mood_value_percentage' : (average_mood_value_workplace/ count if count > 0 else average_mood_value_workplace + 1) * 100,
         'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False),
         'podium_moods_freetime' : podium_moods_freetime,
         'activities_podium_count_freetime': activity_count_freetime,
-        'podium_moods_marketplace' : podium_moods_marketplace,
-        'activities_podium_count_marketplace': activity_count_marketplace,
+        'podium_moods_workplace' : podium_moods_workplace,
+        'activities_podium_count_workplace': activity_count_workplace,
     }
 
 
@@ -329,7 +329,7 @@ def home_employee(request, employee):
     return render(request, 'core/employee/index.html', {
         'moods' : moods,
         'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
-        'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts),
+        'workplace_toughts' : filter( lambda t : t['tought_type'] == WORK_PLACE, toughts),
         'courses': not_seen_courses[:2],
     })
 
@@ -340,7 +340,7 @@ def statistics_employee(request, employee):
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
         'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
-        'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts)
+        'workplace_toughts' : filter( lambda t : t['tought_type'] == WORK_PLACE, toughts)
     })
 
 
@@ -432,8 +432,8 @@ def check_survey(fn, request, employee):
             'available_icons' : available_icons,
             'freetime_available_choose':  filter( lambda a : a.activity_type == FREETIME, default_activity_choose),
             'team_freetime_available_choose':  filter( lambda a : a.activity_type == FREETIME, team_activity_choose),
-            'marketplace_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, default_activity_choose),
-            'team_marketplace_available_choose':  filter( lambda a : a.activity_type == MARKET_PLACE, team_activity_choose),
+            'workplace_available_choose':  filter( lambda a : a.activity_type == WORK_PLACE, default_activity_choose),
+            'team_workplace_available_choose':  filter( lambda a : a.activity_type == WORK_PLACE, team_activity_choose),
 
         })
     return fn(request, employee)
@@ -473,7 +473,7 @@ def statistics_for_day(request):
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,
         'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
-        'marketplace_toughts' : filter( lambda t : t['tought_type'] == MARKET_PLACE, toughts)
+        'workplace_toughts' : filter( lambda t : t['tought_type'] == WORK_PLACE, toughts)
     })
 
 @csrf_exempt
@@ -509,17 +509,17 @@ def submit_survey(request):
             tought.activities.add(*activities)
 
 
-        ### marketplace
+        ### workplace
         employee = Employee.objects.get(email = request.user.email)
         employee.last_seen_survey = datetime.now()
         employee.save()
-        mood = Mood.objects.get(pk=request.POST['marketplace[selected_mood]'])
-        activities = Activity.objects.filter(pk__in=request.POST.getlist('marketplace[activities][]'))
+        mood = Mood.objects.get(pk=request.POST['workplace[selected_mood]'])
+        activities = Activity.objects.filter(pk__in=request.POST.getlist('workplace[activities][]'))
         tought = Tought.objects.create(  
-                        tought_type=MARKET_PLACE,
+                        tought_type=WORK_PLACE,
                         mood=mood,
                         motivational_quote=daily_quote,
-                        text=request.POST['marketplace[current_tought]'],
+                        text=request.POST['workplace[current_tought]'],
                         employee=employee
                         )
         if activities and len(activities) > 0:
@@ -580,14 +580,14 @@ def home_manager(request, manager):
     average_moods = analysis['average_moods']
     return render(request, 'core/manager/index.html', {
         'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
-        'average_mood_marketplace_percentage': round(analysis['marketplace_mood_value_percentage']),
+        'average_mood_workplace_percentage': round(analysis['workplace_mood_value_percentage']),
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
-        'podium_moods_marketplace': analysis['podium_moods_marketplace'],
+        'podium_moods_workplace': analysis['podium_moods_workplace'],
         'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
-        'podium_moods_marketplace_activities': analysis['activities_podium_count_marketplace'],
+        'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
-        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_marketplace'])+1))),
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1))),
         'courses': not_seen_courses[:2],
     })
 # Login engine

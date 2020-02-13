@@ -359,10 +359,10 @@ $('.freetime-mood-button').click(function(event){
 
 })
 
-$('.marketplace-mood-button').click(function(event){
+$('.workplace-mood-button').click(function(event){
 	let mood = $(this).data('mood')
-	updateChart(radarCharts['marketplace-radar-chart'], mood, dataMarketPlace)
-	updateChart(radarCharts['related-marketplace-radar-chart'], mood, dataMarketPlace)
+	updateChart(radarCharts['workplace-radar-chart'], mood, dataWorkPlace)
+	updateChart(radarCharts['related-workplace-radar-chart'], mood, dataWorkPlace)
 })
 
 function updateChart(chart, selectedMood, _data) {

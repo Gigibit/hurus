@@ -359,10 +359,10 @@ $('.freetime-mood-button').click(function(event){
 
 })
 
-$('.marketplace-mood-button').click(function(event){
+$('.workplace-mood-button').click(function(event){
 	let mood = $(this).data('mood')
-	updateChart(radarCharts['marketplace-radar-chart'], mood, dataMarketPlace)
-	updateChart(radarCharts['related-marketplace-radar-chart'], mood, dataMarketPlace)
+	updateChart(radarCharts['workplace-radar-chart'], mood, dataWorkPlace)
+	updateChart(radarCharts['related-workplace-radar-chart'], mood, dataWorkPlace)
 })
 
 function updateChart(chart, selectedMood, _data) {
@@ -580,9 +580,13 @@ let backgroundColors = []
 function doughnutChart(div,toughts){
         let doughnutDataSet = []
 		let moodsLabels = []
+		let total = 0
+		Object.keys(moods).forEach(function(mood,i){
+			total += toughts.filter((tought,i) => tought.mood == mood ).length
+		 })
         Object.keys(moods).forEach(function(mood,i){
-			moodsLabels.push(mood)
-			doughnutDataSet[i] = toughts.filter((tought,i) => tought.mood == mood ).length 
+			moodsLabels.push(moods[mood])
+			doughnutDataSet[i] = /*Math.round(*/ toughts.filter((tought,i) => tought.mood == mood ).length ///total * 100)
 
             if(!backgroundColors[i] ) //not configured yet
             {
@@ -604,21 +608,45 @@ function doughnutChart(div,toughts){
         new Chart(document.getElementById(div).getContext('2d'), {
             type: "doughnut",
             data:{ 
-				  labels :moodsLabels,
                   datasets:[{
                           data:doughnutDataSet,
                           backgroundColor: backgroundColors
                         }]
-            },
+			},
+
             options:{
                 rotation: 1 * Math.PI,
-                circumference: 1 * Math.PI,
+				circumference: 1 * Math.PI,
+				plugins: {
+					datalabels: {
+					   // hide datalabels for all datasets
+					   display: false
+					}
+				},
                 legend: {
                     display: false
                 },
-                tooltips: {
-                    enabled: false
-               }
+				tooltips: {
+					callbacks: {
+					//   title: function(tooltipItem, data) {
+					// 	return data['labels'][tooltipItem[0]['index']];
+					//   },
+					  label: function(tooltipItem, data) {
+						return data['datasets'][0]['data'][tooltipItem['index']];
+					  },
+					  afterLabel: function(tooltipItem, data) {
+						var dataset = data['datasets'][0];
+						var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][Object.keys(dataset['_meta'])[0]]['total']) * 100)
+						return percent + '%';
+					  }
+					},
+					backgroundColor: '#FFF',
+					// titleFontSize: 16,
+					// titleFontColor: '#0066ff',
+					bodyFontColor: '#000',
+					bodyFontSize: 15,
+					displayColors: false
+				  },
             }
         });
     }
@@ -646,16 +674,41 @@ function doughnutChart(div,toughts){
                           data:doughnutDataSet,
                           backgroundColor: backgroundColors
                         }]
-            },
+			},
+		
             options:{
                 rotation: 1 * Math.PI,
                 circumference: 1 * Math.PI,
                 legend: {
                     display: false
-                },
-                tooltips: {
-                    enabled: false
-               }
+				},
+				plugins: {
+					datalabels: {
+					   // hide datalabels for all datasets
+					   display: false
+					}
+				},
+				tooltips: {
+					callbacks: {
+					  title: function(tooltipItem, data) {
+						return data['labels'][tooltipItem[0]['index']];
+					  },
+					  label: function(tooltipItem, data) {
+						return data['datasets'][0]['data'][tooltipItem['index']];
+					  },
+					  afterLabel: function(tooltipItem, data) {
+						var dataset = data['datasets'][0];
+						var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+						return '(' + percent + '%)';
+					  }
+					},
+					backgroundColor: '#FFF',
+					titleFontSize: 16,
+					titleFontColor: '#0066ff',
+					bodyFontColor: '#000',
+					bodyFontSize: 14,
+					displayColors: false
+				  },
             }
         });
     }

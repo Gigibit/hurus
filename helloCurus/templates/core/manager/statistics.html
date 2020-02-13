@@ -20,12 +20,12 @@
             </div>
         </div>
         <div class="percentage-evaluation chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
+            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
             <div class="progress progress-bar-vertical">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_marketplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_marketplace_percentage}}%;
-                background-color: {% if average_mood_marketplace_percentage > 65 %} lightgreen {% elif average_mood_marketplace_percentage > 40%} darkorange {% else %} red {% endif%}"
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%;
+                background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}"
                 >
-                {{average_mood_marketplace_percentage}}%
+                {{average_mood_workplace_percentage}}%
                 </div>
             </div>
         </div>
@@ -37,9 +37,9 @@
             <canvas id="freetime-line-chart" class="chart"></canvas>
         </div>
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
-            <div id="legend-marketplace-line-chart" class="row legend"></div>
-            <canvas id="marketplace-line-chart" class="chart"></canvas>
+            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+            <div id="legend-workplace-line-chart" class="row legend"></div>
+            <canvas id="workplace-line-chart" class="chart"></canvas>
         </div>
     </div>
     <div class="row sparkboxes mt-4 mb-4">
@@ -48,8 +48,8 @@
             <div id="average-freetime-line-chart" class="chart"></div>
         </div>
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
-            <div id="average-marketplace-line-chart" class="chart"></div>
+            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+            <div id="average-workplace-line-chart" class="chart"></div>
         </div>
     </div>
     {% for index in best_mood_counts %}
@@ -71,18 +71,18 @@
             </div>
         </div>
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
+            <h1>{% trans 'CAUSE_EFFECT_WORKPLACE'%}</h1>
             <div class="chart">
                     <div class="row">
                         <div class="col-md-3">
-                            <img id="marketplace-mood-{{index}}" class="radar-chart-mood-icon"/>
+                            <img id="workplace-mood-{{index}}" class="radar-chart-mood-icon"/>
                         </div>
                     </div>
                 <div>
-                    <canvas id="marketplace-radar-chart{{index}}" ></canvas>
+                    <canvas id="workplace-radar-chart{{index}}" ></canvas>
                 </div>
                 <div class="related-radar-chart">
-                    <canvas id="related-marketplace-radar-chart{{index}}" ></canvas>
+                    <canvas id="related-workplace-radar-chart{{index}}" ></canvas>
                 </div>
             </div>
         </div>
@@ -107,8 +107,8 @@
         
     var dates = []    
     var freetimeAverageMoods= []
-    var marketplaceAverageMoods= []
-    var dataMarketPlace = {}
+    var workplaceAverageMoods= []
+    var dataWorkPlace = {}
     var dataFreetime = {}
     {% for average in average_moods%}
         {% for mood,value in average.moods.freetime_moods_count.items %}
@@ -120,13 +120,13 @@
             dataFreetime[{{mood}}].data.push({{value}})
         {% endfor %}
 
-        {% for mood,value in average.moods.marketplace_moods_count.items %}
-            if(!dataMarketPlace[{{mood}}])
-            dataMarketPlace[{{mood}}]={
+        {% for mood,value in average.moods.workplace_moods_count.items %}
+            if(!dataWorkPlace[{{mood}}])
+            dataWorkPlace[{{mood}}]={
                     backgroundColor : randomRgba(),
                     data: []
                 } 
-            dataMarketPlace[{{mood}}].data.push({{value}})
+            dataWorkPlace[{{mood}}].data.push({{value}})
         {% endfor %}
         dates.push('{{average.date|date:"d-m-Y" }}')
 
@@ -136,9 +136,9 @@
             
             })
 
-        marketplaceAverageMoods.push({
+        workplaceAverageMoods.push({
              "date": '{{average.date|date:"d-m-Y"}}', //H:i
-             "mood": '{{average.average_mood_marketplace|stringformat:"f"}}' 
+             "mood": '{{average.average_mood_workplace|stringformat:"f"}}' 
             })
 
     {% endfor %}
@@ -147,7 +147,7 @@
         d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
         d.mood = d.mood 
     })
-    marketplaceAverageMoods.forEach(function(d){
+    workplaceAverageMoods.forEach(function(d){
         d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
         d.mood = d.mood 
     })
@@ -170,8 +170,8 @@
         },
         {% endfor %}
     ]
-    var chartDataMarketPlace = [
-        {% for a in podium_moods_marketplace_activities%}
+    var chartDataWorkPlace = [
+        {% for a in podium_moods_workplace_activities%}
         {
             "mood": "{{a.mood_value}}",
             "name": "{{a.mood_i18n_key}}",
@@ -200,12 +200,12 @@
             $('#freetime-line-chart').parent().hide();
         }
         try{
-            lineChart("#average-marketplace-line-chart", marketplaceAverageMoods)
-            managerLineChart('marketplace-line-chart', dataMarketPlace)
+            lineChart("#average-workplace-line-chart", workplaceAverageMoods)
+            managerLineChart('workplace-line-chart', dataWorkPlace)
         }catch(ex){
             somethingFailed = true
-            $("#average-marketplace-line-chart").replaceWith('<div class="wip-warning"></div>');
-            $('#marketplace-line-chart').parent().hide();
+            $("#average-workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $('#workplace-line-chart').parent().hide();
         }
 
         if(somethingFailed){
@@ -213,20 +213,20 @@
         }
 
         // barChart("#freetime-bar-chart", dataFreetime)
-        // barChart("#marketplace-bar-chart", dataMarketPlace)
+        // barChart("#workplace-bar-chart", dataWorkPlace)
         {% for a in podium_moods_freetime_activities %}
             $('#freetime-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
             activityRadarChart('related-freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
 
         {% endfor %}
-        {% for a in podium_moods_marketplace_activities %}
-            $('#marketplace-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
-            configRadarChart('marketplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataMarketPlace)
-            activityRadarChart('related-marketplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataMarketPlace)
+        {% for a in podium_moods_workplace_activities %}
+            $('#workplace-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
+            configRadarChart('workplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataWorkPlace)
+            activityRadarChart('related-workplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataWorkPlace)
         {% endfor %}
         // doughnutChart('doughnut-chart-freetime',dataFreetime)
-        // doughnutChart('doughnut-chart-marketplace',dataMarketPlace)
+        // doughnutChart('doughnut-chart-workplace',dataWorkPlace)
     })
 </script>
 

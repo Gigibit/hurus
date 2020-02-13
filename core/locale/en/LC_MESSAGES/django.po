@@ -205,6 +205,8 @@ msgstr "Your mood"
 msgid "YOUR_TOUGHTS"
 msgstr "Your toughts (visible only to you)"
 
+msgid "TOUGHTS"
+msgstr "Toughts"
 
 msgid "YOUR_TOUGHT"
 msgstr "Your tought"
@@ -382,22 +384,26 @@ msgstr "My Learning material"
 msgid "CURUS_FOR_THE_ENVIRONMENT"
 msgstr "Curus for the environment"
 
+msgid "FREETIME"
+msgstr "FREE TIME"
+
+
 msgid "HISTORICAL_TREND_FREETIME"
 msgstr "Historical trend freetime"
 
-msgid "HISTORICAL_TREND_MARKETPLACE"
-msgstr "Historical trend marketplace"
+msgid "HISTORICAL_TREND_WORKPLACE"
+msgstr "Historical trend workplace"
 
 msgid "CAUSE_EFFECT_FREETIME"
 msgstr "Cause-Effect: Free Time Mood"
 
-msgid "CAUSE_EFFECT_MARKETPLACE"
+msgid "CAUSE_EFFECT_WORKPLACE"
 msgstr "Cause-Effect: Workplace Mood"
 
 msgid "COUNTER_FREETIME"
 msgstr "Counter: Free Time Mood"
 
-msgid "COUNTER_MARKETPLACE"
+msgid "COUNTER_WORKPLACE"
 msgstr "Counter: Workplace Mood"
 
 msgid "COMPLETE_STATISTICS"
@@ -480,3 +486,7 @@ msgstr "Career"
 
 msgid "COULD_NOT_PROCESS_SELECTED_DATE"
 msgstr "Cannot process selected date"
+
+
+msgid "VIEW_STATISTICS"
+msgstr "VIEW STATISTICS"

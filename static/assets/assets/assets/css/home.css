@@ -162,8 +162,8 @@
   display: none;
 }
 .date-picker{
-  margin-top: 65px;
-  display: none!important;
+  margin-top: 35px;
+  visibility: hidden;
 }
 .date-picker .row{
   text-align: center;

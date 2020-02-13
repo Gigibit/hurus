@@ -14,18 +14,20 @@
             <div id="freetime-line-chart" class="chart"></div>
         </div>
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_MARKETPLACE'%}</h1>
-            <div id="marketplace-line-chart" class="chart"></div>
+            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+            <div id="workplace-line-chart" class="chart"></div>
         </div>
     </div>
     <div class="row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'COUNTER_FREETIME'%}</h1>
             <div id="freetime-bar-chart" class="chart"></div>
+            <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
         </div>
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'COUNTER_MARKETPLACE'%}</h1>
-            <div id="marketplace-bar-chart" class="chart"></div>
+            <h1>{% trans 'COUNTER_WORKPLACE'%}</h1>
+            <div id="workplace-bar-chart" class="chart"></div>
+            <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
         </div>
     </div>
     <div class="row sparkboxes mt-4 mb-4">
@@ -53,12 +55,12 @@
             </div>
         </div>
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
+            <h1>{% trans 'CAUSE_EFFECT_WORKPLACE'%}</h1>
             <div class="chart">
                 <div class="mood-buttons-container">
                     <div class="mood-buttons-wrapper">
                         {% for mood in moods %}
-                        <div class="marketplace-mood-button mood-button" data-mood="{{mood.value}}">
+                        <div class="workplace-mood-button mood-button" data-mood="{{mood.value}}">
                         <img src="{% static mood.icon.name %}">
                         <div class="mood-text">
                             {% trans mood.i18n_key%}
@@ -68,27 +70,16 @@
                     </div>
                 </div>
                 <div>
-                    <canvas id="marketplace-radar-chart" ></canvas>
+                    <canvas id="workplace-radar-chart" ></canvas>
                 </div>
                 <div class="related-radar-chart">
-                    <canvas id="related-marketplace-radar-chart" ></canvas>
+                    <canvas id="related-workplace-radar-chart" ></canvas>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
-            <div class="row legend"></div>
-            <canvas id="doughnut-chart-freetime" class="chart"></canvas>
-        </div>
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'CAUSE_EFFECT_MARKETPLACE'%}</h1>
-            <div class="row legend"></div>
-            <canvas id="doughnut-chart-marketplace" class="chart"></canvas>
-        </div>
-    </div>
+
 </div>
 
 
@@ -117,8 +108,8 @@
         },
         {% endfor %}
     ]
-    var dataMarketPlace = [
-        {% for tought in marketplace_toughts%}
+    var dataWorkPlace = [
+        {% for tought in workplace_toughts%}
         {
             "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
             "mood": "{{tought.mood.value}}",
@@ -136,7 +127,7 @@
         d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
         d.mood = d.mood 
     })
-    dataMarketPlace.forEach(function(d){
+    dataWorkPlace.forEach(function(d){
         d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
         d.mood = d.mood 
     })
@@ -157,19 +148,19 @@
             $("#freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
         }
         try{
-            lineChart("#marketplace-line-chart", dataMarketPlace)
+            lineChart("#workplace-line-chart", dataWorkPlace)
         }catch(ex){
-            $("#marketplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $("#workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
         }
         barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart')
-        barChart("#marketplace-bar-chart", dataMarketPlace,'marketplace-radar-chart')
+        barChart("#workplace-bar-chart", dataWorkPlace,'workplace-radar-chart')
         configRadarChart('freetime-radar-chart',    7, dataFreetime)
         activityRadarChart('related-freetime-radar-chart',    7, dataFreetime)
-        configRadarChart('marketplace-radar-chart', 1, dataMarketPlace)
-        activityRadarChart('related-marketplace-radar-chart',    1, dataFreetime)
+        configRadarChart('workplace-radar-chart', 1, dataWorkPlace)
+        activityRadarChart('related-workplace-radar-chart',    1, dataFreetime)
 
         doughnutChart('doughnut-chart-freetime',dataFreetime)
-        doughnutChart('doughnut-chart-marketplace',dataMarketPlace)
+        doughnutChart('doughnut-chart-workplace',dataWorkPlace)
     })
 </script>
 

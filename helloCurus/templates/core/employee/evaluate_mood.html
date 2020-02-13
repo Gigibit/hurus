@@ -98,7 +98,7 @@
         </div>
       </div>
     </section>
-    <section id="marketplace-mood-section">
+    <section id="workplace-mood-section">
         <div class="container">
           <div class="corus-dot"></div>
           <h1 class="title">
@@ -116,7 +116,7 @@
           
           <div class="moods-wrapper row d-flex justify-content-center">
             {% for mood in moods %}
-            <div class="marketplace-mood col-md-1" data-mood="{{mood.pk}}">
+            <div class="workplace-mood col-md-1" data-mood="{{mood.pk}}">
               <img src="{% static mood.icon.name %}">
               <div class="mood-text">
                 {% trans mood.i18n_key%}
@@ -126,28 +126,28 @@
           </div>
           <div class="curus-badge"></div>
           <h1>{% trans 'YOUR_TOUGHTS_VISIBILE_ONLY_TO_YOU'%}</h1>
-          <textarea placeholder="{% trans 'WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER' %}" id="current-tought-marketplace" class="current-tought"></textarea>
+          <textarea placeholder="{% trans 'WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER' %}" id="current-tought-workplace" class="current-tought"></textarea>
         </div>
       </section>
-      <section id="marketplace-section">
+      <section id="workplace-section">
           <h1 class="title">
             <div class="curus-badge"></div>
             {% trans 'WHAT_HAVE_YOU_BEEN_UP_TODAY_WP' %}
           </h1>
-          <div id="marketplace-activities-container" class="row">
-            {% for marketplace_choose in marketplace_available_choose %}
-            <div class="marketplace-box-wrapper col-md-2" data-activity="{{marketplace_choose.pk}}">
+          <div id="workplace-activities-container" class="row">
+            {% for workplace_choose in workplace_available_choose %}
+            <div class="workplace-box-wrapper col-md-2" data-activity="{{workplace_choose.pk}}">
               <div class="freetime-box">
-                <img src="{% static marketplace_choose.icon.name %}">
-                <p> {% trans marketplace_choose.i18n_key %} </p>
+                <img src="{% static workplace_choose.icon.name %}">
+                <p> {% trans workplace_choose.i18n_key %} </p>
               </div>
             </div>
             {% endfor %}
-            {% for freetime_choose in team_marketplace_available_choose %}
-            <div class="marketplace-box-wrapper col-md-2" data-activity="{{marketplace_choose.pk}}">
+            {% for freetime_choose in team_workplace_available_choose %}
+            <div class="workplace-box-wrapper col-md-2" data-activity="{{workplace_choose.pk}}">
               <div class="freetime-box">
-                <img src="{{ marketplace_choose.icon.name }}">
-                <p> {% trans marketplace_choose.name %} </p>
+                <img src="{{ workplace_choose.icon.name }}">
+                <p> {% trans workplace_choose.name %} </p>
               </div>
             </div>
             {% endfor %}
@@ -254,7 +254,7 @@
                 var src = response['icon']
                 var value = response['name']
                 $('#activities-container').append(
-                  '<div class="' + (activityType == 'MP' ? 'marketplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
+                  '<div class="' + (activityType == 'MP' ? 'workplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
                     '<div class="freetime-box">' +
                       '<img src="'+src+'">'+
                       '<p> '+ value +'</p>'+

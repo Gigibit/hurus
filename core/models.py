@@ -23,12 +23,12 @@ LANGUAGES = (
 
 
 FREETIME     = 'FT'
-MARKET_PLACE = 'MP'
+WORK_PLACE = 'MP'
 
 
 TYPES = (
     (FREETIME, 'Freetime'),
-    (MARKET_PLACE, 'MarketPlace'),
+    (WORK_PLACE, 'WorkPlace'),
 )
 
 

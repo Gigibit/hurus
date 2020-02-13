@@ -1,14 +1,14 @@
 var selectedMood;
-var selectedMoodMarketPlace;
+var selectedMoodWorkPlace;
 var selectedMoodDiv;
 var freetimeActivities = []
-var marketplaceActivities = []
+var workplaceActivities = []
 var currentTought = '';
-var currentToughtMarketplace = '';
+var currentToughtWorkplace = '';
 var step = 0;
 $('#freetime-section').hide()
-$('#marketplace-mood-section').hide()
-$('#marketplace-section').hide()
+$('#workplace-mood-section').hide()
+$('#workplace-section').hide()
 $('#daily-quote-section').hide()
 
 
@@ -21,11 +21,11 @@ $('#submit-button').click(function(event){
             evaluateFreetime()
             break;
         case 2: 
-            evaluateMoodMarketPlace()
+            evaluateMoodWorkPlace()
             break;
         
         case 3: 
-            evaluateMarketPlace()
+            evaluateWorkPlace()
             break;
         case 4:
             location.href='/'
@@ -52,8 +52,8 @@ $('.tought').click(function(event){
 $('#current-tought').on('input propertychange paste', function() {
     currentTought = $(this).val();
 });
-$('#current-tought-marketplace').on('input propertychange paste', function() {
-    currentToughtMarketplace = $(this).val();
+$('#current-tought-workplace').on('input propertychange paste', function() {
+    currentToughtWorkplace = $(this).val();
 });
 
 $(document).on('click','.freetime-box-wrapper', function(){
@@ -79,27 +79,27 @@ $(document).on('click','.freetime-box-wrapper', function(){
         freetimeActivities.push(activity);
     }
 })
-$(document).on('click','.marketplace-box-wrapper', function(){
+$(document).on('click','.workplace-box-wrapper', function(){
     let element = $(this)
     let activity = element.data('activity')
-    let index = marketplaceActivities.indexOf(activity) 
+    let index = workplaceActivities.indexOf(activity) 
     if( index != -1){
-        $(element.children()[0]).removeClass('marketplace-box-selected')
-        marketplaceActivities.splice(index, 1);
+        $(element.children()[0]).removeClass('workplace-box-selected')
+        workplaceActivities.splice(index, 1);
     }
-    else if(marketplaceActivities.length < 5 ) {
-        $(element.children()[0]).addClass('marketplace-box-selected')
-        marketplaceActivities.push(activity);
+    else if(workplaceActivities.length < 5 ) {
+        $(element.children()[0]).addClass('workplace-box-selected')
+        workplaceActivities.push(activity);
     } else {
-        let selectedActivities = $('.marketplace-box-selected')
+        let selectedActivities = $('.workplace-box-selected')
 
         let lastActivitySelect = $(selectedActivities[selectedActivities.length - 1 ])
-        let indexOfLastSelectedActivity = marketplaceActivities.indexOf(lastActivitySelect.parent().data('activity'))
+        let indexOfLastSelectedActivity = workplaceActivities.indexOf(lastActivitySelect.parent().data('activity'))
         
-        lastActivitySelect.removeClass('marketplace-box-selected')
-        marketplaceActivities.splice(indexOfLastSelectedActivity, 1);
-        $(element.children()[0]).addClass('marketplace-box-selected')
-        marketplaceActivities.push(activity);
+        lastActivitySelect.removeClass('workplace-box-selected')
+        workplaceActivities.splice(indexOfLastSelectedActivity, 1);
+        $(element.children()[0]).addClass('workplace-box-selected')
+        workplaceActivities.push(activity);
     }
 })
 
@@ -126,23 +126,23 @@ function evaluateFreetime(){
         
         console.log(freetimeActivities)
         $('#freetime-section').hide()
-        $('#marketplace-mood-section').show()
+        $('#workplace-mood-section').show()
         step++
     }
 }
 
-function evaluateMoodMarketPlace(){
-    if(selectedMoodMarketPlace){
-        $('#marketplace-mood-section').hide()
-        $('#marketplace-section').show()
+function evaluateMoodWorkPlace(){
+    if(selectedMoodWorkPlace){
+        $('#workplace-mood-section').hide()
+        $('#workplace-section').show()
         step++
     }
 }
 
 
-function evaluateMarketPlace(){
-    console.log(marketplaceActivities)
-    if(marketplaceActivities.length > 0){
+function evaluateWorkPlace(){
+    console.log(workplaceActivities)
+    if(workplaceActivities.length > 0){
         let request = {
             'freetime': {
                 'selected_mood' : selectedMood,
@@ -150,16 +150,16 @@ function evaluateMarketPlace(){
                 'activities' : freetimeActivities
     
             },
-            'marketplace': {
-                'selected_mood' : selectedMoodMarketPlace,
-                'current_tought': currentToughtMarketplace,
-                'activities' : marketplaceActivities
+            'workplace': {
+                'selected_mood' : selectedMoodWorkPlace,
+                'current_tought': currentToughtWorkplace,
+                'activities' : workplaceActivities
     
             }
         }
         console.log(request)
         $.post('/submit_survey/',request, function(response){
-            $('#marketplace-section').hide()
+            $('#workplace-section').hide()
             $('#daily-quote-section').show()
             $('#quote').text('"' + response['motivational_quote']['text'] +'"')
             if(response['motivational_quote']['author'])
@@ -183,12 +183,12 @@ $('.mood').click(function(event){
 });
 
 
-$('.marketplace-mood').click(function(event){
+$('.workplace-mood').click(function(event){
     buttonEnabled = true
     if( selectedMoodDiv != null ){
         selectedMoodDiv.removeClass('mood-selected')
     }
     selectedMoodDiv = $(this)
-    selectedMoodMarketPlace = $(this).data('mood')
+    selectedMoodWorkPlace = $(this).data('mood')
     selectedMoodDiv.addClass('mood-selected')
 });

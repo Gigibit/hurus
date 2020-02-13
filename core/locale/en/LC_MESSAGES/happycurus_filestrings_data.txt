@@ -205,8 +205,6 @@ msgstr "Your mood"
 msgid "YOUR_TOUGHTS"
 msgstr "Your toughts (visible only to you)"
 
-msgid "TOUGHTS"
-msgstr "Toughts"
 
 msgid "YOUR_TOUGHT"
 msgstr "Your tought"
@@ -384,10 +382,6 @@ msgstr "My Learning material"
 msgid "CURUS_FOR_THE_ENVIRONMENT"
 msgstr "Curus for the environment"
 
-msgid "FREETIME"
-msgstr "FREE TIME"
-
-
 msgid "HISTORICAL_TREND_FREETIME"
 msgstr "Historical trend freetime"
 
@@ -486,7 +480,3 @@ msgstr "Career"
 
 msgid "COULD_NOT_PROCESS_SELECTED_DATE"
 msgstr "Cannot process selected date"
-
-
-msgid "VIEW_STATISTICS"
-msgstr "VIEW STATISTICS"

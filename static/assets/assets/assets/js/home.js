@@ -152,7 +152,7 @@ function computeDate(day, month, year){
     success:function(response){
       try{
         let freetime = response['toughts_for_day'][0]
-        let marketplace = response['toughts_for_day'][1]
+        let workplace = response['toughts_for_day'][1]
         
         $('#tought-modal-mood-freetime').html('<img class="mood" src="/static/'+ freetime['mood']['icon'] +'"/>')
         $('#tought-modal-tought-freetime').text(freetime['tought'])
@@ -172,16 +172,16 @@ function computeDate(day, month, year){
             }
           }
           
-          $('#tought-modal-mood-marketplace').html('<img class="mood" src="/static/'+ marketplace['mood']['icon'] +'"/>')
-          $('#tought-modal-tought-marketplace').text(marketplace['tought'])
+          $('#tought-modal-mood-workplace').html('<img class="mood" src="/static/'+ workplace['mood']['icon'] +'"/>')
+          $('#tought-modal-tought-workplace').text(workplace['tought'])
           
-          let marketplaceActivities = JSON.parse(marketplace['activities'])
+          let workplaceActivities = JSON.parse(workplace['activities'])
           console.log(response)
-          if(marketplaceActivities){
-            $('#tought-modal-activities-marketplace').html()
-            for( var i = 0; i < marketplaceActivities.length; i++ ){
-              let activity = marketplaceActivities[i]
-              $('#tought-modal-activities-marketplace').append(
+          if(workplaceActivities){
+            $('#tought-modal-activities-workplace').html()
+            for( var i = 0; i < workplaceActivities.length; i++ ){
+              let activity = workplaceActivities[i]
+              $('#tought-modal-activities-workplace').append(
                 '<div class="col-md-3 activity-box-container">'+
                 '<div class="activity-box">' +
                 '<img class="activity-icon" src="/static/'+ activity['icon']+'"/>'+
@@ -191,7 +191,7 @@ function computeDate(day, month, year){
                 )
               }
             }
-            $('#tought-modal-motivational-quote').text(( freetime['motivational_quote'] && freetime['motivational_quote']['text'] ) || (marketplace['motivational_quote'] && marketplace['motivational_quote']['text']))
+            $('#tought-modal-motivational-quote').text(( freetime['motivational_quote'] && freetime['motivational_quote']['text'] ) || (workplace['motivational_quote'] && workplace['motivational_quote']['text']))
             
             $('#tought-modal').modal('toggle')
             $('#view-statistics').click(function(event){
@@ -230,7 +230,7 @@ function computeDate(day, month, year){
                 })
                 
                 $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
-                $('#mp-row').append('<h1>'+ i18n['MARKETPLACE_MOOD_COUNT'] + '</h1>')
+                $('#mp-row').append('<h1>'+ i18n['WORKPLACE_MOOD_COUNT'] + '</h1>')
                 mpMoods.forEach((value,i)=>{
                   $('#mp-row').append(
                     '<div class="chart col-md-3 col-centered">'+

@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='activity',
             name='activity_type',
-            field=models.CharField(choices=[('FT', 'Freetime'), ('MP', 'MarketPlace')], default='FT', max_length=2),
+            field=models.CharField(choices=[('FT', 'Freetime'), ('MP', 'WorkPlace')], default='FT', max_length=2),
         ),
         migrations.AddField(
             model_name='tought',
             name='tought_type',
-            field=models.CharField(choices=[('FT', 'Freetime'), ('MP', 'MarketPlace')], default='FT', max_length=2),
+            field=models.CharField(choices=[('FT', 'Freetime'), ('MP', 'WorkPlace')], default='FT', max_length=2),
         ),
     ]
