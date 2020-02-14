@@ -488,10 +488,12 @@ def submit_survey(request):
         sentences = list(EncouragingSentence.objects.filter(language=request.user.preferred_language).exclude(pk__in= request.user.read_encouraging_sentences.all().values('pk')))
         if len(sentences) == 0:
             daily_quote = EncouragingSentence.objects.filter(language=request.user.preferred_language).first()
-            request.user.read_encouraging_sentences.set([daily_quote])
+            if daily_quote:
+                request.user.read_encouraging_sentences.set([daily_quote])
         else:
             daily_quote = random.sample(sentences, len(sentences))[0]
-            request.user.read_encouraging_sentences.add(daily_quote)
+            if daily_quote:
+                request.user.read_encouraging_sentences.add(daily_quote)
 
         request.user.save()
 
@@ -500,7 +502,7 @@ def submit_survey(request):
         tought = Tought.objects.create(  
                         tought_type = FREETIME,
                         mood=mood,
-                        motivational_quote= daily_quote,
+                        motivational_quote= daily_quote if daily_quote else '…',
                         text=request.POST['freetime[current_tought]'],
                         employee=employee
                         )
@@ -518,7 +520,7 @@ def submit_survey(request):
         tought = Tought.objects.create(  
                         tought_type=WORK_PLACE,
                         mood=mood,
-                        motivational_quote=daily_quote,
+                        motivational_quote=daily_quote if daily_quote else '…',
                         text=request.POST['workplace[current_tought]'],
                         employee=employee
                         )
@@ -529,7 +531,7 @@ def submit_survey(request):
 
         return JsonResponse({
           'status' : 200,
-          'motivational_quote' : model_to_dict(daily_quote)
+          'motivational_quote' : model_to_dict(daily_quote) if daily_quote else '…'
         })
     return None
 

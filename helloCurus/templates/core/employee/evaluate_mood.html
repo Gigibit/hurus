@@ -253,7 +253,7 @@
                 var id = response['id']
                 var src = response['icon']
                 var value = response['name']
-                $('#activities-container').append(
+                $('#activities-container').prepend(
                   '<div class="' + (activityType == 'MP' ? 'workplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
                     '<div class="freetime-box">' +
                       '<img src="'+src+'">'+
