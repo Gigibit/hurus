@@ -70,7 +70,7 @@
         <div class="curus-badge"></div>
         {% trans 'WHAT_HAVE_YOU_BEEN_UP_TODAY' %}
       </h1>
-      <div id="activities-container" class="row">
+      <div id="FT-activities-container" class="row">
         {% for freetime_choose in freetime_available_choose %}
         <div class="freetime-box-wrapper col-md-2" data-activity="{{freetime_choose.pk}}">
           <div class="freetime-box">
@@ -134,7 +134,7 @@
             <div class="curus-badge"></div>
             {% trans 'WHAT_HAVE_YOU_BEEN_UP_TODAY_WP' %}
           </h1>
-          <div id="workplace-activities-container" class="row">
+          <div id="MP-activities-container" class="row">
             {% for workplace_choose in workplace_available_choose %}
             <div class="workplace-box-wrapper col-md-2" data-activity="{{workplace_choose.pk}}">
               <div class="freetime-box">
@@ -253,7 +253,7 @@
                 var id = response['id']
                 var src = response['icon']
                 var value = response['name']
-                $('#activities-container').prepend(
+                $('#' + activityType + '-activities-container').prepend(
                   '<div class="' + (activityType == 'MP' ? 'workplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
                     '<div class="freetime-box">' +
                       '<img src="'+src+'">'+

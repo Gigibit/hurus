@@ -35,11 +35,11 @@ TYPES = (
 
 def activity_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'static/img/activities/team_{0}/{1}'.format(instance.team.id if instance.team else 0, filename)
+    return 'static/img/activities/team_{0}/{1}'.format(instance.team.pk if instance.team else 0, filename)
 
 def course_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return 'static/img/course/{0}/{1}'.format(instance.id, filename)
+    return 'static/img/course/{0}/{1}'.format(instance.pk, filename)
 
 
 

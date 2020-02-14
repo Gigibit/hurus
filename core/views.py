@@ -400,8 +400,10 @@ def add_activity(request):
         employee = Employee.objects.get(email = request.user.email)
         activity_name   = request.POST['name']
         image_src       = request.POST['src']
+        activity_type   = request.POST['type']
 
         activity = Activity.objects.create(
+            activity_type = activity_type,
             team = employee.team,
             name  = activity_name,
             icon =  image_src
@@ -502,7 +504,7 @@ def submit_survey(request):
         tought = Tought.objects.create(  
                         tought_type = FREETIME,
                         mood=mood,
-                        motivational_quote= daily_quote if daily_quote else '…',
+                        motivational_quote= daily_quote,
                         text=request.POST['freetime[current_tought]'],
                         employee=employee
                         )
@@ -520,7 +522,7 @@ def submit_survey(request):
         tought = Tought.objects.create(  
                         tought_type=WORK_PLACE,
                         mood=mood,
-                        motivational_quote=daily_quote if daily_quote else '…',
+                        motivational_quote=daily_quote,
                         text=request.POST['workplace[current_tought]'],
                         employee=employee
                         )
