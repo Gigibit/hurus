@@ -140,8 +140,8 @@ svg text {
 
 
 .mood-button img{
-  width: 20px;
-  height: 20px;
+  width: 3vw;
+  height: 3vw;
   margin: 0 auto;
   display: block;
 }
@@ -152,6 +152,7 @@ svg text {
   padding: 6px;
   position: relative;
   width: 100%;
+  margin-bottom: 20px;
 }
 .mood-text{
   font-size: 8px;

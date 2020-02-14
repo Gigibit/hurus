@@ -23,9 +23,10 @@ body{
 .happy-corus-info{
     color: #ee863f;
     font-weight: bold;
+    font-size: 16px;
 }
 .curus-greeting{
-    font-size: 11px;
+    font-size: 13px;
     color: steelblue;
     margin-top: 10px;
     font-weight: bold;

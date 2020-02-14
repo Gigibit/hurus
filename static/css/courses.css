@@ -8,6 +8,9 @@
     border: #00b0f0 2px solid;
 }
 .seen-icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
     text-align: end;
     font-size: 24px;
 }
@@ -51,7 +54,7 @@
     display: block;
     font-weight: bold;
     color: #333;
-
+    
 }
 .reveal-container{
     position: absolute;
@@ -83,7 +86,7 @@ section{
 .reveal .progress{
     color: #00b0f0!important;
     height: 11px!important;
-
+    
 }
 .manager-overview-employees{
     font-size: 10px;
@@ -99,3 +102,43 @@ section{
     border-radius: 100%;
     font-weight: bold;
 }
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.arrow {
+    border: solid black;
+    border-width: 0 10px 10px 0;
+    padding: 10px;
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    border-radius: 3px;
+    z-index: 999999999999999999;
+    transition: padding 0.3s ease, border-width 0.3s ease ;
+}
+.arrow:hover{
+    border-width: 0 13px 13px 0;
+    padding: 13px;
+}
+.card {
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    height: 120px;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .card-info-container {
+    padding: 2px 16px;
+  }
+  .course-title{
+      padding-left: 0;
+      font-size: 24px;
+      font-weight: bold;
+  }

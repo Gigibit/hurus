@@ -1,5 +1,6 @@
 .container {
   height: 100%;
+  
 }
 .title {
   margin: 0;
@@ -187,7 +188,11 @@ section{
   resize: none;
 }
 .curus-badge-white{
-  background-size: 107px 100px;
-  width: 107px;
-  height: 100px;
+  background-size: 128px 108px;
+  width: 128px;
+  height: 108px;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
