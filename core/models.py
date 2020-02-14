@@ -12,6 +12,9 @@ from django.db import models
 from django.utils.translation import gettext as _
 from tinymce.models import HTMLField
 
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
+
 GERMAN = 'DE'
 ENGLISH = 'EN'
 ITALIAN =  'IT'
@@ -31,6 +34,9 @@ TYPES = (
     (WORK_PLACE, 'WorkPlace'),
 )
 
+
+
+_UNSAVED_FILEFIELD = 'unsaved_filefield'
 
 
 def activity_directory_path(instance, filename):
@@ -330,3 +336,29 @@ class Tought(models.Model):
         if self.motivational_quote:
             tought['motivational_quote'] = model_to_dict(self.motivational_quote)
         return tought
+
+
+# I know we can optimize…
+@receiver(pre_save, sender=Course)
+def skip_saving_file_course(sender, instance, **kwargs):
+    if not instance.pk and not hasattr(instance, _UNSAVED_FILEFIELD):
+        setattr(instance, _UNSAVED_FILEFIELD, instance.cover)
+        instance.cover = None
+
+@receiver(post_save, sender=Course)
+def save_file_course(sender, instance, created, **kwargs):
+    if created and hasattr(instance, _UNSAVED_FILEFIELD):
+        instance.cover = getattr(instance, _UNSAVED_FILEFIELD)
+        instance.save()     
+
+@receiver(pre_save, sender=Activity)
+def skip_saving_file_activity(sender, instance, **kwargs):
+    if not instance.pk and not hasattr(instance, _UNSAVED_FILEFIELD):
+        setattr(instance, _UNSAVED_FILEFIELD, instance.icon)
+        instance.icon = None
+
+@receiver(post_save, sender=Activity)
+def save_file_activity(sender, instance, created, **kwargs):
+    if created and hasattr(instance, _UNSAVED_FILEFIELD):
+        instance.icon = getattr(instance, _UNSAVED_FILEFIELD)
+        instance.save()     
