@@ -6,6 +6,7 @@
     margin: 5px;
     border-radius: 15px;
     border: #00b0f0 2px solid;
+    position: relative;
 }
 .seen-icon{
     text-align: end;
