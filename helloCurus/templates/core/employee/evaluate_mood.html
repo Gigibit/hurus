@@ -75,7 +75,7 @@
         <div class="freetime-box-wrapper col-md-2" data-activity="{{freetime_choose.pk}}">
           <div class="freetime-box">
             <img src="{% static freetime_choose.icon.name %}">
-            <p> {% trans freetime_choose.i18n_key %} </p>
+            <p>{% if freetime_choose.i18n_key %} {% trans freetime_choose.i18n_key %} {% elif freetime_choose.name%} {{freetime_choose.name }} {% endif %} </p>
           </div>
         </div>
         {% endfor %}

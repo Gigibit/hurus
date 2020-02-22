@@ -1,4 +1,4 @@
-import os, base64, json, random, datetime, threading
+import os, base64, json, random, threading
 from datetime import date, datetime, timedelta
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -212,18 +212,18 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
 
 
 
-    for date in set(dates):
+    for _date in set(dates):
 
-        average_mood_freetime = calculate_average_mood_for_day(date, toughts, FREETIME)
-        average_mood_workplace = calculate_average_mood_for_day(date, toughts, WORK_PLACE)
+        average_mood_freetime = calculate_average_mood_for_day(_date, toughts, FREETIME)
+        average_mood_workplace = calculate_average_mood_for_day(_date, toughts, WORK_PLACE)
         average_mood_value_freetime += average_mood_freetime / mood_max_value
         average_mood_value_workplace += average_mood_workplace / mood_max_value
         count += 1
-        freetime_counts = get_mood_count_for_date(date, toughts, FREETIME)
-        workplace_counts = get_mood_count_for_date(date, toughts, WORK_PLACE)
+        freetime_counts = get_mood_count_for_date(_date, toughts, FREETIME)
+        workplace_counts = get_mood_count_for_date(_date, toughts, WORK_PLACE)
         
         average_moods.append({
-            'date' : date,
+            'date' : _date,
             'average_mood_freetime' : average_mood_freetime,
             'average_mood_workplace' : average_mood_workplace,
             'moods' : {
@@ -246,22 +246,22 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
 
 
 
-def get_mood_count_for_date(date, toughts, for_type):
+def get_mood_count_for_date(_date, toughts, for_type):
     moods = {}
     for mood in Mood.objects.all():
         moods[mood.value] = 0
-    for tought in filter(lambda t: same_day(t.created_at,date), toughts):
+    for tought in filter(lambda t: same_day(t.created_at,_date), toughts):
         if(tought.tought_type == for_type):
             moods[tought.mood.value] += 1
 
     return moods
 
 
-def calculate_average_mood_for_day(date, toughts, for_type):
+def calculate_average_mood_for_day(_date, toughts, for_type):
     count = 0
     moods = 0
 
-    for tought in filter(lambda t: same_day(t.created_at, date), toughts):
+    for tought in filter(lambda t: same_day(t.created_at, _date), toughts):
 
         if tought.tought_type == for_type:
             count += 1
