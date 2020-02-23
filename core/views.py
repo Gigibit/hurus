@@ -162,15 +162,16 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
     podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key,value in moods_count.items()],key=lambda x: x['count'], reverse=True)
 
     activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime] ])[:6]
-    
+
     activity_count_freetime = []
     for mood in moods:
         #max number of activity displayed
         activities = [ 
-            {   'mood': activity['name'],
-                'i18n_key' : translation.gettext( activity['18n_key'] ) if activity.get('18n_key', None) else activity['name'],
+            {   'name': activity['name'],
+                'i18n_key' : translation.gettext( activity['i18n_key'] ) if activity.get('i18n_key', None) else activity['name'],
                 'mood' : activity['mood']
             } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+
         if len(activities) > 0 : 
             activity_count_freetime.append({
                 'mood_value' : mood.value,
@@ -179,7 +180,6 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
                 'mood_i18n_key': mood.i18n_key,
                 'activities': activities
             })
-
 
 
     moods_count = {}
@@ -197,7 +197,7 @@ def calculate_average_moods(manager, end_day=None, start_day=None, mood_max_valu
         #max number of activity displayed
         activities = [ 
         {   'name': activity['name'],
-            'i18n_key' : translation.gettext( activity['18n_key'] ) if activity.get('18n_key', None) else activity['name'],
+            'i18n_key' : translation.gettext( activity['i18n_key'] ) if activity.get('i18n_key', None) else activity['name'],
             'mood' : activity['mood']
         } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
         if len(activities) > 0:
@@ -273,6 +273,8 @@ def calculate_average_mood_for_day(_date, toughts, for_type):
 
 
 def e_learning_manager(request, manager):
+    print(request.user.seen_courses.all())
+    
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
@@ -282,8 +284,10 @@ def e_learning_manager(request, manager):
         request.user.last_seen_course_date = None
         request.user.save()
 
+    print(request.user.seen_courses.all())
 
     if request.user.has_to_get_new_course():
+        # shuffle if new course has to change
         not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
         course_to_see = not_seen_courses[0]
         request.user.course_to_see = course_to_see
@@ -297,6 +301,7 @@ def e_learning_manager(request, manager):
     courses_check_list = []
     employees = Employee.objects.filter(team__manager = manager)
     employees_length = len(employees)
+
     for c in courses:
         employees_that_have_seen_courses = len(list(filter(lambda e: c in e.seen_courses.all(), employees)))
         if c.pk != course_to_see.pk:
@@ -349,6 +354,7 @@ def statistics_employee(request, employee):
 
 def e_learning_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
+    print(courses)
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     if len(not_seen_courses) == 0:
         request.user.seen_courses.set([])
@@ -370,12 +376,15 @@ def e_learning_employee(request, employee):
 
 
     courses_check_list = []
+    print(courses)
+    print(request.user.seen_courses.all())
     for c in courses:
         if c.pk != course_to_see.pk:
             courses_check_list.append({
                 'seen' : c in request.user.seen_courses.all(),
                 'course': c
             })
+    print(courses_check_list)
     return render(request, 'core/employee/e_learning.html', {
         'courses': sorted(courses_check_list, key=lambda c: c['seen'], reverse=True),
         'course_to_see': course_to_see
@@ -386,8 +395,9 @@ def e_learning_detail(request,id):
     course = Course.objects.get(pk=id)
     if course not in request.user.seen_courses.all():
         request.user.seen_courses.add(course)
-    if request.user.course_to_see and request.user.course_to_see == course.pk:
+    if request.user.course_to_see and request.user.course_to_see.pk == course.pk:
         request.user.course_to_see = None
+    request.user.save()
 
     return render(request, 'core/employee/e_learning_detail.html', {
         'course': course,

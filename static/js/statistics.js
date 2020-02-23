@@ -378,67 +378,6 @@ function updateChart(chart, selectedMood, _data) {
 	}
 }
 
-function managerLineChart(forDiv, data){
-
-	let ctx = document.getElementById(forDiv).getContext('2d')
-	let backgroundColors ={}
-	Object.keys(data).forEach(key=>{
-		backgroundColors[key] = moods[key]['color'];
-		$('#legend-'+forDiv).append(
-			'<div class="legend-mood col-md-2">' + 
-				'<div class="row">' + 
-					'<div class="legend-mood-img-wrp col-md-2">'+
-						'<img class="legend-mood-img" src="' + moods[key].icon + '"/>' + 
-					'</div>'+
-					'<div class="legend-mood-color col-md-6" style="background-color:' + backgroundColors[key] + '"></div>'+
-				'</div>' + 
-			'</div>'
-		)
-	})
-	new Chart(ctx, {
-		type: 'line',
-		data: {
-			labels : dates,
-			datasets:  Object.keys(data).map(key=>{ 
-				console.log(key)
-				return {
-					fill: false,
-					lineTension: 0.3,
-					borderColor: moods[key]['color'],
-					borderCapStyle: 'square',
-					borderJoinStyle: 'miter',
-					pointBorderWidth: 1,
-					pointHoverRadius: 8,
-					pointHoverBorderWidth: 2,
-					pointRadius: 4,
-					pointHitRadius: 10,
-					data : data[key].data
-				}})
-		},
-		options: {
-			legend: {
-				display: false
-			},
-			tooltips: {
-				// mode: 'index',
-				// intersect: false,
-				enabled: false
-			},
-			hover: {
-				mode: 'nearest',
-				intersect: true
-			},
-			scales: {
-			yAxes: [{
-				ticks: {
-				beginAtZero:true
-				}
-			}]
-		  },
-		}
-	  });
-}
-
 function diffBetweenDateInDays(date1, date2){
 	const diffTime = Math.abs(date2 - date1);
 	return Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
@@ -446,9 +385,13 @@ function diffBetweenDateInDays(date1, date2){
 
 
 function configRadarChart(chartDiv, selectedMood, data) {
-    var context = document.getElementById(chartDiv).getContext('2d');
+    var el = document.getElementById(chartDiv);
 
-	let labels = getActivities(selectedMood, data)
+	let labels = getActivities(selectedMood, data) || []
+	if(labels.length <= 0){
+		return el.replaceWith('<div class="wip-warning"></div>')
+	}
+	var context = el.getContext('2d');
     let datasetData = getDataForActivities(labels, selectedMood, data)
 	var causeEffectChartData = {
 		labels: [' '].concat(labels),
@@ -495,9 +438,13 @@ function configRadarChart(chartDiv, selectedMood, data) {
 }
 
 function activityRadarChart(chartDiv, selectedMood, data){
-	var relatedContext = document.getElementById(chartDiv).getContext('2d');
-
+	var el = document.getElementById(chartDiv)
+	if(data.length <= 0){
+		return el.replaceWith('<div class="wip-warning"></div>')
+	}
+	console.log(data)
 	let labels = getActivities(selectedMood, data)
+	var relatedContext = el.getContext('2d');
     let datasetData = getDataForActivities(labels, selectedMood, data)
     var opt = {
         legend: {
@@ -715,8 +662,22 @@ function doughnutChart(div,toughts){
 
 
 
-    function randomRgba() {
-        var o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-    }
-    
+			function randomRgba(){
+				var maximum = 255;
+				var minimum = 100;
+				var range = maximum - minimum;
+				var red = Math.floor(Math.random()*range)+minimum;
+				var green = Math.floor(Math.random()*range)+minimum;
+				var blue = Math.floor(Math.random()*range)+minimum;
+				var redToHex = red.toString(16);
+				var greenToHex = green.toString(16);
+				var blueToHex = blue.toString(16);
+				return "rgb(" + red + "," + green + "," + blue + ")";
+				//this.hexValue = "#" + redToHex + "" + greenToHex + "" + blueToHex;
+			}
+			RndColor.prototype.getRGB = function(){
+				return this.rgbValue;
+			}
+			RndColor.prototype.getHex = function(){
+				return this.hexValue;
+			}

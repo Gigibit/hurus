@@ -38,8 +38,8 @@ class EmployeeProfileAdmin(admin.ModelAdmin):
                 'fields': ('email', 'password1', 'password2'),
             }),
         )
-    list_display = ('email', 'first_name', 'last_name', 'agency')
-    search_fields = ('email', 'first_name', 'last_name','agency__name')
+    list_display = ('email', 'first_name', 'last_name', 'agency', 'team')
+    search_fields = ('email', 'first_name', 'last_name','agency__name', 'team__name')
     ordering = ('email',)
 
 @admin.register(Manager)

@@ -9,7 +9,7 @@
 {% endblock head_css_section %}
 
 <div class="page-header">
-        <img id="header-img" src="{% static 'img/website_assets/header_menu.jpg' %}" />
+        <!-- <img id="header-img" src="{% static 'img/website_assets/header_menu.jpg' %}" /> -->
         <!-- h1><a href="/">happyCurus</a></h1 -->
         <p class="back-button"><i onclick="location.href='/courses'" class="arrow left"></i></p>
     </div>
@@ -51,7 +51,10 @@
             controls: true,
             progress: true,
             history: true,
-            center: true
+            center: true,
+            controlsLayout: 'edges',
+
+
         });
     </script>
 </body>

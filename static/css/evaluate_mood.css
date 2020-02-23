@@ -1,6 +1,7 @@
 .container {
   height: 100%;
-  
+  padding: 0;
+  margin: 0 auto;
 }
 .title {
   margin: 0;
@@ -191,6 +192,7 @@ section{
   background-size: 128px 108px;
   width: 128px;
   height: 108px;
+  margin-top: 70px;
 }
 
 ::-webkit-scrollbar {
