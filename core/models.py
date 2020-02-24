@@ -232,7 +232,8 @@ class Employee(UserProfile):
         verbose_name_plural = 'Employees'
 
     def has_seen_daily_survey(self):
-        return self.last_seen_survey and (datetime.today().date() - self.last_seen_survey.date()).days < 1
+        print(self.email)
+        return (self.last_seen_survey and (datetime.today().date() - self.last_seen_survey.date()).days < 1) or datetime.today().weekday() >= 5
 
 
 class Curus(models.Model):
@@ -361,4 +362,4 @@ def skip_saving_file_activity(sender, instance, **kwargs):
 def save_file_activity(sender, instance, created, **kwargs):
     if created and hasattr(instance, _UNSAVED_FILEFIELD):
         instance.icon = getattr(instance, _UNSAVED_FILEFIELD)
-        instance.save()     
+        instance.save()   

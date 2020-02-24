@@ -32,6 +32,10 @@ IT_DAYS = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'
 def main(argv=None):
     if argv is None:
         argv = sys.argv
+
+    if datetime.datetime.today().weekday() >= 5:
+        return
+        
     e = Employee(
         email = 'gigibit92@gmail.com',
         preferred_language = 'it'

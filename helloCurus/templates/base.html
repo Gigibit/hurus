@@ -43,8 +43,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
-    <script>window['True']  = true</script><!-- to avoid error from bknd -->
-    <script>window['False'] = false</script><!-- to avoid error from bknd -->
+    <script>
+        window['None']  = null;
+        window['True']  = true;
+        window['False'] = false
+    
+    </script><!-- to avoid error from bknd -->
     
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
@@ -67,6 +71,8 @@
         'FREETIME_MOOD_COUNT': "{% trans 'CAUSE_EFFECT_FREETIME' %}",
         'WORKPLACE_MOOD_COUNT': "{% trans 'CAUSE_EFFECT_WORKPLACE' %}",
         'COULD_NOT_PROCESS_SELECTED_DATE': "{% trans 'COULD_NOT_PROCESS_SELECTED_DATE' %}",
+        'NO_DATA': "{% trans 'NO_DATA' %}",
+
     }
 
 
@@ -82,6 +88,8 @@
     <div id="page-wrapper" style="display:none">
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light static-top">
+            <img id="header-img" src="{% static 'img/website_assets/header_menu.jpg' %}" />
+
             <div class="container">
                 <a id="application-brand" class="navbar-brand" href="#">
                     <img width="94" height="50" src="{% static 'img/website_assets/logo.png' %}" alt="logo">

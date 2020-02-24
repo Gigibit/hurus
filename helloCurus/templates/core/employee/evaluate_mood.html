@@ -139,11 +139,11 @@
             <div class="workplace-box-wrapper col-md-2" data-activity="{{workplace_choose.pk}}">
               <div class="freetime-box">
                 <img src="{% static workplace_choose.icon.name %}">
-                <p> {% trans workplace_choose.i18n_key %} </p>
+                <p>{% if workplace_choose.i18n_key %} {% trans workplace_choose.i18n_key %} {% elif workplace_choose.name%} {{workplace_choose.name }} {% endif %} </p>
               </div>
             </div>
             {% endfor %}
-            {% for freetime_choose in team_workplace_available_choose %}
+            {% for workplace_choose in team_workplace_available_choose %}
             <div class="workplace-box-wrapper col-md-2" data-activity="{{workplace_choose.pk}}">
               <div class="freetime-box">
                 <img src="{{ workplace_choose.icon.name }}">
@@ -172,6 +172,8 @@
     <div class="submit-button-container col-md-12">
       <button id="submit-button" (click)="submit()" type="button" class="align-self-end btn btn-lg btn-block btn-primary submit-button btn-sm waves-effect waves-light">Save</button>
     </div>
+    <div id="snackbar"></div>
+
   </div>
 </body>
 <footer>
@@ -210,7 +212,7 @@
           <div class="selected-icon-wrapper col-md-12">
             <img id="selected-icon" src="">
           </div>
-          <input id="new-activity-name" name="new-activity-name" placeholder="{% trans 'NEW_ACTIVITY_NAME_PLACEHOLDER' %}">
+          <input id="new-activity-name" maxlength="121" name="new-activity-name" placeholder="{% trans 'NEW_ACTIVITY_NAME_PLACEHOLDER' %}">
         </div>
       </div>
 
@@ -230,6 +232,8 @@
 
         $('.available-icon').click(function(event){
             activitySrc =  $(this).attr('src');
+            console.log(activitySrc)
+
             $('#selected-icon').attr('src',activitySrc);
         })
 
@@ -246,12 +250,12 @@
             $('#add-activity-modal').modal('toggle');
             $.post('/add_activity/', {
               'type': activityType,
-              'src' : activitySrc,
+              'src' : activitySrc.replace("static/", ""),
               'name' : activityName
             },function(response){
                 $('#new-activity-name').val('')
                 var id = response['id']
-                var src = response['icon']
+                var src = '/static/' + response['icon']
                 var value = response['name']
                 $('#' + activityType + '-activities-container').prepend(
                   '<div class="' + (activityType == 'MP' ? 'workplace-box-wrapper' : 'freetime-box-wrapper') + ' col-md-2" data-activity="'+id+'">' +
@@ -266,5 +270,6 @@
         })
       </script>
   </div>
+  
 </div>
 </html>

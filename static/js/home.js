@@ -151,9 +151,12 @@ function computeDate(day, month, year){
     method: 'GET',
     success:function(response){
       try{
+        $('tought-modal-activities-freetime').empty()
+        $('tought-modal-activities-workplace').empty()
+        
         let freetime = response['toughts_for_day'][0]
         let workplace = response['toughts_for_day'][1]
-        
+
         $('#tought-modal-mood-freetime').html('<img class="mood" src="/static/'+ freetime['mood']['icon'] +'"/>')
         $('#tought-modal-tought-freetime').text(freetime['tought'])
         let freetimeActivities = JSON.parse(freetime['activities'])
@@ -213,7 +216,6 @@ function computeDate(day, month, year){
             try{
               let ftMoods = Object.keys(response['FT'])
               let mpMoods = Object.keys(response['MP'])
-              console.log(response)
               $('#tought-modal #result').empty()
               
               
