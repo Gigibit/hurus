@@ -490,3 +490,13 @@ msgstr "Cannot process selected date"
 
 msgid "VIEW_STATISTICS"
 msgstr "VIEW STATISTICS"
+
+
+
+
+
+
+# add to lokalization
+
+msgid "NO_DATA"
+msgstr "There is not enough data!"

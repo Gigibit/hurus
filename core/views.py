@@ -356,15 +356,15 @@ def e_learning_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     print(courses)
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
-    if len(not_seen_courses) == 0:
-        request.user.seen_courses.set([])
-        not_seen_courses = courses
-        request.user.course_to_see = None
-        request.user.last_seen_course_date = None
-        request.user.save()
+    # if len(not_seen_courses) == 0:
+    #     request.user.seen_courses.set([])
+    #     not_seen_courses = courses
+    #     request.user.course_to_see = None
+    #     request.user.last_seen_course_date = None
+    #     request.user.save()
 
 
-    if request.user.has_to_get_new_course():
+    if request.user.has_to_get_new_course() and len(not_seen_courses) > 0:
         not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
         course_to_see = not_seen_courses[0]
         request.user.course_to_see = course_to_see
@@ -379,7 +379,7 @@ def e_learning_employee(request, employee):
     print(courses)
     print(request.user.seen_courses.all())
     for c in courses:
-        if c.pk != course_to_see.pk:
+        if course_to_see and c.pk != course_to_see.pk:
             courses_check_list.append({
                 'seen' : c in request.user.seen_courses.all(),
                 'course': c

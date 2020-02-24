@@ -373,6 +373,11 @@ function updateChart(chart, selectedMood, _data) {
 			chart.data.labels = labels
 			chart.data.datasets[0].data = data
 			chart.update()
+			$(chart.canvas).show(500)
+		}
+		else{
+			$(chart.canvas).hide(500)
+			snackbar(i18n['NO_DATA'])
 		}
 
 	}
