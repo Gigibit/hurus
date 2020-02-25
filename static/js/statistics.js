@@ -680,9 +680,4 @@ function doughnutChart(div,toughts){
 				return "rgb(" + red + "," + green + "," + blue + ")";
 				//this.hexValue = "#" + redToHex + "" + greenToHex + "" + blueToHex;
 			}
-			RndColor.prototype.getRGB = function(){
-				return this.rgbValue;
-			}
-			RndColor.prototype.getHex = function(){
-				return this.hexValue;
-			}
+	
