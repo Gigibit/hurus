@@ -2,6 +2,7 @@ var radarCharts = {};
 const MIN_DAYS_FOR_CHART = 14;
 
 function count(obj) { return Object.keys(obj).length; }
+const truncate = (input) => input.length > 35 ? `${input.substring(0, 35)}...` : input;
 
 
 function barChart(chartDiv, data, relatedChart) {
@@ -116,7 +117,7 @@ function barChart(chartDiv, data, relatedChart) {
 
 function lineChart(chartDiv, data) {
 	if(diffBetweenDateInDays(data[0].date, data[data.length-1].date) < MIN_DAYS_FOR_CHART)
-		throw new Exception('data evaluation unavailable')
+		throw 'data evaluation unavailable'
 	
 	var margin = {
 			top: 50,
@@ -371,7 +372,21 @@ function updateChart(chart, selectedMood, _data) {
 		let data = getDataForActivities(labels, selectedMood, _data)
 		if (labels.length > 0 && data.length > 0) {
 			chart.data.labels = labels
-			chart.data.datasets[0].data = data
+			chart.data.datasets = [{
+				scaleOverride: true,
+				scaleSteps: 5,
+				scaleStepWidth: 5,
+				scaleStartValue: 0,
+				pointLabelFontSize: 16,
+				fillColor: "rgba(0,120,0,0.2)",
+				strokeColor: "rgba(0,120,0,1)",
+				pointColor: "rgba(10,10,10,1)",
+				pointStrokeColor: "#ccc",
+				pointHighlightFill: "#333",
+				pointHighlightStroke: "rgba(255,255,0,1)",
+				backgroundColor: moods[selectedMood]['color'],
+				data: [0].concat(data)
+			}]
 			chart.update()
 			$(chart.canvas).show(500)
 		}
@@ -393,11 +408,10 @@ function configRadarChart(chartDiv, selectedMood, data) {
     var el = document.getElementById(chartDiv);
 
 	let labels = getActivities(selectedMood, data) || []
-	if(labels.length <= 0){
-		return el.replaceWith('<div class="wip-warning"></div>')
-	}
+
 	var context = el.getContext('2d');
-    let datasetData = getDataForActivities(labels, selectedMood, data)
+	let datasetData = getDataForActivities(labels, selectedMood, data)
+
 	var causeEffectChartData = {
 		labels: [' '].concat(labels),
 		datasets: [{
@@ -417,6 +431,8 @@ function configRadarChart(chartDiv, selectedMood, data) {
 		}]
 
 	};
+
+	//this MUST eather initialized anyway, for instantiate once and just update next time
 	radarCharts[chartDiv] = new Chart(context, {
 		type: 'radar',
 		data: causeEffectChartData,
@@ -438,8 +454,11 @@ function configRadarChart(chartDiv, selectedMood, data) {
             }
     
 		}
-    });
-
+	});
+	
+	if(labels.length <= 0){ 
+		 $(radarCharts[chartDiv].canvas).hide()
+	} else $(el).show(500)
 }
 
 function activityRadarChart(chartDiv, selectedMood, data){
@@ -447,7 +466,6 @@ function activityRadarChart(chartDiv, selectedMood, data){
 	if(data.length <= 0){
 		return el.replaceWith('<div class="wip-warning"></div>')
 	}
-	console.log(data)
 	let labels = getActivities(selectedMood, data)
 	var relatedContext = el.getContext('2d');
     let datasetData = getDataForActivities(labels, selectedMood, data)
@@ -465,7 +483,7 @@ function activityRadarChart(chartDiv, selectedMood, data){
                   weight: 700
                 },
                 offset: 8,
-                color: 'white'
+                color: 'gray'
             }
         },
         scales:{
@@ -487,8 +505,19 @@ function activityRadarChart(chartDiv, selectedMood, data){
         data: {
           labels: labels,
           datasets: [
-            {
-              backgroundColor: datasetData.map(d => randomRgba()),
+            {				
+				scaleOverride: true,
+				scaleSteps: 5,
+				scaleStepWidth: 5,
+				scaleStartValue: 0,
+				pointLabelFontSize: 16,
+				fillColor: "rgba(0,120,0,0.2)",
+				strokeColor: "rgba(0,120,0,1)",
+				pointColor: "rgba(10,10,10,1)",
+				pointStrokeColor: "#ccc",
+				pointHighlightFill: "#333",
+				pointHighlightStroke: "rgba(255,255,0,1)",
+				backgroundColor: moods[selectedMood]['color'],
               data: datasetData
             }
           ]
@@ -500,7 +529,7 @@ function activityRadarChart(chartDiv, selectedMood, data){
 
 
 function getActivities(forMood, data) {
-	activities = data.filter(t => forMood == t.mood)
+	let activities = data.filter(t => forMood == t.mood)
 		.flatMap(tought => tought.activities.map(opt => {
 			return {
 				'i18n_key': opt.i18n_key,
@@ -508,8 +537,7 @@ function getActivities(forMood, data) {
 			}
 		}))
 		.map(opt => opt.i18n_key || opt.name)
-
-	return activities.filter((item, pos) => activities.indexOf(item) == pos)
+	return activities.filter((item, pos) => activities.indexOf(item) == pos).map(truncate)
 
 }
 function getDataForActivities(labels, forMood, data) {
@@ -522,7 +550,7 @@ function getDataForActivities(labels, forMood, data) {
 					'i18n_key': opt.i18n_key,
 					'name': opt.name
 				}
-			}).filter(opt => opt.i18n_key == label || opt.name == label).length > 0 && t.mood == forMood
+			}).filter(opt => opt.i18n_key === label || opt.name === label).length > 0 && t.mood == forMood
 		}).length
 
     }
@@ -571,6 +599,7 @@ function doughnutChart(div,toughts){
 				circumference: 1 * Math.PI,
 				plugins: {
 					datalabels: {
+						
 					   // hide datalabels for all datasets
 					   display: false
 					}
@@ -674,9 +703,6 @@ function doughnutChart(div,toughts){
 				var red = Math.floor(Math.random()*range)+minimum;
 				var green = Math.floor(Math.random()*range)+minimum;
 				var blue = Math.floor(Math.random()*range)+minimum;
-				var redToHex = red.toString(16);
-				var greenToHex = green.toString(16);
-				var blueToHex = blue.toString(16);
 				return "rgb(" + red + "," + green + "," + blue + ")";
 				//this.hexValue = "#" + redToHex + "" + greenToHex + "" + blueToHex;
 			}
