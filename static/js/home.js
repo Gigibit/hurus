@@ -214,8 +214,13 @@ function computeDate(day, month, year){
           method: 'GET',
           success:function(response){
             try{
-              let ftMoods = Object.keys(response['FT'])
-              let mpMoods = Object.keys(response['MP'])
+              let ftMoods = Object.keys(response['FT']) || [] 
+              let mpMoods = Object.keys(response['MP']) || []
+              
+              if(ftMoods.length == 0 || mpMoods.length == 0){
+                return snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
+              }
+
               $('#tought-modal #result').empty()
               
               
