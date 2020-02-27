@@ -151,9 +151,6 @@ function computeDate(day, month, year){
     method: 'GET',
     success:function(response){
       try{
-        $('tought-modal-activities-freetime').empty()
-        $('tought-modal-activities-workplace').empty()
-        
         let freetime = response['toughts_for_day'][0]
         let workplace = response['toughts_for_day'][1]
 
@@ -161,7 +158,7 @@ function computeDate(day, month, year){
         $('#tought-modal-tought-freetime').text(freetime['tought'])
         let freetimeActivities = JSON.parse(freetime['activities'])
         if(freetimeActivities){
-          $('#tought-modal-activities-freetime').html()
+          $('#tought-modal-activities-freetime').html('')
           for( var i = 0; i < freetimeActivities.length; i++ ){
             let activity = freetimeActivities[i]
             $('#tought-modal-activities-freetime').append(
@@ -181,7 +178,7 @@ function computeDate(day, month, year){
           let workplaceActivities = JSON.parse(workplace['activities'])
           console.log(response)
           if(workplaceActivities){
-            $('#tought-modal-activities-workplace').html()
+            $('#tought-modal-activities-workplace').html('')
             for( var i = 0; i < workplaceActivities.length; i++ ){
               let activity = workplaceActivities[i]
               $('#tought-modal-activities-workplace').append(

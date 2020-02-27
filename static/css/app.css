@@ -143,18 +143,20 @@ p{
   }
 }
 
-
 #navbarResponsive{
   position: absolute;
-  top: 65px;
+  top: 38px;
   width: 100%;
   left: 0;
   margin-bottom: 15px;
 }
-
+.navbar{
+  padding-left: 0;
+  padding-right: 0;
+}
 #application-brand{
   width: 100%;
-  text-align: end;
+  text-align: start;
 }
 
 .nav-item{

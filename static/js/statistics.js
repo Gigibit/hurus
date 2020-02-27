@@ -338,7 +338,7 @@ function lineChart(chartDiv, data) {
 		})
 		.attr("r", 5)
 		.each(function (d, i) {
-			if (i % 7 != 0 && i % 7 != 6) return
+			if ( i==0 || i== data.length -1)
 			d3.select(this)
 				.append('image')
 				.attr('class', 'path-image')
