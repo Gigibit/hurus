@@ -551,7 +551,6 @@ function managerLineChart(forDiv, data){
 		data: {
 			labels : dates,
 			datasets:  Object.keys(data).map(key=>{ 
-				console.log(key)
 				return {
 					fill: false,
 					lineTension: 0.3,

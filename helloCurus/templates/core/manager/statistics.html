@@ -215,7 +215,6 @@
             try {
                 var value = satisfation[$(el).data('target')]
                 $(el).html($(el).text().replace('${PERCENTAGE}',`<div class="percentage-satisfation `+ ( value > 0 ? 'success' : 'danger' )  + `">${value}%</div>`))
-                console.log( value+1 )
             }catch{
                 //error with value
             }
@@ -247,13 +246,11 @@
 
         // barChart("#freetime-bar-chart", dataFreetime)
         // barChart("#workplace-bar-chart", dataWorkPlace)
-        console.log(chartDataFreetime)
         {% for a in podium_moods_freetime_activities %}
             $('#freetime-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
             activityRadarChart('related-freetime-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataFreetime)
         {% endfor %}
-        console.log('{{podium_moods_workplace_activities}}')
         {% for a in podium_moods_workplace_activities %}
             $('#workplace-mood-{{forloop.counter}}').attr('src', '{% static a.mood_icon %}')
             configRadarChart('workplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataWorkPlace)

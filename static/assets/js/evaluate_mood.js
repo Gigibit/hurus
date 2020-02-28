@@ -124,7 +124,6 @@ function evaluateFreetime(){
 
     if(freetimeActivities.length > 0){
         
-        console.log(freetimeActivities)
         $('#freetime-section').hide()
         $('#workplace-mood-section').show()
         step++
@@ -141,7 +140,6 @@ function evaluateMoodWorkPlace(){
 
 
 function evaluateWorkPlace(){
-    console.log(workplaceActivities)
     if(workplaceActivities.length > 0){
         let request = {
             'freetime': {
@@ -157,7 +155,6 @@ function evaluateWorkPlace(){
     
             }
         }
-        console.log(request)
         $.post('/submit_survey/',request, function(response){
             $('#workplace-section').hide()
             $('#daily-quote-section').show()

@@ -7,7 +7,6 @@ class ContactForm {
         if (key === el.elements[key].id) obj[key] = el.elements[key]
         return obj
       }, {})
-      console.log('Contact Form:', this)
     }
     
     init() {
@@ -42,7 +41,6 @@ class ContactForm {
   
       this.element.classList.remove('contact-form--loading')
       this.element.classList.add('contact-form--sent')
-      console.log('Sent:', response.success)
     }
     
     onError(err = '') {
@@ -53,7 +51,6 @@ class ContactForm {
     
     sendFormData(data = {}) {
       return new Promise((resolve, reject) => {
-        console.log('Send Data:', data)
         fetch(this.action, {
           headers: {
             'Content-Type': 'application/json',

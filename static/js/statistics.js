@@ -385,7 +385,7 @@ function updateChart(chart, selectedMood, _data) {
 				pointHighlightFill: "#333",
 				pointHighlightStroke: "rgba(255,255,0,1)",
 				backgroundColor: moods[selectedMood]['color'],
-				data: [0].concat(data)
+				data: data
 			}]
 			chart.update()
 			$(chart.canvas).show(500)
@@ -408,12 +408,13 @@ function configRadarChart(chartDiv, selectedMood, data) {
     var el = document.getElementById(chartDiv);
 
 	let labels = getActivities(selectedMood, data) || []
-
+	if (chartDiv == 'freetime-radar-chart2') console.log('data',labels)
 	var context = el.getContext('2d');
 	let datasetData = getDataForActivities(labels, selectedMood, data)
+	if (chartDiv == 'freetime-radar-chart2') console.log('datasetData',datasetData)
 
 	var causeEffectChartData = {
-		labels: [' '].concat(labels),
+		labels: labels,
 		datasets: [{
             scaleOverride: true,
             scaleSteps: 5,
@@ -427,7 +428,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
             pointHighlightFill: "#333",
             pointHighlightStroke: "rgba(255,255,0,1)",
 			backgroundColor: moods[selectedMood]['color'],
-			data: [0].concat(datasetData)
+			data: datasetData
 		}]
 
 	};
@@ -457,7 +458,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
 	});
 	
 	if(labels.length <= 0){ 
-		 $(radarCharts[chartDiv].canvas).hide()
+		$(radarCharts[chartDiv].canvas).hide()
 	} else $(el).show(500)
 }
 
@@ -552,7 +553,6 @@ function getDataForActivities(labels, forMood, data) {
 				}
 			}).filter(opt => opt.i18n_key === label || opt.name === label).length > 0 && t.mood == forMood
 		}).length
-
     }
 	return result
 }

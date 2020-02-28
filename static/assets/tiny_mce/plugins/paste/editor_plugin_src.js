@@ -343,7 +343,6 @@
 				trim = tinymce.trim,
 				len, stripClass;
 
-			//console.log('Before preprocess:' + o.content);
 
 			function process(items) {
 				each(items, function(v) {
@@ -375,7 +374,6 @@
 			// Detect Word content and process it more aggressive
 			if (/class="?Mso|style="[^"]*\bmso-|w:WordDocument/i.test(h) || o.wordContent) {
 				o.wordContent = true;			// Mark the pasted contents as word specific content
-				//console.log('Word contents detected.');
 
 				// Process away some basic content
 				process([
@@ -577,7 +575,6 @@
 				h = h.replace(/<\/?span[^>]*>/gi, "");
 			}
 
-			//console.log('After preprocess:' + h);
 
 			o.content = h;
 		},

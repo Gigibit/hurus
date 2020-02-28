@@ -33,7 +33,6 @@ class Calendar {
         } else {
           this.selected = moment(`${this.month.format('YYYY-MM')}-${date}`)
         }
-        console.log(this.selected.isBefore(new Date()))
         if(this.selected.isBefore(new Date())){
           computeDate(this.selected.date(), this.selected.month(), this.selected.year())
         }
@@ -176,7 +175,6 @@ function computeDate(day, month, year){
           $('#tought-modal-tought-workplace').text(workplace['tought'])
           
           let workplaceActivities = JSON.parse(workplace['activities'])
-          console.log(response)
           if(workplaceActivities){
             $('#tought-modal-activities-workplace').html()
             for( var i = 0; i < workplaceActivities.length; i++ ){
@@ -213,7 +211,6 @@ function computeDate(day, month, year){
             try{
               let ftMoods = Object.keys(response['FT'])
               let mpMoods = Object.keys(response['MP'])
-              console.log(response)
               $('#tought-modal #result').empty()
               
               

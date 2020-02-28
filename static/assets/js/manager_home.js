@@ -1,6 +1,5 @@
 $( document ).ready(function() {
     function c(passed_month, passed_year, calNum) {
-        console.log('hey')
         var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
         makeWeek(calendar.weekline);
         calendar.datesBody.empty();
@@ -52,7 +51,6 @@ $( document ).ready(function() {
             clicked = $(this);
             if (clicked.hasClass('past-date')) { return; }
             var whichCalendar = calendar.name;
-            console.log(whichCalendar);
             // Understading which element was clicked;
             // var parentClass = $(this).parent().parent().attr('class');
             if (firstClick && secondClick) {
@@ -94,10 +92,8 @@ $( document ).ready(function() {
                 selected[firstClicked.year] = {};
                 selected[firstClicked.year][firstClicked.month] = [firstClicked.date];
             } else {
-                console.log('second click');
                 secondClick = true;
                 secondClicked = getClickedInfo(clicked, calendar);
-                //console.log(secondClicked);
 
                 // what if second clicked date is before the first clicked?
                 var firstClickDateObj = new Date(firstClicked.year, 
@@ -130,23 +126,19 @@ $( document ).ready(function() {
                 // add between dates to [selected]
                 selected = addChosenDates(firstClicked, secondClicked, selected);
             }
-            // console.log(selected);
             selectDates(selected);
         });			
 
     }
     function selectDates(selected) {
-        console.log('select')
 
         if (!$.isEmptyObject(selected)) {
             var dateElements1 = datesBody1.find('div');
             var dateElements2 = datesBody2.find('div');
 
             function highlightDates(passed_year, passed_month, dateElements){
-                console.log('hightliìdanf')
                 if (passed_year in selected && passed_month in selected[passed_year]) {
                     var daysToCompare = selected[passed_year][passed_month];
-                    // console.log(daysToCompare);
                     for (var d in daysToCompare) {
                         dateElements.each(function(index) {
                             if (parseInt($(this).text()) == daysToCompare[d]) {
@@ -164,7 +156,6 @@ $( document ).ready(function() {
     }
 
     function makeMonthArray(passed_month, passed_year) { // creates Array specifying dates and weekdays
-        console.log('make')
         var e=[];
         for(var r=1;r<getDaysInMonth(passed_year, passed_month)+1;r++) {
             e.push({day: r,
@@ -288,7 +279,6 @@ $( document ).ready(function() {
             generateCalendars("previous");
         } else { generateCalendars("next"); }
         clickedElement = bothCals.find(".calendar_content").find("div");
-        console.log("checking");
     });
 
 
@@ -299,14 +289,12 @@ $( document ).ready(function() {
             clickedMonth,
             clickedYear;
         clickedCalendar = calendar.name;
-        //console.log(element.parent().parent().attr('class'));
         clickedMonth = clickedCalendar == "first" ? month : nextMonth;
         clickedYear = clickedCalendar == "first" ? year : nextYear;
         clickedInfo = {"calNum": clickedCalendar,
                         "date": parseInt(element.text()),
                         "month": clickedMonth,
                         "year": clickedYear}
-        //console.log(clickedInfo);
         return clickedInfo;
     }
 
@@ -320,7 +308,6 @@ $( document ).ready(function() {
             var added_year = secondClicked.year;
             var added_month = secondClicked.month;
             var added_date = secondClicked.date;
-            console.log(selected);
 
             if (added_year > firstClicked.year) {	
                 // first add all dates from all months of Second-Clicked-Year
@@ -333,7 +320,6 @@ $( document ).ready(function() {
                 }
         
                 added_month = added_month - 1;
-                console.log(added_month);
                 while (added_month >= 0) {
                     selected[added_year][added_month] = [];
                     for (var i = 1; 
@@ -363,7 +349,6 @@ $( document ).ready(function() {
             
             if (added_month > firstClicked.month) {
                 if (firstClicked.year == secondClicked.year) {
-                    console.log("here is the month:",added_month);
                     selected[added_year][added_month] = [];
                     for (var i = 1; 
                         i <= secondClicked.date;

@@ -10379,7 +10379,6 @@ window.tinymce.dom.Sizzle = Sizzle;
 					rng.collapse(true);
 				}
 
-				//console.log(self.dom.dumpRng(rng));
 				self.setRng(rng, self.isForward());
 			}
 		},
@@ -10839,9 +10838,6 @@ window.tinymce.dom.Sizzle = Sizzle;
 			
 			function error() {
 				// Report the error so it's easier for people to spot loading errors
-				if (typeof(console) !== "undefined" && console.log)
-					console.log("Failed to load: " + url);
-
 				// We can't mark it as done if there is a load error since
 				// A) We don't want to produce 404 errors on the server and
 				// B) the onerror event won't fire on all browsers.
