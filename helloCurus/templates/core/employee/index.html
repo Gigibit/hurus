@@ -5,13 +5,13 @@
 
 
 {% block head_css_section %}
-<link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
-<link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}?{% now 'U' %}" rel="stylesheet">
+<link href="{% static 'css/courses.css' %}?{% now 'U' %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
 <script>let manager = false</script>
-<script src="{% static 'js/home.js' %}?{% now "U" %}" type="text/javascript"></script>
+<script src="{% static 'js/home.js' %}?{% now 'U' %}" type="text/javascript"></script>
 {% endblock footer_javascript_section %}
 
 {% block content %}

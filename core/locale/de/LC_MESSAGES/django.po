@@ -500,3 +500,12 @@ msgstr "VIEW STATISTICS"
 
 msgid "NO_DATA"
 msgstr "There is not enough data!"
+
+msgid "WEEKLY_SATISFATION"
+msgstr "${PERCENTAGE}: compared to last week"
+
+msgid "MOTHLY_SATISFATION"
+msgstr "${PERCENTAGE}: compared to last month"
+
+msgid "FROM_THE_BEGINNING_SATISFATION"
+msgstr "${PERCENTAGE}: compared to the first two weeks of happycurus"

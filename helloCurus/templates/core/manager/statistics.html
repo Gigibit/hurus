@@ -7,9 +7,10 @@
 {% endblock head_css_section %}
 
 {% block content %}
+
 <div class="main">
     <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6 ">
+        <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
             <div class="progress progress-bar-vertical">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}%;
@@ -18,8 +19,13 @@
                 {{average_mood_freetime_percentage}}%
                 </div>
             </div>
+            <div class="tooltiptext">
+                <span class="satisfation" data-target="weeklyFT">{% trans 'WEEKLY_SATISFATION' %}</span><br>
+                <span class="satisfation" data-target="monthlyFT">{% trans 'MOTHLY_SATISFATION' %}</span><br>
+                <span class="satisfation" data-target="fromBeginningFT">{% trans 'FROM_THE_BEGINNING_SATISFATION' %}</span><br>
+            </div>
         </div>
-        <div class="percentage-evaluation chart-wrapper col-md-6">
+        <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
             <div class="progress progress-bar-vertical">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%;
@@ -27,6 +33,11 @@
                 >
                 {{average_mood_workplace_percentage}}%
                 </div>
+            </div>
+            <div class="tooltiptext">
+                <span class="satisfation" data-target="weeklyWP">{% trans 'WEEKLY_SATISFATION' %}</span><br>
+                <span class="satisfation" data-target="monthlyWP">{% trans 'MOTHLY_SATISFATION' %}</span><br>
+                <span class="satisfation" data-target="fromBeginningWP">{% trans 'FROM_THE_BEGINNING_SATISFATION' %}</span><br>
             </div>
         </div>
     </div>
@@ -188,8 +199,30 @@
     
 </script>
 <script type="text/javascript">
-    
+    var satisfation = {
+        weeklyFT: {{weekly_difference_average_freetime_percentage}},
+        weeklyWP: {{weekly_difference_average_workplace_percentage}},
+        monthlyFT: {{monthly_difference_average_freetime_percentage}},
+        monthlyWP: {{monthly_difference_average_workplace_percentage}},
+        fromBeginningFT: {{from_begin_difference_average_freetime_percentage}},
+        fromBeginningWP: {{from_begin_difference_average_workplace_percentage}}
+    }
+
+
+
     $(document).ready(function(){
+        $('.satisfation').each((index,el)=>{
+            try {
+                var value = satisfation[$(el).data('target')]
+                $(el).html($(el).text().replace('${PERCENTAGE}',`<div class="percentage-satisfation `+ ( value > 0 ? 'success' : 'danger' )  + `">${value}%</div>`))
+                console.log( value+1 )
+            }catch{
+                //error with value
+            }
+        });
+
+
+
         var somethingFailed = false
         try{
             lineChart("#average-freetime-line-chart", freetimeAverageMoods)
@@ -239,6 +272,10 @@
                 }
             })
         },700)
+        
+
+
+
     })
 </script>
 

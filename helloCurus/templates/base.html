@@ -118,6 +118,26 @@
         {% block content %}
         {% endblock %}
         <div id="snackbar"></div>
+        <!-- <script>
+            $(document).ready(()=>{
+                $('#body-wrapper').hide()
+                $('#spinit').show(500)
+                $('.nav-item .nav-link').click(function(){
+                    $.ajax({
+                        url: $(this).data('target'),
+                        method: 'GET',
+                        success: function(response){
+                            console.log(response)
+                            $('#spinit').hide(500)
+                            $('#body-wrapper').html(response)
+                            $('#body-wrapper').show()
+                            console.log( $('#spinit'))
+                        },
+                        error: (e)=>console.log(e)
+                    })
+                })
+            })
+    </script> -->
     </div>
 </body>
 

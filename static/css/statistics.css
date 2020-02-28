@@ -176,3 +176,38 @@ svg text {
   margin-top: 110px;
   margin-left: 15px;
 }
+.percentage-evaluation {
+  position: relative;
+}
+
+.percentage-evaluation .tooltiptext {
+  visibility: hidden;
+  width: 364px;
+  background-color: white;
+  color: #222;
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 5px 15px;
+  position: absolute;
+  z-index: 1;
+  margin: 0 20px;
+  top: 40%;
+}
+.satisfation{
+  display: flex;
+}
+.percentage-satisfation{
+  text-align: right;
+  width: 34px;
+  margin-right: 2px;
+  font-weight: bold;
+}
+.percentage-satisfation.danger{
+  color: orange;
+}
+.percentage-satisfation.success{
+  color: forestgreen;
+}
+.progress-bar-vertical:hover + .tooltiptext {
+  visibility: visible;
+}
