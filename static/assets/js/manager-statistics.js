@@ -109,7 +109,7 @@ function barChart(chartDiv, data) {
 }
 
 
-function lineChart(chartDiv, data) {
+function managerLineChart(chartDiv, data) {
 	var margin = {
 			top: 50,
 			right: 50,

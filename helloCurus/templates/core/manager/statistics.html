@@ -106,7 +106,6 @@
 
 
 <script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
-
 <script>
     var moods = {
             {% for mood in moods %}
@@ -227,6 +226,8 @@
             lineChart("#average-freetime-line-chart", freetimeAverageMoods)
             managerLineChart('freetime-line-chart', dataFreetime)
         }catch(ex){
+            console.log(ex)
+
             somethingFailed = true
             $("#average-freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
             $('#freetime-line-chart').parent().hide();
@@ -236,6 +237,7 @@
             managerLineChart('workplace-line-chart', dataWorkPlace)
         }catch(ex){
             somethingFailed = true
+            console.log(ex)
             $("#average-workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
             $('#workplace-line-chart').parent().hide();
         }

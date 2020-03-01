@@ -115,6 +115,67 @@ function barChart(chartDiv, data, relatedChart) {
 }
 
 
+	
+function managerLineChart(forDiv, data){
+
+	let ctx = document.getElementById(forDiv).getContext('2d')
+	let backgroundColors ={}
+	Object.keys(data).forEach(key=>{
+		backgroundColors[key] = moods[key]['color'];
+		$('#legend-'+forDiv).append(
+			'<div class="legend-mood col-md-2">' + 
+				'<div class="row">' + 
+					'<div class="legend-mood-img-wrp col-md-2">'+
+						'<img class="legend-mood-img" src="' + moods[key].icon + '"/>' + 
+					'</div>'+
+					'<div class="legend-mood-color col-md-6" style="background-color:' + backgroundColors[key] + '"></div>'+
+				'</div>' + 
+			'</div>'
+		)
+	})
+	new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels : dates,
+			datasets:  Object.keys(data).map(key=>{ 
+				return {
+					fill: false,
+					lineTension: 0.3,
+					borderColor: moods[key]['color'],
+					borderCapStyle: 'square',
+					borderJoinStyle: 'miter',
+					pointBorderWidth: 1,
+					pointHoverRadius: 8,
+					pointHoverBorderWidth: 2,
+					pointRadius: 4,
+					pointHitRadius: 10,
+					data : data[key].data
+				}})
+		},
+		options: {
+			legend: {
+				display: false
+			},
+			tooltips: {
+				// mode: 'index',
+				// intersect: false,
+				enabled: false
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+			yAxes: [{
+				ticks: {
+				beginAtZero:true
+				}
+			}]
+		  },
+		}
+	  });
+}
+
 function lineChart(chartDiv, data) {
 	if(diffBetweenDateInDays(data[0].date, data[data.length-1].date) < MIN_DAYS_FOR_CHART)
 		throw 'data evaluation unavailable'
