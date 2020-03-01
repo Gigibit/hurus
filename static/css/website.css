@@ -293,9 +293,9 @@ h1{
 }
 .motivation-description{
     font-size: 14px;
-    height: 0px;
+    max-height: 0px;
     overflow: hidden;
-    transition: height 200ms ease-in;
+    transition: max-height 200ms ease-in;
     margin-top: 15px;
     padding: 0 15px;
 }
@@ -558,7 +558,7 @@ form button{
     margin: 0 auto;
 }
 .motivation-info-content:hover .motivation-description{
-    height: auto;
+    max-height: 500px;
     padding-top: 25px;
     
 }
@@ -566,7 +566,6 @@ form button{
 .contact-form-section{
     width: 100%;
     height: 800px;
-    
 }
 
 .contact-form-header{
@@ -581,7 +580,6 @@ form button{
 .contact-form-container{
     position: relative;
     height: 100%;
-    
 }
 .contact-form {
     position:absolute;
@@ -788,10 +786,10 @@ li.nav-item{
     margin: 0 auto;
     display: block;
     background-color: #F0A10B;
-    width: 190px;
+    width: 205px;
     height: 45px;
     padding: 12px;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
     color: white;
 }

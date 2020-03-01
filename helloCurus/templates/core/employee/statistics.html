@@ -160,11 +160,15 @@
         }
         barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart')
         barChart("#workplace-bar-chart", dataWorkPlace,'workplace-radar-chart')
-        configRadarChart('freetime-radar-chart',    7, dataFreetime)
-        activityRadarChart('related-freetime-radar-chart',    7, dataFreetime)
-        configRadarChart('workplace-radar-chart', 1, dataWorkPlace)
-        activityRadarChart('related-workplace-radar-chart',    1, dataWorkPlace)
-
+        
+        let firstMoodFTWithData = dataFreetime.find( t => t.activities && t.activities.length > 0 ).mood || 7
+        configRadarChart('freetime-radar-chart', firstMoodFTWithData, dataFreetime)
+        activityRadarChart('related-freetime-radar-chart', firstMoodFTWithData, dataFreetime)
+        
+        let firstMoodWPWithData = dataWorkPlace.find( t => t.activities && t.activities.length > 0 ).mood || 1
+        configRadarChart('workplace-radar-chart', firstMoodWPWithData, dataWorkPlace)
+        activityRadarChart('related-workplace-radar-chart',    firstMoodWPWithData, dataWorkPlace)
+        
         doughnutChart('doughnut-chart-freetime',dataFreetime)
         doughnutChart('doughnut-chart-workplace',dataWorkPlace)
     })
