@@ -472,7 +472,6 @@ function configRadarChart(chartDiv, selectedMood, data) {
 	var context = el.getContext('2d');
 	let datasetData = getDataForActivities(labels, selectedMood, data)
 
-	
 	var causeEffectChartData = {
 		labels: labels,
 		datasets: [{
@@ -519,11 +518,7 @@ function configRadarChart(chartDiv, selectedMood, data) {
 	
 	if(labels.length <= 0){ 
 		$(radarCharts[chartDiv].canvas).hide()
-		return false
-	} else {
-		$(radarCharts[chartDiv].canvas).show(500)
-		return true
-	}
+	} else $(el).show(500)
 }
 
 function activityRadarChart(chartDiv, selectedMood, data){
@@ -588,14 +583,7 @@ function activityRadarChart(chartDiv, selectedMood, data){
           ]
         },
         options: opt
-	});
-	if(labels.length <= 0){ 
-		$(radarCharts[chartDiv].canvas).hide()
-		return false
-	} else {
-		$(radarCharts[chartDiv].canvas).show(500)
-		return true
-	}
+    });
 }
 
 
