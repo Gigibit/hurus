@@ -469,11 +469,10 @@ function configRadarChart(chartDiv, selectedMood, data) {
     var el = document.getElementById(chartDiv);
 
 	let labels = getActivities(selectedMood, data) || []
-	if (chartDiv == 'freetime-radar-chart2') console.log('data',labels)
 	var context = el.getContext('2d');
 	let datasetData = getDataForActivities(labels, selectedMood, data)
-	if (chartDiv == 'freetime-radar-chart2') console.log('datasetData',datasetData)
 
+	
 	var causeEffectChartData = {
 		labels: labels,
 		datasets: [{
@@ -520,7 +519,11 @@ function configRadarChart(chartDiv, selectedMood, data) {
 	
 	if(labels.length <= 0){ 
 		$(radarCharts[chartDiv].canvas).hide()
-	} else $(el).show(500)
+		return false
+	} else {
+		$(radarCharts[chartDiv].canvas).show(500)
+		return true
+	}
 }
 
 function activityRadarChart(chartDiv, selectedMood, data){
@@ -585,7 +588,14 @@ function activityRadarChart(chartDiv, selectedMood, data){
           ]
         },
         options: opt
-    });
+	});
+	if(labels.length <= 0){ 
+		$(radarCharts[chartDiv].canvas).hide()
+		return false
+	} else {
+		$(radarCharts[chartDiv].canvas).show(500)
+		return true
+	}
 }
 
 
