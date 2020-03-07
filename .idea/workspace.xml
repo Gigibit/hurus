@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helloCurus/templates/core/employee/e_learning.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/core/employee/e_learning.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helloCurus/templates/core/manager/e_learning.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/core/manager/e_learning.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/curus.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/curus.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/home.css" afterDir="false" />
-    </list>
+    <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,6 +71,7 @@
         <option value="$PROJECT_DIR$/core/views.py" />
         <option value="$PROJECT_DIR$/static/css/website.css" />
         <option value="$PROJECT_DIR$/helloCurus/templates/website/index.html" />
+        <option value="$PROJECT_DIR$/static/css/app.css" />
       </list>
     </option>
   </component>
@@ -137,8 +130,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -204,12 +197,18 @@
       <option name="project" value="LOCAL" />
       <updated>1579040225774</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Merge branches '_ui_refactoring' and 'develop' of https://github.com/Gigibit/hurus into _ui_refactoring&#10;&#10;# Conflicts:&#10;#&#9;core/__pycache__/admin.cpython-36.pyc&#10;#&#9;core/__pycache__/views.cpython-36.pyc&#10;#&#9;core/migrations/__pycache__/0010_remove_coursesection_title.cpython-36.pyc&#10;#&#9;core/migrations/__pycache__/0011_coursesection_title.cpython-36.pyc&#10;#&#9;db.sqlite3&#10;#&#9;helloCurus/templates/core/manager/index.html&#10;#&#9;static/css/app.css&#10;#&#9;static/css/curus.css">
+      <created>1583596086547</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1583596086547</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="723" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22557585" />
@@ -285,7 +284,8 @@
     <MESSAGE value="wip on website" />
     <MESSAGE value="wip on aos" />
     <MESSAGE value="restored giordy's requirements lost during scp from server to get edit (stupid move)" />
-    <option name="LAST_COMMIT_MESSAGE" value="restored giordy's requirements lost during scp from server to get edit (stupid move)" />
+    <MESSAGE value="Merge branches '_ui_refactoring' and 'develop' of https://github.com/Gigibit/hurus into _ui_refactoring&#10;&#10;# Conflicts:&#10;#&#9;core/__pycache__/admin.cpython-36.pyc&#10;#&#9;core/__pycache__/views.cpython-36.pyc&#10;#&#9;core/migrations/__pycache__/0010_remove_coursesection_title.cpython-36.pyc&#10;#&#9;core/migrations/__pycache__/0011_coursesection_title.cpython-36.pyc&#10;#&#9;db.sqlite3&#10;#&#9;helloCurus/templates/core/manager/index.html&#10;#&#9;static/css/app.css&#10;#&#9;static/css/curus.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branches '_ui_refactoring' and 'develop' of https://github.com/Gigibit/hurus into _ui_refactoring&#10;&#10;# Conflicts:&#10;#&#9;core/__pycache__/admin.cpython-36.pyc&#10;#&#9;core/__pycache__/views.cpython-36.pyc&#10;#&#9;core/migrations/__pycache__/0010_remove_coursesection_title.cpython-36.pyc&#10;#&#9;core/migrations/__pycache__/0011_coursesection_title.cpython-36.pyc&#10;#&#9;db.sqlite3&#10;#&#9;helloCurus/templates/core/manager/index.html&#10;#&#9;static/css/app.css&#10;#&#9;static/css/curus.css" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/css/website.css">

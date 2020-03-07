@@ -60,6 +60,7 @@
   float: left;
 }
 
+
 .cal-body__week,
 .calendar__head {
   display: block;
@@ -67,7 +68,9 @@
   width: 350px;
   margin: 0 auto;
 }
-
+.courses{
+  overflow-x: scroll;
+}
 .calendar__head {
   line-height: 50px;
   position: relative;

@@ -377,7 +377,7 @@ def home_employee(request, employee):
         'moods' : moods,
         'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
         'workplace_toughts' : filter( lambda t : t['tought_type'] == WORK_PLACE, toughts),
-        'courses': not_seen_courses[:2],
+        'courses': not_seen_courses,
     })
 
 
@@ -644,7 +644,7 @@ def home_manager(request, manager):
         'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
         'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1))),
-        'courses': not_seen_courses[:2],
+        'courses': not_seen_courses,
     })
 # Login engine
 def engine(request):
