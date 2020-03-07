@@ -124,7 +124,6 @@ def statistics_manager(request, manager):
 
     first_two_week_of_happycurus= manager.agency.created_at + timedelta(days=14)
 
-    #based on manager creation we'll replace manager with agency, but not today!
     when_everything_started_analysis = calculate_average_moods(manager, end_date=first_two_week_of_happycurus, mood_max_value=mood_max_value)
     
 

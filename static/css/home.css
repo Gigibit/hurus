@@ -124,11 +124,12 @@
 }
 
 .info-row{
-  border: 0.5px solid #ccccccee;
   padding: 15px;
 }
 .info-row > :first-child{
   font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 .activity-box-container{
   padding:0;

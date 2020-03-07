@@ -41,22 +41,24 @@
             <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
             <div class="chart">
                 <div class="mood-buttons-container">
-                        <div class="mood-buttons-wrapper">
-                            {% for mood in moods %}
-                            <div class="freetime-mood-button mood-button" data-mood="{{mood.value}}">
-                                <img src="{% static mood.icon.name %}">
-                                <div class="mood-text">
+                    <div class="mood-buttons-wrapper">
+                        {% for mood in moods %}
+                        <div class="freetime-mood-button mood-button" data-mood="{{mood.value}}">
+                            <img src="{% static mood.icon.name %}">
+                            <div class="mood-text">
                                 {% trans mood.i18n_key%}
-                                </div>
                             </div>
-                            {% endfor %}
                         </div>
+                        {% endfor %}
                     </div>
+                </div>
                 <div>
                     <canvas id="freetime-radar-chart"></canvas>
                 </div>
                 <div class="related-radar-chart">
-                    <canvas id="related-freetime-radar-chart" ></canvas>
+                    <div class="chart-related-wrapper" style="max-height:600px">
+                        <canvas id="related-freetime-radar-chart" ></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,10 +69,10 @@
                     <div class="mood-buttons-wrapper">
                         {% for mood in moods %}
                         <div class="workplace-mood-button mood-button" data-mood="{{mood.value}}">
-                        <img src="{% static mood.icon.name %}">
-                        <div class="mood-text">
-                            {% trans mood.i18n_key%}
-                        </div>
+                            <img src="{% static mood.icon.name %}">
+                            <div class="mood-text">
+                                {% trans mood.i18n_key%}
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
@@ -79,13 +81,15 @@
                     <canvas id="workplace-radar-chart" ></canvas>
                 </div>
                 <div class="related-radar-chart">
-                    <canvas id="related-workplace-radar-chart" ></canvas>
+                    <div class="chart-related-wrapper"  style="max-height:600px">
+                        <canvas id="related-workplace-radar-chart" ></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
     </div>
-
+    
 </div>
 
 
@@ -110,21 +114,21 @@
         "name": "{{tought.mood.i18n_key}}",
         'mood_color' : '{{tought.mood.color_code}}',
         "activities": {{tought.activities|safe}},
-
-        },
-        {% endfor %}
+        
+    },
+    {% endfor %}
     ]
     var dataWorkPlace = [
-        {% for tought in workplace_toughts%}
-        {
-            "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
-            "mood": "{{tought.mood.value}}",
-            "name": "{{tought.mood.i18n_key}}",
-            'mood_color' : '{{tought.mood.color_code}}',
-            "activities": {{tought.activities|safe}},
-
-        },
-        {% endfor %}
+    {% for tought in workplace_toughts%}
+    {
+        "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
     ]
     
     
@@ -145,7 +149,7 @@
 </script>
 <script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
 <script type="text/javascript">
- 
+    
     
     $(document).ready(function(){
         try{

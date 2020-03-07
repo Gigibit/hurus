@@ -4,6 +4,9 @@
   stroke: steelblue;
   stroke-width: 3;
 }
+body{
+  overflow-x: hidden;
+}
 
 /* Style the dots by assigning a fill and stroke */
 .dot {
@@ -76,7 +79,37 @@ svg text {
     text-anchor: middle;
 }
 .related-radar-chart{
-  margin: 15px
+  margin: 15px;
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.related-radar-chart::-webkit-scrollbar{
+  display: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  display: block;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: skyblue; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: deepskyblue; 
 }
 .legend-mood-img{
   width: 10px;

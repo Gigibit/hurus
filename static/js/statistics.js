@@ -15,7 +15,7 @@ function barChart(chartDiv, data, relatedChart) {
 	}
 
 	barData = []
-	Object.keys(buff).forEach(function (key) {
+	Object.keys(buff).reverse().forEach(function (key) {
 		barData.push({
 			key: key,
 			value: buff[key]
@@ -471,7 +471,6 @@ function configRadarChart(chartDiv, selectedMood, data) {
 	let labels = getActivities(selectedMood, data) || []
 	var context = el.getContext('2d');
 	let datasetData = getDataForActivities(labels, selectedMood, data)
-
 	var causeEffectChartData = {
 		labels: labels,
 		datasets: [{
@@ -543,7 +542,7 @@ function activityRadarChart(chartDiv, selectedMood, data){
                   weight: 700
                 },
                 offset: 8,
-                color: 'gray'
+                color: 'black'
             }
         },
         scales:{
@@ -556,8 +555,9 @@ function activityRadarChart(chartDiv, selectedMood, data){
         },
         tooltips: {
             enabled: false
-        },
-        maintainAspectRatio: false,
+		},
+		responsive: true,
+        maintainAspectRatio: true,
 
     };
 	radarCharts[chartDiv] = new Chart(relatedContext, {
@@ -602,9 +602,10 @@ function getActivities(forMood, data) {
 }
 function getDataForActivities(labels, forMood, data) {
 	var result = []
+	var elementsIndex = 0
 	for (var i = 0; i < labels.length; i++) {
         let label = labels[i]
-		result[i] = data.filter(t => {
+		let filterCount = data.filter(t => {
 			return t.activities.map(opt => {
 				return {
 					'i18n_key': opt.i18n_key,
@@ -612,11 +613,13 @@ function getDataForActivities(labels, forMood, data) {
 				}
 			}).filter(opt => opt.i18n_key === label || opt.name === label).length > 0 && t.mood == forMood
 		}).length
-    }
+		if(filterCount > 0)
+			result[elementsIndex++] = filterCount
+	}
 	return result
 }
 let backgroundColors = []
-function doughnutChart(div,toughts){
+function doughnutChart(div,toughts, displayCount = false){
         let doughnutDataSet = []
 		let moodsLabels = []
 		let total = 0
@@ -660,7 +663,7 @@ function doughnutChart(div,toughts){
 					datalabels: {
 						
 					   // hide datalabels for all datasets
-					   display: false
+					   display: displayCount
 					}
 				},
                 legend: {

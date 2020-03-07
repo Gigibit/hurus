@@ -82,7 +82,7 @@
         {% for freetime_choose in team_freetime_available_choose %}
         <div class="freetime-box-wrapper col-md-2" data-activity="{{freetime_choose.pk}}">
           <div class="freetime-box">
-            <img src="{{ freetime_choose.icon.name }}">
+            <img src="{% static freetime_choose.icon.name %}">
             <p> {% trans freetime_choose.name %} </p>
           </div>
         </div>

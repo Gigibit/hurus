@@ -228,7 +228,7 @@ function computeDate(day, month, year){
                   '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
                   '</div>'
                   )
-                  doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value])
+                  doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value], true)
                 })
                 
                 $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
@@ -240,7 +240,7 @@ function computeDate(day, month, year){
                     '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
                     '</div>'
                     )
-                    doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value])
+                    doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value], true)
                   })
                   
                   

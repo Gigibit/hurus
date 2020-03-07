@@ -17,13 +17,18 @@ body{
   z-index: 99999999999;
 }
 
-
 .col-center-block{
   float: none;
   display: block;
   margin: 0 auto;
 }
-
+.navbar-toggler{
+  background: #ffff;
+  top: 20px;
+  right: 5px;
+  display: block;
+  position: absolute;
+}
 
 .nav-link{
   color: #555;
@@ -150,12 +155,15 @@ p{
 
 #navbarResponsive{
   position: absolute;
-  top: 38px;
+  top: 39px;
   width: 100%;
   left: 0;
   margin-bottom: 15px;
+  z-index: 999999;
 }
 .navbar{
+  height: 80px;
+  overflow: hidden;
   padding-left: 0;
   padding-right: 0;
 }
