@@ -479,7 +479,7 @@ def check_survey(fn, request, employee):
     else:
         team_activity_choose = []
         employee = Employee.objects.get(email = request.user.email)
-    if not employee.has_seen_daily_survey():
+    if True or not employee.has_seen_daily_survey():
         return render(request, 'core/employee/evaluate_mood.html', {
             'toughts':toughts,
             'moods' : moods,

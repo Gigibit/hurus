@@ -4,6 +4,9 @@
   stroke: steelblue;
   stroke-width: 3;
 }
+body{
+  overflow-x: hidden;
+}
 
 /* Style the dots by assigning a fill and stroke */
 .dot {

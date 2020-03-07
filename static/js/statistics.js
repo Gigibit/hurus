@@ -15,7 +15,7 @@ function barChart(chartDiv, data, relatedChart) {
 	}
 
 	barData = []
-	Object.keys(buff).forEach(function (key) {
+	Object.keys(buff).reverse().forEach(function (key) {
 		barData.push({
 			key: key,
 			value: buff[key]
@@ -542,7 +542,7 @@ function activityRadarChart(chartDiv, selectedMood, data){
                   weight: 700
                 },
                 offset: 8,
-                color: 'gray'
+                color: 'black'
             }
         },
         scales:{
@@ -557,7 +557,7 @@ function activityRadarChart(chartDiv, selectedMood, data){
             enabled: false
 		},
 		responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
 
     };
 	radarCharts[chartDiv] = new Chart(relatedContext, {
