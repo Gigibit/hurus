@@ -23,91 +23,113 @@
 
 
 <div class="container">
-  <div class="date-picker col-md-12 justify">
-
-    <div class="row">
-      <div class='col-sm-3 mx-auto'>
-        <div class="form-group">
-          <div class='input-group date' id='datetimepicker'>
-            <input id="date-picker" type='text' class="form-control" />
-            <div id="date-picker-info" class="row">
-              Date formats: dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+  <div class="row">
+    <div class="date-picker col-md-12 justify">
+      
+      <div class="row">
+        <div class='col-sm-3 mx-auto'>
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker'>
+              <input id="date-picker" type='text' class="form-control" />
+              <div id="date-picker-info" class="row">
+                Date formats: dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="calendar">
-    <div class="calendar__month">
-      <div class="cal-month__previous"><</div>
-      <div class="cal-month__current"></div>
-      <div class="cal-month__next">></div>
+    <div class="calendar col-md-6">
+      <div class="calendar__month">
+        <div class="cal-month__previous"><</div>
+        <div class="cal-month__current"></div>
+        <div class="cal-month__next">></div>
+      </div>
+      <div class="calendar__head">
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+      </div>
+      <div class="calendar__body">
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+      </div>
     </div>
-    <div class="calendar__head">
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-    </div>
-    <div class="calendar__body">
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
+    
+    <div class="col-md-6 overview-charts" onclick="location.href='/statistics'">
+      <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="chart">
+            <div id="first-mood-counter-chart-legend"></div>
+            <canvas id="first-mood-counter-chart" ></canvas>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="chart">
+            <div id="second-mood-counter-chart-legend"></div>
+            <canvas id="second-mood-counter-chart" ></canvas>
+          </div>
+        </div>
       </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
+      <!-- <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div> -->
+      
     </div>
   </div>
   <div class="row">
@@ -128,23 +150,7 @@
   </div>
   
   
-  <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
-  <div class="row overview-charts">
-    <div class="col-md-4">
-      <div class="chart">
-        <div id="first-mood-counter-chart-legend"></div>
-        <canvas id="first-mood-counter-chart" ></canvas>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="chart">
-        <div id="second-mood-counter-chart-legend"></div>
-        <canvas id="second-mood-counter-chart" ></canvas>
-      </div>
-    </div>
-    <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div>
-
-  </div>
+  
   
 </div> <!-- End Container -->
 
