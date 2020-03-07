@@ -725,6 +725,10 @@ input[type="checkbox"]:focus{
     background: #fff;
     opacity: 0.8;
 }
+.find-more-link{
+    text-decoration: underline!important;
+    cursor: pointer;
+}
 .about-happy-curus-find-more{
     border-top: 5px solid deepskyblue;
 }
