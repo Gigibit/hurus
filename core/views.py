@@ -147,7 +147,7 @@ def statistics_manager(request, manager):
         'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
         
         'average_mood_freetime_percentage': current_average_ft,
-        'average_mood_workplace_percentage': current_average_ft,
+        'average_mood_workplace_percentage': current_average_mp,
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
         'podium_moods_workplace': analysis['podium_moods_workplace'],
