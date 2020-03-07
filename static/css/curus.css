@@ -1,7 +1,7 @@
 .curus-description{
     padding: 40px;
     background: #fff;
-    border: 1px solid #36acb8;
+    /* border: 1px solid #36acb8;
     margin-top: 20px;
     -moz-border-top-left-radius: 100px;
     -moz-border-bottom-left-radius: 20px;
@@ -13,13 +13,13 @@
     position: relative;
     -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset; */
 
 }
 
 
 
-.curus-description:before, .curus-description:after
+/* .curus-description:before, .curus-description:after
 {
 	content:"";
     position:absolute;
@@ -47,7 +47,7 @@
         -ms-transform:skew(8deg) rotate(3deg);
          -o-transform:skew(8deg) rotate(3deg);
             transform:skew(8deg) rotate(3deg);
-}
+} */
 
 
 

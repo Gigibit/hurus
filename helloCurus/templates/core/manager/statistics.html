@@ -269,7 +269,7 @@
         setTimeout(()=>{
             $('canvas').each((index,el)=>{
                 if(el.className == '' &&  index%2 != 0){
-                    $(el).parent().parent().replaceWith('<div class="wip-warning"></div>');
+                    $(el).parent().parent().parent().replaceWith('<div class="wip-warning"></div>');
                 }
                 else{
                     $(el).show(300)
