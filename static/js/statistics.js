@@ -517,7 +517,11 @@ function configRadarChart(chartDiv, selectedMood, data) {
 	
 	if(labels.length <= 0){ 
 		$(radarCharts[chartDiv].canvas).hide()
-	} else $(el).show(500)
+		return false
+	} else{
+		$(el).show(500)
+		return true
+	}
 }
 
 function activityRadarChart(chartDiv, selectedMood, data){
