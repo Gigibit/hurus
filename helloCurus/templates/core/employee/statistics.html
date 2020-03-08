@@ -155,11 +155,13 @@
         try{
             lineChart("#freetime-line-chart", dataFreetime)
         }catch(ex){
+            console.error(ex)
             $("#freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
         }
         try{
             lineChart("#workplace-line-chart", dataWorkPlace)
         }catch(ex){
+            console.error(ex)
             $("#workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
         }
         barChart("#freetime-bar-chart", dataFreetime,'freetime-radar-chart')

@@ -56,7 +56,7 @@ key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can on
 def statistics_manager_for_day(request):
     manager = request.user
     moods = Mood.objects.all()
-    date_to_evaulate = datetime.date(year=int(request.GET['year']), 
+    date_to_evaulate = date(year=int(request.GET['year']), 
                                               month=int(request.GET['month']), 
                                               day=int(request.GET['day'])) 
     mood_max_value = max(mood.value for mood in moods )
@@ -516,13 +516,15 @@ def tought_for_day(request):
 
 @login_required(login_url='/website')
 def statistics_for_day(request):
+    date_to_evaulate = date(year=int(request.GET['year']), 
+                                        month=int(request.GET['month']), 
+                                        day=int(request.GET['day']))
+
     toughts = [t.to_public_dict() for t in Tought.objects.filter(
-        created_at__day__lte=request.GET['day'],
-        created_at__month__lte=request.GET['month'],
-        created_at__year__lte=request.GET['year'],
-        employee__email = request.user.email
+                            created_at__lte   = date_to_evaulate,
+                            employee__email = request.user.email
     ).order_by('created_at')]
-        
+    
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,

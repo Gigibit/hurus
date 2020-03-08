@@ -183,7 +183,7 @@ function lineChart(chartDiv, data) {
 	var margin = {
 			top: 50,
 			right: 50,
-			bottom: 50,
+			bottom: 100,
 			left: 50
 		},
 		width = window.innerWidth / 2.5 // Use the window's width
@@ -234,7 +234,7 @@ function lineChart(chartDiv, data) {
 		.attr("transform", "translate(0," + height + ")")
 		.call(d3.axisBottom(xScale)
 			.ticks(5)
-			.tickFormat(d3.timeFormat("%d %b")));
+			.tickFormat(d3.timeFormat("%d %b %Y")));
 
 	// 6. Y scale will use the randomly generate number
 	var yScale = d3.scaleLinear()
@@ -248,7 +248,7 @@ function lineChart(chartDiv, data) {
 			return d.date;
 		}))
 		xAxis.transition().call(d3.axisBottom(xScale).ticks(5)
-			.tickFormat(d3.timeFormat("%d %b")))
+			.tickFormat(d3.timeFormat("%d %b %Y")))
 		line.select('.line')
 			.transition()
 			.attr("d", d3.line()
@@ -351,7 +351,7 @@ function lineChart(chartDiv, data) {
 		xAxis.transition().duration(1000).call(
 			d3.axisBottom(xScale)
 			.ticks(5)
-			.tickFormat(d3.timeFormat('%H')))
+			.tickFormat(d3.timeFormat('%d %b %Y')))
 		line
 			.select('.line')
 			.transition()
@@ -365,6 +365,8 @@ function lineChart(chartDiv, data) {
 				})
 				.curve(d3.curveMonotoneX)
 			)
+		d3.selectAll('.x.axis .tick text').attr('style', 'transform:rotateZ(270deg) translate(-15px, -12px)')
+
 	}
 
 
@@ -626,11 +628,12 @@ let backgroundColors = []
 function doughnutChart(div,toughts, displayCount = false){
         let doughnutDataSet = []
 		let moodsLabels = []
-		let total = 0
-		Object.keys(moods).forEach(function(mood,i){
-			total += toughts.filter((tought,i) => tought.mood == mood ).length
-		 })
-        Object.keys(moods).forEach(function(mood,i){
+		let moodsKeys = Object.keys(moods).reverse()
+
+		// moodsKeys.forEach(function(mood,i){
+		// 	total += toughts.filter((tought,i) => tought.mood == mood ).length
+		//  })
+		 moodsKeys.forEach(function(mood,i){
 			moodsLabels.push(moods[mood])
 			doughnutDataSet[i] = /*Math.round(*/ toughts.filter((tought,i) => tought.mood == mood ).length ///total * 100)
 
@@ -665,7 +668,15 @@ function doughnutChart(div,toughts, displayCount = false){
 				circumference: 1 * Math.PI,
 				plugins: {
 					datalabels: {
-						
+						clamp: true,
+						align: 'center',
+						anchor: 'center',
+						font: {
+						  size: 11,
+						  weight: 700
+						},
+						offset: 8,
+						color: 'black',
 					   // hide datalabels for all datasets
 					   display: displayCount
 					}
@@ -731,6 +742,15 @@ function doughnutChart(div,toughts, displayCount = false){
 				},
 				plugins: {
 					datalabels: {
+						clamp: true,
+						align: 'center',
+						anchor: 'center',
+						font: {
+						  size: 14,
+						  weight: 700
+						},
+						offset: 8,
+						color: 'black',
 					   // hide datalabels for all datasets
 					   display: false
 					}
