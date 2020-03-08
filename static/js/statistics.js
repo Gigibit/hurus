@@ -661,7 +661,15 @@ function doughnutChart(div,toughts, displayCount = false){
 				circumference: 1 * Math.PI,
 				plugins: {
 					datalabels: {
-						
+						clamp: true,
+						align: 'center',
+						anchor: 'center',
+						font: {
+						  size: 11,
+						  weight: 700
+						},
+						offset: 8,
+						color: 'black',
 					   // hide datalabels for all datasets
 					   display: displayCount
 					}
@@ -694,7 +702,7 @@ function doughnutChart(div,toughts, displayCount = false){
         });
     }
 
-	function doughnutMoodCountChart(div,mood){
+	function doughnutMoodCountChart(div,mood, displayCount){
 	        let doughnutDataSet = []
 		if(!mood) return
 		doughnutDataSet = [mood.count] 
@@ -727,8 +735,17 @@ function doughnutChart(div,toughts, displayCount = false){
 				},
 				plugins: {
 					datalabels: {
+						clamp: true,
+						align: 'center',
+						anchor: 'center',
+						font: {
+						  size: 11,
+						  weight: 700
+						},
+						offset: 8,
+						color: 'black',
 					   // hide datalabels for all datasets
-					   display: false
+					   display: displayCount
 					}
 				},
 				tooltips: {

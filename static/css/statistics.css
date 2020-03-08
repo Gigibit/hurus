@@ -244,3 +244,6 @@ svg text {
 .progress-bar-vertical:hover + .tooltiptext {
   visibility: visible;
 }
+.tooltiptext:hover {
+  visibility: visible;
+}

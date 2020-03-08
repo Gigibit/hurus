@@ -219,11 +219,11 @@ function computeDate(day, month, year){
               $('#tought-modal #result').empty()
               
               
-              $('#tought-modal #result').append('<div class="row" id="ft-row"></div>')
-              $('#ft-row').append('<h1>'+ i18n['FREETIME_MOOD_COUNT'] + '</h1>')
+              $('#tought-modal #result').append('<h1>'+ i18n['FREETIME_MOOD_COUNT'] + '</h1>')
+                                        .append('<div class="scroll-x row flex-row flex-nowrap" id="ft-row"></div>')
               ftMoods.forEach((value,i)=>{
                 $('#ft-row').append(
-                  '<div class="chart col-md-3 col-centered">'+
+                  '<div class="chart col-md-4 col-centered">'+
                   '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
                   '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
                   '</div>'
@@ -231,11 +231,13 @@ function computeDate(day, month, year){
                   doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value], true)
                 })
                 
-                $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
-                $('#mp-row').append('<h1>'+ i18n['WORKPLACE_MOOD_COUNT'] + '</h1>')
+                $('#tought-modal #result')
+                .append('<h1>'+ i18n['WORKPLACE_MOOD_COUNT'] + '</h1>')
+                .append('<div class="scroll-x row flex-row flex-nowrap" id="mp-row"></div>')
+                
                 mpMoods.forEach((value,i)=>{
                   $('#mp-row').append(
-                    '<div class="chart col-md-3 col-centered">'+
+                    '<div class="chart col-md-4 col-centered">'+
                     '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
                     '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
                     '</div>'

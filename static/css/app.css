@@ -233,3 +233,8 @@ p{
 ::-webkit-scrollbar {
   display: none;
 }
+
+.scroll-x{
+  overflow: auto;
+  overflow-x: scroll;
+}

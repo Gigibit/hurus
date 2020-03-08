@@ -9,25 +9,26 @@
 {% endblock %}
 
 {% block content %}
-    <div class="curus-description">
-        {{curus.description|safe}}
-    </div>
+<div class="curus-section">
+    {{curus.description|safe}}
     <div class="row">
         <div class="col-md-4">
-        <div class="row">
-            <div class="col-md-12">
-                <img class="tree" src="{% static 'img/website_assets/icona_albero.png' %}">
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="tree" src="{% static 'img/website_assets/icona_albero.png' %}">
+                </div>
+            </div>
+            <div>
+                <div class="counter">{{curus.count|intcomma}}</div>
             </div>
         </div>
-        <div>
-            <div class="counter">{{curus.count|intcomma}}</div>
-        </div>
-    </div>
+        <div class="col-md-4"></div>
         <div class="col-md-4">
             <div class="happy-corus-info">{% trans 'HAPPY_CURUS_INFO' %}</div>
             <p class="curus-greeting">{% trans 'YOUR_HAPPY_TEAM' %}</p>
         </div>
     </div>
+</div>
 
 
 {% endblock %}

@@ -1,4 +1,4 @@
-.curus-description{
+.curus-section{
     padding: 40px;
     background: #fff;
     border: 1px solid #36acb8;
@@ -11,22 +11,22 @@
     border-bottom-right-radius: 100px;
     margin: 25px;
     position: relative;
-    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.1) inset;
 
 }
 
 
 
-.curus-description:before, .curus-description:after
+.curus-section:before, .curus-section:after
 {
 	content:"";
     position:absolute;
     z-index:-1;
-    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
-    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
-    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -webkit-box-shadow:0 0 5px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 5px rgba(0,0,0,0.8);
+    box-shadow:0 0 5px rgba(0,0,0,0.8);
     top:0;
     bottom:0;
     left:10px;
@@ -38,7 +38,7 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 100px;
 }
-.curus-description:after
+.curus-section:after
 {
 	right:10px;
     left:auto;

@@ -4,7 +4,10 @@
   width: 350px;
   margin: 10px auto 0;
 }
-
+.progress-bar-vertical{
+  width: 65px;
+  min-height: 130px;
+}
 .calendar__month {
   font-size: 20px;
   font-weight: 800;
@@ -68,9 +71,11 @@
   width: 350px;
   margin: 0 auto;
 }
-.courses{
-  overflow-x: scroll;
+#tought-modal .chart{
+  margin: 15px!important;
 }
+#tought-modal 
+
 .calendar__head {
   line-height: 50px;
   position: relative;
@@ -91,11 +96,19 @@
   text-align: center;
   cursor: pointer;
 }
-
+#tought-modal .legend-mood-img-wrp img{
+  width: 50px!important;
+  height: 50px!important;
+}
 .cal-day__month--current {
   color: #777;
 }
-
+.courses{
+  padding-bottom: 30px;
+}
+.chart, .progress-bar-vertical{
+  cursor: pointer;
+}
 .cal-day__day--today {
   font-weight: 800;
   color: #2196f3;
@@ -151,10 +164,6 @@
   z-index: 99999;
 }
 
-#tought-modal .chart{
-  margin: 15px;
-  
-}
 
 .show-more-button{
   font-size: 21px;
@@ -169,7 +178,7 @@
 .date-picker{
   margin-top: 35px;
   visibility: hidden;
-
+  
 }
 .date-picker .row{
   text-align: center;
@@ -183,5 +192,5 @@
   height: 45px;
   margin-bottom: 15px;
   font-size: 14px;
-
+  
 }

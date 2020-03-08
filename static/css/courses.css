@@ -8,6 +8,9 @@
     border: #00b0f0 2px solid;
     position: relative;
 }
+.course-wrapper:hover{
+    cursor: pointer;
+}
 .seen-icon{
     position: absolute;
     top: 5px;
@@ -48,11 +51,15 @@
     background: #fff;
     filter: blur(150px);
 }
+.back-button:hover{
+    cursor: pointer;
+}
 .course-info{
     position: absolute;
     left: 0;
     right: 0;
     display: block;
+    font-size: 50%;
     font-weight: bold;
     color: #333;
     margin-top:90px;
@@ -69,7 +76,7 @@ section{
     overflow-y: scroll;
 }
 ::-webkit-scrollbar {
-    width: 3px;
+    width: 5px;
   }
   
   /* Track */
@@ -123,6 +130,7 @@ section{
     font-weight: bold;
 }
 
+  
 .left {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);

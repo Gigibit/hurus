@@ -147,7 +147,7 @@ def statistics_manager(request, manager):
         'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
         
         'average_mood_freetime_percentage': current_average_ft,
-        'average_mood_workplace_percentage': current_average_ft,
+        'average_mood_workplace_percentage': current_average_mp,
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
         'podium_moods_workplace': analysis['podium_moods_workplace'],
@@ -377,7 +377,7 @@ def home_employee(request, employee):
         'moods' : moods,
         'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
         'workplace_toughts' : filter( lambda t : t['tought_type'] == WORK_PLACE, toughts),
-        'courses': not_seen_courses,
+        'courses': not_seen_courses[:6],
     })
 
 
@@ -644,7 +644,7 @@ def home_manager(request, manager):
         'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
         'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1))),
-        'courses': not_seen_courses,
+        'courses': not_seen_courses[:6],
     })
 # Login engine
 def engine(request):
