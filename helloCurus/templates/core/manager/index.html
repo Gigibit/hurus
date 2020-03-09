@@ -165,6 +165,17 @@
 </div>
 
 <script type="text/javascript">
+    var moods = {
+        {% for mood in moods %}
+        {{mood.value}} : {
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
+            
+        },
+        {% endfor %}
+    }
+
+
   $.ajax({
     url : '/manager_tought_moods_count/',
     method: 'GET',

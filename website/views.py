@@ -5,7 +5,7 @@ def index(request):
     if lang == 'IT':
         template = 'website/index_it.html'
     elif lang == 'DE':
-        template = 'website/index_en.html'
+        template = 'website/index_de.html'
     else : 
         template = 'website/index.html'
     print(lang)

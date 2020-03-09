@@ -152,7 +152,7 @@ function computeDate(day, month, year){
       try{
         let freetime = response['toughts_for_day'][0]
         let workplace = response['toughts_for_day'][1]
-
+        
         $('#tought-modal-mood-freetime').html('<img class="mood" src="/static/'+ freetime['mood']['icon'] +'"/>')
         $('#tought-modal-tought-freetime').text(freetime['tought'])
         let freetimeActivities = JSON.parse(freetime['activities'])
@@ -209,91 +209,144 @@ function computeDate(day, month, year){
           method: 'GET',
           success:function(response){
             try{
-              let ftMoods = Object.keys(response['FT']) || [] 
-              let mpMoods = Object.keys(response['MP']) || []
+              console.log(response)
+              // let ftMoods = Object.keys(response['FT']) || [] 
+              // let mpMoods = Object.keys(response['MP']) || []
+              // console.log(response)
+              // if(ftMoods.length == 0 || mpMoods.length == 0){
+              //   return snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
+              // }
               
-              if(ftMoods.length == 0 || mpMoods.length == 0){
-                return snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
-              }
-
               $('#tought-modal #result').empty()
               
               
-              $('#tought-modal #result').append('<div class="row" id="ft-row"></div>')
-              $('#ft-row').append('<h1>'+ i18n['FREETIME_MOOD_COUNT'] + '</h1>')
-              ftMoods.forEach((value,i)=>{
-                $('#ft-row').append(
-                  '<div class="chart col-md-3 col-centered">'+
-                  '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
-                  '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
-                  '</div>'
-                  )
-                  doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value], true)
-                })
-                
-                $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
-                $('#mp-row').append('<h1>'+ i18n['WORKPLACE_MOOD_COUNT'] + '</h1>')
-                mpMoods.forEach((value,i)=>{
-                  $('#mp-row').append(
-                    '<div class="chart col-md-3 col-centered">'+
-                    '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
-                    '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
-                    '</div>'
-                    )
-                    doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value], true)
-                  })
-                  
-                  
-                  $('#tought-modal').modal('toggle')
-                  
-                  
-                  
-                }
-                
-                catch(exception){
-                  snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
-                }
-              }
-            })
-          }
-        }
-        
-        
-        $(document).ready(function() {
-          var bindDatePicker = function() {
-            $(".date")
-            .datetimepicker({
-              format: "DD-MM-YYYY",
-              icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-arrow-up",
-                down: "fa fa-arrow-down"
-              }
-            })
-            .find("input:first")
-            .on("blur", function() {
-              // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
-              // update the format if it's yyyy-mm-dd
-              var date = moment($(this).val(), 'DD-MM-YYYY', true)
-              if (date.isValid()) {
-                //create date based on momentjs (we have that)
-                computeDate(date.date(), date.month(), date.year())
-              }
-              $(this).val('');
+              // $('#tought-modal #result').append('<div class="row" id="ft-row"></div>')
+              // $('#ft-row').append('<h1>'+ i18n['FREETIME_MOOD_COUNT'] + '</h1>')
+              // ftMoods.forEach((value,i)=>{
+              //   $('#ft-row').append(
+              //     '<div class="chart col-md-3 col-centered">'+
+              //     '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
+              //     '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
+              //     '</div>'
+              //     )
+              //     doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value])
+              //   })
               
-            });
-          };
-          
-          var parseDate = function(value) {
-            var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
-            if (m)
-            value =
-            ("00" + m[1]).slice(-2)+ "-" + ("00" + m[3]).slice(-2) + "-" +  m[5];
+              //   $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
+              //   $('#mp-row').append('<h1>'+ i18n['WORKPLACE_MOOD_COUNT'] + '</h1>')
+              //   mpMoods.forEach((value,i)=>{
+              //     $('#mp-row').append(
+              //       '<div class="chart col-md-3 col-centered">'+
+              //       '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
+              //       '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
+              //       '</div>'
+              //       )
+              //       doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value])
+              //     })
+              if (!response || !response['freetime_toughts'] || response['freetime_toughts'].length <= 0 
+                  || !response['workplace_toughts'] || response['workplace_toughts'].length <= 0 )
+                return snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
+
+              
+              var freetimeData = []
+              for(var i = 0; i < response['freetime_toughts'].length ; i++){
+                var tought = response['freetime_toughts'][i];
+                console.log(tought)
+                freetimeData.push({
+                  "date": new Date(tought['created_at']), //H:i
+                  "mood": tought['mood']['value'],
+                  "name": tought['mood']['i18n_key'],
+                  'mood_color' : tought['mood']['i18n_key'],
+                })
+              }
+              var workplaceData = []
+              for(var i = 0; i < response['workplace_toughts'].length ; i++){
+                var tought = response['workplace_toughts'][i];
+                workplaceData.push({
+                  "date": new Date(tought['created_at']), //H:i
+                  "mood": tought['mood']['value'],
+                  "name": tought['mood']['i18n_key'],
+                  'mood_color' : tought['mood']['i18n_key'],
+                })
+              }
+              $('#tought-modal #result').append(
+                '<div class="row sparkboxes mt-4 mb-4">' +
+                '    <div class="chart-wrapper col-md-6">' +
+                '        <div id="freetime-bar-chart" class="chart" style="position: relative;">' +
+                '            <div class="chart-helper-wrapper">' +
+                '                <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>' +
+                '            </div>' +
+                '        </div>' +
+                '    </div>' +
+                '    <div class="chart-wrapper col-md-6">' +
+                '        <div id="workplace-bar-chart" class="chart" style="position: relative;">' +
+                '            <div class="chart-helper-wrapper">' +
+                '                <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>' +
+                '            </div>' +
+                '        </div>' +
+                '    </div>' +
+                '</div>'
+                )
+                
+                barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 4)
+                barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 4)
+                
+                doughnutChart('doughnut-chart-freetime',freetimeData)
+                doughnutChart('doughnut-chart-workplace',workplaceData)
+                
+                $('#tought-modal').modal('toggle')
+                $('#view-statistics').css('display', 'block')
+                $('#view-statistics').click(function(event){
+                  location.href = '/statistics_manager_for_day?day='+day + '&' +'month=' + (month + 1) + '&' +'year='  + year
+                });
+              }
+              
+              catch(exception){
+                console.log(exception)
+                
+                snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
+              }
+            }
+          })
+        }
+      }
+      
+      
+      $(document).ready(function() {
+        var bindDatePicker = function() {
+          $(".date")
+          .datetimepicker({
+            format: "DD-MM-YYYY",
+            icons: {
+              time: "fa fa-clock-o",
+              date: "fa fa-calendar",
+              up: "fa fa-arrow-up",
+              down: "fa fa-arrow-down"
+            }
+          })
+          .find("input:first")
+          .on("blur", function() {
+            // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+            // update the format if it's yyyy-mm-dd
+            var date = moment($(this).val(), 'DD-MM-YYYY', true)
+            if (date.isValid()) {
+              //create date based on momentjs (we have that)
+              computeDate(date.date(), date.month(), date.year())
+            }
+            $(this).val('');
             
-            return value;
-          };
-          
-          bindDatePicker();
-        });
+          });
+        };
         
+        var parseDate = function(value) {
+          var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+          if (m)
+          value =
+          ("00" + m[1]).slice(-2)+ "-" + ("00" + m[3]).slice(-2) + "-" +  m[5];
+          
+          return value;
+        };
+        
+        bindDatePicker();
+      });
+      

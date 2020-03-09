@@ -9,6 +9,7 @@
 {% block content %}
 
 <div class="main">
+    {% if date_to_evaluate %}<h1>{{date_to_evaluate|title}}</h1>{% endif %}
     <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
@@ -55,6 +56,24 @@
 </div>
 <div class="row sparkboxes mt-4 mb-4">
     <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'COUNTER_FREETIME'%}</h1>
+        <div id="freetime-bar-chart" class="chart" style="position: relative;">
+            <div class="chart-helper-wrapper">
+                <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'COUNTER_WORKPLACE'%}</h1>
+        <div id="workplace-bar-chart" class="chart" style="position: relative;">
+            <div class="chart-helper-wrapper">
+                <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row sparkboxes mt-4 mb-4">
+    <div class="chart-wrapper col-md-6">
         <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
         <div id="average-freetime-line-chart" class="chart"></div>
     </div>
@@ -77,7 +96,7 @@
                 <canvas id="freetime-radar-chart{{index}}"></canvas>
             </div>
             <div class="related-radar-chart">
-                <div class="chart-related-wrapper"  style="height:100vh">
+                <div class="chart-related-wrapper" >
                     <canvas id="related-freetime-radar-chart{{index}}" ></canvas>
                 </div>
             </div>
@@ -95,7 +114,7 @@
                 <canvas id="workplace-radar-chart{{index}}" ></canvas>
             </div>
             <div class="related-radar-chart">
-                <div class="chart-related-wrapper"  style="height:100vh">
+                <div class="chart-related-wrapper" >
                     <canvas id="related-workplace-radar-chart{{index}}" ></canvas>
                 </div>
             </div>
@@ -111,14 +130,7 @@
 
 <script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
 <script>
-    var moods = {
-        {% for mood in moods %}
-        {{mood.value}} : {
-            'icon'  : "{% static mood.icon.name %}"
-        },
-        {% endfor %}
-    }
-    
+
     var dates = []    
     var freetimeAverageMoods= []
     var workplaceAverageMoods= []
@@ -197,6 +209,31 @@
     
     {% endfor %}
     ]
+    var freetimeToughts = [
+    {% for tought in freetime_toughts %}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
+    
+    var workplaceToughts = [
+    {% for tought in workplace_toughts %}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
     
     
     
@@ -263,6 +300,13 @@
             activityRadarChart('related-workplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataWorkPlace)
         }
         {% endfor %}
+        barChart("#freetime-bar-chart", freetimeToughts,'freetime-radar-chart')
+        barChart("#workplace-bar-chart", workplaceToughts,'workplace-radar-chart')
+
+        doughnutChart('doughnut-chart-freetime',freetimeToughts)
+        doughnutChart('doughnut-chart-workplace',workplaceToughts)
+
+
         // doughnutChart('doughnut-chart-freetime',dataFreetime)
         // doughnutChart('doughnut-chart-workplace',dataWorkPlace)
         $('canvas').each((index,el)=>{ $(el).hide()})

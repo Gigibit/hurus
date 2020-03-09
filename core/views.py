@@ -12,6 +12,7 @@ from core.models import *
 from helloCurus.settings import BASE_DIR
 from django.forms.models import model_to_dict
 from django.db.models import Avg
+from django.template.defaultfilters import date as _date
 
 from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
@@ -56,29 +57,66 @@ key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can on
 def statistics_manager_for_day(request):
     manager = request.user
     moods = Mood.objects.all()
-    date_to_evaulate = date(year=int(request.GET['year']), 
+    date_to_evaulate = datetime(year=int(request.GET['year']), 
                                               month=int(request.GET['month']), 
                                               day=int(request.GET['day'])) 
     mood_max_value = max(mood.value for mood in moods )
-
     analysis = calculate_average_moods(manager, mood_max_value=mood_max_value, end_date=date_to_evaulate)
+
+    last_week_analysis = calculate_average_moods(manager, end_date = previous_friday(date_to_evaulate), mood_max_value=mood_max_value)
+    last_month_analysis = calculate_average_moods(manager, end_date = previous_month(date_to_evaulate), mood_max_value=mood_max_value)
+    
+
+    first_two_week_of_happycurus= manager.agency.created_at + timedelta(days=14)
+
+    when_everything_started_analysis = calculate_average_moods(manager, end_date=first_two_week_of_happycurus, mood_max_value=mood_max_value)
+    
+
+
+
+    current_average_ft = round(analysis['freetime_mood_value_percentage'])
+    current_average_mp = round(analysis['workplace_mood_value_percentage'])
+
     average_moods = analysis['average_moods']
     return render(request, 'core/manager/statistics.html', {
-        'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
-        'average_mood_workplace_percentage': round(analysis['workplace_mood_value_percentage']),
+        'date_to_evaluate': _date(date_to_evaulate, "d F, Y"),
+        'weekly_difference_average_freetime_percentage': round(current_average_ft - last_week_analysis['freetime_mood_value_percentage']),
+        'weekly_difference_average_workplace_percentage': round(current_average_mp - last_week_analysis['workplace_mood_value_percentage']),
+        
+        'monthly_difference_average_freetime_percentage': round(current_average_ft - last_month_analysis['freetime_mood_value_percentage']),
+        'monthly_difference_average_workplace_percentage': round(current_average_mp - last_month_analysis['workplace_mood_value_percentage']),
+        
+        'from_begin_difference_average_freetime_percentage': round(current_average_ft - when_everything_started_analysis['freetime_mood_value_percentage']),
+        'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
+        'average_mood_freetime_percentage': current_average_ft,
+        'average_mood_workplace_percentage': current_average_mp,
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
         'podium_moods_workplace': analysis['podium_moods_workplace'],
         'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
         'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
-        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1, len(analysis['activities_podium_count_workplace'])+1)))
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1)))
     })
 
 
-def manager_tought_moods_count_in_day(request) : return JsonResponse(tought_moods_count(request, True))
+def manager_tought_moods_count_in_day(request) : return JsonResponse(toughts_in_day(request, True))
 def manager_tought_moods_count_overview(request) : return JsonResponse(tought_moods_count(request, False))
 
+
+
+def toughts_in_day(request, in_day):
+    if in_day:
+        toughts = Tought.objects.filter(
+                            employee__team__manager = request.user, 
+                            created_at__year=int(request.GET['year']), 
+                            created_at__month=int(request.GET['month']), 
+                            created_at__day=int(request.GET['day'])
+                        )
+    return {
+        'freetime_toughts': [t.to_public_dict() for t in filter(lambda x : x.tought_type == FREETIME, toughts)],
+        'workplace_toughts': [t.to_public_dict() for t in filter(lambda x : x.tought_type == WORK_PLACE, toughts)]
+    }
 
 def tought_moods_count(request, in_day):
     if in_day:
@@ -146,6 +184,9 @@ def statistics_manager(request, manager):
         'from_begin_difference_average_freetime_percentage': round(current_average_ft - when_everything_started_analysis['freetime_mood_value_percentage']),
         'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
         
+        'freetime_toughts': analysis['freetime_toughts'],
+        'workplace_toughts': analysis['workplace_toughts'],
+
         'average_mood_freetime_percentage': current_average_ft,
         'average_mood_workplace_percentage': current_average_mp,
         'average_moods': average_moods,
@@ -167,6 +208,8 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
     else :
         toughts = Tought.objects.filter(employee__team__manager=manager)
     
+
+
 
     average_moods = []
     count = 0
@@ -260,6 +303,8 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
 
 
     return {
+        'freetime_toughts' :  [t.to_public_dict() for t in filter( lambda t : t.tought_type == FREETIME, toughts)],
+        'workplace_toughts' : [t.to_public_dict() for t in filter( lambda t : t.tought_type == WORK_PLACE, toughts)],
         'freetime_mood_value_percentage' : (average_mood_value_freetime / count if count > 0 else average_mood_value_freetime + 1) * 100,
         'workplace_mood_value_percentage' : (average_mood_value_workplace/ count if count > 0 else average_mood_value_workplace + 1) * 100,
         'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False),
@@ -270,8 +315,8 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
     }
 
 
-def previous_friday():
-    current_time = datetime.now()
+def previous_friday(of_date = None):
+    current_time = of_date if of_date else datetime.now()
 
     # get friday, one week ago, at 16 o'clock
     last_friday = (current_time.date()
@@ -285,7 +330,7 @@ def previous_friday():
         last_friday_at_16 += one_week
     return last_friday_at_16
 
-def previous_month(): return date.today().replace(day=1) - timedelta(days=1)
+def previous_month(of_date = None): return (of_date if of_date else date.today()).replace(day=1) - timedelta(days=1)
 
 
 def get_mood_count_for_date(_date, toughts, for_type):
