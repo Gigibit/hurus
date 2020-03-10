@@ -184,11 +184,10 @@ img.right{
 }
 
 .home-image{
-    background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_96391741.jpg);
-    background-size: cover;
-    height: 100%;
     width: 100%;
-    background-position: center;
+}
+.landing{
+    position: relative;
 }
 .home-box{
     position: absolute;
@@ -196,7 +195,7 @@ img.right{
     right: 0;
     display: block;
     border-radius: 5px;
-    bottom: -265px;
+    bottom: -15%;
     margin: 0 auto;
     color: #222;
     padding: 15px;
@@ -244,7 +243,7 @@ img.right{
 }
 
 #about-happy-curus-section{
-    padding-top: 175px;
+    padding-top: 130px;
 }
 .home-box-content::after{
     background-color: deepskyblue;
