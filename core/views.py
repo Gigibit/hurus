@@ -101,7 +101,7 @@ def statistics_manager_for_day(request):
 
 
 def manager_tought_moods_count_in_day(request) : return JsonResponse(toughts_in_day(request, True))
-def manager_tought_moods_count_overview(request) : return JsonResponse(tought_moods_count(request, False))
+def manager_tought_moods_count_overview(request) : return JsonResponse(toughts_in_day(request, False))
 
 
 
@@ -113,6 +113,9 @@ def toughts_in_day(request, in_day):
                             created_at__month=int(request.GET['month']), 
                             created_at__day=int(request.GET['day'])
                         )
+    else:
+        toughts = Tought.objects.filter(
+                    employee__team__manager = request.user )
     return {
         'freetime_toughts': [t.to_public_dict() for t in filter(lambda x : x.tought_type == FREETIME, toughts)],
         'workplace_toughts': [t.to_public_dict() for t in filter(lambda x : x.tought_type == WORK_PLACE, toughts)]
@@ -228,9 +231,9 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
         dates.append( date(t.created_at.year, t.created_at.month, t.created_at.day) )
         moods_count[t.mood.value] += 1
     
-    podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key,value in moods_count.items()],key=lambda x: x['count'], reverse=True)
+    podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)
 
-    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime] ])[:6]
+    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime[:3]] ])
 
     activity_count_freetime = []
     for mood in moods:
@@ -239,7 +242,7 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
             {   'name': activity['name'],
                 'i18n_key' : translation.gettext( activity['i18n_key'] ) if activity.get('i18n_key', None) else activity['name'],
                 'mood' : activity['mood']
-            } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+            } for activity in activities_for_podium_moods if activity['mood'] == mood.pk]
 
         if len(activities) > 0 : 
             activity_count_freetime.append({
@@ -260,15 +263,14 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
     
     podium_moods_workplace = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)[:3]
 
-    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in workplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_workplace] ])[:6]
+    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in workplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_workplace[:3]] ])
     activity_count_workplace = []
     for mood in moods:
-        #max number of activity displayed
         activities = [ 
         {   'name': activity['name'],
             'i18n_key' : translation.gettext( activity['i18n_key'] ) if activity.get('i18n_key', None) else activity['name'],
             'mood' : activity['mood']
-        } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+        } for activity in activities_for_podium_moods if activity['mood'] == mood.pk]  #max number of activity displayed
         if len(activities) > 0:
             activity_count_workplace.append({
                 'mood_value': mood.value,
@@ -302,6 +304,7 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
         })
 
 
+
     return {
         'freetime_toughts' :  [t.to_public_dict() for t in filter( lambda t : t.tought_type == FREETIME, toughts)],
         'workplace_toughts' : [t.to_public_dict() for t in filter( lambda t : t.tought_type == WORK_PLACE, toughts)],
@@ -309,9 +312,9 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
         'workplace_mood_value_percentage' : (average_mood_value_workplace/ count if count > 0 else average_mood_value_workplace + 1) * 100,
         'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False),
         'podium_moods_freetime' : podium_moods_freetime,
-        'activities_podium_count_freetime': activity_count_freetime,
+        'activities_podium_count_freetime': sorted(activity_count_freetime, key=lambda x: x['mood_value'],reverse=False),
         'podium_moods_workplace' : podium_moods_workplace,
-        'activities_podium_count_workplace': activity_count_workplace,
+        'activities_podium_count_workplace': sorted(activity_count_workplace, key=lambda x: x['mood_value'],reverse=False)
     }
 
 
@@ -360,7 +363,6 @@ def calculate_average_mood_for_day(_date, toughts, for_type):
 
 
 def e_learning_manager(request, manager):
-    print(request.user.seen_courses.all())
     
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
@@ -371,7 +373,6 @@ def e_learning_manager(request, manager):
         request.user.last_seen_course_date = None
         request.user.save()
 
-    print(request.user.seen_courses.all())
 
     if request.user.has_to_get_new_course():
         # shuffle if new course has to change
@@ -441,7 +442,6 @@ def statistics_employee(request, employee):
 
 def e_learning_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
-    print(courses)
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     # if len(not_seen_courses) == 0:
     #     request.user.seen_courses.set([])
@@ -463,15 +463,12 @@ def e_learning_employee(request, employee):
 
 
     courses_check_list = []
-    print(courses)
-    print(request.user.seen_courses.all())
     for c in courses:
         if course_to_see and c.pk != course_to_see.pk:
             courses_check_list.append({
                 'seen' : c in request.user.seen_courses.all(),
                 'course': c
             })
-    print(courses_check_list)
     return render(request, 'core/employee/e_learning.html', {
         'courses': sorted(courses_check_list, key=lambda c: c['seen'], reverse=True),
         'course_to_see': course_to_see

@@ -60,11 +60,13 @@ body{
 
 .happy-curus-section-image{
     position: relative;
+    min-height: 321px;
 }
 .happy-curus-section-image ul{
     position: absolute;
     top: 10px;
     list-style: none;
+    padding: 0;
 }
 
 .happy-curus-section-image ul li{
@@ -74,6 +76,7 @@ body{
     font-weight: bold;
     padding: 5px 15px;
     color: white;
+    
 }
 
 .happy-curus-section-image ul li.make-it-green{
@@ -83,7 +86,7 @@ body{
     color: greenyellow;
 }
 .happy-curus-section-image ul li span:nth-child(2){
-    margin: 0 50px;
+    margin: 0 20px;
 }
 
 
@@ -93,7 +96,7 @@ body{
 .curus-effect-box{
     border: 1px solid deepskyblue;
     border-radius: 25px;
-    height: 100%;
+    height: 300px;
     padding-top: 18px;
 }
 .curus-effect-box-wrapper{
@@ -115,12 +118,11 @@ body{
     display: block;
 }
 
-.enviroment-row{
-    height: 100%;
+.enviroment-row {
     padding: 0 122px;
 }
 
-.happy-environment-image{
+.happy-environment-image {
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -464,9 +466,6 @@ form button{
 .glance-row .description.right{
     text-align: right;
 }
-.contact-form-section{
-    text-align: center;
-}
 
 .padded-section{
     margin-bottom: 50px;
@@ -572,7 +571,7 @@ form button{
 
 .contact-form-section{
     width: 100%;
-    height: 800px;
+    height: 105vh;
 }
 
 .contact-form-header{
@@ -602,8 +601,7 @@ form button{
     box-sizing: border-box;
     left: 0;
     right: 0;
-    bottom:0;
-    
+    top: 50px;    
 }
 .form-label{
     font-weight: bold;
