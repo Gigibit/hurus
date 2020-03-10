@@ -147,32 +147,40 @@ img.right{
     padding: 15px 40px 15px 15px;
 }
 #first-about{
+    float: right;
+    display: block;
     background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_306317760.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 350px;
-    width: 100%;
+    width: 388px;
+    height: 388px;
 }
 #second-about{
+    float: right;
+    display: block;
     background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_132150794.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 350px;
-    width: 100%;
+    width: 388px;
+    height: 388px;
 }
 #third-about{
+    float: right;
+    display: block;
     background-image: url(../img/website_assets/site/Immagini\ sito/man-1209494_1920.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 350px;
-    width: 100%;
+    width: 388px;
+    height: 388px;
 }
 #fourth-about{
+    float: right;
+    display: block;
     background-image: url(../img/website_assets/site/Immagini\ sito/AdobeStock_290521699.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 350px;
-    width: 100%;
+    width: 388px;
+    height: 388px;
 }
 
 .home-image{
@@ -358,7 +366,7 @@ Button
     width: 100%;
 }
 .motivation-img-wrapper{
-    height: 350px;
+    height: 640px;
     position: absolute;
     top: 0;
     z-index: 0;
