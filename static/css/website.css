@@ -60,11 +60,13 @@ body{
 
 .happy-curus-section-image{
     position: relative;
+    min-height: 321px;
 }
 .happy-curus-section-image ul{
     position: absolute;
     top: 10px;
     list-style: none;
+    padding: 0;
 }
 
 .happy-curus-section-image ul li{
@@ -74,6 +76,7 @@ body{
     font-weight: bold;
     padding: 5px 15px;
     color: white;
+    
 }
 
 .happy-curus-section-image ul li.make-it-green{
@@ -83,7 +86,7 @@ body{
     color: greenyellow;
 }
 .happy-curus-section-image ul li span:nth-child(2){
-    margin: 0 50px;
+    margin: 0 20px;
 }
 
 
@@ -93,7 +96,7 @@ body{
 .curus-effect-box{
     border: 1px solid deepskyblue;
     border-radius: 25px;
-    height: 100%;
+    height: 300px;
     padding-top: 18px;
 }
 .curus-effect-box-wrapper{
@@ -115,12 +118,11 @@ body{
     display: block;
 }
 
-.enviroment-row{
-    height: 100%;
+.enviroment-row {
     padding: 0 122px;
 }
 
-.happy-environment-image{
+.happy-environment-image {
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -210,6 +212,9 @@ img.right{
     color: white;
     text-align: center;
     padding: 30px;
+    margin: 0 auto;
+    transition: width 1000ms linear;
+
 }
 @media only screen and (max-width: 600px) {
     #navbarResponsive{
@@ -260,6 +265,7 @@ img.right{
     transform: skewX(-11deg);
     /* border-color: transparent rgba(173,216,230 , 1) transparent transparent; */
     /* border-width: 25px 50vw 0 0; */
+    margin: 0 auto;
 }
 
 /*
@@ -464,13 +470,7 @@ form button{
 .glance-row .description.right{
     text-align: right;
 }
-.contact-form-section{
-    text-align: center;
-}
 
-.padded-section{
-    margin-bottom: 50px;
-}
 
 .agreements{
     display: table;
@@ -572,25 +572,23 @@ form button{
 
 .contact-form-section{
     width: 100%;
-    height: 800px;
+    position: relative;
+    overflow: hidden;
 }
 
 .contact-form-header{
+    position: absolute;
     left: 0;
     right: 0;
     background: url('/static/img/website_assets/site/Immagini sito/adventure-1807524.jpg');
     height: 100%;
+    top: 0;
+    bottom: 0;
     width: 100%;
-    z-index: 2;
+    z-index: -1;
     background-size: cover;
 }
-.contact-form-container{
-    position: relative;
-    height: 100%;
-}
 .contact-form {
-    position:absolute;
-    height:90%;
     width:50vw;
     margin: 0 auto;
     z-index: 3;
@@ -602,8 +600,7 @@ form button{
     box-sizing: border-box;
     left: 0;
     right: 0;
-    bottom:0;
-    
+    margin-top: 50px;    
 }
 .form-label{
     font-weight: bold;
@@ -636,7 +633,9 @@ input[type="checkbox"]:focus{
 .happy-environment-description-container{
     background-color: rgba(173,216,230 , 1);
 }
-
+.contact-form-container{
+    padding-bottom: 30px;
+}
 .curus-donate-section{
     font-size: 30px;
 }
@@ -785,9 +784,6 @@ li.nav-item{
     width: 100%;
     padding: 0;
     margin: 15px 0 60px 0;
-}
-.curus-effect-monitor{
-    margin-bottom: 50px;
 }
 
 .find-more-button{
