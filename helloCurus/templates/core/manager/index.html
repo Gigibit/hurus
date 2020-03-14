@@ -187,7 +187,6 @@
       var freetimeData = []
       for(var i = 0; i < response['freetime_toughts'].length ; i++){
         var tought = response['freetime_toughts'][i];
-        console.log(tought)
         freetimeData.push({
           "date": new Date(tought['created_at']), //H:i
           "mood": tought['mood']['value'],
@@ -205,6 +204,7 @@
           'mood_color' : tought['mood']['i18n_key'],
         })
       }
+      console.log(freetimeData)
       barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 4)
       barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 4)
       

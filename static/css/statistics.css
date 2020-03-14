@@ -220,7 +220,7 @@ svg text {
   color: #222;
   border: 1px solid #222;
   border-radius: 6px;
-  padding: 5px 15px;
+  padding: 20px 15px 0px 15px;
   position: absolute;
   z-index: 1;
   margin: 0 20px;

@@ -220,29 +220,6 @@ function computeDate(day, month, year){
               $('#tought-modal #result').empty()
               
               
-              // $('#tought-modal #result').append('<div class="row" id="ft-row"></div>')
-              // $('#ft-row').append('<h1>'+ i18n['FREETIME_MOOD_COUNT'] + '</h1>')
-              // ftMoods.forEach((value,i)=>{
-              //   $('#ft-row').append(
-              //     '<div class="chart col-md-3 col-centered">'+
-              //     '<div id="ft-'+i+'-mood-counter-chart-legend"></div>' +
-              //     '<canvas id="ft-'+i+'-mood-counter-chart'+'"></canvas>'+
-              //     '</div>'
-              //     )
-              //     doughnutMoodCountChart( 'ft-'+i + '-mood-counter-chart', response['FT'][value])
-              //   })
-              
-              //   $('#tought-modal #result').append('<div class="row" id="mp-row"></div>')
-              //   $('#mp-row').append('<h1>'+ i18n['WORKPLACE_MOOD_COUNT'] + '</h1>')
-              //   mpMoods.forEach((value,i)=>{
-              //     $('#mp-row').append(
-              //       '<div class="chart col-md-3 col-centered">'+
-              //       '<div id="mp-'+i+'-mood-counter-chart-legend"></div>' +
-              //       '<canvas id="mp-'+i+'-mood-counter-chart'+'"></canvas>'+
-              //       '</div>'
-              //       )
-              //       doughnutMoodCountChart('mp-' + i + '-mood-counter-chart', response['MP'][value])
-              //     })
               if (!response || !response['freetime_toughts'] || response['freetime_toughts'].length <= 0 
                   || !response['workplace_toughts'] || response['workplace_toughts'].length <= 0 )
                 return snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
@@ -272,27 +249,27 @@ function computeDate(day, month, year){
               $('#tought-modal #result').append(
                 '<div class="row sparkboxes mt-4 mb-4">' +
                 '    <div class="chart-wrapper col-md-6">' +
-                '        <div id="freetime-bar-chart" class="chart" style="position: relative;">' +
+                '        <div id="modal-freetime-bar-chart" class="chart" style="position: relative;">' +
                 '            <div class="chart-helper-wrapper">' +
-                '                <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>' +
+                '                <canvas id="modal-doughnut-chart-freetime" class="chart-helper"></canvas>' +
                 '            </div>' +
                 '        </div>' +
                 '    </div>' +
                 '    <div class="chart-wrapper col-md-6">' +
-                '        <div id="workplace-bar-chart" class="chart" style="position: relative;">' +
+                '        <div id="modal-workplace-bar-chart" class="chart" style="position: relative;">' +
                 '            <div class="chart-helper-wrapper">' +
-                '                <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>' +
+                '                <canvas id="modal-doughnut-chart-workplace" class="chart-helper"></canvas>' +
                 '            </div>' +
                 '        </div>' +
                 '    </div>' +
                 '</div>'
                 )
                 
-                barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 4)
-                barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 4)
+                barChart("#modal-freetime-bar-chart", freetimeData,'modal-freetime-radar-chart', window.innerWidth / 4)
+                barChart("#modal-workplace-bar-chart", workplaceData,'modal-workplace-radar-chart', window.innerWidth / 4)
                 
-                doughnutChart('doughnut-chart-freetime',freetimeData)
-                doughnutChart('doughnut-chart-workplace',workplaceData)
+                doughnutChart('modal-doughnut-chart-freetime',freetimeData)
+                doughnutChart('modal-doughnut-chart-workplace',workplaceData)
                 
                 $('#tought-modal').modal('toggle')
                 $('#view-statistics').css('display', 'block')
@@ -302,7 +279,7 @@ function computeDate(day, month, year){
               }
               
               catch(exception){
-                console.log(exception)
+                console.error(exception)
                 
                 snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
               }

@@ -3,7 +3,13 @@ const MIN_DAYS_FOR_CHART = 14;
 
 function count(obj) { return Object.keys(obj).length; }
 const truncate = (input) => input.length > 35 ? `${input.substring(0, 35)}...` : input;
-
+Array.prototype.remove = function(element){
+	const index = this.indexOf(element);
+	if (index > -1) {
+		this.splice(index, 1);
+	}
+	return this
+}
 
 function barChart(chartDiv, data, relatedChart, width= null, height = null) {
 	
@@ -51,7 +57,6 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null) {
 	.append("g")
 	.attr("transform",
 	"translate(" + margin.left + "," + margin.top + ")");
-	
 	// Scale the range of the data in the domains
 	x.domain(barData.map(function (d) {
 		return d.key;
@@ -117,7 +122,6 @@ function managerLineChart(forDiv, data){
 	var i = 0
 	
 	dates = dates.map( it=> moment(it, "DD-MM-YYYY"))
-	console.log(dates)
 	let chart = new Chart(ctx, {
 		type: 'line',
 		data: {
@@ -472,7 +476,11 @@ function managerLineChart(forDiv, data){
 	function updateChart(chart, selectedMood, _data) {
 		if (chart != null) {
 			let labels = getActivities(selectedMood, _data)
-			let data = getDataForActivities(labels, selectedMood, _data)
+			let process = getDataForActivities(labels, selectedMood, _data)
+			let data = process['result']
+			for(var i = 0 ; i < process['erasered'].length ; i++){
+				labels = labels.remove(process['erasered'][i])
+			}
 			if (labels.length > 0 && data.length > 0) {
 				chart.data.labels = labels
 				chart.data.datasets = [{
@@ -512,7 +520,12 @@ function managerLineChart(forDiv, data){
 		
 		let labels = getActivities(selectedMood, data) || []
 		var context = el.getContext('2d');
-		let datasetData = getDataForActivities(labels, selectedMood, data)
+		let process = getDataForActivities(labels, selectedMood, data)
+		let datasetData = process['result']
+		for(var i = 0 ; i < process['erasered'].length ; i++){
+			labels = labels.remove(process['erasered'][i])
+		}
+
 		var causeEffectChartData = {
 			labels: labels,
 			datasets: [{
@@ -552,8 +565,21 @@ function managerLineChart(forDiv, data){
 				},
 				tooltips: {
 					enabled: false
-				}
-				
+				},
+				plugins: {
+					datalabels: {
+						clamp: true,
+						align: 'center',
+						anchor: 'center',
+						font: {
+							size: 11,
+							weight: 700
+						},
+						offset: 8,
+						color: 'black',
+						display: labels.length < 10
+					}
+				},
 			}
 		});
 		
@@ -576,7 +602,11 @@ function managerLineChart(forDiv, data){
 		$(el).parent().css('height', ( 60 * labels.length + 'px' ))
 		
 		var relatedContext = el.getContext('2d');
-		let datasetData = getDataForActivities(labels, selectedMood, data)
+		let process = getDataForActivities(labels, selectedMood, data)
+		let datasetData = process['result']
+		for(var i = 0 ; i < process['erasered'].length ; i++){
+			labels = labels.remove(process['erasered'][i])
+		}
 		var opt = {
 			legend: {
 				display: false
@@ -651,21 +681,31 @@ function managerLineChart(forDiv, data){
 	}
 	function getDataForActivities(labels, forMood, data) {
 		var result = []
+		var erasered = []
 		var elementsIndex = 0
 		for (var i = 0; i < labels.length; i++) {
 			let label = labels[i]
-			let filterCount = data.filter(t => {
-				return t.activities.map(opt => {
-					return {
-						'i18n_key': opt.i18n_key,
-						'name': opt.name
+			let countForActivity = 0;
+			for (var j = 0; j < data.length ; j++){
+				let tought = data[j]
+				for(var k = 0 ; k < tought['activities'].length; k++){
+					let activity = tought['activities'][k];
+					if(label == activity['name'] || label == activity['i18n_key'] && tought['mood'] == forMood){
+						countForActivity++
 					}
-				}).filter(opt => opt.i18n_key === label || opt.name === label).length > 0 && t.mood == forMood
-			}).length
-			if(filterCount > 0)
-			result[elementsIndex++] = filterCount
+				}
+			}
+			if(countForActivity > 0){
+				result[elementsIndex++] = countForActivity
+			}
+			else{
+				erasered.push(label)
+			}
 		}
-		return result
+		return {
+			result: result,
+			erasered : erasered
+		}
 	}
 	let backgroundColors = []
 	function doughnutChart(div,toughts, displayCount = false){
@@ -835,3 +875,4 @@ function managerLineChart(forDiv, data){
 				//this.hexValue = "#" + redToHex + "" + greenToHex + "" + blueToHex;
 			}
 			
+
