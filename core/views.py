@@ -86,6 +86,10 @@ def statistics_manager_for_day(request):
         'monthly_difference_average_freetime_percentage': round(current_average_ft - last_month_analysis['freetime_mood_value_percentage']),
         'monthly_difference_average_workplace_percentage': round(current_average_mp - last_month_analysis['workplace_mood_value_percentage']),
         
+        'freetime_toughts': analysis['freetime_toughts'],
+        'workplace_toughts': analysis['workplace_toughts'],
+
+
         'from_begin_difference_average_freetime_percentage': round(current_average_ft - when_everything_started_analysis['freetime_mood_value_percentage']),
         'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
         'average_mood_freetime_percentage': current_average_ft,
@@ -100,18 +104,19 @@ def statistics_manager_for_day(request):
     })
 
 
-def manager_tought_moods_count_in_day(request) : return JsonResponse(toughts_in_day(request, True))
-def manager_tought_moods_count_overview(request) : return JsonResponse(toughts_in_day(request, False))
+def manager_tought_moods_count_in_day(request) : return JsonResponse(toughts_until_day(request, True))
+def manager_tought_moods_count_overview(request) : return JsonResponse(toughts_until_day(request, False))
 
 
 
-def toughts_in_day(request, in_day):
+def toughts_until_day(request, in_day):
+
     if in_day:
         toughts = Tought.objects.filter(
                             employee__team__manager = request.user, 
-                            created_at__year=int(request.GET['year']), 
-                            created_at__month=int(request.GET['month']), 
-                            created_at__day=int(request.GET['day'])
+                            created_at__lte= date (int(request.GET['year']), 
+                                                    int(request.GET['month']), 
+                                                    int(request.GET['day']))
                         )
     else:
         toughts = Tought.objects.filter(

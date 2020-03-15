@@ -71,6 +71,7 @@ svg text {
   fill:white;
   font: 10px sans-serif;
   text-anchor: end;
+  letter-spacing: 0.6px;
 }
 .bar-text {
     fill:#222;
@@ -220,7 +221,7 @@ svg text {
   color: #222;
   border: 1px solid #222;
   border-radius: 6px;
-  padding: 20px 15px 0px 15px;
+  padding: 5px 15px;
   position: absolute;
   z-index: 1;
   margin: 0 20px;

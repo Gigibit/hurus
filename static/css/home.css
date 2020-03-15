@@ -146,9 +146,14 @@
   z-index: 99999;
 }
 
-#tought-modal .chart{
-  margin: 15px;
-  
+ .chart div, .chart svg{
+   bottom: 0;
+   margin: 0 auto;
+   top: unset;
+   display: block;
+}
+.chart-helper-wrapper{
+  position: unset!important;
 }
 
 .show-more-button{

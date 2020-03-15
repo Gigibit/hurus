@@ -14,7 +14,6 @@ Array.prototype.remove = function(element){
 function barChart(chartDiv, data, relatedChart, width= null, height = null) {
 	
 	buff = []
-	
 	for (var i = 0; i < data.length; i++) {
 		var d = data[i]
 		buff[d.mood] = buff[d.mood] ? buff[d.mood] + 1 : 1
@@ -56,7 +55,7 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null) {
 	.attr("height", '400px')
 	.append("g")
 	.attr("transform",
-	"translate(" + margin.left + "," + margin.top + ")");
+	"translate(" + (margin.left - 10) + "," + margin.top + ")");
 	// Scale the range of the data in the domains
 	x.domain(barData.map(function (d) {
 		return d.key;
@@ -122,34 +121,40 @@ function managerLineChart(forDiv, data){
 	var i = 0
 	
 	dates = dates.map( it=> moment(it, "DD-MM-YYYY"))
+	let dataset = Object.keys(data).map(key=>{ 
+		return {
+			fill: false,
+			lineTension: 0.3,
+			borderColor: moods[key]['color'],
+			borderCapStyle: 'square',
+			borderJoinStyle: 'miter',
+			pointBorderWidth: 1,
+			pointHoverRadius: 8,
+			pointHoverBorderWidth: 2,
+			pointRadius: 4,
+			pointHitRadius: 10,
+			data : data[key].data
+		}})
+	let max  = Math.max(dataset)
 	let chart = new Chart(ctx, {
 		type: 'line',
 		data: {
 			labels : dates,
-			datasets:  Object.keys(data).map(key=>{ 
-				return {
-					fill: false,
-					lineTension: 0.3,
-					borderColor: moods[key]['color'],
-					borderCapStyle: 'square',
-					borderJoinStyle: 'miter',
-					pointBorderWidth: 1,
-					pointHoverRadius: 8,
-					pointHoverBorderWidth: 2,
-					pointRadius: 4,
-					pointHitRadius: 10,
-					data : data[key].data
-				}})
+			datasets:  dataset
 			},
 			options: {
 				plugins: {
 					zoom: {
 						// Container for pan options
 						pan: {
+							threshold: 1,
+							
 							rangeMax:{
+								y: max,
 								x: dates[dates.length-1].toDate().getTime()
 							},
 							rangeMin:{
+								y: max,
 								x: dates[0].toDate().getTime(),
 							},
 							// Boolean to enable panning
@@ -162,20 +167,28 @@ function managerLineChart(forDiv, data){
 						
 						// Container for zoom options
 						zoom: {
+							maxZoom: 99999999,
 							rangeMax:{
+								y: max,
+
 								x: dates[dates.length-1].toDate().getTime()
 							},
 							rangeMin:{
+								y: max,
 								x: dates[0].toDate().getTime(),
 							},
 							// Boolean to enable zooming
 							enabled: true,
-							
+							threshold: 1,
 							// Zooming directions. Remove the appropriate direction to disable 
 							// Eg. 'y' would only allow zooming in the y direction
 							mode: 'x',
 						}
+					},
+					datalabels:{
+						display: false
 					}
+					
 				},
 				legend: {
 					display: false
@@ -195,13 +208,15 @@ function managerLineChart(forDiv, data){
 						time: {
 							minUnit:'day',
 							displayFormats: {
-								'day': 'DD MMM YYYY'
+								day: 'DD MMM YYYY'
 							}
 						},
 						gridLines: {
 							display: false,
 						},
 						ticks: {
+							fontStyle: 'bold', 
+							fontSize: 12,
 							fontColor: "orange", // this here
 							autoSkip: false,
 							maxRotation: 45,
@@ -216,13 +231,13 @@ function managerLineChart(forDiv, data){
 								if (Math.floor(label) === label) {
 									return label;
 								}
-		   
 							},
-						
+							
 						}
 						
 					}]
 				},
+				responsive: true,
 			}
 		});
 		d3.select(`#${forDiv}`).on("dblclick", ()=>chart.resetZoom())
@@ -525,7 +540,7 @@ function managerLineChart(forDiv, data){
 		for(var i = 0 ; i < process['erasered'].length ; i++){
 			labels = labels.remove(process['erasered'][i])
 		}
-
+		
 		var causeEffectChartData = {
 			labels: labels,
 			datasets: [{
@@ -875,4 +890,5 @@ function managerLineChart(forDiv, data){
 				//this.hexValue = "#" + redToHex + "" + greenToHex + "" + blueToHex;
 			}
 			
-
+			
+			

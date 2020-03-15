@@ -210,12 +210,6 @@ function computeDate(day, month, year){
           success:function(response){
             try{
               console.log(response)
-              // let ftMoods = Object.keys(response['FT']) || [] 
-              // let mpMoods = Object.keys(response['MP']) || []
-              // console.log(response)
-              // if(ftMoods.length == 0 || mpMoods.length == 0){
-              //   return snackbar(i18n['COULD_NOT_PROCESS_SELECTED_DATE'])
-              // }
               
               $('#tought-modal #result').empty()
               
@@ -228,7 +222,6 @@ function computeDate(day, month, year){
               var freetimeData = []
               for(var i = 0; i < response['freetime_toughts'].length ; i++){
                 var tought = response['freetime_toughts'][i];
-                console.log(tought)
                 freetimeData.push({
                   "date": new Date(tought['created_at']), //H:i
                   "mood": tought['mood']['value'],
