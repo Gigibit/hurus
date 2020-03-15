@@ -382,7 +382,7 @@ def e_learning_manager(request, manager):
     if request.user.has_to_get_new_course():
         # shuffle if new course has to change
         not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
-        course_to_see = not_seen_courses[0]
+        course_to_see = not_seen_courses[0] if len(not_seen_course) > 0 else None
         request.user.course_to_see = course_to_see
         request.user.last_seen_course_date =  datetime.now()
         # request.user.seen_courses.add(course_to_see)

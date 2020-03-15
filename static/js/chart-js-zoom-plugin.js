@@ -229,7 +229,6 @@
                 if (currentScale == 4 ) return
                 if ( zoomOptions.maxZoom && chart.lastScale - currentScale > 0 && currentScale < zoomOptions.maxZoom ){
                     chart.lastScale-= 100000
-                    console.log(chart.lastScale - currentScale)
                     return
                 }
                 console.log('test')

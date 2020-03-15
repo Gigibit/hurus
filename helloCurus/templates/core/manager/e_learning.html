@@ -9,6 +9,7 @@
 
 {% block content %}
 <div class="main">
+    {% if course_to_see %}
     <div class="row">
         <h1>{% trans 'NEW_COURSES' %}</h1>
         <div class="col-md-6">
@@ -24,6 +25,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     <div class="row">
         <h1>{% trans 'PREVIOUS_COURSES' %}</h1>
         <div class="col-md-6">
