@@ -323,6 +323,18 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
     }
 
 
+def android_app_link(request):
+    return JsonResponse([{
+                "relation": ["delegate_permission/common.handle_all_urls"],
+                "target": {
+                    "namespace": "android_app",
+                    "package_name": "it.nogood.container",
+                    "sha256_cert_fingerprints":
+                    ["4D:54:10:DF:C5:B6:92:49:A8:8C:84:40:CB:C6:26:9C:E6:D0:AD:E2:8D:31:FE:9F:78:F4:27:0A:32:63:6C:12", "21:A9:0A:67:68:4D:03:EC:EB:54:16:C5:E9:97:E5:D6:FA:8C:C4:69:50:30:BA:4C:49:08:3E:B5:E6:3A:1E:0D"]
+                }
+            }
+        ], safe=False)
+
 def previous_friday(of_date = None):
     current_time = of_date if of_date else datetime.now()
 
