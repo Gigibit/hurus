@@ -59,13 +59,13 @@
         
         <!-- Navigation -->
         <nav id="application-navbar" class="navbar navbar-expand-lg navbar-light static-top">
-            <a class="navbar-brand" href="#">
+            <a id="happycurus-logo" class="navbar-brand" href="#">
                 <img width="120" height="60" src="{% static 'img/website_assets/logo.png' %}" alt="logo">
             </a>
             <div class="container">
                 <div class="wrapper">
                     
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <button id="menu-button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive" >
@@ -84,9 +84,6 @@
                             </li>
                             <li class="nav-item goto-button" data-target="career-section">
                                 <a class="nav-link" >{% trans 'CAREER' %}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link">{% trans 'LANGUAGE' %}</a>
                             </li>
                         </ul>
                     </div>
@@ -125,10 +122,16 @@
                 $('.enviroment-row').css('padding', '10px 30px')
                 $('.home-box-content').css('width', '100vw')
                 $('.home-box-content').css('overflow', 'hidden')
-                $('.home-box-content').css('margin-left', '-15px')
-                $('#about-happy-curus-section').css('padding-top', '240px')
+                setTimeout(()=>$('.home-box-content').css('margin-left', '-15px'), 1000)
+                $('.home-box').css('position', 'unset')
+                $('#about-happy-curus-section').css('padding-top', '45px')
                 $("head").append($('<style>.home-box-content::after { width: 125vw; left: -75px; transform: none; }</style>'));
-                
+                $('#happycurus-logo').css('position', 'absolute')
+                $('#happycurus-logo').css('left', '50%')
+                $('#menu-button').css('position', 'absolute')
+                $('#menu-button').css('top', '30px')
+                $('#menu-button').css('left', '15px')
+                $('.happy-curus-section-image ul li').css('margin', '5px')
             }else{
                 $('body, #page-wrapper').css('overflow-x','hidden')
             }

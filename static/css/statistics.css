@@ -71,6 +71,7 @@ svg text {
   fill:white;
   font: 10px sans-serif;
   text-anchor: end;
+  letter-spacing: 0.6px;
 }
 .bar-text {
     fill:#222;
@@ -91,7 +92,7 @@ svg text {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   display: block;
 }
 

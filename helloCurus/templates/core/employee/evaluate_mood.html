@@ -146,7 +146,7 @@
             {% for workplace_choose in team_workplace_available_choose %}
             <div class="workplace-box-wrapper col-md-2" data-activity="{{workplace_choose.pk}}">
               <div class="freetime-box">
-                <img src="{{ workplace_choose.icon.name }}">
+                <img src="{% static workplace_choose.icon.name %}">
                 <p> {% trans workplace_choose.name %} </p>
               </div>
             </div>

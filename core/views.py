@@ -12,6 +12,7 @@ from core.models import *
 from helloCurus.settings import BASE_DIR
 from django.forms.models import model_to_dict
 from django.db.models import Avg
+from django.template.defaultfilters import date as _date
 
 from django.db.models import IntegerField, Value
 from django.shortcuts import get_object_or_404
@@ -56,29 +57,74 @@ key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can on
 def statistics_manager_for_day(request):
     manager = request.user
     moods = Mood.objects.all()
-    date_to_evaulate = datetime.date(year=int(request.GET['year']), 
+    date_to_evaulate = datetime(year=int(request.GET['year']), 
                                               month=int(request.GET['month']), 
                                               day=int(request.GET['day'])) 
     mood_max_value = max(mood.value for mood in moods )
-
     analysis = calculate_average_moods(manager, mood_max_value=mood_max_value, end_date=date_to_evaulate)
+
+    last_week_analysis = calculate_average_moods(manager, end_date = previous_friday(date_to_evaulate), mood_max_value=mood_max_value)
+    last_month_analysis = calculate_average_moods(manager, end_date = previous_month(date_to_evaulate), mood_max_value=mood_max_value)
+    
+
+    first_two_week_of_happycurus= manager.agency.created_at + timedelta(days=14)
+
+    when_everything_started_analysis = calculate_average_moods(manager, end_date=first_two_week_of_happycurus, mood_max_value=mood_max_value)
+    
+
+
+
+    current_average_ft = round(analysis['freetime_mood_value_percentage'])
+    current_average_mp = round(analysis['workplace_mood_value_percentage'])
+
     average_moods = analysis['average_moods']
     return render(request, 'core/manager/statistics.html', {
-        'average_mood_freetime_percentage': round(analysis['freetime_mood_value_percentage']),
-        'average_mood_workplace_percentage': round(analysis['workplace_mood_value_percentage']),
+        'date_to_evaluate': _date(date_to_evaulate, "d F, Y"),
+        'weekly_difference_average_freetime_percentage': round(current_average_ft - last_week_analysis['freetime_mood_value_percentage']),
+        'weekly_difference_average_workplace_percentage': round(current_average_mp - last_week_analysis['workplace_mood_value_percentage']),
+        
+        'monthly_difference_average_freetime_percentage': round(current_average_ft - last_month_analysis['freetime_mood_value_percentage']),
+        'monthly_difference_average_workplace_percentage': round(current_average_mp - last_month_analysis['workplace_mood_value_percentage']),
+        
+        'freetime_toughts': analysis['freetime_toughts'],
+        'workplace_toughts': analysis['workplace_toughts'],
+
+
+        'from_begin_difference_average_freetime_percentage': round(current_average_ft - when_everything_started_analysis['freetime_mood_value_percentage']),
+        'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
+        'average_mood_freetime_percentage': current_average_ft,
+        'average_mood_workplace_percentage': current_average_mp,
         'average_moods': average_moods,
         'podium_moods_freetime': analysis['podium_moods_freetime'],
         'podium_moods_workplace': analysis['podium_moods_workplace'],
         'podium_moods_freetime_activities': analysis['activities_podium_count_freetime'],
         'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
-        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1, len(analysis['activities_podium_count_workplace'])+1)))
+        'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1)))
     })
 
 
-def manager_tought_moods_count_in_day(request) : return JsonResponse(tought_moods_count(request, True))
-def manager_tought_moods_count_overview(request) : return JsonResponse(tought_moods_count(request, False))
+def manager_tought_moods_count_in_day(request) : return JsonResponse(toughts_until_day(request, True))
+def manager_tought_moods_count_overview(request) : return JsonResponse(toughts_until_day(request, False))
 
+
+
+def toughts_until_day(request, in_day):
+
+    if in_day:
+        toughts = Tought.objects.filter(
+                            employee__team__manager = request.user, 
+                            created_at__lte= date (int(request.GET['year']), 
+                                                    int(request.GET['month']), 
+                                                    int(request.GET['day']))
+                        )
+    else:
+        toughts = Tought.objects.filter(
+                    employee__team__manager = request.user )
+    return {
+        'freetime_toughts': [t.to_public_dict() for t in filter(lambda x : x.tought_type == FREETIME, toughts)],
+        'workplace_toughts': [t.to_public_dict() for t in filter(lambda x : x.tought_type == WORK_PLACE, toughts)]
+    }
 
 def tought_moods_count(request, in_day):
     if in_day:
@@ -146,6 +192,9 @@ def statistics_manager(request, manager):
         'from_begin_difference_average_freetime_percentage': round(current_average_ft - when_everything_started_analysis['freetime_mood_value_percentage']),
         'from_begin_difference_average_workplace_percentage': round(current_average_mp - when_everything_started_analysis['workplace_mood_value_percentage']),
         
+        'freetime_toughts': analysis['freetime_toughts'],
+        'workplace_toughts': analysis['workplace_toughts'],
+
         'average_mood_freetime_percentage': current_average_ft,
         'average_mood_workplace_percentage': current_average_mp,
         'average_moods': average_moods,
@@ -168,6 +217,8 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
         toughts = Tought.objects.filter(employee__team__manager=manager)
     
 
+
+
     average_moods = []
     count = 0
     average_mood_value_freetime      = .0
@@ -185,9 +236,9 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
         dates.append( date(t.created_at.year, t.created_at.month, t.created_at.day) )
         moods_count[t.mood.value] += 1
     
-    podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key,value in moods_count.items()],key=lambda x: x['count'], reverse=True)
+    podium_moods_freetime = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)
 
-    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime] ])[:6]
+    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in freetime_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_freetime[:3]] ])
 
     activity_count_freetime = []
     for mood in moods:
@@ -196,7 +247,7 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
             {   'name': activity['name'],
                 'i18n_key' : translation.gettext( activity['i18n_key'] ) if activity.get('i18n_key', None) else activity['name'],
                 'mood' : activity['mood']
-            } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+            } for activity in activities_for_podium_moods if activity['mood'] == mood.pk]
 
         if len(activities) > 0 : 
             activity_count_freetime.append({
@@ -217,15 +268,14 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
     
     podium_moods_workplace = sorted([{'mood': key, 'count' : value } for key, value in moods_count.items()], key=lambda x: x['count'], reverse=True)[:3]
 
-    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in workplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_workplace] ])[:6]
+    activities_for_podium_moods = flat([ tought.activities.all().annotate(mood=Value(tought.mood.pk, output_field=IntegerField())).values('name','i18n_key', 'mood') for tought in workplace_toughts if tought.mood.value in [ p['mood'] for p in podium_moods_workplace[:3]] ])
     activity_count_workplace = []
     for mood in moods:
-        #max number of activity displayed
         activities = [ 
         {   'name': activity['name'],
             'i18n_key' : translation.gettext( activity['i18n_key'] ) if activity.get('i18n_key', None) else activity['name'],
             'mood' : activity['mood']
-        } for activity in activities_for_podium_moods if activity['mood'] == mood.pk][:MAX_NUMBER_DISPLAYED]
+        } for activity in activities_for_podium_moods if activity['mood'] == mood.pk]  #max number of activity displayed
         if len(activities) > 0:
             activity_count_workplace.append({
                 'mood_value': mood.value,
@@ -259,19 +309,34 @@ def calculate_average_moods(manager, end_date=None, start_date=None, mood_max_va
         })
 
 
+
     return {
+        'freetime_toughts' :  [t.to_public_dict() for t in filter( lambda t : t.tought_type == FREETIME, toughts)],
+        'workplace_toughts' : [t.to_public_dict() for t in filter( lambda t : t.tought_type == WORK_PLACE, toughts)],
         'freetime_mood_value_percentage' : (average_mood_value_freetime / count if count > 0 else average_mood_value_freetime + 1) * 100,
         'workplace_mood_value_percentage' : (average_mood_value_workplace/ count if count > 0 else average_mood_value_workplace + 1) * 100,
         'average_moods' : sorted(average_moods, key=lambda x: x['date'], reverse=False),
         'podium_moods_freetime' : podium_moods_freetime,
-        'activities_podium_count_freetime': activity_count_freetime,
+        'activities_podium_count_freetime': sorted(activity_count_freetime, key=lambda x: x['mood_value'],reverse=False),
         'podium_moods_workplace' : podium_moods_workplace,
-        'activities_podium_count_workplace': activity_count_workplace,
+        'activities_podium_count_workplace': sorted(activity_count_workplace, key=lambda x: x['mood_value'],reverse=False)
     }
 
 
-def previous_friday():
-    current_time = datetime.now()
+def android_app_link(request):
+    return JsonResponse([{
+                "relation": ["delegate_permission/common.handle_all_urls"],
+                "target": {
+                    "namespace": "android_app",
+                    "package_name": "it.nogood.container",
+                    "sha256_cert_fingerprints":
+                    ["4D:54:10:DF:C5:B6:92:49:A8:8C:84:40:CB:C6:26:9C:E6:D0:AD:E2:8D:31:FE:9F:78:F4:27:0A:32:63:6C:12", "21:A9:0A:67:68:4D:03:EC:EB:54:16:C5:E9:97:E5:D6:FA:8C:C4:69:50:30:BA:4C:49:08:3E:B5:E6:3A:1E:0D"]
+                }
+            }
+        ], safe=False)
+
+def previous_friday(of_date = None):
+    current_time = of_date if of_date else datetime.now()
 
     # get friday, one week ago, at 16 o'clock
     last_friday = (current_time.date()
@@ -285,7 +350,7 @@ def previous_friday():
         last_friday_at_16 += one_week
     return last_friday_at_16
 
-def previous_month(): return date.today().replace(day=1) - timedelta(days=1)
+def previous_month(of_date = None): return (of_date if of_date else date.today()).replace(day=1) - timedelta(days=1)
 
 
 def get_mood_count_for_date(_date, toughts, for_type):
@@ -315,7 +380,6 @@ def calculate_average_mood_for_day(_date, toughts, for_type):
 
 
 def e_learning_manager(request, manager):
-    print(request.user.seen_courses.all())
     
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
@@ -326,12 +390,11 @@ def e_learning_manager(request, manager):
         request.user.last_seen_course_date = None
         request.user.save()
 
-    print(request.user.seen_courses.all())
 
     if request.user.has_to_get_new_course():
         # shuffle if new course has to change
         not_seen_course = random.sample(not_seen_courses, len(not_seen_courses))
-        course_to_see = not_seen_courses[0]
+        course_to_see = not_seen_courses[0] if len(not_seen_course) > 0 else None
         request.user.course_to_see = course_to_see
         request.user.last_seen_course_date =  datetime.now()
         # request.user.seen_courses.add(course_to_see)
@@ -396,7 +459,6 @@ def statistics_employee(request, employee):
 
 def e_learning_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
-    print(courses)
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
     # if len(not_seen_courses) == 0:
     #     request.user.seen_courses.set([])
@@ -418,15 +480,12 @@ def e_learning_employee(request, employee):
 
 
     courses_check_list = []
-    print(courses)
-    print(request.user.seen_courses.all())
     for c in courses:
         if course_to_see and c.pk != course_to_see.pk:
             courses_check_list.append({
                 'seen' : c in request.user.seen_courses.all(),
                 'course': c
             })
-    print(courses_check_list)
     return render(request, 'core/employee/e_learning.html', {
         'courses': sorted(courses_check_list, key=lambda c: c['seen'], reverse=True),
         'course_to_see': course_to_see
@@ -516,13 +575,15 @@ def tought_for_day(request):
 
 @login_required(login_url='/website')
 def statistics_for_day(request):
+    date_to_evaulate = date(year=int(request.GET['year']), 
+                                        month=int(request.GET['month']), 
+                                        day=int(request.GET['day']))
+
     toughts = [t.to_public_dict() for t in Tought.objects.filter(
-        created_at__day__lte=request.GET['day'],
-        created_at__month__lte=request.GET['month'],
-        created_at__year__lte=request.GET['year'],
-        employee__email = request.user.email
+                            created_at__lte   = date_to_evaulate,
+                            employee__email = request.user.email
     ).order_by('created_at')]
-        
+    
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,

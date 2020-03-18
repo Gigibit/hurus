@@ -74,7 +74,7 @@
 #tought-modal .chart{
   margin: 15px!important;
 }
-#tought-modal 
+#tought-modal
 
 .calendar__head {
   line-height: 50px;
@@ -157,13 +157,21 @@
   padding:15px;
 }
 .close-button{
-  font-size: 66px;
   position: absolute;
   right: 15px;
   top: 15px;
   z-index: 99999;
 }
 
+ .chart div, .chart svg{
+   bottom: 0;
+   margin: 0 auto;
+   top: unset;
+   display: block;
+}
+.chart-helper-wrapper{
+  position: unset!important;
+}
 
 .show-more-button{
   font-size: 21px;
@@ -178,7 +186,7 @@
 .date-picker{
   margin-top: 35px;
   visibility: hidden;
-  
+
 }
 .date-picker .row{
   text-align: center;
@@ -192,5 +200,9 @@
   height: 45px;
   margin-bottom: 15px;
   font-size: 14px;
-  
+
+}
+
+#freetime-bar-chart svg, #workplace-bar-chart svg{
+  margin-top: 0;
 }

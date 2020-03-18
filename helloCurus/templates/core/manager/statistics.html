@@ -9,112 +9,128 @@
 {% block content %}
 
 <div class="main">
+    {% if date_to_evaluate %}<h1>{{date_to_evaluate|title}}</h1>{% endif %}
     <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
             <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
             <div class="progress progress-bar-vertical">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}% ;background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}">
-                    {{average_mood_freetime_percentage}}%
-                </div>
-            </div>
-            <div class="tooltiptext">
-                <span class="satisfation" data-target="weeklyFT">{% trans 'WEEKLY_SATISFATION' %}</span><br>
-                <span class="satisfation" data-target="monthlyFT">{% trans 'MOTHLY_SATISFATION' %}</span><br>
-                <span class="satisfation" data-target="fromBeginningFT">{% trans 'FROM_THE_BEGINNING_SATISFATION' %}</span><br>
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}%;
+                background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}"
+                >
+                {{average_mood_freetime_percentage}}%
             </div>
         </div>
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
-            <div class="progress progress-bar-vertical">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%; background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}" >
-                    {{average_mood_workplace_percentage}}%
-                </div>
-            </div>
-            <div class="tooltiptext">
-                <span class="satisfation" data-target="weeklyWP">{% trans 'WEEKLY_SATISFATION' %}</span><br>
-                <span class="satisfation" data-target="monthlyWP">{% trans 'MOTHLY_SATISFATION' %}</span><br>
-                <span class="satisfation" data-target="fromBeginningWP">{% trans 'FROM_THE_BEGINNING_SATISFATION' %}</span><br>
+        <div class="tooltiptext">
+            <span class="satisfation" data-target="weeklyFT">{% trans 'WEEKLY_SATISFATION' %}</span>
+            <span class="satisfation" data-target="monthlyFT">{% trans 'MOTHLY_SATISFATION' %}</span>
+            <span class="satisfation" data-target="fromBeginningFT">{% trans 'FROM_THE_BEGINNING_SATISFATION' %}</span>
+        </div>
+    </div>
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+        <div class="progress progress-bar-vertical">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%;
+            background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}"
+            >
+            {{average_mood_workplace_percentage}}%
+        </div>
+    </div>
+    <div class="tooltiptext">
+        <span class="satisfation" data-target="weeklyWP">{% trans 'WEEKLY_SATISFATION' %}</span>
+        <span class="satisfation" data-target="monthlyWP">{% trans 'MOTHLY_SATISFATION' %}</span>
+        <span class="satisfation" data-target="fromBeginningWP">{% trans 'FROM_THE_BEGINNING_SATISFATION' %}</span>
+    </div>
+</div>
+</div>
+<div class="row sparkboxes mt-4 mb-4">
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+        <div id="legend-freetime-line-chart" class="row legend"></div>
+        <canvas id="freetime-line-chart" class="chart"></canvas>
+    </div>
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+        <div id="legend-workplace-line-chart" class="row legend"></div>
+        <canvas id="workplace-line-chart" class="chart"></canvas>
+    </div>
+</div>
+<div class="row sparkboxes mt-4 mb-4">
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'COUNTER_FREETIME'%}</h1>
+        <div id="freetime-bar-chart" class="chart" style="position: relative;">
+            <div class="chart-helper-wrapper">
+                <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
             </div>
         </div>
     </div>
-    <div class="row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
-            <div id="legend-freetime-line-chart" class="row legend"></div>
-            <canvas id="freetime-line-chart" class="chart"></canvas>
-        </div>
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
-            <div id="legend-workplace-line-chart" class="row legend"></div>
-            <canvas id="workplace-line-chart" class="chart"></canvas>
-        </div>
-    </div>
-    <div class="row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
-            <div id="average-freetime-line-chart" class="chart"></div>
-        </div>
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
-            <div id="average-workplace-line-chart" class="chart"></div>
-        </div>
-    </div>
-    {% for index in best_mood_counts %}
-    <div class="row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
-            <div class="chart">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img id="freetime-mood-{{index}}" class="radar-chart-mood-icon"/>
-                    </div>
-                </div>
-                <div>
-                    <canvas id="freetime-radar-chart{{index}}"></canvas>
-                </div>
-                <div class="related-radar-chart">
-                    <div class="chart-related-wrapper"  style="height:100vh">
-                        <canvas id="related-freetime-radar-chart{{index}}" ></canvas>
-                    </div>
-                </div>
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'COUNTER_WORKPLACE'%}</h1>
+        <div id="workplace-bar-chart" class="chart" style="position: relative;">
+            <div class="chart-helper-wrapper">
+                <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
             </div>
         </div>
-        <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'CAUSE_EFFECT_WORKPLACE'%}</h1>
-            <div class="chart">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img id="workplace-mood-{{index}}" class="radar-chart-mood-icon"/>
-                    </div>
+    </div>
+</div>
+<div class="row sparkboxes mt-4 mb-4">
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+        <div id="average-freetime-line-chart" class="chart"></div>
+    </div>
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+        <div id="average-workplace-line-chart" class="chart"></div>
+    </div>
+</div>
+{% for index in best_mood_counts %}
+<div class="row sparkboxes mt-4 mb-4">
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
+        <div class="chart">
+            <div class="row">
+                <div class="col-md-3">
+                    <img id="freetime-mood-{{index}}" class="radar-chart-mood-icon"/>
                 </div>
-                <div>
-                    <canvas id="workplace-radar-chart{{index}}" ></canvas>
-                </div>
-                <div class="related-radar-chart">
-                    <div class="chart-related-wrapper"  style="height:100vh">
-                        <canvas id="related-workplace-radar-chart{{index}}" ></canvas>
-                    </div>
+            </div>
+            <div>
+                <canvas id="freetime-radar-chart{{index}}"></canvas>
+            </div>
+            <div class="related-radar-chart">
+                <div class="chart-related-wrapper" >
+                    <canvas id="related-freetime-radar-chart{{index}}" ></canvas>
                 </div>
             </div>
         </div>
     </div>
-    {% endfor %}
-    
-    
+    <div class="chart-wrapper col-md-6">
+        <h1>{% trans 'CAUSE_EFFECT_WORKPLACE'%}</h1>
+        <div class="chart">
+            <div class="row">
+                <div class="col-md-3">
+                    <img id="workplace-mood-{{index}}" class="radar-chart-mood-icon"/>
+                </div>
+            </div>
+            <div>
+                <canvas id="workplace-radar-chart{{index}}" ></canvas>
+            </div>
+            <div class="related-radar-chart">
+                <div class="chart-related-wrapper" >
+                    <canvas id="related-workplace-radar-chart{{index}}" ></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
 </div>
 
 
 
 <script src="{% static 'js/statistics.js' %}?v={% now "U" %}" type="text/javascript"></script>
 <script>
-    var moods = {
-        {% for mood in moods %}
-        {{mood.value}} : {
-            'icon'  : "{% static mood.icon.name %}"
-        },
-        {% endfor %}
-    }
-    
+
     var dates = []    
     var freetimeAverageMoods= []
     var workplaceAverageMoods= []
@@ -193,6 +209,31 @@
     
     {% endfor %}
     ]
+    var freetimeToughts = [
+    {% for tought in freetime_toughts %}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
+    
+    var workplaceToughts = [
+    {% for tought in workplace_toughts %}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
     
     
     
@@ -259,6 +300,13 @@
             activityRadarChart('related-workplace-radar-chart{{forloop.counter}}',{{a.mood_value}}, chartDataWorkPlace)
         }
         {% endfor %}
+        barChart("#freetime-bar-chart", freetimeToughts,'freetime-radar-chart')
+        barChart("#workplace-bar-chart", workplaceToughts,'workplace-radar-chart')
+
+        doughnutChart('doughnut-chart-freetime',freetimeToughts)
+        doughnutChart('doughnut-chart-workplace',workplaceToughts)
+
+
         // doughnutChart('doughnut-chart-freetime',dataFreetime)
         // doughnutChart('doughnut-chart-workplace',dataWorkPlace)
         $('canvas').each((index,el)=>{ $(el).hide()})

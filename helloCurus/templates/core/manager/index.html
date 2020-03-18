@@ -22,7 +22,7 @@
 {% block content %}
 
 
-<div class="container">
+<div id="manager-home" class="container">
   <div class="row">
     <div class="date-picker col-md-12 justify" style="display: none;">
       
@@ -115,60 +115,57 @@
     <div class="col-md-6 overview-charts" onclick="location.href='/statistics'">
       <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
       <div class="row">
-        <div class="col-md-4 col-center-block">
-          <div class="chart">
-            <div id="first-mood-counter-chart-legend"></div>
-            <canvas id="first-mood-counter-chart" ></canvas>
+        <div class="col-md-6 col-center-block">
+          <div id="freetime-bar-chart" class="chart" style="position: relative;">
           </div>
         </div>
-        <div class="col-md-4 col-center-block">
-          <div class="chart">
-            <div id="second-mood-counter-chart-legend"></div>
-            <canvas id="second-mood-counter-chart" ></canvas>
+        <div class="col-md-6 col-center-block">
+          <div id="workplace-bar-chart" class="chart" style="position: relative;">
           </div>
         </div>
       </div>
-      <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
-          <div class="progress progress-bar-vertical">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}% ;background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}">
-              {{average_mood_freetime_percentage}}%
-            </div>
-          </div>
-        </div>
-        <div class="chart-wrapper col-md-6">
-          <div class="progress progress-bar-vertical">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%; background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}" >
-              {{average_mood_workplace_percentage}}%
-            </div>
+    
+    <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
+      <div class="chart-wrapper col-md-6">
+        <div class="progress progress-bar-vertical">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}% ;background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}">
+            {{average_mood_freetime_percentage}}%
           </div>
         </div>
       </div>
-      
-      <!-- <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div> -->
-      
+      <div class="chart-wrapper col-md-6">
+        <div class="progress progress-bar-vertical">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%; background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}" >
+            {{average_mood_workplace_percentage}}%
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div> -->
+    
+  </div>
+</div>
+<h1>{% trans 'COURSES' %}</h1>
+<div class="scroll-x courses row flex-row flex-nowrap">
+  {% for course in courses %}
+  <div class="col-md-4">
+    <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
+      <div class="course-title col-md-10">{{course.title}}</div>
+      <div class="seen-icon col-md-2">
+        <span class="course-seen glyphicon glyphicon-play"></span>
+      </div>
     </div>
   </div>
-  <h1>{% trans 'COURSES' %}</h1>
-  <div class="scroll-x courses row flex-row flex-nowrap">
-    {% for course in courses %}
-    <div class="col-md-4">
-      <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
-        <div class="course-title col-md-10">{{course.title}}</div>
-        <div class="seen-icon col-md-2">
-          <span class="course-seen glyphicon glyphicon-play"></span>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-    <div class="col-md-4">
-      <div class="show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
-    </div>
+  {% endfor %}
+  <div class="col-md-4">
+    <div class="show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
   </div>
-  
-  
-  
-  
+</div>
+
+
+
+
 </div> <!-- End Container -->
 
 
@@ -181,41 +178,53 @@
       </button>
       <div class="modal-body p-4" id="result"></div>
       <div class="modal-footer">
-        <button id="view-statistics" type="button" class="btn btn-secondary">{% trans 'VIEW_STATISTICS' %}</button>
+        <button id="view-statistics" type="button" class="align-self-end btn btn-lg btn-block btn-primary submit-button btn-sm waves-effect waves-light">{% trans 'VIEW_STATISTICS' %}</button>
       </div>
     </div>
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript">
+  var moods = {
+    {% for mood in moods %}
+    {{mood.value}} : {
+      'icon'  : "{% static mood.icon.name %}",
+      'color' : '{{mood.color_code}}'
+      
+    },
+    {% endfor %}
+  }
+  
   
   $.ajax({
     url : '/manager_tought_moods_count/',
     method: 'GET',
     success:function(response){
-      let ftMoods = Object.keys(response['FT'])
-      let mpMoods = Object.keys(response['MP'])
+      var freetimeData = []
+      for(var i = 0; i < response['freetime_toughts'].length ; i++){
+        var tought = response['freetime_toughts'][i];
+        freetimeData.push({
+          "date": new Date(tought['created_at']), //H:i
+          "mood": tought['mood']['value'],
+          "name": tought['mood']['i18n_key'],
+          'mood_color' : tought['mood']['i18n_key'],
+        })
+      }
+      var workplaceData = []
+      for(var i = 0; i < response['workplace_toughts'].length ; i++){
+        var tought = response['workplace_toughts'][i];
+        workplaceData.push({
+          "date": new Date(tought['created_at']), //H:i
+          "mood": tought['mood']['value'],
+          "name": tought['mood']['i18n_key'],
+          'mood_color' : tought['mood']['i18n_key'],
+        })
+      }
+      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 8, 100 )
+      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 8, 100 )
       
-      doughnutMoodCountChart('first-mood-counter-chart', response['FT'][ftMoods[0]], true)
-      doughnutMoodCountChart('second-mood-counter-chart', response['MP'][mpMoods[1]], true)
-      
-      
+      // doughnutChart('doughnut-chart-freetime',freetimeData)
+      // doughnutChart('doughnut-chart-workplace',workplaceData)
     }
   })
 </script>
