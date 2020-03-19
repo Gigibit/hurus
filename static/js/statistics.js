@@ -11,7 +11,7 @@ Array.prototype.remove = function(element){
 	return this
 }
 
-function barChart(chartDiv, data, relatedChart, width= null, height = null) {
+function barChart(chartDiv, data, relatedChart, width= null, height = null, displayText = true) {
 	
 	buff = []
 	for (var i = 0; i < data.length; i++) {
@@ -79,7 +79,7 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null) {
 	.attr("height", function (d) {
 		return height - y(d.value);
 	})
-	bars.append('text')
+	let builtBars = bars.append('text')
 	.attr('class', 'bar-text')
 	.attr("x", function (d) {
 		return x(d.key) + x.bandwidth()/2;
@@ -87,9 +87,10 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null) {
 	.attr("y", function (d) {
 		return (height+y(d.value))/2;
 	})
-	.text(function (d) {
-		return d.value
-	})
+	if(displayText)
+		builtBars.text(function (d) {
+			return d.value
+		})
 	
 	
 	// add the x Axis

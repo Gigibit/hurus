@@ -4,7 +4,10 @@
   width: 350px;
   margin: 10px auto 0;
 }
-
+.progress-bar-vertical{
+  width: 65px;
+  min-height: 130px;
+}
 .calendar__month {
   font-size: 20px;
   font-weight: 800;
@@ -60,18 +63,24 @@
   float: left;
 }
 
+
 .cal-body__week,
 .calendar__head {
   display: block;
   height: 50px;
   width: 350px;
+  margin: 0 auto;
 }
+#tought-modal .chart{
+  margin: 15px!important;
+}
+#tought-modal
 
 .calendar__head {
   line-height: 50px;
   position: relative;
 }
-.calendar__head:after {
+/* .calendar__head:after {
   content: ' ';
   position: absolute;
   bottom: 0;
@@ -79,7 +88,7 @@
   right: 0;
   height: 1px;
   background-color: #90CAF9;
-}
+} */
 
 .cal-body__day {
   color: #e1e1e1;
@@ -87,11 +96,19 @@
   text-align: center;
   cursor: pointer;
 }
-
+#tought-modal .legend-mood-img-wrp img{
+  width: 50px!important;
+  height: 50px!important;
+}
 .cal-day__month--current {
   color: #777;
 }
-
+.courses{
+  padding-bottom: 30px;
+}
+.chart, .progress-bar-vertical{
+  cursor: pointer;
+}
 .cal-day__day--today {
   font-weight: 800;
   color: #2196f3;
@@ -118,9 +135,7 @@
   height: 35px;
   width: 35px;
 }
-.activity-box{
-  text-align: center;
-}
+
 
 .info-row{
   padding: 15px;
@@ -138,7 +153,13 @@
   border-radius: 25px;
   border: 0.5px solid #ccccccee;
   padding:15px;
+  text-align: center;
+  transition: background-color 300ms ease-in;
 }
+.activity-box:hover{
+  background-color: #ccccccee;
+}
+
 .close-button{
   position: absolute;
   right: 15px;
@@ -184,4 +205,11 @@
   margin-bottom: 15px;
   font-size: 14px;
 
+}
+
+#freetime-bar-chart svg, #workplace-bar-chart svg{
+  margin-top: 0;
+}
+.overview-charts{
+  cursor: pointer;
 }

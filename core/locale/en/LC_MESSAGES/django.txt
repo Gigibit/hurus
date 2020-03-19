@@ -490,3 +490,29 @@ msgstr "Cannot process selected date"
 
 msgid "VIEW_STATISTICS"
 msgstr "VIEW STATISTICS"
+
+
+
+
+
+
+# add to lokalization
+
+msgid "NO_DATA"
+msgstr "There is not enough data!"
+
+msgid "WEEKLY_SATISFATION"
+msgstr "${PERCENTAGE}: compared to last week"
+
+msgid "MOTHLY_SATISFATION"
+msgstr "${PERCENTAGE}: compared to last month"
+
+msgid "FROM_THE_BEGINNING_SATISFATION"
+msgstr "${PERCENTAGE}: compared to the first two weeks of happycurus"
+
+
+msgid “EMPLOYEES_THAT_HAVE_SEEN”
+msgstr “took this course”
+
+msgid READ_MORE
+msgstr “read more...”

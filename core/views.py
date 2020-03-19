@@ -59,7 +59,7 @@ def statistics_manager_for_day(request):
     moods = Mood.objects.all()
     date_to_evaulate = datetime(year=int(request.GET['year']), 
                                               month=int(request.GET['month']), 
-                                              day=int(request.GET['day'])) 
+                                              day=int(request.GET['day'])+1) 
     mood_max_value = max(mood.value for mood in moods )
     analysis = calculate_average_moods(manager, mood_max_value=mood_max_value, end_date=date_to_evaulate)
 
@@ -460,12 +460,12 @@ def statistics_employee(request, employee):
 def e_learning_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
-    # if len(not_seen_courses) == 0:
-    #     request.user.seen_courses.set([])
-    #     not_seen_courses = courses
-    #     request.user.course_to_see = None
-    #     request.user.last_seen_course_date = None
-    #     request.user.save()
+    if len(not_seen_courses) == 0:
+        request.user.seen_courses.set([])
+        not_seen_courses = courses
+        request.user.course_to_see = None
+        request.user.last_seen_course_date = None
+        request.user.save()
 
 
     if request.user.has_to_get_new_course() and len(not_seen_courses) > 0:
@@ -577,13 +577,11 @@ def tought_for_day(request):
 def statistics_for_day(request):
     date_to_evaulate = date(year=int(request.GET['year']), 
                                         month=int(request.GET['month']), 
-                                        day=int(request.GET['day']))
-
+                                        day=int(request.GET['day'])+1)
     toughts = [t.to_public_dict() for t in Tought.objects.filter(
                             created_at__lte   = date_to_evaulate,
                             employee__email = request.user.email
     ).order_by('created_at')]
-    
     moods = Mood.objects.all()
     return render(request, 'core/employee/statistics.html', {
         'moods' : moods,

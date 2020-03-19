@@ -12,7 +12,7 @@
     {% if date_to_evaluate %}<h1>{{date_to_evaluate|title}}</h1>{% endif %}
     <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
         <div class="chart-wrapper col-md-6">
-            <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+            <h1>{% trans 'HISTORICAL_PERCENTAGE_FREETIME'%}</h1>
             <div class="progress progress-bar-vertical">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}%;
                 background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}"
@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+        <h1>{% trans 'HISTORICAL_PERCENTAGE_WORKPLACE'%}</h1>
         <div class="progress progress-bar-vertical">
             <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%;
             background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}"
@@ -44,19 +44,19 @@
 </div>
 <div class="row sparkboxes mt-4 mb-4">
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+        <h1>{% trans 'HISTORICAL_MANAGER_OVERVIEW_MOOD_FREETIME'%}</h1>
         <div id="legend-freetime-line-chart" class="row legend"></div>
         <canvas id="freetime-line-chart" class="chart"></canvas>
     </div>
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+        <h1>{% trans 'HISTORICAL_MANAGER_OVERVIEW_MOOD_WORKPLACE'%}</h1>
         <div id="legend-workplace-line-chart" class="row legend"></div>
         <canvas id="workplace-line-chart" class="chart"></canvas>
     </div>
 </div>
 <div class="row sparkboxes mt-4 mb-4">
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'COUNTER_FREETIME'%}</h1>
+        <h1>{% trans 'MANAGER_COUNTER_FREETIME'%}</h1>
         <div id="freetime-bar-chart" class="chart" style="position: relative;">
             <div class="chart-helper-wrapper">
                 <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
@@ -64,7 +64,7 @@
         </div>
     </div>
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'COUNTER_WORKPLACE'%}</h1>
+        <h1>{% trans 'MANAGER_COUNTER_WORKPLACE'%}</h1>
         <div id="workplace-bar-chart" class="chart" style="position: relative;">
             <div class="chart-helper-wrapper">
                 <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
@@ -74,18 +74,18 @@
 </div>
 <div class="row sparkboxes mt-4 mb-4">
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'HISTORICAL_TREND_FREETIME'%}</h1>
+        <h1>{% trans 'MANAGER_HISTORICAL_TREND_FREETIME'%}</h1>
         <div id="average-freetime-line-chart" class="chart"></div>
     </div>
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'HISTORICAL_TREND_WORKPLACE'%}</h1>
+        <h1>{% trans 'MANAGER_HISTORICAL_TREND_WORKPLACE'%}</h1>
         <div id="average-workplace-line-chart" class="chart"></div>
     </div>
 </div>
 {% for index in best_mood_counts %}
 <div class="row sparkboxes mt-4 mb-4">
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'CAUSE_EFFECT_FREETIME'%}</h1>
+        <h1>{% trans 'MANAGER_CAUSE_EFFECT_FREETIME'%}</h1>
         <div class="chart">
             <div class="row">
                 <div class="col-md-3">
@@ -103,7 +103,7 @@
         </div>
     </div>
     <div class="chart-wrapper col-md-6">
-        <h1>{% trans 'CAUSE_EFFECT_WORKPLACE'%}</h1>
+        <h1>{% trans 'MANAGER_CAUSE_EFFECT_WORKPLACE'%}</h1>
         <div class="chart">
             <div class="row">
                 <div class="col-md-3">
@@ -270,7 +270,7 @@
             console.log(ex)
             
             somethingFailed = true
-            $("#average-freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $("#average-freetime-line-chart").replaceWith('<div class="no-data-sad"></div>');
             $('#freetime-line-chart').parent().hide();
         }
         try{
@@ -279,7 +279,7 @@
         }catch(ex){
             somethingFailed = true
             console.log(ex)
-            $("#average-workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+            $("#average-workplace-line-chart").replaceWith('<div class="no-data-sad"></div>');
             $('#workplace-line-chart').parent().hide();
         }
         
@@ -313,7 +313,7 @@
         setTimeout(()=>{
             $('canvas').each((index,el)=>{
                 if(el.className == '' &&  index%2 != 0){
-                    $(el).parent().parent().parent().replaceWith('<div class="wip-warning"></div>');
+                    $(el).parent().parent().parent().replaceWith( '<div class="wip-warning"></div>' );
                 }
                 else{
                     $(el).show(300)

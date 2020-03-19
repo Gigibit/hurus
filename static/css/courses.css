@@ -2,7 +2,7 @@
     padding: 20px
 }
 .course-wrapper{
-    padding: 20px;
+    padding: 20px 0 0 0;
     margin: 5px;
     border-radius: 15px;
     border: #00b0f0 2px solid;
@@ -147,7 +147,8 @@ section{
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    height: 120px;
+    min-height: 155px;
+    max-height: 155px;
   }
   
   .card:hover {
@@ -159,6 +160,10 @@ section{
   }
   .course-title{
       padding-left: 0;
-      font-size: 24px;
+      font-size: 34px;
       font-weight: bold;
+  }
+  .read-more{
+        color: cadetblue;
+        font-size: 8px;
   }

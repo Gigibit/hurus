@@ -5,9 +5,9 @@
 
 
 {% block head_css_section %}
-<link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
 <link href="{% static 'css/statistics.css' %}?{% now "U" %}" rel="stylesheet">
 <link href="{% static 'css/courses.css' %}?{% now "U" %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}?{% now "U" %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
@@ -22,134 +22,150 @@
 {% block content %}
 
 
-<div class="container">
-  <div class="date-picker col-md-12 justify">
-    
-    <div class="row">
-      <div class='col-sm-3 mx-auto'>
-        <div class="form-group">
-          <div class='input-group date' id='datetimepicker'>
-            <input id="date-picker" type='text' class="form-control" />
-            <div id="date-picker-info" class="row">
-              Date formats: dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+<div id="manager-home" class="container">
+  <div class="row">
+    <div class="date-picker col-md-12 justify" style="display: none;">
+      
+      <div class="row">
+        <div class='col-sm-3 mx-auto'>
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker'>
+              <input id="date-picker" type='text' class="form-control" />
+              <div id="date-picker-info" class="row">
+                Date formats: dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="calendar">
-    <div class="calendar__month">
-      <div class="cal-month__previous"><</div>
-      <div class="cal-month__current"></div>
-      <div class="cal-month__next">></div>
-    </div>
-    <div class="calendar__head">
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-      <div class="cal-head__day"></div>
-    </div>
-    <div class="calendar__body">
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
+    <div class="calendar col-md-6">
+      <div class="calendar__month">
+        <div class="cal-month__previous"><</div>
+        <div class="cal-month__current"></div>
+        <div class="cal-month__next">></div>
       </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
+      <div class="calendar__head">
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
+        <div class="cal-head__day"></div>
       </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-      <div class="cal-body__week">
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-        <div class="cal-body__day"></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <h1>{% trans 'COURSES' %}</h1>
-    {% for course in courses %}
-    <div class="col-md-4">
-      <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
-        <div class="course-title col-md-10">{{course.title}}</div>
-        <div class="seen-icon col-md-2">
-          <span class="course-seen glyphicon glyphicon-play"></span>
+      <div class="calendar__body">
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+        </div>
+        <div class="cal-body__week">
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
+          <div class="cal-body__day"></div>
         </div>
       </div>
     </div>
-    {% endfor %}
-    <div class="col-md-4">
-      <div class="show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
+    
+    <div class="col-md-6 overview-charts" onclick="location.href='/statistics'">
+      <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
+    
+    <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
+      <div class="chart-wrapper col-md-6">
+        <div class="progress progress-bar-vertical">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}% ;background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}">
+            {{average_mood_freetime_percentage}}%
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper col-md-6">
+        <div class="progress progress-bar-vertical">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%; background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}" >
+            {{average_mood_workplace_percentage}}%
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="col-md-6 col-center-block">
+        <div id="freetime-bar-chart" class="chart" style="position: relative;">
+        </div>
+      </div>
+      <div class="col-md-6 col-center-block">
+        <div id="workplace-bar-chart" class="chart" style="position: relative;">
+        </div>
+      </div>
+    </div>
   
-  
-  <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
-  <div class="row sparkboxes mt-4 mb-4">
-    <div class="chart-wrapper col-md-6">
-      <h1>{% trans 'COUNTER_FREETIME'%}</h1>
-      <div id="freetime-bar-chart" class="chart" style="position: relative;">
-        <div class="chart-helper-wrapper">
-          <canvas id="doughnut-chart-freetime" class="chart-helper"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="chart-wrapper col-md-6">
-      <h1>{% trans 'COUNTER_WORKPLACE'%}</h1>
-      <div id="workplace-bar-chart" class="chart" style="position: relative;">
-        <div class="chart-helper-wrapper">
-          <canvas id="doughnut-chart-workplace" class="chart-helper"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div>
+    <!-- <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div> -->
     
   </div>
-  
+</div>
+<h1>{% trans 'COURSES' %}</h1>
+<div class="scroll-x courses row flex-row flex-nowrap">
+  {% for course in courses %}
+  <div class="col-md-4">
+    <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
+      <div class="course-title col-md-10">{{course.title}}</div>
+      <div class="seen-icon col-md-2">
+        <span class="course-seen glyphicon glyphicon-play"></span>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="col-md-4">
+    <div class="show-more-button"><a href="/courses">{% trans 'SHOW_MORE' %}</a></div>
+  </div>
+</div>
+
+
+
+
 </div> <!-- End Container -->
 
 
@@ -204,11 +220,11 @@
           'mood_color' : tought['mood']['i18n_key'],
         })
       }
-      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 4)
-      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 4)
+      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 8, 100, false )
+      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 8, 100, false )
       
-      doughnutChart('doughnut-chart-freetime',freetimeData)
-      doughnutChart('doughnut-chart-workplace',workplaceData)
+      // doughnutChart('doughnut-chart-freetime',freetimeData)
+      // doughnutChart('doughnut-chart-workplace',workplaceData)
     }
   })
 </script>

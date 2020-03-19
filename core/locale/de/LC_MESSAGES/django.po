@@ -388,29 +388,52 @@ msgid "FREETIME"
 msgstr "FREE TIME"
 
 
+msgid "MANAGER_HISTORICAL_TREND_FREETIME"
+msgstr "Historical Trend of Team Morale: Free Time"
+
+msgid "MANAGER_HISTORICAL_TREND_WORKPLACE"
+msgstr "Historical Trend of Team Morale: Workplace"
+
+msgid "MANAGER_CAUSE_EFFECT_FREETIME"
+msgstr "Cause-Effect Free time: Most Frequent Selections and Their Causes"
+
+msgid "MANAGER_CAUSE_EFFECT_WORKPLACE"
+msgstr "Cause-Effect Workplace: Most Frequent Selections and Their Causes"
+
+msgid "MANAGER_COUNTER_FREETIME"
+msgstr "Historical Counter of Team Morale: Free Time"
+
+msgid "MANAGER_COUNTER_WORKPLACE"
+msgstr "Historical Counter of Team Morale: Workplace"
+
+
+
 msgid "HISTORICAL_TREND_FREETIME"
-msgstr "Historical trend freetime"
+msgstr "Historical Trend of Your Morale: Free Time"
 
 msgid "HISTORICAL_TREND_WORKPLACE"
-msgstr "Historical trend workplace"
+msgstr "Historical Trend of Your Morale: Workplace"
 
 msgid "CAUSE_EFFECT_FREETIME"
-msgstr "Cause-Effect: Free Time Mood"
+msgstr "Cause-Effect Free time: Your Mood and its causes"
 
 msgid "CAUSE_EFFECT_WORKPLACE"
-msgstr "Cause-Effect: Workplace Mood"
+msgstr "Cause-Effect Workplace: Your Mood and its causes"
+
+
+
 
 msgid "COUNTER_FREETIME"
-msgstr "Counter: Free Time Mood"
+msgstr "Historical Counter of Your Morale: Free Time"
 
 msgid "COUNTER_WORKPLACE"
-msgstr "Counter: Workplace Mood"
+msgstr "Historical Counter of Your Morale: Workplace"
 
 msgid "COMPLETE_STATISTICS"
 msgstr "Complete Statistics"
 
 msgid "NEW_COURSES"
-msgstr "New Courses"
+msgstr "New Course"
 
 msgid "COURSES"
 msgstr "Courses"
@@ -509,3 +532,23 @@ msgstr "${PERCENTAGE}: compared to last month"
 
 msgid "FROM_THE_BEGINNING_SATISFATION"
 msgstr "${PERCENTAGE}: compared to the first two weeks of happycurus"
+
+
+msgid "EMPLOYEES_THAT_HAVE_SEEN"
+msgstr "took this course"
+
+msgid "READ_MORE"
+msgstr "read more..."
+
+
+msgid "HISTORICAL_PERCENTAGE_FREETIME"
+msgstr "Current Level of Team Satisfaction: Free Time"
+
+msgid "HISTORICAL_PERCENTAGE_WORKPLACE"
+msgstr "Current Level of Team Satisfaction: Workplace"
+
+msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_FREETIME"
+msgstr "Team Morale Breakdown: Free Time"
+
+msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_WORKPLACE"
+msgstr "Team Morale Breakdown: Workplace"
