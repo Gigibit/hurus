@@ -383,12 +383,12 @@ def e_learning_manager(request, manager):
     
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
-    if len(not_seen_courses) == 0:
-        request.user.seen_courses.set([])
-        not_seen_courses = courses
-        request.user.course_to_see = None
-        request.user.last_seen_course_date = None
-        request.user.save()
+    # if len(not_seen_courses) == 0:
+    #     request.user.seen_courses.set([])
+    #     not_seen_courses = courses
+    #     request.user.course_to_see = None
+    #     request.user.last_seen_course_date = None
+    #     request.user.save()
 
 
     if request.user.has_to_get_new_course():
@@ -409,7 +409,7 @@ def e_learning_manager(request, manager):
 
     for c in courses:
         employees_that_have_seen_courses = len(list(filter(lambda e: c in e.seen_courses.all(), employees)))
-        if c.pk != course_to_see.pk:
+        if not course_to_see or (course_to_see and c.pk != course_to_see.pk):
             courses_check_list.append({
                 'seen' : c in request.user.seen_courses.all(),
                 'employees_counter':  "%d/%d"%(employees_that_have_seen_courses, employees_length),
@@ -428,19 +428,19 @@ def e_learning_manager(request, manager):
 def home_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
-    if len(not_seen_courses) == 0:
-        request.user.seen_courses.set([])
-        not_seen_courses = courses
-        request.user.course_to_see = None
-        request.user.last_seen_course_date = None
-        request.user.save()
+    # if len(not_seen_courses) == 0:
+    #     request.user.seen_courses.set([])
+    #     not_seen_courses = courses
+    #     request.user.course_to_see = None
+    #     request.user.last_seen_course_date = None
+    #     request.user.save()
     toughts = [ tought.to_public_dict() for tought in Tought.objects.filter(employee = employee).order_by('created_at') ]
     moods = Mood.objects.all()
     return render(request, 'core/employee/index.html', {
         'moods' : moods,
         'toughts' : filter( lambda t : t['tought_type'] == FREETIME, toughts),
         'workplace_toughts' : filter( lambda t : t['tought_type'] == WORK_PLACE, toughts),
-        'courses': not_seen_courses[:2],
+        'courses': not_seen_courses[:2] if len(not_seen_courses)>2 else courses[:2],
     })
 
 
@@ -460,12 +460,12 @@ def statistics_employee(request, employee):
 def e_learning_employee(request, employee):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
-    if len(not_seen_courses) == 0:
-        request.user.seen_courses.set([])
-        not_seen_courses = courses
-        request.user.course_to_see = None
-        request.user.last_seen_course_date = None
-        request.user.save()
+    # if len(not_seen_courses) == 0:
+    #     #request.user.seen_courses.set([])
+    #     not_seen_courses = courses
+    #     request.user.course_to_see = None
+    #     request.user.last_seen_course_date = None
+    #     request.user.save()
 
 
     if request.user.has_to_get_new_course() and len(not_seen_courses) > 0:
@@ -481,7 +481,7 @@ def e_learning_employee(request, employee):
 
     courses_check_list = []
     for c in courses:
-        if course_to_see and c.pk != course_to_see.pk:
+        if not course_to_see or (course_to_see and c.pk != course_to_see.pk):
             courses_check_list.append({
                 'seen' : c in request.user.seen_courses.all(),
                 'course': c
@@ -682,12 +682,12 @@ def e_learning(request):
 def home_manager(request, manager):
     courses = list(Course.objects.filter(language__iexact=request.user.preferred_language))
     not_seen_courses = list(filter(lambda c: c not in request.user.seen_courses.all(), courses))
-    if len(not_seen_courses) == 0:
-        request.user.seen_courses.set([])
-        not_seen_courses = courses
-        request.user.course_to_see = None
-        request.user.last_seen_course_date = None
-        request.user.save()
+    # if len(not_seen_courses) == 0:
+    #     request.user.seen_courses.set([])
+    #     not_seen_courses = courses
+    #     request.user.course_to_see = None
+    #     request.user.last_seen_course_date = None
+    #     request.user.save()
    
     moods = Mood.objects.all()
     mood_max_value = max(mood.value for mood in moods )
@@ -703,7 +703,7 @@ def home_manager(request, manager):
         'podium_moods_workplace_activities': analysis['activities_podium_count_workplace'],
         'moods' : moods,
         'best_mood_counts' : list(range(1, max(len(analysis['activities_podium_count_freetime']) +1 ,len(analysis['activities_podium_count_workplace'])+1))),
-        'courses': not_seen_courses[:2],
+        'courses': not_seen_courses[:2] if len(not_seen_courses)>2 else courses[:2],
     })
 # Login engine
 def engine(request):

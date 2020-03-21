@@ -61,6 +61,7 @@ body{
 .happy-curus-section-image{
     position: relative;
     min-height: 321px;
+    margin-bottom: 30px;
 }
 .happy-curus-section-image ul{
     position: absolute;

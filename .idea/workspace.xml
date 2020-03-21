@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="" />
+    <list default="true" id="ab79a2d9-0528-4d8c-b654-b83064bfbbdf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloCurus/templates/core/employee/e_learning.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/core/employee/e_learning.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloCurus/templates/core/employee/happy_curus.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/core/employee/happy_curus.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helloCurus/templates/core/manager/e_learning.html" beforeDir="false" afterPath="$PROJECT_DIR$/helloCurus/templates/core/manager/e_learning.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/courses.css" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,11 +53,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/helloCurus/templates/website/index_de.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+            <state relative-caret-position="315">
+              <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/happy_curus.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -80,6 +96,7 @@
         <option value="$PROJECT_DIR$/core/views.py" />
         <option value="$PROJECT_DIR$/static/css/website.css" />
         <option value="$PROJECT_DIR$/helloCurus/templates/website/index.html" />
+        <option value="$PROJECT_DIR$/helloCurus/templates/core/employee/happy_curus.html" />
       </list>
     </option>
   </component>
@@ -121,6 +138,29 @@
               <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
               <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloCurus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
+              <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloCurus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
+              <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="employee" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloCurus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
+              <item name="helloCurus" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="manager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="helloCurus" type="b2602c69:ProjectViewProjectNode" />
@@ -215,7 +255,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="723" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="723" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
@@ -310,6 +350,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/statistics.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -327,17 +374,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/statistics.html">
+    <entry file="file://$PROJECT_DIR$/helloCurus/templates/website/index_de.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+        <state relative-caret-position="315">
+          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helloCurus/templates/website/index_de.html">
+    <entry file="file://$PROJECT_DIR$/helloCurus/templates/core/employee/happy_curus.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+        <state relative-caret-position="180">
+          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
         </state>
       </provider>
     </entry>

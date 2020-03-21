@@ -17,8 +17,8 @@
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course_to_see.pk}}'">
                 
                 <div class="card-info-container col-md-10">
-                    <h4><b><div class="course-title col-md-10">{{course_to_see.title}}<span class="badge-new">{% trans 'NEW' %}</span></div></b></h4> 
-                    <p>{{course_to_see.description|truncatechars:155}}{% if course_to_see.description|length > 155 %}...{% endif %}</p> 
+                    <h4><div class="course-title">{{course_to_see.title}}<span class="badge-new">{% trans 'NEW' %}</span></div></h4> 
+                    <p class="course-description">{{course_to_see.description|truncatechars:155}}{% if course_to_see.description|length > 155 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
                     {% if not course_to_see.seen %}
@@ -41,8 +41,8 @@
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course.course.pk}}'">
                 
                 <div class="card-info-container col-md-10">
-                    <h4><b><div class="course-title col-md-10">{{course.course.title}}</div></b></h4> 
-                    <p>{{course.course.description|truncatechars:155}}{% if course.course.description|length > 155 %}...{% endif %}</p> 
+                    <h4 class="course-title">{{course.course.title}}</h4> 
+                    <p class="course-description">{{course.course.description|truncatechars:155}}{% if course.course.description|length > 155 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
                     {% if not course.seen %}
@@ -60,8 +60,8 @@
         <div class="collapse out budgets hidden-courses col-md-6">
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course.course.pk}}'">
                 <div class="card-info-container col-md-10">
-                    <h4><b><div class="course-title col-md-10">{{course.course.title}}</div></b></h4> 
-                    <p>{{course.course.description|truncatechars:155}}{% if course.course.description|length > 155 %}...{% endif %}</p> 
+                    <h4 class="course-title">{{course.course.title}}</h4> 
+                    <p class="course-description">{{course.course.description|truncatechars:155}}{% if course.course.description|length > 155 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
                     {% if not course.seen %}
