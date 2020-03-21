@@ -9,6 +9,7 @@
   url('../fonts/Rubik/Rubik-Bold.ttf') format("truetype");
 }
 body{
+  transition: background-color 1s linear;
   position: relative;
 }
 

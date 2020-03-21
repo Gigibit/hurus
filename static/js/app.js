@@ -20,6 +20,7 @@ $(document).ready(function(){
                         'height':'5px',
                         'width': '5px'
                     })
+                    const interval = setInterval(()=> newPositionCount++>3 ? clearInterval(interval) : newPosition(), 1000)
                 }
             ,500)
             document.body.style.background = "violet";
@@ -46,7 +47,6 @@ $(document).ready(function(){
         })
     }
     var newPositionCount = 0;
-    const interval = setInterval(()=> newPositionCount++>3 ? clearInterval(interval) : newPosition(), 1000)
     $('giordy').hover(function(){
         $('giordy').css({
                         'width': '100vh',
