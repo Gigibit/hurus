@@ -220,8 +220,18 @@
           'mood_color' : tought['mood']['i18n_key'],
         })
       }
-      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 8, 100, false )
-      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 8, 100, false )
+      const style = {
+        margin: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0
+        },
+        width: window.innerWidth/8,
+        height: 100
+      }
+      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', style, false )
+      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', style, false )
       
       // doughnutChart('doughnut-chart-freetime',freetimeData)
       // doughnutChart('doughnut-chart-workplace',workplaceData)

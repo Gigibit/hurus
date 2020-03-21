@@ -11,7 +11,7 @@ Array.prototype.remove = function(element){
 	return this
 }
 
-function barChart(chartDiv, data, relatedChart, width= null, height = null, displayText = true) {
+function barChart(chartDiv, data, relatedChart, style = null, displayText = true) {
 	
 	buff = []
 	for (var i = 0; i < data.length; i++) {
@@ -27,14 +27,14 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null, disp
 		})
 	});
 	
-	var margin = {
+	var margin = style && style.margin || {
 		top: 20,
 		right: 20,
 		bottom: 30,
 		left: 40
 	},
-	width = width || window.innerWidth / 2.5, // Use the window's width
-	height = height || window.innerHeight / 2.5; // Use the window's height
+	width = style && style.width || window.innerWidth / 2.5, // Use the window's width
+	height = style && style.height || window.innerHeight / 2.5; // Use the window's height
 	
 	// set the ranges
 	var x = d3.scaleBand()
