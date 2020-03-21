@@ -53,7 +53,7 @@ KDF = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can only use kdf oncefrom cryptography.fernet import Fernet
 
 
-
+    
 def statistics_manager_for_day(request):
     manager = request.user
     moods = Mood.objects.all()

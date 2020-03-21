@@ -5,12 +5,14 @@
 
 
 {% block head_css_section %}
-<link href="{% static 'css/home.css' %}?{% now 'U' %}" rel="stylesheet">
 <link href="{% static 'css/courses.css' %}?{% now 'U' %}" rel="stylesheet">
+<link href="{% static 'css/statistics.css' %}?{% now 'U' %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}?{% now 'U' %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
 <script>let manager = false</script>
+<script src="{% static 'js/statistics.js' %}?{% now 'U' %}" type="text/javascript"></script>
 <script src="{% static 'js/home.js' %}?{% now 'U' %}" type="text/javascript"></script>
 {% endblock footer_javascript_section %}
 
@@ -108,31 +110,12 @@
     </div>
     <div class="col-md-6 overview-charts" onclick="location.href='/statistics'">
       <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
-      
-      <div class="percentage-evaluation row sparkboxes mt-4 mb-4">
-        <div class="chart-wrapper col-md-6">
-          <div class="progress progress-bar-vertical">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_freetime_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_freetime_percentage}}% ;background-color: {% if average_mood_freetime_percentage > 65 %} lightgreen {% elif average_mood_freetime_percentage > 40%} darkorange {% else %} red {% endif%}">
-              {{average_mood_freetime_percentage}}%
-            </div>
-          </div>
-        </div>
-        <div class="chart-wrapper col-md-6">
-          <div class="progress progress-bar-vertical">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{average_mood_workplace_percentage}}" aria-valuemin="0" aria-valuemax="100" style="height:{{average_mood_workplace_percentage}}%; background-color: {% if average_mood_workplace_percentage > 65 %} lightgreen {% elif average_mood_workplace_percentage > 40%} darkorange {% else %} red {% endif%}" >
-              {{average_mood_workplace_percentage}}%
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-6 col-center-block">
-          <div id="freetime-bar-chart" class="chart" style="position: relative;">
-          </div>
+          <div id="freetime-line-chart" class="chart"></div>
         </div>
         <div class="col-md-6 col-center-block">
-          <div id="workplace-bar-chart" class="chart" style="position: relative;">
-          </div>
+          <div id="workplace-line-chart" class="chart"></div>
         </div>
       </div>
       
@@ -225,47 +208,70 @@
 </div>
 
 <script type="text/javascript">
+  
   var moods = {
-    {% for mood in moods %}
-    {{mood.value}} : {
-      'icon'  : "{% static mood.icon.name %}",
-      'color' : '{{mood.color_code}}'
-      
+        {% for mood in moods %}
+        {{mood.value}} : {
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
+        },
+        {% endfor %}
+    }
+    
+    var dataFreetime = [
+    {% for tought in toughts%}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
     },
     {% endfor %}
-  }
-  
-  
-  $.ajax({
-    url : '/trend_for_day/',
-    method: 'GET',
-    success:function(response){
-      var freetimeData = []
-      for(var i = 0; i < response['freetime_toughts'].length ; i++){
-        var tought = response['freetime_toughts'][i];
-        freetimeData.push({
-          "date": new Date(tought['created_at']), //H:i
-          "mood": tought['mood']['value'],
-          "name": tought['mood']['i18n_key'],
-          'mood_color' : tought['mood']['i18n_key'],
-        })
+    ]
+    var dataWorkPlace = [
+    {% for tought in workplace_toughts%}
+    {
+        "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
+    
+    
+    
+    dataFreetime.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    dataWorkPlace.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    
+    
+    $(document).ready(function(){
+      const style = {
+        width: 150,
+        height: 150
       }
-      var workplaceData = []
-      for(var i = 0; i < response['workplace_toughts'].length ; i++){
-        var tought = response['workplace_toughts'][i];
-        workplaceData.push({
-          "date": new Date(tought['created_at']), //H:i
-          "mood": tought['mood']['value'],
-          "name": tought['mood']['i18n_key'],
-          'mood_color' : tought['mood']['i18n_key'],
-        })
-      }
-      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 8, 100, false )
-      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 8, 100, false )
-      
-      // doughnutChart('doughnut-chart-freetime',freetimeData)
-      // doughnutChart('doughnut-chart-workplace',workplaceData)
-    }
-  })
+        try{
+            lineChart("#freetime-line-chart", dataFreetime, style)
+        }catch(ex){
+            console.error(ex)
+            $("#freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
+        }
+        try{
+            lineChart("#workplace-line-chart", dataWorkPlace, style)
+        }catch(ex){
+            console.error(ex)
+            $("#workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+        }
+    });
 </script>
 {% endblock %}
