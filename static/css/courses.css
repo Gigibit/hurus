@@ -57,6 +57,9 @@
     color: #333;
     margin-top:90px;
 }
+.course-info h1{
+    font-size: 52px!important;
+}
 .reveal-container{
     position: absolute;
     top: 0;
@@ -165,10 +168,11 @@ section{
       padding-left: 0;
       font-size: 34px;
       font-weight: 500;
-      font-family: sans-serif;
+      font-family: auto;
   }
   .course-description{
       font-size: 20px;
+      height: 40px;
   }
   .read-more{
     margin: 15px 0;

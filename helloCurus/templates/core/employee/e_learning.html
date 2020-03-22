@@ -18,7 +18,7 @@
                 
                 <div class="card-info-container col-md-10">
                     <h4><div class="course-title">{{course_to_see.title}}<span class="badge-new">{% trans 'NEW' %}</span></div></h4> 
-                    <p class="course-description">{{course_to_see.description|truncatechars:155}}{% if course_to_see.description|length > 155 %}...{% endif %}</p> 
+                    <p class="course-description">{{course_to_see.description|truncatechars:65}}{% if course_to_see.description|length > 65 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
                     {% if not course_to_see.seen %}
@@ -42,7 +42,7 @@
                 
                 <div class="card-info-container col-md-10">
                     <h4 class="course-title">{{course.course.title}}</h4> 
-                    <p class="course-description">{{course.course.description|truncatechars:155}}{% if course.course.description|length > 155 %}...{% endif %}</p> 
+                    <p class="course-description">{{course.course.description|truncatechars:65}}{% if course.course.description|length > 65 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
                     {% if not course.seen %}
@@ -61,7 +61,7 @@
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course.course.pk}}'">
                 <div class="card-info-container col-md-10">
                     <h4 class="course-title">{{course.course.title}}</h4> 
-                    <p class="course-description">{{course.course.description|truncatechars:155}}{% if course.course.description|length > 155 %}...{% endif %}</p> 
+                    <p class="course-description">{{course.course.description|truncatechars:65}}{% if course.course.description|length > 65 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
                     {% if not course.seen %}
