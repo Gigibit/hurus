@@ -5,22 +5,20 @@
 
 
 {% block head_css_section %}
-<link href="{% static 'css/home.css' %}?{% now 'U' %}" rel="stylesheet">
 <link href="{% static 'css/courses.css' %}?{% now 'U' %}" rel="stylesheet">
+<link href="{% static 'css/statistics.css' %}?{% now 'U' %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}?{% now 'U' %}" rel="stylesheet">
 {% endblock head_css_section %}
 
 {% block footer_javascript_section %}
 <script>let manager = false</script>
+<script src="{% static 'js/statistics.js' %}?{% now 'U' %}" type="text/javascript"></script>
 <script src="{% static 'js/home.js' %}?{% now 'U' %}" type="text/javascript"></script>
 {% endblock footer_javascript_section %}
 
 {% block content %}
-
-
-<div class="container">
-  
+<div id="manager-home" class="container">
   <div class="row">
-    
     <div class="date-picker col-md-12 justify" style="display: none;">
       
       <div class="row">
@@ -35,9 +33,8 @@
           </div>
         </div>
       </div>
-      
     </div>
-    <div class="calendar">
+    <div class="calendar col-md-6">
       <div class="calendar__month">
         <div class="cal-month__previous"><</div>
         <div class="cal-month__current"></div>
@@ -108,6 +105,20 @@
           <div class="cal-body__day"></div>
         </div>
       </div>
+    </div>
+    <div class="col-md-6 overview-charts" onclick="location.href='/statistics'">
+      <h1>{% trans 'COMPLETE_STATISTICS' %}</h1>
+      <div class="row">
+        <div class="col-md-6 col-center-block">
+          <div id="freetime-line-chart" class="chart"></div>
+        </div>
+        <div class="col-md-6 col-center-block">
+          <div id="workplace-line-chart" class="chart"></div>
+        </div>
+      </div>
+      
+      <!-- <div class="col-md-4 show-more-button"><a href="/statistics">{% trans 'SHOW_MORE' %}</a></div> -->
+      
     </div>
   </div>
   
@@ -194,4 +205,71 @@
   </div>
 </div>
 
+<script type="text/javascript">
+  
+  var moods = {
+        {% for mood in moods %}
+        {{mood.value}} : {
+            'icon'  : "{% static mood.icon.name %}",
+            'color' : '{{mood.color_code}}'
+        },
+        {% endfor %}
+    }
+    
+    var dataFreetime = [
+    {% for tought in toughts%}
+    {
+        "date": "{{tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
+    var dataWorkPlace = [
+    {% for tought in workplace_toughts%}
+    {
+        "date": "{{ tought.created_at|date:"d-m-Y" }}", //H:i
+        "mood": "{{tought.mood.value}}",
+        "name": "{{tought.mood.i18n_key}}",
+        'mood_color' : '{{tought.mood.color_code}}',
+        "activities": {{tought.activities|safe}},
+        
+    },
+    {% endfor %}
+    ]
+    
+    
+    
+    dataFreetime.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    dataWorkPlace.forEach(function(d){
+        d.date = d3.timeParse("%d-%m-%Y")(d.date) //%H:%M
+        d.mood = d.mood 
+    })
+    
+    
+    $(document).ready(function(){
+      const style = {
+        width: 150,
+        height: 150
+      }
+        try{
+            lineChart("#freetime-line-chart", dataFreetime, style)
+        }catch(ex){
+            console.error(ex)
+            $("#freetime-line-chart").replaceWith('<div class="wip-warning"></div>');
+        }
+        try{
+            lineChart("#workplace-line-chart", dataWorkPlace, style)
+        }catch(ex){
+            console.error(ex)
+            $("#workplace-line-chart").replaceWith('<div class="wip-warning"></div>');
+        }
+    });
+</script>
 {% endblock %}

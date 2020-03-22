@@ -20,8 +20,6 @@
 {% endblock footer_javascript_section %}
 
 {% block content %}
-
-
 <div id="manager-home" class="container">
   <div class="row">
     <div class="date-picker col-md-12 justify" style="display: none;">
@@ -220,8 +218,18 @@
           'mood_color' : tought['mood']['i18n_key'],
         })
       }
-      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', window.innerWidth / 8, 100, false )
-      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', window.innerWidth / 8, 100, false )
+      const style = {
+        margin:  {
+        top: 20,
+        right: 10,
+        bottom: 30,
+        left: 10
+      },
+        width: window.innerWidth/7,
+        height: 100
+      }
+      barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', style, false )
+      barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', style, false )
       
       // doughnutChart('doughnut-chart-freetime',freetimeData)
       // doughnutChart('doughnut-chart-workplace',workplaceData)

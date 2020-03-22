@@ -147,8 +147,11 @@ section{
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    min-height: 155px;
-    max-height: 155px;
+    min-height: 170px;
+    max-height: 170px;
+    width: 400px;
+    margin: 0 auto;
+    display: block;
   }
   
   .card:hover {
@@ -161,9 +164,14 @@ section{
   .course-title{
       padding-left: 0;
       font-size: 34px;
-      font-weight: bold;
+      font-weight: 500;
+      font-family: sans-serif;
+  }
+  .course-description{
+      font-size: 20px;
   }
   .read-more{
-        color: cadetblue;
-        font-size: 8px;
+    margin: 15px 0;
+    color: cadetblue;
+    font-size: 14px;
   }

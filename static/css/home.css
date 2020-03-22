@@ -208,8 +208,16 @@
 }
 
 #freetime-bar-chart svg, #workplace-bar-chart svg{
-  margin-top: 0;
+  margin: 0 auto;
+  display: block;
 }
 .overview-charts{
   cursor: pointer;
+}
+
+.chart{
+  padding: 0;
+}
+.course-wrapper {
+  padding: 20px 15px;
 }

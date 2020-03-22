@@ -11,7 +11,7 @@ Array.prototype.remove = function(element){
 	return this
 }
 
-function barChart(chartDiv, data, relatedChart, width= null, height = null, displayText = true) {
+function barChart(chartDiv, data, relatedChart, style = null, displayText = true) {
 	
 	buff = []
 	for (var i = 0; i < data.length; i++) {
@@ -27,14 +27,14 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null, disp
 		})
 	});
 	
-	var margin = {
+	var margin = style && style.margin || {
 		top: 20,
 		right: 20,
 		bottom: 30,
 		left: 40
 	},
-	width = width || window.innerWidth / 2.5, // Use the window's width
-	height = height || window.innerHeight / 2.5; // Use the window's height
+	width = style && style.width || window.innerWidth / 2.5, // Use the window's width
+	height = style && style.height || window.innerHeight / 2.5; // Use the window's height
 	
 	// set the ranges
 	var x = d3.scaleBand()
@@ -52,7 +52,7 @@ function barChart(chartDiv, data, relatedChart, width= null, height = null, disp
 	// moves the 'group' element to the top left margin
 	var svg = d3.select(chartDiv).append("svg")
 	.attr("width", width + margin.left + margin.right)
-	.attr("height", '400px')
+	.attr("height", height + margin.top + margin.bottom)
 	.append("g")
 	.attr("transform",
 	"translate(" + (margin.left - 10) + "," + margin.top + ")");
@@ -244,19 +244,19 @@ function managerLineChart(forDiv, data){
 		d3.select(`#${forDiv}`).on("dblclick", ()=>chart.resetZoom())
 	}
 	
-	function lineChart(chartDiv, data) {
+	function lineChart(chartDiv, data, style) {
 		if(diffBetweenDateInDays(data[0].date, data[data.length-1].date) < MIN_DAYS_FOR_CHART)
 		throw 'data evaluation unavailable'
 		
-		var margin = {
+		var margin = style && style.margin || {
 			top: 50,
 			right: 50,
 			bottom: 100,
 			left: 50
 		},
-		width = window.innerWidth / 2.5 // Use the window's width
+		width = style && style.width || window.innerWidth / 2.5 // Use the window's width
 		,
-		height = window.innerHeight / 2.5; // Use the window's height
+		height = style && style.height || window.innerHeight / 2.5; // Use the window's height
 		
 		const zoom = d3.zoom()
 		.scaleExtent([1, 32])
