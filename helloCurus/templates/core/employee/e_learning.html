@@ -17,7 +17,7 @@
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course_to_see.pk}}'">
                 
                 <div class="card-info-container col-md-10">
-                    <h4><div class="course-title">{{course_to_see.title}}<span class="badge-new">{% trans 'NEW' %}</span></div></h4> 
+                    <h4><div class="course-title">{{course_to_see.title|truncatechars:58}}<span class="badge-new">{% trans 'NEW' %}</span></div></h4> 
                     <p class="course-description">{{course_to_see.description|truncatechars:65}}{% if course_to_see.description|length > 65 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
@@ -41,7 +41,7 @@
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course.course.pk}}'">
                 
                 <div class="card-info-container col-md-10">
-                    <h4 class="course-title">{{course.course.title}}</h4> 
+                    <h4 class="course-title">{{course.course.title|truncatechars:58}}</h4> 
                     <p class="course-description">{{course.course.description|truncatechars:65}}{% if course.course.description|length > 65 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">
@@ -60,7 +60,7 @@
         <div class="collapse out budgets hidden-courses col-md-6">
             <div class="course-wrapper row card" onClick="location.href='/courses/{{course.course.pk}}'">
                 <div class="card-info-container col-md-10">
-                    <h4 class="course-title">{{course.course.title}}</h4> 
+                    <h4 class="course-title">{{course.course.title|truncatechars:58}}</h4> 
                     <p class="course-description">{{course.course.description|truncatechars:65}}{% if course.course.description|length > 65 %}...{% endif %}</p> 
                 </div>
                 <div class="seen-icon col-md-2">

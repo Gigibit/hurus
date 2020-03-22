@@ -149,7 +149,7 @@
     {% for course in courses %}
     <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
       <div class="card-info-container">
-        <h4 class="course-title">{{course.title}}</h4> 
+        <h4 class="course-title">{{course.title|truncatechars:58}}</h4> 
         <p class="course-description">{{course.description|truncatechars:155}}{% if course.description|length > 155 %}...{% endif %}</p> 
       </div>
       <div class="seen-icon col-md-2">
@@ -228,11 +228,11 @@
         margin:  {
           top: 20,
           right: 10,
-          bottom: 30,
+          bottom: 50,
           left: 10
         },
-        width: window.innerWidth/7,
-        height: 100
+        width: window.innerWidth/8,
+        height: 200
       }
       barChart("#freetime-bar-chart", freetimeData,'freetime-radar-chart', style, false )
       barChart("#workplace-bar-chart", workplaceData,'workplace-radar-chart', style, false )

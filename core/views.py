@@ -116,7 +116,8 @@ def toughts_until_day(request, in_day):
                             employee__team__manager = request.user, 
                             created_at__lte= date (int(request.GET['year']), 
                                                     int(request.GET['month']), 
-                                                    int(request.GET['day']))
+                                                    int(request.GET['day'])+ 1
+                                                    ) 
                         )
     else:
         toughts = Tought.objects.filter(
@@ -130,9 +131,9 @@ def tought_moods_count(request, in_day):
     if in_day:
         toughts = Tought.objects.filter(
                                             employee__team__manager = request.user, 
-                                            created_at__year=int(request.GET['year']), 
+                                            created_at__year=int(request.GET['year'] ), 
                                             created_at__month=int(request.GET['month']), 
-                                            created_at__day=int(request.GET['day'])
+                                            created_at__day=int(request.GET['day']) +1
                                         )
     else:
         toughts = Tought.objects.filter( employee__team__manager = request.user)
