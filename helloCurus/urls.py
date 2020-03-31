@@ -32,7 +32,7 @@ urlpatterns = [
     path('send_contact_email/', core.send_contact_email),
     path('.well-known/assetlinks.json', core.android_app_link),
     path('courses/<int:id>', core.e_learning_detail),
-    path('ax/<str:token>', core.login_user_from_token),
+#    path('ax/<str:token>', core.login_user_from_token),
     path('website/', include('website.urls')),
     path('tinymce/', include('tinymce.urls')),
     path('', core.home),
