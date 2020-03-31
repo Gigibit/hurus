@@ -53,6 +53,16 @@ KDF = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(KDF.derive(MY_SECRET_FOR_EVER.encode())) # Can only use kdf oncefrom cryptography.fernet import Fernet
 
 
+
+
+def _404(request, exception):
+    return redirect('/')
+
+def _500(request):
+    return redirect('/')
+    #return render(request, 'core/manager/statistics.html', {})
+
+
     
 def statistics_manager_for_day(request):
     manager = request.user
@@ -759,5 +769,6 @@ def send_contact_email(request):
                             '\n name: ' + name +
                              '\n\n\n says: \n' + message, to=[CONTACT_EMAILS_RECEIVER]).send()
     return redirect('/')
+
 
 
