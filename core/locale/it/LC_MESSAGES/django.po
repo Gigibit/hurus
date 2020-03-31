@@ -24,531 +24,309 @@ msgid "email_address"
 msgstr ""
 
 msgid "NEW_ACTIVITY_NAME_PLACEHOLDER"
-msgstr "Enter name..."
-
-
+msgstr "Inserisci nome..."
 msgid "HOW_DO_YOU_FEEL"
-msgstr "Welcome! How did you feel during your free time?"
-
+msgstr "Benvenuti! Come vi siete sentiti nel tempo libero?"
 msgid "HOW_DO_YOU_FEEL_WP"
-msgstr "How did you feel during the last day you spent at work?"
-
-
+msgstr "Come ti sei sentito durante l'ultimo giorno di lavoro?"
 msgid "HAPPY"
-msgstr "Happy"
-
-
+msgstr "Felice"
 msgid "GOOD_MOOD"
-msgstr "In A Good Mood"
-
-
+msgstr "Di Buon Umore"
 msgid "INSPIRED"
-msgstr "Inspired"
-
-
+msgstr "Ispirato"
 msgid "SAD"
-msgstr "Sad"
-
-
+msgstr "Triste"
 msgid "ANGRY"
-msgstr "Angry"
-
-
+msgstr "Arrabbiato"
 msgid "AWFUL"
-msgstr "Awful"
-
-
+msgstr "Terribile"
 msgid "HOW_DO_YOU_BEEN_UP_FREE_TIME"
-msgstr "What have you been up to in your free time?"
-
-
+msgstr "Cosa hai fatto nel tempo libero?"
 msgid "HOW_ARE_YOU"
-msgstr "How are you feeling right now?"
-
-
+msgstr "Come ti senti in questo momento?"
 msgid "ACTIVE"
-msgstr "active"
-
-
+msgstr "Attivo"
 msgid "FOCUSED"
-msgstr "focused"
-
-
+msgstr "Focalizzato"
 msgid "JOYFUL"
-msgstr "joyful"
-
-
+msgstr "Gioioso"
 msgid "INTERESTED"
-msgstr "interested"
-
-
+msgstr "Interessato"
 msgid "SERENE"
-msgstr "serene"
-
-
+msgstr "Sereno"
 msgid "HOPEFUL"
-msgstr "hopeful"
-
-
+msgstr "Speranzoso"
 msgid "GLAD"
-msgstr "glad"
-
-
+msgstr "Grato"
 msgid "SURPRISED"
-msgstr "surprised"
-
-
+msgstr "Sorpreso"
 msgid "CHEERFUL"
-msgstr "Cheerful"
-
-
+msgstr "Allegro"
 msgid "CONFIDENT"
-msgstr "confident"
-
-
+msgstr "Fiducioso"
 msgid "RELIEVED"
-msgstr "relieved"
-
+msgstr "Sollevato"
 msgid "SHOW_MORE"
-msgstr "See more..."
-
+msgstr "Vedi di più..."
 msgid "IN_LOVE"
-msgstr "in love"
-
-
+msgstr "In love"
 msgid "ENTHUSIASTIC"
-msgstr "enthusiastic"
-
-
+msgstr "Entusiasta"
 msgid "RELAXED"
-msgstr "relaxed"
-
-
+msgstr "Rilassato"
 msgid "SATISFACTED"
-msgstr "satisfacted"
-
-
+msgstr "Soddisfatto"
 msgid "PROUD"
-msgstr "proud"
-
-
+msgstr "Orgoglioso"
 msgid "ASHAMED"
-msgstr "ashmed"
-
-
+msgstr "Imbarazzato"
 msgid "ANXIOUS"
-msgstr "anxious"
-
-
+msgstr "Ansioso"
 msgid "AFRAID"
-msgstr "afraid"
-
-
+msgstr "Spaventato"
 msgid "DEPRESSED"
-msgstr "depressed"
-
-
+msgstr "Depresso"
 msgid "LONELY"
-msgstr "lonely"
-
-
+msgstr "Solitario"
 msgid "DELUDED"
-msgstr "deluded"
-
-
+msgstr "Deluso"
 msgid "ANNOYED"
-msgstr "annoyed"
-
-
+msgstr "Infastidito"
 msgid "COLD"
-msgstr "cold"
-
-
+msgstr "Freddo"
 msgid "CONFUSED"
-msgstr "confused"
-
-
+msgstr "Confuso"
 msgid "PASSIVE"
-msgstr "passive"
-
-
+msgstr "Passivo"
 msgid "PREOCCUPIED"
-msgstr "preoccupied"
-
-
+msgstr "Preoccupato"
 msgid "INSECURE"
-msgstr "insecure"
-
-
+msgstr "Insicuro"
 msgid "REPRESSED"
-msgstr "repressed"
-
-
+msgstr "Represso"
 msgid "FRURSTRATED"
-msgstr "frustrated"
-
-
+msgstr "Frustrato"
 msgid "DISGUSTED"
-msgstr "disgusted"
-
-
+msgstr "Disgustato"
 msgid "GUILTY"
-msgstr "guilty"
-
-
+msgstr "Colpevole"
 msgid "DISCOURAGED"
-msgstr "discoraged"
-
+msgstr "Scoraggiato"
 msgid "YOUR_MOOD"
-msgstr "Your mood"
-
+msgstr "Il tuo umore"
 msgid "YOUR_TOUGHTS"
-msgstr "Your toughts (visible only to you)"
-
+msgstr "I tuoi pensieri (visibili solo a te)."
 msgid "TOUGHTS"
-msgstr "Toughts"
-
+msgstr "Pensieri"
 msgid "YOUR_TOUGHT"
-msgstr "Your tought"
-
+msgstr "I tuoi pensieri"
 msgid "WRITE_TO_REMEMBER"
-msgstr "Write down something you want to remember…"
-
-
+msgstr "Annota qualcosa che vuoi ricordare"
 msgid "Extra_Work"
-msgstr "Extra Work"
-
+msgstr "Lavoro extra"
 msgid "Reading"
-msgstr "Reading"
-
+msgstr "Lettura"
 msgid "Music"
-msgstr "Music"
-
+msgstr "Musica"
 msgid "TV"
 msgstr "TV"
-
 msgid "Party"
-msgstr "Party"
-
+msgstr "Festa"
 msgid "Sport"
 msgstr "Sport"
-
 msgid "Romantic_Date"
-msgstr "Romantic Date"
-
+msgstr "Appuntamento Galante"
 msgid "Friends"
-msgstr "Friends"
-
+msgstr "Amici"
 msgid "Family"
-msgstr "Family"
-
+msgstr "Famiglia"
 msgid "Relax"
 msgstr "Relax"
-
 msgid "Helping"
-msgstr "Helping"
-
+msgstr "Aiutare"
 msgid "Cocktail_bar"
-msgstr "Cocktail bar"
-
+msgstr "Cocktail Bar"
 msgid "Restaurant"
-msgstr "Restaurant"
-
+msgstr "Ristorante"
 msgid "Shopping"
 msgstr "Shopping"
-
 msgid "Art"
-msgstr "Art"
-
+msgstr "Arte"
 msgid "Writing"
-msgstr "Writing"
-
+msgstr "Scrittura"
 msgid "Praying"
-msgstr "Praying"
-
+msgstr "Preghiera"
 msgid "Studying"
-msgstr "Studying"
-
+msgstr "Studio"
 msgid "Time_in_the_nature"
-msgstr "Time in the nature"
-
-
+msgstr "Tempo nella Natura"
 msgid "Hobby"
 msgstr "Hobby"
-
 msgid "Cleaning_Home"
-msgstr "Cleaning Home"
-
+msgstr "Pulizia della casa"
 msgid "Travelling"
-msgstr "Travelling"
-
+msgstr "Viaggio"
 msgid "Doctor_appointment"
-msgstr "Doctor appointment"
-
+msgstr "Appuntamento con il Medico"
 msgid "Cooking"
-msgstr "Cooking"
-
+msgstr "Cucina"
 msgid "Videogames"
-msgstr "Videogames"
-
+msgstr "Videogiochi"
 msgid "Phone-call"
-msgstr "Phone-call"
-
+msgstr "Telefonare"
 msgid "Having_a_walk"
-msgstr "Having a walk"
-
-msgid "Nothing_at_all_Time_with_my_partner"
-msgstr "Nothing at all Time with my partner"
-
+msgstr "Fare una Passeggiata"
 msgid "Cinema"
 msgstr "Cinema"
-
 msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
-msgstr "What activities did you do during your free time?"
-
+msgstr "Quali attività hai svolto nel tempo libero?"
 msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY_WP"
-msgstr "What activities kept you busy at work?"
-
+msgstr "Quali attività ti hanno tenuto occupato al lavoro?"
 msgid "IN_A_GOOD_MOOD"
-msgstr "In a good mood"
-
+msgstr "Di buon Umore"
 msgid "WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER"
-msgstr "Write something that you want to remember"
-
-
+msgstr "Annota qualcosa che vuoi ricordare"
 msgid "LOW_ENERGY"
-msgstr "Low energy"
-
-
+msgstr "Stanco"
 msgid "YOUR_TOUGHTS_VISIBILE_ONLY_TO_YOU"
-msgstr "Your toughts (visible only to you)"
-
+msgstr "I tuoi pensieri (visibili solo a te)-ì."
 msgid "Time_with_my_partner"
-msgstr "Time with my partner"
-
+msgstr "Tempo con il mio Partner"
 msgid "Nothing_at_all"
-msgstr "Nothing at all"
-
+msgstr "Un bel Niente"
 msgid "Phone_call"
-msgstr "Phone call"
-
+msgstr "Telefonata"
 msgid "Meeting_with_management"
-msgstr "Meeting with management"
-
-
+msgstr "Meeting con il Capo"
 msgid "Meeting_with_team"
-msgstr "Meeting with team"
-
+msgstr "Meeting con il Team"
 msgid "New_Tasks"
-msgstr "New Tasks"
-
+msgstr "Nuovi compiti"
 msgid "Team_Rotation"
 msgstr "Team Rotation"
-
 msgid "Document_analysis"
-msgstr "Document analysis"
-
+msgstr "Analisi di documenti"
 msgid "Held_a_Presentation"
-msgstr "Held a Presentation"
-
+msgstr "Tenere una presentazione"
 msgid "Working_with_Time_Pressure"
-msgstr "Working with Time Pressure"
-
+msgstr "Lavorare sotto Pressione"
 msgid "Sick_leave"
-msgstr "Sick leave"
-
+msgstr "Congedo per Malattia"
 msgid "Everydays_routine"
-msgstr "Everydays routine"
-
+msgstr "Attività di Routine"
 msgid "Project_Management"
 msgstr "Project Management"
-
 msgid "External_Meeting"
-msgstr "External Meeting"
-
+msgstr "Meeting Esterno"
 msgid "Worked_Closely_to_a_new_teammate"
-msgstr "Worked Closely to a new teammate"
-
+msgstr "Lavorare con un nuovo collega"
 msgid "Mentored_someone"
-msgstr "Mentored someone"
-
+msgstr "Ho dato delle direttive"
 msgid "MY_HAPPYCURUS"
-msgstr "My Happycurus"
-
+msgstr "Il mio Happycurus"
 msgid "MY_STATISTICS"
-msgstr "My Statitistics"
-
+msgstr "Le mie Statistiche"
 msgid "MY_LEARNING_MATERIAL"
-msgstr "My Learning material"
-
+msgstr "Il mio Materiale Didattico"
 msgid "CURUS_FOR_THE_ENVIRONMENT"
-msgstr "Curus for the environment"
-
+msgstr "Curus per l'Ambiente"
 msgid "FREETIME"
-msgstr "FREE TIME"
-
-
-msgid "MANAGER_HISTORICAL_TREND_FREETIME"
-msgstr "Historical Trend of Team Morale: Free Time"
-
-msgid "MANAGER_HISTORICAL_TREND_WORKPLACE"
-msgstr "Historical Trend of Team Morale: Workplace"
-
-msgid "MANAGER_CAUSE_EFFECT_FREETIME"
-msgstr "Cause-Effect Free time: Most Frequent Selections and Their Causes"
-
-msgid "MANAGER_CAUSE_EFFECT_WORKPLACE"
-msgstr "Cause-Effect Workplace: Most Frequent Selections and Their Causes"
-
-msgid "MANAGER_COUNTER_FREETIME"
-msgstr "Historical Counter of Team Morale: Free Time"
-
-msgid "MANAGER_COUNTER_WORKPLACE"
-msgstr "Historical Counter of Team Morale: Workplace"
-
-
-
-msgid "HISTORICAL_TREND_FREETIME"
-msgstr "Historical Trend of Your Morale: Free Time"
-
-msgid "HISTORICAL_TREND_WORKPLACE"
-msgstr "Historical Trend of Your Morale: Workplace"
-
-msgid "CAUSE_EFFECT_FREETIME"
-msgstr "Cause-Effect Free time: Your Mood and its causes"
-
-msgid "CAUSE_EFFECT_WORKPLACE"
-msgstr "Cause-Effect Workplace: Your Mood and its causes"
-
-
-
-
-msgid "COUNTER_FREETIME"
-msgstr "Historical Counter of Your Morale: Free Time"
-
-msgid "COUNTER_WORKPLACE"
-msgstr "Historical Counter of Your Morale: Workplace"
-
+msgstr "TEMPO LIBERO"
 msgid "COMPLETE_STATISTICS"
-msgstr "Complete Statistics"
-
+msgstr "Statistiche Complete"
 msgid "NEW_COURSES"
-msgstr "New Course"
-
+msgstr "Nuovo Corso"
 msgid "COURSES"
-msgstr "Courses"
-
+msgstr "Corsi"
 msgid "NEW"
-msgstr "New"
-
+msgstr "Nuovo"
 msgid "MOTIVATIONAL_QUOTE"
-msgstr "Motivational quote"
-
+msgstr "Citazione Motivante"
 msgid "ACTIVITIES"
-msgstr "Activities"
-
-
+msgstr "Attività"
 msgid "PREVIOUS_COURSES"
-msgstr "Previous Courses"
-
+msgstr "Corsi Precedenti"
 msgid "HAPPY_CURUS_INFO"
-msgstr "THE VALUE ON THE LEFT REPRESENTS THE NUMBER OF TREES HAPPYCURUS HAS BEEN ABLE TO PLANT SO FAR. OUR DONATIONS HAVE DIFFERENT AMOUNTS AND FOCUS ON SEVERAL SPECIES OF TREES. THE NUMBER OF DONATIONS WE MAKE DEPENDS ON CHANGING FACTORS, SUCH AS THE NUMBER AND TYPE OF LICENSES SOLD, THE TIMING OF THE PAYMENTS, THE DEALS WE HAVE WITH EACH PARTNER, THE TYPE OF PROJECTS SUPPORTED AND THE UNEXPECTED EXPENSES THAT HAPPYCURUS MAY HAVE TO FACE. FOR MORE DETAILS ABOUT THE PROJECTS AND THE PARTNERS HAPPYCURUS IS SUPPORTING, PLEASE VISIT OUR WEBSITE WWW.HAPPYCURUS.DE AND CONTACT US."
-
+msgstr "IL VALORE A SINISTRA RAPPRESENTA IL NUMERO DI DONAZIONI CHE HAPPYCURUS È RIUSCITO A PIANTARE FIN ORA. LE NOSTRE DONAZIONI HANNO IMPORTI DIVERSI E SI CONCENTRANO SU DIVERSE SPECIE DI ALBERI. IL NUMERO DI DONAZIONI CHE FACCIAMO DIPENDE DA FATTORI VARIABILI, COME IL NUMERO E IL TIPO DI LICENZE VENDUTE, LA TEMPISTICA DEI PAGAMENTI, GLI ACCORDI CHE ABBIAMO CON OGNI PARTNER, IL TIPO DI PROGETTI SOSTENUTI E LE SPESE IMPREVISTE CHE HAPPYCURUS PUÒ ESSERE COSTRETTO A SOSTENERE. PER MAGGIORI DETTAGLI SUI PROGETTI E SUI PARTNER CHE HAPPYCURUS FINANZIA, VISITA IL NOSTRO SITO WEB  WWW.HAPPYCURUS.DE E CONTATTACI."
 msgid "YOUR_HAPPY_TEAM"
-msgstr "YOUR HAPPYCURUS TEAM."
-
-
+msgstr "IL TEAM DI HAPPYCURUS"
 msgid "SELECT_A_DAY_BEFORE_TODAY"
-msgstr "Select a day before today"
-
+msgstr "Seleziona una data prima di oggi"
 msgid "MISSING_FIELDS"
-msgstr "Please, fill every field"
-
-
+msgstr "Bisogna Compilare tutti i Campi"
 msgid "ABOUT_HAPPY_CURUS"
-msgstr "About Happycurus"
-
+msgstr "Riguardo Happycurus"
 msgid "CURUS_AND_THE_ENVIRONMENT"
-msgstr "Curus and the Environment"
-
+msgstr "Curus e l'ambiente"
 msgid "THE_CURUS_EFFECT"
-msgstr "The Happycurus Effect"
-
+msgstr "L'effetto Happycurus"
 msgid "CONTACT"
-msgstr "Contact"
-
+msgstr "Contatti"
 msgid "LANGUAGE"
-msgstr "Language"
-
-
-
+msgstr "Lingua"
 msgid "home_box_title"
-msgstr "Collect data about your team. Take care of them."
-
-
+msgstr "Raccogli dati sul tuo team. Prenditi cura di loro"
 msgid "ABOUT_HAPPY_CURUS_DESCRIPTION"
-msgstr "People don’t leave jobs but toxic workplaces. Thanks to Happycurus you can:"
-
-
+msgstr "Le persone non lasciano lavori, ma luoghi di lavoro scomodi. Grazie a Happycurus è possibile:"
 msgid "OUR_MOTIVATION"
-msgstr "Our Motivation"
-
+msgstr "La nostra motivazione"
 msgid "OUR_MOTIVATION_DESCRIPTION"
-msgstr "Team synergy for company efficiency."
-
+msgstr "Sinergia di squadra per l'efficienza aziendale"
 msgid "home_box_description"
-msgstr "How committed is your team? How satisfied are your\
-        employees with their tasks? Are they happy on the workplace?\
-        Collect and store important data about your employees. Learn\
-        how to keep them engaged. Increase productivity through\
-        Happycurus."
-
-
+msgstr "Quanto si sente coinvolto il tuo team? Quanto sono soddisfatti i tuoi\
+dipendenti con i loro compiti? Sono felici sul posto di lavoro? \
+Raccogli e tieni traccia di dati importanti sui tuoi collaboratori. \
+Imparare come mantenerli coinvolti. Aumenta la produttività con \
+Happycurus"
+        
 msgid "CAREER"
-msgstr "Career"
-
+msgstr "Lavora con Noi"
 msgid "COULD_NOT_PROCESS_SELECTED_DATE"
-msgstr "Cannot process selected date"
-
-
+msgstr "Impossibile elaborare la data selezionata"
 msgid "VIEW_STATISTICS"
-msgstr "VIEW STATISTICS"
-
-
-
-
-
-
-# add to lokalization
-
+msgstr "Vedi le Statistiche"
 msgid "NO_DATA"
-msgstr "There is not enough data!"
-
+msgstr "Non ci sono abbastanza dati!"
 msgid "WEEKLY_SATISFATION"
-msgstr "${PERCENTAGE}: compared to last week"
-
+msgstr "${PERCENTAGE}: rispetto alla settimana scorsa"
 msgid "MOTHLY_SATISFATION"
-msgstr "${PERCENTAGE}: compared to last month"
-
+msgstr "${PERCENTAGE}: rispetto al mese scorso"
 msgid "FROM_THE_BEGINNING_SATISFATION"
-msgstr "${PERCENTAGE}: compared to the first two weeks of happycurus"
-
-
+msgstr "${PERCENTAGE}: rispetto alle prime due settimane di happycurus"
 msgid "EMPLOYEES_THAT_HAVE_SEEN"
-msgstr "took this course"
-
+msgstr "hanno visualizzato questo corso"
 msgid "READ_MORE"
-msgstr "read more..."
-
-
+msgstr "leggi tutto..."
 msgid "HISTORICAL_PERCENTAGE_FREETIME"
-msgstr "Current Level of Team Satisfaction: Free Time"
-
+msgstr "Livello attuale di soddisfazione del team: Tempo libero"
 msgid "HISTORICAL_PERCENTAGE_WORKPLACE"
-msgstr "Current Level of Team Satisfaction: Workplace"
-
+msgstr "Livello attuale di soddisfazione del team: Posto di lavoro"
 msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_FREETIME"
-msgstr "Team Morale Breakdown: Free Time"
-
+msgstr "Dettaglio sul morale del team: Tempo libero"
 msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_WORKPLACE"
-msgstr "Team Morale Breakdown: Workplace"
+msgstr "Dettaglio sul morale del team: Posto di lavoro"
+msgid "MANAGER_HISTORICAL_TREND_FREETIME"
+msgstr "Trend storico del morale del team: Tempo libero"
+msgid "MANAGER_HISTORICAL_TREND_WORKPLACE"
+msgstr "Trend storico del morale del team: Posto di lavoro"
+msgid "MANAGER_CAUSE_EFFECT_FREETIME"
+msgstr "Causa-effetto morale nel tempo libero: Le selezioni più frequenti e le loro cause"
+msgid "MANAGER_CAUSE_EFFECT_WORKPLACE"
+msgstr "Causa-effetto morale sul posto di lavoro: Le selezioni più frequenti e le loro cause"
+msgid "MANAGER_COUNTER_FREETIME"
+msgstr "Contatore storico del morale del team: Tempo libero"
+msgid "MANAGER_COUNTER_WORKPLACE"
+msgstr "Contatore storico del morale del team: Posto di lavoro"
+msgid "HISTORICAL_TREND_FREETIME"
+msgstr "Trend storico del tuo morale: Tempo libero"
+msgid "HISTORICAL_TREND_WORKPLACE"
+msgstr "Trend storico del tuo morale: Posto di lavoro"
+msgid "CAUSE_EFFECT_FREETIME"
+msgstr "Causa-effetto morale nel tempo libero: Il tuo umore e le sue cause"
+msgid "CAUSE_EFFECT_WORKPLACE"
+msgstr "Causa-effetto morale sul posto di lavoro: Il tuo umore e le sue cause"
+msgid "COUNTER_FREETIME"
+msgstr "Contatore storico del tuo morale: Tempo libero"
+msgid "COUNTER_WORKPLACE"
+msgstr "Contatore storico del tuo morale: Posto di lavoro"
