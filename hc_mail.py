@@ -36,26 +36,24 @@ def main(argv=None):
     if datetime.datetime.today().weekday() >= 5:
         return
 
-    e = Employee(
-        email = 'gigibit92@gmail.com',
-        preferred_language = 'it'
-    )
-    token = get_token(e.email)
-    text_html = get_email_body_for_employee(e, token)
-    mail = EmailMultiAlternatives("HappyCurus daily login!", 'Login in the application with %s' % (base_url + '/ax/' + token), to=[e.email])
-    mail.attach_alternative(text_html, 'text/html')
-    mail.send()
 
-    # for e in Employee.objects.all():
-    #     if e.agency.enabled:
-    #         newsletters = get_email_body_for_employee(e)
-    #         EmailMessage("HappyCurus daily login!", newsletters, to=[e.email]).send()
+    for e in Employee.objects.all():
+        if e.agency.enabled and e.email:
+            token = get_token(e.email)
+            newsletters = get_email_body_for_employee(e, token)
+            mail = EmailMultiAlternatives("HappyCurus daily login!", 'Login in the application with %s' % (base_url + '/ax/' + token), 'hello@happycurus.de' ,to=[e.email])
+            mail.attach_alternative(newsletters, 'text/html')
+            mail.send(fail_silently=True)
+            
 
     
-    # for m in Manager.objects.all():
-    #     if m.agency.enabled:
-    #         newsletters = get_email_body_for_manager(m)
-    #         EmailMessage("HappyCurus daily login!", newsletters, to=[m.email]).send()
+    for m in Manager.objects.all():
+        if m.agency.enabled and m.email:
+            token = get_token(m.email)
+            newsletters = get_email_body_for_manager(m, token)
+            mail = EmailMultiAlternatives("HappyCurus daily login!", 'Login in the application with %s' % (base_url + '/ax/' + token), 'hello@happycurus.de' ,to=[m.email])
+            mail.attach_alternative(newsletters, 'text/html')
+            mail.send(fail_silently=True)
 
 
 
@@ -135,7 +133,7 @@ def get_email_body_for_employee(employee, token):
             '            font-family: arial;">' +\
             '                <div class="message-wrapper">' +\
             '                    <div class="message-content">' +\
-            '                       %s ' +\
+            '                       ' + message_body +\
             '                    </div>' +\
             '                </div>' +\
             '            </div>' +\
@@ -144,7 +142,7 @@ def get_email_body_for_employee(employee, token):
             '           <img class="claim" width="184" height="75" src="' + base_url + '/static/img/website_assets/Happycurus-Claim_SW.png">'+\
             '       </div>' +\
             '    </body>' +\
-            '</html>' % message_body
+            '</html>'
 
 
 def get_email_body_for_manager(manager, token):
@@ -198,7 +196,7 @@ def get_email_body_for_manager(manager, token):
             '                            statistics about your team.<br><br>' +\
             '                        </p>'
 
-    message_body = message_body % days[datetime.datetime.today().weekday() - 1]
+#    message_body = message_body % days[datetime.datetime.today().weekday() - 1]
     return  '<html>' +\
             '    <body style="border: 3px solid #222;' +\
             '            padding: 21px;' +\
@@ -221,7 +219,7 @@ def get_email_body_for_manager(manager, token):
             '            font-family: arial;">' +\
             '                <div class="message-wrapper">' +\
             '                    <div class="message-content">' +\
-            '                          %s '                     +\
+            '                         '+ message_body   +\
             '                    </div>' +\
             '                </div>' +\
             '            </div>' +\
@@ -230,7 +228,7 @@ def get_email_body_for_manager(manager, token):
             '           <img class="claim" width="184" height="75" src="' + base_url + '/static/img/website_assets/Happycurus-Claim_SW.png">'+\
             '       </div>' +\
             '    </body>' +\
-            '</html>' % message_body
+            '</html>' 
 
 
 
