@@ -144,7 +144,7 @@ def get_email_body_for_employee(employee, token):
             '           <img class="claim" width="184" height="75" src="' + base_url + '/static/img/website_assets/Happycurus-Claim_SW.png">'+\
             '       </div>' +\
             '    </body>' +\
-            '</html>' 
+            '</html>' % message_body
 
 
 def get_email_body_for_manager(manager, token):
