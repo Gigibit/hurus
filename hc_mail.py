@@ -35,7 +35,7 @@ def main(argv=None):
 
     if datetime.datetime.today().weekday() >= 5:
         return
-        
+
     e = Employee(
         email = 'gigibit92@gmail.com',
         preferred_language = 'it'
@@ -135,7 +135,7 @@ def get_email_body_for_employee(employee, token):
             '            font-family: arial;">' +\
             '                <div class="message-wrapper">' +\
             '                    <div class="message-content">' +\
-            '                       %s  ' +\
+            '                       %s ' +\
             '                    </div>' +\
             '                </div>' +\
             '            </div>' +\
@@ -144,7 +144,7 @@ def get_email_body_for_employee(employee, token):
             '           <img class="claim" width="184" height="75" src="' + base_url + '/static/img/website_assets/Happycurus-Claim_SW.png">'+\
             '       </div>' +\
             '    </body>' +\
-            '</html>' % message_body
+            '</html>' 
 
 
 def get_email_body_for_manager(manager, token):

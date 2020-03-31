@@ -143,10 +143,25 @@ DATABASES = {
 }
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'contattodalsitohappycurus@gmail.com'
+EMAIL_HOST = 'smtp.ionos.de'
+#EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'hello@happycurus.de'
 EMAIL_HOST_PASSWORD = '110295Luca!'
 EMAIL_PORT = 587
+#smtpd_tls_cert_file='/etc/letsencrypt/live/happycurus.de/fullchain.pem'
+#smtpd_tls_key_file='/etc/letsencrypt/live/happycurus.de/privkey.pem'
+
+#EMAIL_SSL_KEYFILE = smtpd_tls_cert_file
+#EMAIL_SSL_CERTFILE = smtpd_tls_key_file
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'localhost'
+#EMAIL_PORT = 465
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+#EMAIL_USE_TLS = True
+#DEFAULT_FROM_EMAIL = 'Happycurus <no-reply@happycurus.de>'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
