@@ -110,7 +110,7 @@ def get_email_body_for_employee(employee, token):
             '                            Click on the <a href="' + base_url + '/ax/' + token + '">link</a> to access it.' +\
             '                        </p>'
 
-    message_body = message_body % days[datetime.datetime.today().weekday() - 1]
+    message_body = message_body % days[datetime.datetime.today().weekday()]
     return  '<html>' +\
             '    <body style="border: 3px solid #222;' +\
             '            padding: 21px;' +\
