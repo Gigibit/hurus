@@ -330,3 +330,8 @@ msgid "COUNTER_FREETIME"
 msgstr "Contatore storico del tuo morale: Tempo libero"
 msgid "COUNTER_WORKPLACE"
 msgstr "Contatore storico del tuo morale: Posto di lavoro"
+
+
+
+msgid "MOBILE_NOT_AVAILABLE"
+msgstr "Mobile version not available"

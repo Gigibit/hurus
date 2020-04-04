@@ -279,3 +279,7 @@ msgstr "How committed is your team? How satisfied are your\
 Collect and store important data about your employees. Learn\
 how to keep them engaged. Increase productivity through\
 Happycurus."
+
+
+msgid "MOBILE_NOT_AVAILABLE"
+msgstr "Mobile version not available"

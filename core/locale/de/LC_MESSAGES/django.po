@@ -329,3 +329,8 @@ msgid "COUNTER_FREETIME"
 msgstr "Historischer Gegenpol zu Ihrer Moral: Freizeit"
 msgid "COUNTER_WORKPLACE"
 msgstr "Historischer Gegenpol zu Ihrer Moral: Arbeitsplatz"
+
+
+
+msgid "MOBILE_NOT_AVAILABLE"
+msgstr "Mobile version not available"
