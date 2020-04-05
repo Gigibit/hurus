@@ -38,7 +38,9 @@ body{
 
 #header-img{
   position: absolute;
+  top: -190px;
   z-index: -1;
+  width: 100vw;
 }
 img, icon, svg {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -170,6 +172,7 @@ p{
 }
 #application-brand{
   width: 100%;
+  margin-left: 30px;
   text-align: start;
 }
 

@@ -39,6 +39,7 @@
     background-repeat: no-repeat;
     border-radius: 50px;
 }
+
 .course-shadow-layer{
     position: absolute;
     top: 0;
@@ -49,6 +50,8 @@
     filter: blur(150px);
 }
 .course-info{
+    padding: 30px;
+    text-align: left;
     position: absolute;
     left: 0;
     right: 0;

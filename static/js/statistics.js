@@ -593,7 +593,7 @@ function managerLineChart(forDiv, data){
 						},
 						offset: 8,
 						color: 'black',
-						display: labels.length < 10
+						display: false//labels.length < 10
 					}
 				},
 			}
