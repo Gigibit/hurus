@@ -285,3 +285,36 @@ Happycurus."
 
 msgid "MOBILE_NOT_AVAILABLE"
 msgstr "Mobile version not available"
+
+
+msgid "NO_DATA"
+msgstr "There is not enough data!"
+
+msgid "WEEKLY_SATISFATION"
+msgstr "${PERCENTAGE}: compared to last week"
+
+msgid "MOTHLY_SATISFATION"
+msgstr "${PERCENTAGE}: compared to last month"
+
+msgid "FROM_THE_BEGINNING_SATISFATION"
+msgstr "${PERCENTAGE}: compared to the first two weeks of happycurus"
+
+
+msgid "EMPLOYEES_THAT_HAVE_SEEN"
+msgstr "took this course"
+
+msgid "READ_MORE"
+msgstr "read more..."
+
+
+msgid "HISTORICAL_PERCENTAGE_FREETIME"
+msgstr "Current Level of Team Satisfaction: Free Time"
+
+msgid "HISTORICAL_PERCENTAGE_WORKPLACE"
+msgstr "Current Level of Team Satisfaction: Workplace"
+
+msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_FREETIME"
+msgstr "Team Morale Breakdown: Free Time"
+
+msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_WORKPLACE"
+msgstr "Team Morale Breakdown: Workplace"
