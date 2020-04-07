@@ -25,501 +25,267 @@ msgstr ""
 
 msgid "NEW_ACTIVITY_NAME_PLACEHOLDER"
 msgstr "Enter name..."
-
-
 msgid "HOW_DO_YOU_FEEL"
 msgstr "Welcome! How did you feel during your free time?"
-
 msgid "HOW_DO_YOU_FEEL_WP"
 msgstr "How did you feel during the last day you spent at work?"
-
-
 msgid "HAPPY"
 msgstr "Happy"
-
-
 msgid "GOOD_MOOD"
 msgstr "In A Good Mood"
-
-
 msgid "INSPIRED"
 msgstr "Inspired"
-
-
 msgid "SAD"
 msgstr "Sad"
-
-
 msgid "ANGRY"
 msgstr "Angry"
-
-
 msgid "AWFUL"
 msgstr "Awful"
-
-
 msgid "HOW_DO_YOU_BEEN_UP_FREE_TIME"
 msgstr "What have you been up to in your free time?"
-
-
 msgid "HOW_ARE_YOU"
 msgstr "How are you feeling right now?"
-
-
 msgid "ACTIVE"
-msgstr "active"
-
-
+msgstr "Active"
 msgid "FOCUSED"
-msgstr "focused"
-
-
+msgstr "Focused"
 msgid "JOYFUL"
-msgstr "joyful"
-
-
+msgstr "Joyful"
 msgid "INTERESTED"
-msgstr "interested"
-
-
+msgstr "Interested"
 msgid "SERENE"
-msgstr "serene"
-
-
+msgstr "Serene"
 msgid "HOPEFUL"
-msgstr "hopeful"
-
-
+msgstr "Hopeful"
 msgid "GLAD"
-msgstr "glad"
-
-
+msgstr "Glad"
 msgid "SURPRISED"
-msgstr "surprised"
-
-
+msgstr "Surprised"
 msgid "CHEERFUL"
 msgstr "Cheerful"
-
-
 msgid "CONFIDENT"
-msgstr "confident"
-
-
+msgstr "Confident"
 msgid "RELIEVED"
-msgstr "relieved"
-
+msgstr "Relieved"
 msgid "SHOW_MORE"
 msgstr "See more..."
-
 msgid "IN_LOVE"
-msgstr "in love"
-
-
+msgstr "In love"
 msgid "ENTHUSIASTIC"
-msgstr "enthusiastic"
-
-
+msgstr "Enthusiastic"
 msgid "RELAXED"
-msgstr "relaxed"
-
-
+msgstr "Relaxed"
 msgid "SATISFACTED"
-msgstr "satisfacted"
-
-
+msgstr "Satisfacted"
 msgid "PROUD"
-msgstr "proud"
-
-
+msgstr "Proud"
 msgid "ASHAMED"
-msgstr "ashmed"
-
-
+msgstr "Ashmed"
 msgid "ANXIOUS"
-msgstr "anxious"
-
-
+msgstr "Anxious"
 msgid "AFRAID"
-msgstr "afraid"
-
-
+msgstr "Afraid"
 msgid "DEPRESSED"
-msgstr "depressed"
-
-
+msgstr "Depressed"
 msgid "LONELY"
-msgstr "lonely"
-
-
+msgstr "Lonely"
 msgid "DELUDED"
-msgstr "deluded"
-
-
+msgstr "Deluded"
 msgid "ANNOYED"
-msgstr "annoyed"
-
-
+msgstr "Annoyed"
 msgid "COLD"
-msgstr "cold"
-
-
+msgstr "Cold"
 msgid "CONFUSED"
-msgstr "confused"
-
-
+msgstr "Confused"
 msgid "PASSIVE"
-msgstr "passive"
-
-
+msgstr "Passive"
 msgid "PREOCCUPIED"
-msgstr "preoccupied"
-
-
+msgstr "Preoccupied"
 msgid "INSECURE"
-msgstr "insecure"
-
-
+msgstr "Insecure"
 msgid "REPRESSED"
-msgstr "repressed"
-
-
+msgstr "Repressed"
 msgid "FRURSTRATED"
-msgstr "frustrated"
-
-
+msgstr "Frustrated"
 msgid "DISGUSTED"
-msgstr "disgusted"
-
-
+msgstr "Disgusted"
 msgid "GUILTY"
-msgstr "guilty"
-
-
+msgstr "Guilty"
 msgid "DISCOURAGED"
-msgstr "discoraged"
-
+msgstr "Discoraged"
 msgid "YOUR_MOOD"
 msgstr "Your mood"
-
 msgid "YOUR_TOUGHTS"
 msgstr "Your toughts (visible only to you)"
-
 msgid "TOUGHTS"
 msgstr "Toughts"
-
 msgid "YOUR_TOUGHT"
-msgstr "Your tought"
-
+msgstr "Your toughts"
 msgid "WRITE_TO_REMEMBER"
-msgstr "Write down something you want to remember…"
-
-
+msgstr "Write down something you want to remember"
 msgid "Extra_Work"
 msgstr "Extra Work"
-
 msgid "Reading"
 msgstr "Reading"
-
 msgid "Music"
 msgstr "Music"
-
 msgid "TV"
 msgstr "TV"
-
 msgid "Party"
 msgstr "Party"
-
 msgid "Sport"
 msgstr "Sport"
-
 msgid "Romantic_Date"
 msgstr "Romantic Date"
-
 msgid "Friends"
 msgstr "Friends"
-
 msgid "Family"
 msgstr "Family"
-
 msgid "Relax"
 msgstr "Relax"
-
 msgid "Helping"
 msgstr "Helping"
-
 msgid "Cocktail_bar"
 msgstr "Cocktail bar"
-
 msgid "Restaurant"
 msgstr "Restaurant"
-
 msgid "Shopping"
 msgstr "Shopping"
-
 msgid "Art"
 msgstr "Art"
-
-msgid "Writing"
-msgstr "Writing"
-
-msgid "Praying"
-msgstr "Praying"
-
-msgid "Studying"
-msgstr "Studying"
-
-msgid "Time_in_the_nature"
-msgstr "Time in the nature"
-
-
-msgid "Hobby"
-msgstr "Hobby"
-
-msgid "Cleaning_Home"
-msgstr "Cleaning Home"
-
-msgid "Travelling"
-msgstr "Travelling"
-
-msgid "Doctor_appointment"
-msgstr "Doctor appointment"
-
-msgid "Cooking"
-msgstr "Cooking"
-
-msgid "Videogames"
-msgstr "Videogames"
-
-msgid "Phone-call"
-msgstr "Phone-call"
-
-msgid "Having_a_walk"
-msgstr "Having a walk"
-
-msgid "Nothing_at_all_Time_with_my_partner"
-msgstr "Nothing at all Time with my partner"
-
-msgid "Cinema"
-msgstr "Cinema"
-
-msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
-msgstr "What activities did you do during your free time?"
-
-msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY_WP"
-msgstr "What activities kept you busy at work?"
-
-msgid "IN_A_GOOD_MOOD"
-msgstr "In a good mood"
-
-msgid "WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER"
-msgstr "Write something that you want to remember"
-
-
-msgid "LOW_ENERGY"
-msgstr "Low energy"
-
-
-msgid "YOUR_TOUGHTS_VISIBILE_ONLY_TO_YOU"
-msgstr "Your toughts (visible only to you)"
-
-msgid "Time_with_my_partner"
-msgstr "Time with my partner"
-
-msgid "Nothing_at_all"
-msgstr "Nothing at all"
-
-msgid "Phone_call"
-msgstr "Phone call"
-
-msgid "Meeting_with_management"
-msgstr "Meeting with management"
-
-
-msgid "Meeting_with_team"
-msgstr "Meeting with team"
-
-msgid "New_Tasks"
-msgstr "New Tasks"
-
-msgid "Team_Rotation"
-msgstr "Team Rotation"
-
-msgid "Document_analysis"
-msgstr "Document analysis"
-
-msgid "Held_a_Presentation"
-msgstr "Held a Presentation"
-
-msgid "Working_with_Time_Pressure"
-msgstr "Working with Time Pressure"
-
-msgid "Sick_leave"
-msgstr "Sick leave"
-
-msgid "Everydays_routine"
-msgstr "Everydays routine"
-
-msgid "Project_Management"
-msgstr "Project Management"
-
-msgid "External_Meeting"
-msgstr "External Meeting"
-
-msgid "Worked_Closely_to_a_new_teammate"
-msgstr "Worked Closely to a new teammate"
-
-msgid "Mentored_someone"
-msgstr "Mentored someone"
-
-msgid "MY_HAPPYCURUS"
-msgstr "My Happycurus"
-
-msgid "MY_STATISTICS"
-msgstr "My Statitistics"
-
-msgid "MY_LEARNING_MATERIAL"
-msgstr "My Learning material"
-
-msgid "CURUS_FOR_THE_ENVIRONMENT"
-msgstr "Curus for the environment"
-
-msgid "FREETIME"
-msgstr "FREE TIME"
-
-
-msgid "MANAGER_HISTORICAL_TREND_FREETIME"
-msgstr "Historical Trend of Team Morale: Free Time"
-
-msgid "MANAGER_HISTORICAL_TREND_WORKPLACE"
-msgstr "Historical Trend of Team Morale: Workplace"
-
-msgid "MANAGER_CAUSE_EFFECT_FREETIME"
-msgstr "Cause-Effect Free time: Most Frequent Selections and Their Causes"
-
-msgid "MANAGER_CAUSE_EFFECT_WORKPLACE"
-msgstr "Cause-Effect Workplace: Most Frequent Selections and Their Causes"
-
-msgid "MANAGER_COUNTER_FREETIME"
-msgstr "Historical Counter of Team Morale: Free Time"
-
-msgid "MANAGER_COUNTER_WORKPLACE"
-msgstr "Historical Counter of Team Morale: Workplace"
-
-
-
-msgid "HISTORICAL_TREND_FREETIME"
-msgstr "Historical Trend of Your Morale: Free Time"
-
-msgid "HISTORICAL_TREND_WORKPLACE"
-msgstr "Historical Trend of Your Morale: Workplace"
-
-msgid "CAUSE_EFFECT_FREETIME"
-msgstr "Cause-Effect Free time: Your Mood and its causes"
-
-msgid "CAUSE_EFFECT_WORKPLACE"
-msgstr "Cause-Effect Workplace: Your Mood and its causes"
-
-
-
-
-msgid "COUNTER_FREETIME"
-msgstr "Historical Counter of Your Morale: Free Time"
-
-msgid "COUNTER_WORKPLACE"
-msgstr "Historical Counter of Your Morale: Workplace"
-
-msgid "COMPLETE_STATISTICS"
-msgstr "Complete Statistics"
-
-msgid "NEW_COURSES"
-msgstr "New Course"
-
-msgid "COURSES"
-msgstr "Courses"
-
-msgid "NEW"
-msgstr "New"
-
-msgid "MOTIVATIONAL_QUOTE"
-msgstr "Motivational quote"
-
-msgid "ACTIVITIES"
-msgstr "Activities"
-
-
-msgid "PREVIOUS_COURSES"
-msgstr "Previous Courses"
-
-msgid "HAPPY_CURUS_INFO"
-msgstr "THE VALUE ON THE LEFT REPRESENTS THE NUMBER OF TREES HAPPYCURUS HAS BEEN ABLE TO PLANT SO FAR. OUR DONATIONS HAVE DIFFERENT AMOUNTS AND FOCUS ON SEVERAL SPECIES OF TREES. THE NUMBER OF DONATIONS WE MAKE DEPENDS ON CHANGING FACTORS, SUCH AS THE NUMBER AND TYPE OF LICENSES SOLD, THE TIMING OF THE PAYMENTS, THE DEALS WE HAVE WITH EACH PARTNER, THE TYPE OF PROJECTS SUPPORTED AND THE UNEXPECTED EXPENSES THAT HAPPYCURUS MAY HAVE TO FACE. FOR MORE DETAILS ABOUT THE PROJECTS AND THE PARTNERS HAPPYCURUS IS SUPPORTING, PLEASE VISIT OUR WEBSITE WWW.HAPPYCURUS.DE AND CONTACT US."
-
-msgid "YOUR_HAPPY_TEAM"
-msgstr "YOUR HAPPYCURUS TEAM."
-
-
-msgid "SELECT_A_DAY_BEFORE_TODAY"
-msgstr "Select a day before today"
-
-msgid "MISSING_FIELDS"
-msgstr "Please, fill every field"
-
-
-msgid "ABOUT_HAPPY_CURUS"
-msgstr "About Happycurus"
-
-msgid "CURUS_AND_THE_ENVIRONMENT"
-msgstr "Curus and the Environment"
-
-msgid "THE_CURUS_EFFECT"
-msgstr "The Happycurus Effect"
-
-msgid "CONTACT"
-msgstr "Contact"
-
-msgid "LANGUAGE"
-msgstr "Language"
-
-
-
-msgid "home_box_title"
-msgstr "Collect data about your team. Take care of them."
-
-
-msgid "ABOUT_HAPPY_CURUS_DESCRIPTION"
-msgstr "People don’t leave jobs but toxic workplaces. Thanks to Happycurus you can:"
-
-
-msgid "OUR_MOTIVATION"
-msgstr "Our Motivation"
-
-msgid "OUR_MOTIVATION_DESCRIPTION"
-msgstr "Team synergy for company efficiency."
-
-msgid "home_box_description"
-msgstr "How committed is your team? How satisfied are your\
-        employees with their tasks? Are they happy on the workplace?\
-        Collect and store important data about your employees. Learn\
-        how to keep them engaged. Increase productivity through\
-        Happycurus."
-
-
 msgid "CAREER"
 msgstr "Career"
+msgid "Writing"
+msgstr "Writing"
+msgid "Praying"
+msgstr "Praying"
+msgid "Studying"
+msgstr "Studying"
+msgid "Time_in_the_nature"
+msgstr "Time in the nature"
+msgid "Hobby"
+msgstr "Hobby"
+msgid "Cleaning_Home"
+msgstr "Cleaning Home"
+msgid "Travelling"
+msgstr "Travelling"
+msgid "Doctor_appointment"
+msgstr "Doctor appointment"
+msgid "Cooking"
+msgstr "Cooking"
+msgid "Videogames"
+msgstr "Videogames"
+msgid "Phone-call"
+msgstr "Phone-call"
+msgid "Having_a_walk"
+msgstr "Having a walk"
+msgid "Cinema"
+msgstr "Cinema"
+msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
+msgstr "What activities did you do during your free time?"
+msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY_WP"
+msgstr "What activities kept you busy at work?"
+msgid "IN_A_GOOD_MOOD"
+msgstr "In a good mood"
+msgid "WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER"
+msgstr "Write something that you want to remember"
+msgid "LOW_ENERGY"
+msgstr "Low energy"
+msgid "YOUR_TOUGHTS_VISIBILE_ONLY_TO_YOU"
+msgstr "Your toughts (visible only to you)"
+msgid "Time_with_my_partner"
+msgstr "Time with my partner"
+msgid "Nothing_at_all"
+msgstr "Nothing at all"
+msgid "Phone_call"
+msgstr "Phone call"
+msgid "Meeting_with_management"
+msgstr "Meeting with management"
+msgid "Meeting_with_team"
+msgstr "Meeting with team"
+msgid "New_Tasks"
+msgstr "New tasks"
+msgid "Team_Rotation"
+msgstr "Team Rotation"
+msgid "Document_analysis"
+msgstr "Document analysis"
+msgid "Held_a_Presentation"
+msgstr "Held a Presentation"
+msgid "Working_with_Time_Pressure"
+msgstr "Working with Time Pressure"
+msgid "Sick_leave"
+msgstr "Sick leave"
+msgid "Everydays_routine"
+msgstr "Everydays routine"
+msgid "Project_Management"
+msgstr "Project Management"
+msgid "External_Meeting"
+msgstr "External Meeting"
+msgid "Worked_Closely_to_a_new_teammate"
+msgstr "Worked Closely to a new teammate"
+msgid "Mentored_someone"
+msgstr "Mentored someone"
+msgid "MY_HAPPYCURUS"
+msgstr "My Happycurus"
+msgid "MY_STATISTICS"
+msgstr "My Statitistics"
+msgid "MY_LEARNING_MATERIAL"
+msgstr "My Learning material"
+msgid "CURUS_FOR_THE_ENVIRONMENT"
+msgstr "Curus for the environment"
+msgid "FREETIME"
+msgstr "FREE TIME"
+msgid "COMPLETE_STATISTICS"
+msgstr "Complete Statistics"
+msgid "NEW_COURSES"
+msgstr "New Course"
+msgid "COURSES"
+msgstr "Courses"
+msgid "NEW"
+msgstr "New"
+msgid "MOTIVATIONAL_QUOTE"
+msgstr "Motivational quote"
+msgid "ACTIVITIES"
+msgstr "Activities"
+msgid "PREVIOUS_COURSES"
+msgstr "Previous Courses"
+msgid "HAPPY_CURUS_INFO"
+msgstr "THE VALUE ON THE LEFT REPRESENTS THE NUMBER OF DONATIONS HAPPYCURUS HAS BEEN ABLE TO PLANT SO FAR. OUR DONATIONS HAVE DIFFERENT AMOUNTS AND FOCUS ON SEVERAL SPECIES OF TREES. THE NUMBER OF DONATIONS WE MAKE DEPENDS ON CHANGING FACTORS, SUCH AS THE NUMBER AND TYPE OF LICENSES SOLD, THE TIMING OF THE PAYMENTS, THE DEALS WE HAVE WITH EACH PARTNER, THE TYPE OF PROJECTS SUPPORTED AND THE UNEXPECTED EXPENSES THAT HAPPYCURUS MAY HAVE TO FACE. FOR MORE DETAILS ABOUT THE PROJECTS AND THE PARTNERS HAPPYCURUS IS SUPPORTING, PLEASE VISIT OUR WEBSITE WWW.HAPPYCURUS.DE AND CONTACT US."
+msgid "YOUR_HAPPY_TEAM"
+msgstr "YOUR HAPPYCURUS TEAM."
+msgid "SELECT_A_DAY_BEFORE_TODAY"
+msgstr "Select a day before today"
+msgid "MISSING_FIELDS"
+msgstr "Please, fill every field"
+msgid "ABOUT_HAPPY_CURUS"
+msgstr "About Happycurus"
+msgid "CURUS_AND_THE_ENVIRONMENT"
+msgstr "Curus and the Environment"
+msgid "THE_CURUS_EFFECT"
+msgstr "The Happycurus Effect"
+msgid "CONTACT"
+msgstr "Contact"
+msgid "LANGUAGE"
+msgstr "Language"
+msgid "home_box_title"
+msgstr "Collect data about your team. Take care of them."
+msgid "ABOUT_HAPPY_CURUS_DESCRIPTION"
+msgstr "People don't leave jobs but toxic workplaces. Thanks to Happycurus you can:"
+msgid "OUR_MOTIVATION"
+msgstr "Our Motivation"
+msgid "OUR_MOTIVATION_DESCRIPTION"
+msgstr "Team synergy for company efficiency."
+msgid "home_box_description"
+msgstr "How committed is your team? How satisfied are your\
+ employees with their tasks? Are they happy on the workplace?\
+Collect and store important data about your employees. Learn\
+how to keep them engaged. Increase productivity through\
+Happycurus."
 
-msgid "COULD_NOT_PROCESS_SELECTED_DATE"
-msgstr "Cannot process selected date"
 
+msgid "MOBILE_NOT_AVAILABLE"
+msgstr "Mobile version not available"
 
-msgid "VIEW_STATISTICS"
-msgstr "VIEW STATISTICS"
-
-
-
-
-
-
-# add to lokalization
 
 msgid "NO_DATA"
 msgstr "There is not enough data!"
@@ -552,3 +318,12 @@ msgstr "Team Morale Breakdown: Free Time"
 
 msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_WORKPLACE"
 msgstr "Team Morale Breakdown: Workplace"
+
+
+
+msgid "VIEW_STATISTICS"
+msgstr "View Statistics"
+
+
+msgid "COULD_NOT_PROCESS_SELECTED_DATE"
+msgstr "No data available for the selected day"

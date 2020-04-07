@@ -32,7 +32,7 @@ msgstr "How did you feel during the last day you spent at work?"
 msgid "HAPPY"
 msgstr "Happy"
 msgid "GOOD_MOOD"
-msgstr "In A Good Mood"
+msgstr "In a Good Mood"
 msgid "INSPIRED"
 msgstr "Inspired"
 msgid "SAD"
@@ -112,7 +112,7 @@ msgstr "Disgusted"
 msgid "GUILTY"
 msgstr "Guilty"
 msgid "DISCOURAGED"
-msgstr "Discoraged"
+msgstr "Discouraged"
 msgid "YOUR_MOOD"
 msgstr "Your mood"
 msgid "YOUR_TOUGHTS"
@@ -182,9 +182,9 @@ msgstr "Having a walk"
 msgid "Cinema"
 msgstr "Cinema"
 msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY"
-msgstr "What activities did you do during your free time?"
+msgstr "What have you been up to in your free time?"
 msgid "WHAT_HAVE_YOU_BEEN_UP_TODAY_WP"
-msgstr "What activities kept you busy at work?"
+msgstr "Which activities kept you busy at work?"
 msgid "IN_A_GOOD_MOOD"
 msgstr "In a good mood"
 msgid "WRITE_SOMETHING_THAT_YOU_WANNA_TO_REMEMBER"
@@ -216,7 +216,7 @@ msgstr "Working with Time Pressure"
 msgid "Sick_leave"
 msgstr "Sick leave"
 msgid "Everydays_routine"
-msgstr "Everydays routine"
+msgstr "Everyday routine"
 msgid "Project_Management"
 msgstr "Project Management"
 msgid "External_Meeting"
@@ -250,13 +250,13 @@ msgstr "Activities"
 msgid "PREVIOUS_COURSES"
 msgstr "Previous Courses"
 msgid "HAPPY_CURUS_INFO"
-msgstr "THE VALUE ON THE LEFT REPRESENTS THE NUMBER OF DONATIONS HAPPYCURUS HAS BEEN ABLE TO PLANT SO FAR. OUR DONATIONS HAVE DIFFERENT AMOUNTS AND FOCUS ON SEVERAL SPECIES OF TREES. THE NUMBER OF DONATIONS WE MAKE DEPENDS ON CHANGING FACTORS, SUCH AS THE NUMBER AND TYPE OF LICENSES SOLD, THE TIMING OF THE PAYMENTS, THE DEALS WE HAVE WITH EACH PARTNER, THE TYPE OF PROJECTS SUPPORTED AND THE UNEXPECTED EXPENSES THAT HAPPYCURUS MAY HAVE TO FACE. FOR MORE DETAILS ABOUT THE PROJECTS AND THE PARTNERS HAPPYCURUS IS SUPPORTING, PLEASE VISIT OUR WEBSITE WWW.HAPPYCURUS.DE AND CONTACT US."
+msgstr "THE VALUE ON THE LEFT REPRESENTS THE NUMBER OF TREES HAPPYCURUS HAS BEEN ABLE TO PLANT SO FAR. OUR DONATIONS HAVE DIFFERENT AMOUNTS AND FOCUS ON AREAS OF THE PLANET RISKING DESERTIFICATION. THE NUMBER OF DONATIONS WE ARE ABLE TO MAKE DEPENDS ON CHANGING FACTORS, SUCH AS THE NUMBER AND TYPE OF LICENSES SOLD, THE TIMING OF THE PAYMENTS, THE DEALS WE HAVE WITH EACH PARTNER, THE TYPE OF PROJECTS SUPPORTED AND THE UNEXPECTED EXPENSES THAT HAPPYCURUS MAY HAVE TO FACE. FOR MORE DETAILS ABOUT THE PROJECTS AND THE PARTNERS HAPPYCURUS IS SUPPORTING, PLEASE VISIT OUR WEBSITE WWW.HAPPYCURUS.DE AND CONTACT US."
 msgid "YOUR_HAPPY_TEAM"
 msgstr "YOUR HAPPYCURUS TEAM."
 msgid "SELECT_A_DAY_BEFORE_TODAY"
 msgstr "Select a day before today"
 msgid "MISSING_FIELDS"
-msgstr "Please, fill every field"
+msgstr "Please fill every field"
 msgid "ABOUT_HAPPY_CURUS"
 msgstr "About Happycurus"
 msgid "CURUS_AND_THE_ENVIRONMENT"
@@ -327,3 +327,46 @@ msgstr "View Statistics"
 
 msgid "COULD_NOT_PROCESS_SELECTED_DATE"
 msgstr "No data available for the selected day"
+
+
+
+msgid "MANAGER_COUNTER_FREETIME"
+msgstr "Historical Counter of Team Morale: Free Time"
+
+
+msgid "MANAGER_COUNTER_WORKPLACE"
+msgstr " Historical Counter of Team Morale: Workplace"
+
+
+msgid "MANAGER_HISTORICAL_TREND_FREETIME"
+msgstr "Historical Trend of Team Morale: Free Time"
+
+
+msgid "MANAGER_HISTORICAL_TREND_WORKPLACE"
+msgstr " Historical Trend of Team Morale: Workplace"
+
+msgid "MANAGER_CAUSE_EFFECT_FREETIME"
+msgstr "Cause-Effect Free time: Most frequent moods in your team and their causes"
+msgid "MANAGER_CAUSE_EFFECT_WORKPLACE"
+msgstr " Cause-Effect Workplace: Most frequent moods in your team and their causes"
+
+
+msgid "HISTORICAL_TREND_FREETIME"
+msgstr "Historical Trend of your Morale: Free Time"
+
+msgid "HISTORICAL_TREND_WORKPLACE"
+msgstr "Historical Trend of your Morale: Workplace"
+
+msgid "COUNTER_FREETIME"
+msgstr "Historical Counter of your Moods: Free Time"
+
+
+msgid "COUNTER_WORKPLACE"
+msgstr " Historical Counter of your Moods: Workplace"
+
+
+msgid "CAUSE_EFFECT_FREETIME"
+msgstr "Cause-Effect Free time: Your Morale and its causes"
+
+msgid "CAUSE_EFFECT_WORKPLACE"
+msgstr " Cause-Effect Workplace: Your Morale and its causes"
