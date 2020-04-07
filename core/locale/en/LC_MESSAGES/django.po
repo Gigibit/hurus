@@ -318,3 +318,12 @@ msgstr "Team Morale Breakdown: Free Time"
 
 msgid "HISTORICAL_MANAGER_OVERVIEW_MOOD_WORKPLACE"
 msgstr "Team Morale Breakdown: Workplace"
+
+
+
+msgid "VIEW_STATISTICS"
+msgstr "View Statistics"
+
+
+msgid "COULD_NOT_PROCESS_SELECTED_DATE"
+msgstr "No data available for the selected day
