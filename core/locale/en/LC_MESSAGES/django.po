@@ -326,4 +326,4 @@ msgstr "View Statistics"
 
 
 msgid "COULD_NOT_PROCESS_SELECTED_DATE"
-msgstr "No data available for the selected day
+msgstr "No data available for the selected day"
