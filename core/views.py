@@ -675,7 +675,10 @@ def statistics(request):
 
 @login_required(login_url='/website')
 def happy_corus(request):
-    curus = Curus.objects.get(language__iexact= request.user.preferred_language)
+    try:
+	curus = Curus.objects.get(language__iexact= request.user.preferred_language)
+    except:
+	curus = {}
     return render(request, 'core/employee/happy_curus.html', {
         'curus': curus,
     })
