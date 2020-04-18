@@ -216,6 +216,9 @@ svg text {
   top: 30%;
   display: table;
 }
+.chart-wrapper h1{
+  font-weight: bold;
+}
 
 #freetime-bar-chart svg, #workplace-bar-chart svg{
   margin-top: 110px;

@@ -218,6 +218,6 @@
 .chart{
   padding: 0;
 }
-.course-wrapper {
+.course-inner, .course-wrapper {
   padding: 20px 15px;
 }

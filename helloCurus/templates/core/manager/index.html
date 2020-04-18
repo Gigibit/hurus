@@ -148,18 +148,21 @@
   <div class="scroll-x courses row flex-row flex-nowrap">
     {% for course in courses %}
     <div class="course-wrapper row" onClick="location.href='/courses/{{course.pk}}'">
-      <div class="card-info-container">
-        <h4 class="course-title">{{course.title|truncatechars:58}}</h4> 
-        <p class="course-description">{{course.description|truncatechars:155}}{% if course.description|length > 155 %}...{% endif %}</p> 
+      <div class="course-inner mr-2">
+        
+        <div class="card-info-container">
+          <h4 class="course-title">{{course.title|truncatechars:58}}</h4> 
+          <p class="course-description">{{course.description|truncatechars:155}}</p> 
+        </div>
+        <div class="seen-icon col-md-2">
+          {% if not course.seen %}
+          <span class="course-seen glyphicon glyphicon-play"></span>
+          {% else %}
+          <span class="course-not-seen glyphicon glyphicon-repeat"></span>
+          {% endif %}
+        </div>
+        <div class="read-more col-md-12">{% trans 'READ_MORE' %}</div>
       </div>
-      <div class="seen-icon col-md-2">
-        {% if not course.seen %}
-        <span class="course-seen glyphicon glyphicon-play"></span>
-        {% else %}
-        <span class="course-not-seen glyphicon glyphicon-repeat"></span>
-        {% endif %}
-      </div>
-      <div class="read-more col-md-12">{% trans 'READ_MORE' %}</div>
     </div>
     {% endfor %}
     <div class="col-md-4">

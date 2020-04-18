@@ -662,9 +662,10 @@ def submit_survey(request):
 @login_required(login_url='/website')
 def home(request):
     user, is_employee = get_employee_from_request_user(request.user)
-    if user:
+    if user and (not user.preferred_language or user.preferred_language != request.LANGUAGE_CODE.upper()):
         user.preferred_language = request.LANGUAGE_CODE.upper()
-        threading.Thread(target=user.save).start()
+        user.course_to_see = None
+        user.save()
         
     return check_survey(home_employee, request, user) if is_employee else home_manager(request, user)
 

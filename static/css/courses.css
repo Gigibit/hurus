@@ -1,12 +1,12 @@
 .main{
-    padding: 20px
+    padding: 20px;
+    overflow: hidden;
 }
 .course-wrapper{
-    padding: 20px 0 0 0;
-    margin: 5px;
-    border-radius: 15px;
-    border: #00b0f0 2px solid;
+    padding: 20px 0 0 15px;
+    margin-bottom: 30px;
     position: relative;
+
 }
 .seen-icon{
     position: absolute;
@@ -24,6 +24,13 @@
 .show-more{
     margin-top: 30px;
     float: right;
+}
+.course-inner{
+    border-radius: 15px;
+    height: 100%;
+    padding: 20px 0 0 15px;
+    position: relative;
+    border: #00b0f0 2px solid;
 }
 .course-header {
     position: absolute;
@@ -114,7 +121,8 @@ section{
 }
 .manager-overview-employees{
     font-size: 10px;
-    padding: 15px;
+    bottom: -25px;
+    position: absolute;
 }
 
 .badge-new{
@@ -180,11 +188,13 @@ section{
   }
   .course-description{
       font-size: 20px;
-      height: 40px;
+      margin-bottom: 40px;
   }
   .read-more{
-    margin: 15px 0;
+    margin: 15px 0 10px 0;
     color: cadetblue;
     font-size: 14px;
+    position: absolute;
+    bottom: 0;
   }
 
