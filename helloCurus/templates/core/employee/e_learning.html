@@ -14,7 +14,7 @@
     <h1>{% trans 'NEW_COURSES' %}</h1>
     <div class="row">
         <div class="col-md-6 col-center-block">
-            <div class="course-wrapper row card" onClick="location.href='/courses/{{course_to_see.pk}}'">
+            <div class="course-wrapper row" onClick="location.href='/courses/{{course_to_see.pk}}'">
                 <div class="course-inner">
                     
                     <div class="card-info-container col-md-10">
@@ -41,7 +41,7 @@
         <div class="col-md-6 course-wrapper">
             <div class="course-inner">
                 
-                <div class="row card" onClick="location.href='/courses/{{course.course.pk}}'">
+                <div class="row" onClick="location.href='/courses/{{course.course.pk}}'">
                     <div class="card-info-container col-md-10">
                         <h4 class="course-title">{{course.course.title}}</h4> 
                         <p class="course-description">{{course.course.description|truncatechars:65}}{% if course.course.description|length > 65 %}...{% endif %}</p> 
@@ -62,8 +62,7 @@
         {% for course in courses|slice:"4:" %}
         <div class="collapse out budgets hidden-courses col-md-6 course-wrapper">
             <div class="course-inner">
-                
-                <div class="row card" onClick="location.href='/courses/{{course.course.pk}}'">
+                <div class="row" onClick="location.href='/courses/{{course.course.pk}}'">
                     <div class="card-info-container col-md-10">
                         <h4 class="course-title">{{course.course.title}}</h4> 
                         <p class="course-description">{{course.course.description|truncatechars:65}}{% if course.course.description|length > 65 %}...{% endif %}</p> 

@@ -89,7 +89,7 @@ def get_email_body_for_employee(employee, token):
             '            margin-top: 38px;">Il TUO PROFILO È PRONTO</h1>' +\
             '                        <p class="message-body">' +\
             '                            CIAO ' + username + '!<br><br>' +\
-            '                            Sei pronto ad avere un impatto positive su<br>' +\
+            '                            Sei pronto ad avere un impatto positivo su<br>' +\
             '                            questo %s?<br>' +\
             '                            Prenditi cura di te stesso e del tuo <br>' +\
             '                            team aggiornando <a href="#">il tuo profilo</a>.<br><br>' +\
