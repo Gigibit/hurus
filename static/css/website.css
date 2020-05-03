@@ -14,6 +14,13 @@
 body{
     width: 100%;
 }
+.simple-page-padded h1,.simple-page-padded h2, .simple-page-padded h3{
+ font-weight: bold;
+}
+
+.simple-page-padded{
+    padding: 80px 30px;
+}
 
 #application-navbar{
     background-color: white;

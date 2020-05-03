@@ -4,4 +4,7 @@ from website import views as site
 
 urlpatterns = [
     path('', site.index),
+    path('terms', site.terms),
+    path('privacy', site.privacy),
+    
 ]
