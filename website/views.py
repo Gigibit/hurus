@@ -31,3 +31,13 @@ def terms(request):
     else : 
         template = 'website/terms.html'
     return render(request, template, {})
+
+def legal(request):
+    lang = request.LANGUAGE_CODE.upper()
+    if lang == 'IT':
+        template = 'website/legal.html'
+    elif lang == 'DE':
+        template = 'website/legal.html'
+    else : 
+        template = 'website/legal.html'
+    return render(request, template, {})

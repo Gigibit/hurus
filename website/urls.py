@@ -6,5 +6,6 @@ urlpatterns = [
     path('', site.index),
     path('terms', site.terms),
     path('privacy', site.privacy),
+    path('legal', site.legal),
     
 ]
